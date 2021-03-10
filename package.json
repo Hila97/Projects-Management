@@ -1,5 +1,5 @@
 {
-  "name": "try-for-projects-management",
+  "name": "projects-management",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Hila97/try-for-Projects-Management.git"
+    "url": "git+https://github.com/Hila97/Projects-Management.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Hila97/try-for-Projects-Management/issues"
+    "url": "https://github.com/Hila97/Projects-Management/issues"
   },
-  "homepage": "https://github.com/Hila97/try-for-Projects-Management#readme",
+  "homepage": "https://github.com/Hila97/Projects-Management#readme",
   "dependencies": {
     "express": "^4.17.1",
     "nodemon": "^2.0.7"
