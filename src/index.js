@@ -3,7 +3,7 @@ const port = process.env.PORT || 4000
 const app = express()
 
 app.get('/',(req,res)=>{
- res.send('Contractors management')
+ res.send('Contractors ')
 })
 app.get('/profile',(req,res)=>{
  res.send('profile')
