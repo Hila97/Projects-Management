@@ -27,9 +27,9 @@ npm run test
 npm install --save  express
 #### install nodemon:
 npm install --save-dev nodemon
-### install eslint:
+#### install eslint:
 npm install --save-dev eslint
-### run lint:
+#### run lint:
 npm run lint
 #### run the project:
 npm run dev
@@ -42,7 +42,9 @@ This function checks if the field: email and password is ot empty,
 and if it is, the function print error message to user.
 
 ## Authors:
-
-
+https://github.com/Hila97
+https://github.com/hodaypi
+https://github.com/mar426
+https://github.com/YaelSabag
 
   
