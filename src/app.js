@@ -16,7 +16,6 @@ app.get('/profile/:name',(req, res) => {
  var data={age:23, job:'student'}
  res.render('profile',{person: req.params.name,data:data})
 })
-
 app.listen(port,()=>{
  console.log(`server is up and running at: http://127.0.0.1:${port}`)
 })
