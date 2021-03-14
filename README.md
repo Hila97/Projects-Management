@@ -2,7 +2,7 @@
 * [description](#description:)
 * [technologies](#Technologies:)
 * [setup](#setup:)
-* [Features and methods](#Features and methods:)
+* [Features and methods](#Features-and-methods:)
 
 ## description:
 this sprint is part of academic course, 
