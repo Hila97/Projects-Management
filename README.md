@@ -3,6 +3,7 @@
 * [technologies](#Technologies:)
 * [setup](#setup:)
 * [Features and methods](#Features-and-methods:)
+* [Authors](#Authors)
 
 ## description:
 this sprint is part of academic course, 
