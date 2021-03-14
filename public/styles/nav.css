@@ -4,6 +4,7 @@
 }
 body {
     text-align: center;
+
 }
 .wrapper {
     width: 1170px;
@@ -62,7 +63,7 @@ nav a {
     position: relative;
     top: 450px;
     background: #ebebeb;
-    height: 1500px;
+    height: 1000px;
 }
 .content-area h2 {
     font-family: poppins;
@@ -77,7 +78,7 @@ nav a {
     line-height: 30px;
 }
 .myButton {
-    background-color: #599bb3;
+    background-color:#599bb3;
     border-radius:28px;
     border:1px solid #29668f;
     display:inline-block;

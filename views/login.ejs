@@ -7,26 +7,33 @@
             var res;
             var email = document.getElementById("email").value;
             var passup = document.getElementById("passup").value;
+            var passagain=document.getElementById("passagain").value;
+            var userup=document.getElementById("userup").value;
 
-            if ((passup.match(/[a-z]/g) && passup.match(/[A-Z]/g) && passup.match(/[0-9]/g) && passup.match(/[^a-zA-Z\d]/g) && passup.length >= 6) == null)
-                alert("Password is invalid");
+
+            if(email== "" && passup== ""&& userup== ""&& passagain=="")
+                alert("Please fill in the fields");
+            else {
+                if ((passup.match(/[a-z]/g) && passup.match(/[A-Z]/g) && passup.match(/[0-9]/g) && passup.match(/[^a-zA-Z\d]/g) && passup.length >= 6) == null)
+                    alert("Invalid password,The password must be at least 6 characters, contain a capital letter, a small letter, a char and a number.");
+                    //else
+                    //  res = "FALSE";
+                //document.getElementById("t2").value = res;
+                else if ((passagain == passup) == false)
+                    alert("The password is not match");
                 //else
-                //  res = "FALSE";
-            //document.getElementById("t2").value = res;
-            else if ((document.getElementById("passagain").value == passup) == false)
-                alert("The password is not match");
-            //else
-            // res = "FALSE";
-            //document.getElementById("t3").value = res;
+                // res = "FALSE";
+                //document.getElementById("t3").value = res;
 
 
-            if ((/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)) == false)
-                alert("Email is invalid");
+                if ((/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(email)) == false)
+                    alert("Invalid email");
 
 
-            if (document.getElementById("userup").value == "") {
-                alert("Name must be filled out");
+                if (userup == "") {
+                    alert("Name must be filled out");
 
+                }
             }
         }
         function test_signin() {
@@ -42,11 +49,19 @@
                 alert("Password must be filled out");
         }
     </script>
+
 </head>
 <body>
 <%- include ('./partials/nav')%>
+
 <div class="login-wrap">
+
+
     <div class="login-html">
+        <pre>
+
+
+    </pre>
         <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
         <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
         <div class="login-form">
