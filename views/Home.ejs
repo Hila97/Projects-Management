@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Fixed Header with html and css | Collapsing Header Tutorial</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link href="Home.css" rel="stylesheet">
+    <link href="/styles/Home.css" rel="stylesheet">
 </head>
 <body>
 <div class="box-area">
@@ -13,9 +13,7 @@
             <div class="logo">
                 <a href="#">MHYHM</a>
             </div>
-            <nav>
-                <a href="#">home</a> <a href="#">link1</a> <a href="#">link2</a> <a href="#">link3</a> <a href="login.html"><button class="myButton">Log-In</button></a>
-            </nav>
+            <%- include ('./partials/nav')%>
         </div>
     </header>
     <div class="banner-area">

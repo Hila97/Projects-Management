@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="login.css"/>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
     <script type="text/javascript">
         function test_signup() {
             var res;
@@ -30,20 +30,21 @@
             }
         }
         function test_signin() {
-                var userin = document.getElementById("userin").value;
-                var passin = document.getElementById("passin").value;
+            var userin = document.getElementById("userin").value;
+            var passin = document.getElementById("passin").value;
 
-                if (userin == ""&& passin == "")
-                    alert("Username and password must be filled out");
-                else if (userin == "")
-                    alert("Username must be filled out");
-                else
-                    if (passin == "")
-                        alert("Password must be filled out");
+            if (userin == ""&& passin == "")
+                alert("Username and password must be filled out");
+            else if (userin == "")
+                alert("Username must be filled out");
+            else
+            if (passin == "")
+                alert("Password must be filled out");
         }
     </script>
 </head>
 <body>
+<%- include ('./partials/nav')%>
 <div class="login-wrap">
     <div class="login-html">
         <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
@@ -83,7 +84,7 @@
                 <div class="group">
                     <label for="passagain" class="label">Repeat Password</label>
                     <input id="passagain" type="password" class="input" data-type="password">
-                   <!-- <input type="text" id="t3" readonly/>-->
+                    <!-- <input type="text" id="t3" readonly/>-->
                 </div>
                 <div class="group">
                     <label for="email" class="label">Email Address</label>
