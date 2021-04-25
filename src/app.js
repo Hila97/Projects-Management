@@ -17,14 +17,14 @@ app.get('/add-users',(req, res)=>{
   username:'sasa@gmailcom',
   password: 'Aa1234'
  })
- users.save()
+ /*users.save()
      .then((result)=>{
        res.send(result)
      })
      .catch((err)=>{
       console.log(err)
      })
-
+*/
 })
 //loginController(app)
 app.get('/', (req, res)=>{
