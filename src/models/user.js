@@ -4,14 +4,14 @@ const schema = mongoose.Schema
 const usersSchema = new schema({
     username: {
         type: String,
-        required: true
+        require:true
     },
     password: {
         type: String,
-        required: true
+        require:true
     }
 },{timestamps: true})
 
-const Users = mongoose.model('Users',usersSchema)
-module.exports = Users
+const User = mongoose.model('User',usersSchema)
+module.exports = User
 
