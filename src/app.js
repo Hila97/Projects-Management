@@ -17,6 +17,7 @@ mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: t
     })
     .catch ((err)=>console.log(err))
 app.set('view engine','ejs')
+app.use(bodyParser.json())
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended:true}))
 app.use('/',router)

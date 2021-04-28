@@ -5,12 +5,12 @@ const addUser=(req, res)=> {
     const newUser = new User(req.body)
     newUser.save().then(user=>{
         console.log(req.body)
-            res.json({newUser:user})
+            res.json({newUser})
     }).catch(err => {
             console.log(err)
         })
 }
-
+module.exports={addUser}
 /*
 const addUser=(req, res)=> {
     var newUser = new User(req.body);
@@ -44,4 +44,3 @@ const addUser=(req, res)=> {
 }
 
  */
-module.exports={addUser}
