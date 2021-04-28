@@ -4,7 +4,7 @@ const app = express()
 //env
 const dotenv=require('dotenv')
 dotenv.config()
-//const bodyParser=require('body-parser')
+const bodyParser=require('body-parser')
 const port = process.env.PORT || 3000
 //router
 const router=require('./route/api')
@@ -18,6 +18,7 @@ mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: t
     .catch ((err)=>console.log(err))
 app.set('view engine','ejs')
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({extended:true}))
 app.use('/',router)
 app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
 
