@@ -1,25 +1,26 @@
-const User=require('../models/user')
+const Salary=require('../models/Salary')
 
-const addUser=(req, res)=> {
+const addSalary=(req, res)=> {
     console.log("add")
-    const newUser = new User(req.body)
-    newUser.save().then(user=>{
+    const newSalary = new Salary(req.body)
+    newSalary.save().then(Salary=>{
         console.log(req.body)
-            res.json({newUser})
+        res.json({newSalary})
     }).catch(err => {
-            console.log(err)
-        })
+        console.log(err)
+    })
 }
-const findAllUsers=(req,res)=>{
+const findAllSalaries=(req,res)=>{
     console.log("find")
-    User.find()
+    Salary.find()
         .then((result)=>{
             res.send(result)
-            })
+        })
         .catch((err)=>{
             console.log(err)
         })
 }
+/*
 const findUserById=(req,res)=>{
     User.findById('60894503dfb11833a47c4f98')
         .then((result)=>{
@@ -29,5 +30,7 @@ const findUserById=(req,res)=>{
             console.log(err)
         })
 }
-module.exports={addUser,findAllUsers,findUserById}
+
+ */
+module.exports={addSalary,findAllSalaries}
 

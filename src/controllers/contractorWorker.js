@@ -1,3 +1,4 @@
+/*
 const contractorWorker = require('../models/contractorWorker')
 
 const addContractor (req, res)=>{
@@ -12,3 +13,5 @@ const addContractor (req, res)=>{
 
 }
 module.exports = {addContractor}
+
+ */

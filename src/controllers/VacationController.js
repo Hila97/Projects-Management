@@ -1,25 +1,26 @@
-const User=require('../models/user')
+const Vacation=require('../models/Vacation')
 
-const addUser=(req, res)=> {
+const addVacation=(req, res)=> {
     console.log("add")
-    const newUser = new User(req.body)
-    newUser.save().then(user=>{
+    const newVacation = new Vacation(req.body)
+    newVacation.save().then(vacation=>{
         console.log(req.body)
-            res.json({newUser})
+        res.json({newVacation})
     }).catch(err => {
-            console.log(err)
-        })
+        console.log(err)
+    })
 }
-const findAllUsers=(req,res)=>{
+const findAllVacations=(req,res)=>{
     console.log("find")
-    User.find()
+    Vacation.find()
         .then((result)=>{
             res.send(result)
-            })
+        })
         .catch((err)=>{
             console.log(err)
         })
 }
+/*
 const findUserById=(req,res)=>{
     User.findById('60894503dfb11833a47c4f98')
         .then((result)=>{
@@ -29,5 +30,7 @@ const findUserById=(req,res)=>{
             console.log(err)
         })
 }
-module.exports={addUser,findAllUsers,findUserById}
+
+ */
+module.exports={addVacation,findAllVacations}
 
