@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose')
 const schema = mongoose.Schema
 const {FieldOfEmployment} = require("./enums")
+
 var validateEmail = function(email)
 {
     var re = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
