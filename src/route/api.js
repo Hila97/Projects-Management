@@ -1,6 +1,7 @@
 const router=require('express').Router()
-const user = require('../controllers/userComtroller')
+const users = require('../controllers/userComtroller')
+const employer = require('../controllers/employerController')
 
-router.post('/addUser',(user.addUser))
-
+router.post('/addUser',(users.addUser))
+router.post('/addEmployer',(employer.addEmployer))
 module.exports=router

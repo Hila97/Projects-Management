@@ -15,7 +15,8 @@ const FieldOfEmployment= {
     TransportAndVehicle: 'Transport And Vehicle',
     TourismAndHotels: 'Tourism And Hotels',
     IndustryAndManagement: 'Industry And Management',
-    Sales: 'Sales'
+    Sales: 'Sales',
+    Other:'other'
 }
 const Days= {
     SUNDAY:'Sunday' ,

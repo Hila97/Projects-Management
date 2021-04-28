@@ -7,11 +7,11 @@ dotenv.config()
 const bodyParser=require('body-parser')
 const port = process.env.PORT || 3000
 //router
-const router=require('./route/api')
+const router= require('./route/api')
 //mongoose
 const mongoose = require ('mongoose')
 //connect to mongoDB
-mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result)=> {
      console.log('connected')
     })
