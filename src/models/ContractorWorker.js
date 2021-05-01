@@ -106,12 +106,5 @@ const contractorSchema = new schema ({
         type: Number
     }
 
- /*
-    resume:{
-        type:
-
-    }*/
-
-
 })
 module.exports=mongoose.model('contractorWorker', contractorSchema)

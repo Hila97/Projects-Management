@@ -1,15 +1,29 @@
 const User=require('../models/user')
 
-const addUser=(req, res)=> {
+function addUser(req, res,next) {
     console.log("add")
-    const newUser = new User(req.body)
+    User.create(req.body).then(u=>{
+        console.log(req.body)
+        res.json({name:req.body.username})
+    }).catch(next)
+    /*
+    var newUser = new User(req.body)
     newUser.save().then(user=>{
         console.log(req.body)
             res.json({newUser})
     }).catch(err => {
             console.log(err)
         })
+     */
 }
+
+function findUser(req,res){
+    User.find({username:req.params.username}).then((result)=>{
+        res.send(result)
+    })
+}
+
+
 const findAllUsers=(req,res)=>{
     console.log("find")
     User.find()
@@ -29,5 +43,6 @@ const findUserById=(req,res)=>{
             console.log(err)
         })
 }
-module.exports={addUser,findAllUsers,findUserById}
+
+module.exports={addUser,findAllUsers,findUserById,findUser}
 

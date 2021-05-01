@@ -20,17 +20,14 @@ const findAllVacations=(req,res)=>{
             console.log(err)
         })
 }
-/*
-const findUserById=(req,res)=>{
-    User.findById('60894503dfb11833a47c4f98')
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
+
+function findAvailableWorker(req,res,next){
+    var query={departureDate:{$gte:req.params.workDate},returningDate:{$lte: req.params.workDate}}
+    var workerIdList=Vacation.find(query).then((result)=>{
+        res.send(result)
+    })
 }
 
- */
-module.exports={addVacation,findAllVacations}
+
+module.exports={addVacation,findAllVacations,findAvailableWorker}
 
