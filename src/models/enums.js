@@ -50,6 +50,7 @@ const AreaOfResidence={
     HAIFA_AND_THE_KRAYOT:'Haifa and the Krayot',
     JERUSALEM:'Jerusalem'
 }
+
 const Status={
     FUTURE:'Future',
     CURRENT:'Current',
