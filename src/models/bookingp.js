@@ -1,50 +1,37 @@
 const mongoose = require ('mongoose');
+const { Status } = require('./enums');
 const schema= mongoose.Schema;
 const bookingpSchema = new schema({
 
-bookingDate:
+    bookingDate:
+        {
+            type: Date,
+            default: Date.now,
+        },
+    workerID:
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'ContractorWorker'
+        },
+    
+    startTime:
     {
-        type: Date,
-        default: Date.now
+            type:String,                 
+
     },
-workerID:
+    endTime:        
     {
-        type: mongoose.Types.ObjectId,
-        ref: 'ContractorWorker'
+            type:String,
+        
     },
-firstName: 
-{
-        type: String,
-        maxLength: 20,
-        required: true
-},
-lastName: 
-{
-        type: String,
-        maxLength: 20
-},
-telephone:
-{
-        type: String,
-        maxLength: 20
-},
-rating:
-{
-    type: Number
-}, 
-startTime:
-{
-        type:Date
-},
-endTime:        
-{
-        type:Date
-},
-status:
-{
-        type:Status,
-        default:Status.FUTURE
-},
+    status:
+    {
+            type:Status,
+            default:Status.CURRENT,
+            
+    }
+    //bookingDate, wid,starttime,end,Status
+    // 10-04-22  123456   45   12  future 
 });
 
 const bookingp = mongoose.model('bookingp',bookingpSchema)
