@@ -34,6 +34,7 @@ app.use('/employer',require('./route/EmployerAPI'))
 app.use('/employment',require('./route/EmploymentAPI'))
 app.use('/errorReport',require('./route/ErrorReportsAPI'))
 app.use('/vacation',require('./route/VacationAPI'))
+app.use('/api',require('./route/api'))
 
 //error handling
 app.use(function (err,req,res,next){
