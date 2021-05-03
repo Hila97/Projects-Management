@@ -1,4 +1,4 @@
-const Employer=require('../models/employer')
+const Employer=require('../models/Employer')
 
 const addEmployer=(req, res)=> {
     console.log("add")

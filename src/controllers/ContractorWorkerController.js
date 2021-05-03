@@ -36,6 +36,13 @@ function findContractorByAreaOfResidence(req,res){
     })
 }
 
+
+function findContractorByFieldOfEmployment(req,res){
+    contractorWorkerController.find({fieldOfEmployment:req.params.fieldOfEmployment}).then((result)=>{
+        res.send(result)
+    })
+}
+
 function findWorkerByRating(req,res){
     var query={rating:{$gte:req.params.rating}}
     contractorWorkerController.find(query).then((result)=>{
@@ -85,5 +92,6 @@ module.exports = {
     findWorkerByRating,
     findWorkerByHourlyWage,
     findWorkerByExperience,
-    findContractorByAreaOfResidence
+    findContractorByAreaOfResidence,
+    findContractorByFieldOfEmployment
 }

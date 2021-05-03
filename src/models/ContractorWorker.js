@@ -62,8 +62,7 @@ const contractorSchema = new schema ({
 
     dateOfBirth: {
         type: Date ,
-        required: true
-
+       // required: true
     },
     areaOfResidence: {
         type:AreaOfResidence ,
@@ -77,7 +76,7 @@ const contractorSchema = new schema ({
 
     workingDays:{
         type: Object,
-        required:true,
+       // required:true,
         days: {
             Sunday :{ type: Boolean},
             Monday :{ type: Boolean},
@@ -99,11 +98,16 @@ const contractorSchema = new schema ({
     bankAccount :{
         type: mongoose.Types.ObjectId,
         ref:'BankAccount',
-        required:true
+        //required:true
 
     },
     rating:{
-        type: Number
+        type: Number,
+        default:0
+    },
+    Experience:{
+        type:Number,
+        default:0
     }
 
 })

@@ -35,7 +35,8 @@ app.use('/employment',require('./route/EmploymentAPI'))
 app.use('/errorReport',require('./route/ErrorReportsAPI'))
 app.use('/vacation',require('./route/VacationAPI'))
 app.use('/api',require('./route/api'))
-
+///try
+app.use('/auth',require('./route/authAPI'))
 //error handling
 app.use(function (err,req,res,next){
     res.status(422).send({error:err.message})
@@ -53,7 +54,9 @@ app.get('/profile/:name',(req, res) => {
  var data={age:23, job:'student'}
  res.render('profile',{person: req.params.name,data:data})
 })
-
+app.get('/SearchContractorWorker',((req, res) => {
+    res.render('SearchContractorWorker')
+}))
 
 
 

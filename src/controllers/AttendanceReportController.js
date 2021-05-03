@@ -20,17 +20,6 @@ const findAllAttendanceReports=(req,res)=>{
             console.log(err)
         })
 }
-/*
-const findEmploymentById=(req,res)=>{
-    Employment.findById()
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-}
 
- */
 module.exports={addAttendanceReport,findAllAttendanceReports}
 
