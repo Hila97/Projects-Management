@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attandence Report</title>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+</head>
+<body>
+<form class="form-horizontal" action='/addAttendanceReport' method="POST">
+    <fieldset>
+        <div id="legend">
+            <legend class="">Register</legend>
+        </div>
+        <div class="control-group">
+            <!-- Username -->
+            <label class="control-label"  for="username">start Shift</label>
+            <div class="controls">
+                <input type="time" id="startShift" name="startShift" placeholder="" class="input-xlarge">
+                <p class="help-block">start Shift can contain any letters or numbers, without spaces</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">end Shift</label>
+            <div class="controls">
+                <input type="time" id="endShift" name="endShift" placeholder="" class="input-xlarge">
+                <p class="help-block">Please provide your E-mail</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="password">start Break</label>
+            <div class="controls">
+                <input type="time" id="startBreak" name="startBreak" placeholder="" class="input-xlarge">
+                <p class="help-block">Password should be at least 4 characters</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Password -->
+            <label class="control-label"  for="password_confirm">startBreak</label>
+            <div class="controls">
+                <input type="time" id="startBreak" name="startBreak" placeholder="" class="input-xlarge">
+                <p class="help-block">Please confirm password</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <button onclick="validation();" class="btn btn-success" type="submit">report</button>
+                <script>
+                    function validation(){
+
+                    }
+                </script>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</body>
+</html>
