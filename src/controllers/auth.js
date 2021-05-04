@@ -1,9 +1,8 @@
-//const UserNew = require('../models/UserNew')
-const User=require('../models/user')
+const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
+const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#(&@!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
 const changePass= async (req, res) => {
     const { token, newpassword: plainTextPassword } = req.body
@@ -64,6 +63,8 @@ const login= async (req, res) => {
     res.json({ status: 'error', error: 'Invalid username/password' })
 }
 
+
+//register of employer only
 const register= async (req, res) => {
     const { username, password: plainTextPassword } = req.body
 
@@ -100,4 +101,5 @@ const register= async (req, res) => {
 
     res.json({ status: 'ok' })
 }
+
 module.exports={changePass,login,register}

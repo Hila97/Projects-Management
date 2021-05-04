@@ -82,9 +82,42 @@ const editProfile=(req, res)=>{
             console.log(err)
         })
 }
+const loginOfContractorWorker= async (req, res) =>
+{
+    var userName = req.body.email
+    var password = req.body.password
+    contractorWorkerController.findOne({userName: userName, password: password}, function (err, contractorWorker)
+    {
+        if ((/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(userName)) == false)
+        {
+            return res.json({status: 'error', error: 'INVALID USERNAME'})
+        }
+        if ((/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/.test(password)) == false)
+        {
+            return res.json({status: 'error', error: 'INVALID PASSWORD'})
+        }
+
+        /*{
+            return res.json({ status: 'error', error: 'NOT MATCH PASSWORD' })
+        }
+         */
+        if (err)
+        {
+            console.log(err)
+            return res.status(500).send()
+        }
+        if (!contractorWorker)
+        {
+            return res.json({status: 'error', error: 'USER NOT FOUND'})
+        }
+
+        return res.json({status: 'ok', data: req.body})
+    })
+}
 
 
-module.exports = {
+module.exports =
+{
     addContractor,
     findAllContractor,
     findContractorByID,
@@ -93,5 +126,6 @@ module.exports = {
     findWorkerByHourlyWage,
     findWorkerByExperience,
     findContractorByAreaOfResidence,
-    findContractorByFieldOfEmployment
+    findContractorByFieldOfEmployment,
+    loginOfContractorWorker
 }
