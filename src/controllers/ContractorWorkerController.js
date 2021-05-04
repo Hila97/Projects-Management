@@ -70,7 +70,7 @@ const editProfile=(req, res)=>{
             .status(400)
             .send({message:"error"})
     const  id = req.params.ID
-    contractorWorkerController.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
+    contractorWorkerController.findOneAndUpdate(id, req.body)
         .then(contractor=>{
             if(!contractor) {
                 res.status(404).send({message: 'error'})
