@@ -20,6 +20,28 @@ const findAllEmployments=(req,res)=>{
             console.log(err)
         })
 }
+
+
+const Updatestatus= async (req,res)=>{
+   const {workerID,status}= req.body
+    try{
+        const employesatus = await Employment.findOneAndUpdate({status : {"$gte": next}}).populate('status')
+        if(next=="close"){
+         //   res.save(next)
+            res.send("you close")
+            return
+        }
+        if(next=="cancel"){
+            res.send("you cancel")
+            return
+        }
+       
+       return  res.json(employestatus)
+    }catch(e){
+        console.log(e)
+    }  
+}
+
 /*
 const findEmploymentById=(req,res)=>{
     Employment.findById()
