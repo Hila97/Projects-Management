@@ -59,14 +59,12 @@ app.get('/login', (req, res)=>{
 app.post('/addContractorForm', function(req, res) {
     var ID = req.body.ID
 })
-/*
-app.post('/contractorWorkerAPI/addContractor', (request, response) => {
-    response.json(request.body);
-})
+
+
 
 app.get('/attandenceReport', (req, res)=>{
     res.render('attandenceReport')
-})*/
+})
 app.get('/profile/:name',(req, res) => {
  var data={age:23, job:'student'}
  res.render('profile',{person: req.params.name,data:data})
