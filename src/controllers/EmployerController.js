@@ -1,6 +1,8 @@
 const Employer=require('../models/Employer')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Employment = require('../models/Employment')
+const moment = require('moment')
 
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#(&@!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
@@ -93,5 +95,49 @@ const loginOfEmployer= async (req, res) =>
     })
 }
 
+const getBookedEmployeesToday= async (req, res)=> {
+    const today = moment().utc(moment()).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = moment().utc(moment()).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+    // console.log(today)
+    // console.log(tomorrow)
+ 
+   
+    try{
+      const query = {$and : [
+            {bookingDate : {$gte: today}},
+            {bookingDate : {$lt: tomorrow}}
+        ]}
+        const employees = await Employment.find(query).populate('employerID').populate('workerID')
+        if(employees.length===0){
+            res.send('no employees booked that day')
+            return
+        }
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
 
-module.exports={addEmployer,findAllE,registerOfEmployer,loginOfEmployer}
+const getBookedEmployeesFuture= async (req,res)=>
+{
+    const {id} = req.params
+    try
+    {  
+        const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+       
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+module.exports={addEmployer,findAllE,registerOfEmployer,loginOfEmployer, getBookedEmployeesFuture, getBookedEmployeesToday}

@@ -2,6 +2,7 @@
 const express = require('express')
 const app = express()
 app.use(express.static('public'))
+const axios = require('axios')
 
 //env
 const dotenv=require('dotenv')
@@ -73,6 +74,46 @@ app.get('/profile/:name',(req, res) => {
 app.get('/SearchContractorWorker',((req, res) => {
     res.render('SearchContractorWorker')
 }))
+
+app.get('/Booking',(req, res) => {
+    try {
+        const fetchBooking = async () =>{
+           const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesToday') 
+           if(typeof data === "string"){
+                return res.render('Error', {message : data})
+           }
+           else{
+            const workerArr = data.map( d => d.workerID)
+            res.render('Booking',{workerArr : workerArr})
+           }
+        }
+        fetchBooking()
+    } catch (e) {
+        console.log(e)
+    }
+   
+   })
+
+   
+app.get('/FutureBooking',(req, res) => {
+    try {
+        const fetchBooking = async () =>{
+           const {data} = await axios.get(`http://127.0.0.1:3000/employer/getBookedEmployeesFuture/60897c4e3b16b63e2437bbad`) 
+           console.log(data)
+           if(typeof data === "string"){
+                return res.render('Error', {message : data})
+           }
+           else{
+            const workerArr = data.map( d => d.workerID)
+            res.render('FutureBooking',{workerArr : workerArr})
+           }
+        }
+        fetchBooking()
+    } catch (e) {
+        console.log(e)
+    }
+   
+   })
 
 
 

@@ -16,12 +16,14 @@ const employmentSchema = new schema({
     employerID:
         {
             type: mongoose.Types.ObjectId,
-            ref: 'Employer'
+            ref: 'Employer',
+            require: true
         },
     workerID:
         {
             type: mongoose.Types.ObjectId,
-            ref: 'ContractorWorker'
+            ref: 'contractorWorker',
+            require: true
         },
     field:
         {
