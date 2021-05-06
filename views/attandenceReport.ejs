@@ -5,17 +5,16 @@
     <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 </head>
 <body>
-<form class="form-horizontal" action='/addAttendanceReport' method="post">
+<form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
     <fieldset>
         <div id="legend">
-            <legend class="">Register</legend>
+           <h1> Attandence Report </h1>
         </div>
         <div class="control-group">
             <!-- Username -->
             <label class="control-label"  for="username">start Shift</label>
             <div class="controls">
                 <input type="date" id="startShift" name="startShift" placeholder="" class="input-xlarge">
-                <p class="help-block">start Shift can contain any letters or numbers, without spaces</p>
             </div>
         </div>
 
@@ -24,7 +23,6 @@
             <label class="control-label" for="email">end Shift</label>
             <div class="controls">
                 <input type="date" id="endShift" name="endShift" placeholder="" class="input-xlarge">
-                <p class="help-block">Please provide your E-mail</p>
             </div>
         </div>
 
@@ -33,7 +31,6 @@
             <label class="control-label" for="password">start Break</label>
             <div class="controls">
                 <input type="date" id="startBreak" name="startBreak" placeholder="" class="input-xlarge">
-                <p class="help-block">Password should be at least 4 characters</p>
             </div>
         </div>
 
@@ -41,8 +38,7 @@
             <!-- Password -->
             <label class="control-label"  for="password_confirm">startBreak</label>
             <div class="controls">
-                <input type="date" id="startBreak" name="startBreak" placeholder="" class="input-xlarge">
-                <p class="help-block">Please confirm password</p>
+                <input type="date" id="endBreak" name="endBreak" placeholder="" class="input-xlarge">
             </div>
         </div>
 

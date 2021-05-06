@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 
+
+</head>
 <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
-<form class="form-horizontal" action='/addContractor' method="POST">
+<form class="form-horizontal" action='/contractorWorker/addContractor' method="POST">
     <fieldset>
         <div id="legend">
             <legend class="">Add New Contractor</legend>
@@ -10,7 +12,7 @@
             <!-- ID -->
             <label class="control-label"  for="ID">ID:</label>
             <div class="controls">
-                <input type="number" id="ID" name="ID" placeholder="" class="input-xlarge">
+                <input type="number" id="ID" name="ID" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -18,7 +20,7 @@
             <!-- firstName -->
             <label class="control-label"  for="firstName">First Name:</label>
             <div class="controls">
-                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge">
+                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -26,7 +28,7 @@
             <!-- lastName -->
             <label class="control-label"  for="lastName">Last Name:</label>
             <div class="controls">
-                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge">
+                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -34,7 +36,7 @@
             <!-- telephone -->
             <label class="control-label"  for="lastName">Phone Number:</label>
             <div class="controls">
-                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge">
+                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -43,7 +45,7 @@
             <!--dateOfBirth -->
             <label class="control-label"  for="dateOfBirth">Birthday:</label>
             <div class="controls">
-                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge">
+                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -52,33 +54,46 @@
             <div>
                 <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
             </div>
-            <input list="areaOfResidence">
-            <datalist id="areaOfResidence">
-                <option value="North">
-                <option value="South">
-                <option value="Galil" >
-                <option value="Tel Aviv metropolitan area" >
-                <option value="Negev" >
-                <option value="Shfela" >
-                <option value="Haifa and the Krayot" >
-                <option value="Jerusalem" >
-
-            </datalist>
+                <select class="form-group" name="areaOfResidence" id="areaOfResidence">
+                <option value="NORTH">North</option>
+                <option value="SOUTH">South</option>
+                <option value="GALIL" >Galil</option>
+                <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
+                <option value="NEGEV" >Negev</option>
+                <option value="SHFELA" >Shfela</option>
+                <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
+                <option value="JERUSALEM" >Jerusalem</option>
+                </select>
         </div>
 
         <div class="control-group">
             <!-- hourlyWage -->
             <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
             <div class="controls">
-                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge">
+                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
         <div class="control-group">
             <!--bankAccount.bankName-->
-            <label class="control-label"  for="bankName"> Bank Name:</label>
+            <label class="control-label"  for="bankAccount.bankName"> Bank Name:</label>
             <div class="controls">
-                <input type="text" id="bankName" name="bankName" placeholder="" class="input-xlarge">
+                <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge" required>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!--bankAccount.branch-->
+            <label class="control-label"  for="bankAccount.branch"> branch:</label>
+            <div class="controls">
+                <input type="text" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <!--bankAccount.accountNumber-->
+            <label class="control-label"  for="bankAccount.accountNumber">Account Number:</label>
+            <div class="controls">
+                <input type="text" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -88,52 +103,49 @@
             <div>
             <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
         </div>
-        <input list="fieldOfEmployment">
-        <datalist id="fieldOfEmployment">
-            <option id="ElectronicsAndElectricity"  value="Electronics And Electricity">
-            <option id="Fashion And Textiles"  value="Fashion And Textiles">
-            <option id="SecurityAndSafety"  value="Security And Safety" >
-            <option id="ConstructionInfrastructureAndRealEstate"  value="Construction Infrastructure And Real Estate">
-            <option id="GraphicsDesignAndArt"  value="Graphics Design And Art">
-            <option id="EducationAndTraining"  value="Education And Training">
-            <option id="AccountingAndFinance"  value="Accounting And Finance">
-            <option id="LogisticsProcurementAndShipping"  value="Logistics Procurement And Shipping">
-            <option id="RestaurantsFoodAndEvents"  value="Restaurants Food And Events">
-            <option id="Retail"  value="Retail">
-            <option id="Medicine And Health"  value="Medicine And Health">
-            <option id="marketingAndAdvertising"  value="marketing And Advertising">
-            <option id="CustomerService"  value="Customer Service">
-            <option id="TransportAndVehicle"  value="Transport And Vehicle">
-            <option id="TourismAndHotels"  value="Tourism And Hotels">
-            <option id="IndustryAndManagement"  value="Industry And Management">
-            <option id="Sales"  value="Sales">
-            <option id="other"  value="other">
-        </datalist>
+            <select class="form-group" name="fieldOfEmployment" id="fieldOfEmployment">
+            <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
+            <option value="Fashion And Textiles" >Fashion And Textiles</option>
+            <option value="SecurityAndSafety" >Security And Safety</option>
+            <option value="ConstructionInfrastructureAndRealEstate">Construction Infrastructure And Real Estate</option>
+            <option value="GraphicsDesignAndArt">Graphics Design And Art</option>
+            <option value="EducationAndTraining" >Education And Training</option>
+            <option value="AccountingAndFinance"  >Accounting And Finance</option>
+            <option value="LogisticsProcurementAndShipping">Logistics Procurement And Shipping</option>
+            <option value="RestaurantsFoodAndEvents" >Restaurants Food And Events</option>
+            <option value="Retail" >Retail</option>
+            <option value="Medicine And Health" >Medicine And Health</option>
+            <option value="marketingAndAdvertising" >marketing And Advertising</option>
+            <option value="CustomerService" >Customer Service</option>
+            <option value="TransportAndVehicle" >Transport And Vehicle</option>
+            <option value="TourismAndHotels" >Tourism And Hotels</option>
+            <option value="IndustryAndManagement" >Industry And Management</option>
+            <option value="Sales" >Sales</option>
+            <option value="other" >other</option>
+            </select>
         </div>
 
 
-
-   <!--    <div class="control-group">
-             areaOfResidence
-            <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
-            <div class="controls">
-                <input type="text" id="areaOfResidence" name="areaOfResidence" placeholder="" class="input-xlarge">
+        <div>
+            <p class="space row">                      </p>
+            <label> working Days:</label>
+            <div id = " workingDays">
+                <label><input type="checkbox" name="workingDays.Sunday" value="Sunday">Sunday</label>
+                <label><input type="checkbox" name="workingDays.Monday" value="Monday" >Monday</label>
+                <label><input type="checkbox" name="workingDays.Tuesday" value="Tuesday">Tuesday</label>
+                <label><input type="checkbox" name="workingDays.Wednesday" value="Wednesday">Wednesday</label>
+                <label><input type="checkbox" name="workingDays.Thursday" value="Thursday" >Thursday</label>
+                <label><input type="checkbox" name="workingDays.Friday" value="Friday">Friday</label>
             </div>
         </div>
 
-        <div class="control-group">
-            fieldOfEmployment
-            <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
-            <div class="controls">
-                <input type="text" id="fieldOfEmployment" name="fieldOfEmployment" placeholder="" class="input-xlarge">
-            </div>
-        </div> -->
 
         <div class="control-group">
+            <p class="space row">                      </p>
             <!-- Experience -->
             <label class="control-label"  for="Experience">Experience:</label>
             <div class="controls">
-                <input type="number" id="Experience" name="Experience" placeholder="" class="input-xlarge">
+                <input type="number" id="Experience" name="Experience" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -141,7 +153,7 @@
             <!-- E-mail -->
             <label class="control-label" for="email">E-mail:</label>
             <div class="controls">
-                <input type="email" id="email" name="email" placeholder="" class="input-xlarge">
+                <input type="email" id="email" name="email" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -149,8 +161,8 @@
             <!-- Password-->
             <label class="control-label" for="password">Password:</label>
             <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
-                <p class="help-block">Password should be at least 6 characters</p>
+                <input type="password" id="password" name="password" placeholder="" class="input-xlarge" required>
+                <p class="space row"">          </p>
             </div>
         </div>
 

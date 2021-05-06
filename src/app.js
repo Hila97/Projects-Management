@@ -42,7 +42,7 @@ app.use('/auth',require('./route/authAPI'))
 app.use(function (err,req,res,next){
     res.status(422).send({error:err.message})
 })
-app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
+app.listen(port,()=>{console.log('server is up and running at: http://127.0.0.1:${port}')})
 
 //loginController(app)
 app.get('/', (req, res)=>{
@@ -56,17 +56,10 @@ app.get('/addContractorForm', (req, res)=>{
 app.get('/login', (req, res)=>{
  res.render('login')
 })
-app.post('/addContractorForm', function(req, res) {
-    var ID = req.body.ID
-})
-/*
-app.post('/contractorWorkerAPI/addContractor', (request, response) => {
-    response.json(request.body);
-})
 
 app.get('/attandenceReport', (req, res)=>{
     res.render('attandenceReport')
-})*/
+})
 app.get('/profile/:name',(req, res) => {
  var data={age:23, job:'student'}
  res.render('profile',{person: req.params.name,data:data})
@@ -79,7 +72,7 @@ app.get('/Booking',(req, res) => {
     try {
         const fetchBooking = async () =>{
            const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesToday') 
-           if(typeof data === "string"){
+           if(typeof data === 'string'){
                 return res.render('Error', {message : data})
            }
            else{
@@ -98,9 +91,9 @@ app.get('/Booking',(req, res) => {
 app.get('/FutureBooking',(req, res) => {
     try {
         const fetchBooking = async () =>{
-           const {data} = await axios.get(`http://127.0.0.1:3000/employer/getBookedEmployeesFuture/60897c4e3b16b63e2437bbad`) 
+           const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesFuture/60897c4e3b16b63e2437bbad')
            console.log(data)
-           if(typeof data === "string"){
+           if(typeof data === 'string'){
                 return res.render('Error', {message : data})
            }
            else{
@@ -114,7 +107,5 @@ app.get('/FutureBooking',(req, res) => {
     }
    
    })
-
-
 
 

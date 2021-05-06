@@ -77,15 +77,12 @@ const contractorSchema = new schema ({
     workingDays:{
         type: Object,
 // required:true,
-        days: {
             Sunday :{ type: Boolean},
             Monday :{ type: Boolean},
             Tuesday :{ type: Boolean},
             Wednesday:{ type: Boolean},
             Thursday :{ type: Boolean},
             Friday: {type: Boolean}
-        }
-
     },
 
 
@@ -96,12 +93,10 @@ const contractorSchema = new schema ({
     },
 
     bankAccount :{
-    deatails:{
+
         bankName:{type:String},
         branch:{type:Number},
         accountNumber:{type:Number}
-
-         }
 
          },
     rating:{
