@@ -79,7 +79,7 @@ app.get('/Booking',(req, res) => {
     try {
         const fetchBooking = async () =>{
            const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesToday') 
-           if(typeof data === "string"){
+           if(typeof data === 'string'){
                 return res.render('Error', {message : data})
            }
            else{
@@ -100,7 +100,7 @@ app.get('/FutureBooking',(req, res) => {
         const fetchBooking = async () =>{
            const {data} = await axios.get(`http://127.0.0.1:3000/employer/getBookedEmployeesFuture/60897c4e3b16b63e2437bbad`) 
            console.log(data)
-           if(typeof data === "string"){
+           if(typeof data === 'string'){
                 return res.render('Error', {message : data})
            }
            else{
