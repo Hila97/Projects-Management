@@ -10,4 +10,8 @@ router.post('/editStartBreak', attendanceReport.editStartBreak)
 router.post('/editEndBreak', attendanceReport.editEndBreak)
 
 
+
+router.get('/addContractorForm', (req, res)=>{
+    res.render('addContractorForm')
+})
 module.exports=router

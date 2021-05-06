@@ -47,13 +47,25 @@ app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:
 app.get('/', (req, res)=>{
  res.render('Home')
 })
+
+app.get('/addContractorForm', (req, res)=>{
+    res.render('addContractorForm')
+})
+
 app.get('/login', (req, res)=>{
  res.render('login')
+})
+app.post('/addContractorForm', function(req, res) {
+    var ID = req.body.ID
+})
+/*
+app.post('/contractorWorkerAPI/addContractor', (request, response) => {
+    response.json(request.body);
 })
 
 app.get('/attandenceReport', (req, res)=>{
     res.render('attandenceReport')
-})
+})*/
 app.get('/profile/:name',(req, res) => {
  var data={age:23, job:'student'}
  res.render('profile',{person: req.params.name,data:data})

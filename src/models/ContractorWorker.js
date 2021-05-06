@@ -33,50 +33,50 @@ const contractorSchema = new schema ({
     firstName: {
         type: String,
         maxLength:15,
-        required: true
+        //required: true
     },
     lastName: {
         type: String,
         maxLength:15,
-        required: true
+        //required: true
     },
     telephone: {
         type: String,
-        required: true
+       // required: true
     },
 
     password: {
         type: String,
         validate:[validatePassword, 'Please fill a valid password'],
         match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/, 'Please fill a valid password'],
-        required: true
+        //required: true
     },
 
     email: {
         type: String,
         unique: true,
-        required: true,
+        //required: true,
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/, 'Please fill a valid email address']
     },
 
     dateOfBirth: {
         type: Date ,
-       // required: true
+// required: true
     },
     areaOfResidence: {
         type:AreaOfResidence ,
-        required:true
+        //required:true
     },
     fieldOfEmployment:{
         type: FieldOfEmployment ,
-        required: true
+        //required: true
 
     },
 
     workingDays:{
         type: Object,
-       // required:true,
+// required:true,
         days: {
             Sunday :{ type: Boolean},
             Monday :{ type: Boolean},
@@ -91,16 +91,19 @@ const contractorSchema = new schema ({
 
     hourlyWage: {
         type: Number,
-        required:true
+        //required:true
 
     },
 
     bankAccount :{
-        type: mongoose.Types.ObjectId,
-        ref:'BankAccount',
-        //required:true
+    deatails:{
+        bankName:{type:String},
+        branch:{type:Number},
+        accountNumber:{type:Number}
 
-    },
+         }
+
+         },
     rating:{
         type: Number,
         default:0

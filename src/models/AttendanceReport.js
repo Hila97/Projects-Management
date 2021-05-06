@@ -1,7 +1,7 @@
 const mongoose = require ('mongoose');
 const schema= mongoose.Schema;
 const attendanceReportSchema = new schema({
-    employmentID:
+   employmentID:
         {
             type: mongoose.Types.ObjectId,
             ref: 'Employment'

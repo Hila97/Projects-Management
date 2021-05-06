@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+<form class="form-horizontal" action='/addContractor' method="POST">
+    <fieldset>
+        <div id="legend">
+            <legend class="">Add New Contractor</legend>
+        </div>
+        <div class="control-group">
+            <!-- ID -->
+            <label class="control-label"  for="ID">ID:</label>
+            <div class="controls">
+                <input type="number" id="ID" name="ID" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- firstName -->
+            <label class="control-label"  for="firstName">First Name:</label>
+            <div class="controls">
+                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- lastName -->
+            <label class="control-label"  for="lastName">Last Name:</label>
+            <div class="controls">
+                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- telephone -->
+            <label class="control-label"  for="lastName">Phone Number:</label>
+            <div class="controls">
+                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <!--dateOfBirth -->
+            <label class="control-label"  for="dateOfBirth">Birthday:</label>
+            <div class="controls">
+                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!--areaOfResidence-->
+            <div>
+                <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
+            </div>
+            <input list="areaOfResidence">
+            <datalist id="areaOfResidence">
+                <option value="North">
+                <option value="South">
+                <option value="Galil" >
+                <option value="Tel Aviv metropolitan area" >
+                <option value="Negev" >
+                <option value="Shfela" >
+                <option value="Haifa and the Krayot" >
+                <option value="Jerusalem" >
+
+            </datalist>
+        </div>
+
+        <div class="control-group">
+            <!-- hourlyWage -->
+            <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
+            <div class="controls">
+                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!--bankAccount.bankName-->
+            <label class="control-label"  for="bankName"> Bank Name:</label>
+            <div class="controls">
+                <input type="text" id="bankName" name="bankName" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+
+        <div class="control-group">
+            <!--fieldOfEmployment-->
+            <div>
+            <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+        </div>
+        <input list="fieldOfEmployment">
+        <datalist id="fieldOfEmployment">
+            <option id="ElectronicsAndElectricity"  value="Electronics And Electricity">
+            <option id="Fashion And Textiles"  value="Fashion And Textiles">
+            <option id="SecurityAndSafety"  value="Security And Safety" >
+            <option id="ConstructionInfrastructureAndRealEstate"  value="Construction Infrastructure And Real Estate">
+            <option id="GraphicsDesignAndArt"  value="Graphics Design And Art">
+            <option id="EducationAndTraining"  value="Education And Training">
+            <option id="AccountingAndFinance"  value="Accounting And Finance">
+            <option id="LogisticsProcurementAndShipping"  value="Logistics Procurement And Shipping">
+            <option id="RestaurantsFoodAndEvents"  value="Restaurants Food And Events">
+            <option id="Retail"  value="Retail">
+            <option id="Medicine And Health"  value="Medicine And Health">
+            <option id="marketingAndAdvertising"  value="marketing And Advertising">
+            <option id="CustomerService"  value="Customer Service">
+            <option id="TransportAndVehicle"  value="Transport And Vehicle">
+            <option id="TourismAndHotels"  value="Tourism And Hotels">
+            <option id="IndustryAndManagement"  value="Industry And Management">
+            <option id="Sales"  value="Sales">
+            <option id="other"  value="other">
+        </datalist>
+        </div>
+
+
+
+   <!--    <div class="control-group">
+             areaOfResidence
+            <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
+            <div class="controls">
+                <input type="text" id="areaOfResidence" name="areaOfResidence" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            fieldOfEmployment
+            <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+            <div class="controls">
+                <input type="text" id="fieldOfEmployment" name="fieldOfEmployment" placeholder="" class="input-xlarge">
+            </div>
+        </div> -->
+
+        <div class="control-group">
+            <!-- Experience -->
+            <label class="control-label"  for="Experience">Experience:</label>
+            <div class="controls">
+                <input type="number" id="Experience" name="Experience" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- E-mail -->
+            <label class="control-label" for="email">E-mail:</label>
+            <div class="controls">
+                <input type="email" id="email" name="email" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Password-->
+            <label class="control-label" for="password">Password:</label>
+            <div class="controls">
+                <input type="password" id="password" name="password" placeholder="" class="input-xlarge">
+                <p class="help-block">Password should be at least 6 characters</p>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <button class="btn btn-success" type="submit">Add New Contractor</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+</html>
