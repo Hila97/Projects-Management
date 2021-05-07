@@ -44,23 +44,37 @@ app.use(function (err,req,res,next){
 })
 app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
 
+
+
+
+/*--------------------------------GET HTMLS---------------------------------*/
 //loginController(app)
 app.get('/', (req, res)=>{
- res.render('Home')
+ res.render('HomeNavUser')
 })
 
 app.get('/addContractorForm', (req, res)=>{
     res.render('addContractorForm')
 })
+app.get('/HomeNavUser', (req, res)=>{
+    res.render('HomeNavUser')
+})
+
+app.get('/ContractorHome', (req, res)=>{
+    res.render('HomeContractor')
+})
+
+app.get('/EmployerHome', (req, res)=>{
+    res.render('HomeEmployer')
+})
+
+app.get('/EmployeeHome', (req, res)=>{
+    res.render('HomeEmployee')
+})
 
 app.get('/login', (req, res)=>{
  res.render('login')
 })
-app.post('/addContractorForm', function(req, res) {
-    var ID = req.body.ID
-})
-
-
 
 app.get('/attandenceReport', (req, res)=>{
     res.render('attandenceReport')
