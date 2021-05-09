@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 app.use(express.static('public'))
 const axios = require('axios')
+const moment = require('moment')
 
 //env
 //const dotenv=require('dotenv')
@@ -111,7 +112,7 @@ app.get('/FutureBooking',(req, res) => {
     try {
         const fetchBooking = async () =>{
            const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesFuture/60897c4e3b16b63e2437bbad') 
-           console.log(data)
+        //    console.log(data)
            if(typeof data === 'string'){
                 return res.render('Error', {message : data})
            }
@@ -126,9 +127,100 @@ app.get('/FutureBooking',(req, res) => {
     }
    
    })
+
+app.get('/employerSearch',((req, res) =>
+{
+    try {
+        const fetchEmployers = async () =>{
+           const {data} = await axios.get('http://127.0.0.1:3000/employer/getAllEmployers') 
+        //    console.log(data)
+           if(typeof data === 'string'){
+                return res.render('Error', {message : data})
+           }
+           else{
+            
+            res.render('employerSearch',{employers : data})
+           }
+        }
+        fetchEmployers()
+    } catch (e) {
+        console.log(e)
+    }
+
+    
+}))
+
 app.get('/employerRegister',((req, res) =>
 {
     res.render('employerRegister')
+}))
+
+app.get('/filterEmploymentsByStatus',((req, res) =>
+{
+    const status = 'Current'
+    try {
+        const fetchEmployees = async () =>{
+           const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmployeesByStatus/${status}`) 
+        //    console.log(data)
+           if(typeof data === 'string'){
+                return res.render('Error', {message : data})
+           }
+           else{
+            const employees = data.map( d => d.workerID)
+            res.render('filterEmploymentsByStatus',{employees : employees})
+           }
+        }
+        fetchEmployees()
+    } catch (e) {
+        console.log(e)
+    }
+
+}))
+
+app.get('/filterContractorsByDate',((req, res) =>
+{
+    // const{val} = req.params
+    // console.log(val)
+    // const today = moment().format('YYYY-MM-DD')
+    // console.log(today)
+    // try {
+    //     const fetchBookingByDate = async () =>{
+    //        const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmploymentsByBookingDate/${today}`) 
+    //     //    console.log(data)
+    //        if(typeof data === 'string'){
+    //             return res.render('Error', {message : data})
+    //        }
+    //        else{
+    //         const employees = data.map( d => d.workerID)
+    //         res.render('filterContractors',{employees : employees})
+    //        }
+    //     }
+    //     fetchBookingByDate()
+    // } catch (e) {
+    //     console.log(e)
+    // }
+    res.render('filterContractorsByDate')
+}))
+
+app.get('/employmentsList',((req, res) =>
+{
+    try {
+        const fetchEmployments = async () =>{
+           const {data} = await axios.get('http://127.0.0.1:3000/employment/findAllEmployments') 
+        //    console.log(data)
+           if(typeof data === 'string'){
+                return res.render('Error', {message : data})
+           }
+           else{
+           
+            res.render('employmentsList',{employments : data})
+           }
+        }
+        fetchEmployments()
+    } catch (e) {
+        console.log(e)
+    }
+
 }))
 
 app.get('/employerLogin',((req, res) =>
