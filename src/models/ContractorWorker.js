@@ -52,7 +52,7 @@ const contractorSchema = new schema ({
         //required: true
     },
 
-    email: {
+    userName: {
         type: String,
         unique: true,
         //required: true,

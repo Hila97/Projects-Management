@@ -11,7 +11,8 @@ const addVacation=(req, res)=> {
     })
 }
 const findAllVacations=(req,res)=>{
-    console.log("find")
+    console.log("find vaca")
+    console.log(req.cookies)
     Vacation.find()
         .then((result)=>{
             res.send(result)

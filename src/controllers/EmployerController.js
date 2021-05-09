@@ -66,7 +66,6 @@ const registerOfEmployer = async (req, res) =>
     newEmployer.phone = phone
     newEmployer.fieldOfEmployment = fieldOfEmployment
 
-
     let employer = await Employer.findOne({userName: req.body.userName})
     if (employer)
     {
@@ -79,11 +78,18 @@ const registerOfEmployer = async (req, res) =>
             console.log(err)
             return res.status(500).send()
         }
-
-        return res.json({status: 'ok', data: req.body})
-
-
     })
+    //then(result=>
+   // {
+        let epmployerIDCookie =
+        {
+            id: newEmployer._id
+        }
+        console.log(newEmployer._id)
+        res.cookie("userData", epmployerIDCookie);
+        console.log(epmployerIDCookie)
+        return res.json({status: 'ok', data: req.body})
+   // })
 }
 
 const loginOfEmployer= async (req, res) =>
@@ -114,8 +120,15 @@ const loginOfEmployer= async (req, res) =>
         {
             return res.json({status: 'error', error: 'USER NOT EXIST'})
         }
-
-
+    }).then(result=>
+    {
+        let employerIDCookie =
+        {
+          id: result._id
+        }
+        console.log(result._id)
+        res.cookie("userData", employerIDCookie);
+        console.log(employerIDCookie)
         return res.json({status: 'ok', data: req.body})
     })
 }
@@ -165,4 +178,12 @@ const getBookedEmployeesFuture= async (req,res)=>
     }  
 }
 
-module.exports={addEmployer,findAllE,registerOfEmployer,loginOfEmployer, getBookedEmployeesFuture, getBookedEmployeesToday,}
+module.exports=
+{
+    addEmployer,
+    findAllE,
+    registerOfEmployer,
+    loginOfEmployer,
+    getBookedEmployeesFuture,
+    getBookedEmployeesToday,
+}
