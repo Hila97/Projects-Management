@@ -1,4 +1,5 @@
 const Employment=require('../models/Employment')
+const moment = require('moment')
 
 const addEmployment=(req, res)=> {
     console.log("add")
@@ -99,5 +100,157 @@ function updateEmploymentStatus(req,res,next)
     res.json(req.body)
 }).catch(next)
 }
-module.exports={addEmployment,findAllEmployments,findFutureEmployment,findTodayEmployment,updateEmploymentStatus,updateEmploymentToday}
+
+
+const getEmployeesByEmployerID= async (req,res)=>
+{
+    const {id} = req.params
+    try
+    {  
+        const employees = await Employment.find({ employerID : id})
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+const getEmployeesByEmployerIDAndStatus= async (req,res)=>
+{
+    const {id, status} = req.params
+    try
+    {  
+        const employees = await Employment.find({ employerID : id, status : status })
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+const getEmployeesByStatus= async (req,res)=>
+{
+    const {status} = req.params
+    try
+    {  
+        const employees = await Employment.find({  status : status }).populate('workerID')
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+
+const getEmploymentsByWorkDate= async (req,res)=>
+{
+    let {WorkDate} = req.params
+    WorkDate = new moment(WorkDate)
+    WorkDate.utc(WorkDate).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = new moment(WorkDate)
+    tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+ 
+   
+    try{
+      const query = {$and : [
+            {workDate : {$gte: WorkDate}},
+            {workDate : {$lt: tomorrow}}
+        ]}
+        const employees = await Employment.find(query)
+        if(employees.length===0){
+            res.send('no employees working that day')
+            return
+        }
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+const getEmploymentsByBookingDate= async (req,res)=>
+{
+    let {BookingDate} = req.params
+    BookingDate = new moment(BookingDate)
+    BookingDate.utc(BookingDate).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = new moment(BookingDate)
+    tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+    console.log(BookingDate, tomorrow)
+   
+    try{
+      const query = {$and : [
+            {BookingDate : {$gte: BookingDate}},
+            {BookingDate : {$lt: tomorrow}}
+        ]}
+        const employees = await Employment.find(query)
+        if(employees.length===0){
+            res.send('no employees working that day')
+            return
+        }
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+const getEmploymentsByBookingDateMonth= async (req,res)=>
+{
+    let {month} = req.params
+    const date = '2021-' + month + '-01'
+    const nextMonthNum = parseInt(month, 10) + 1
+    const nextMonthNumString = new Date('2021-' + nextMonthNum.toString() + '-01')
+    console.log(nextMonthNumString)
+
+    thisMonth = new moment(date)
+    nextMonth = new moment(nextMonthNumString)
+
+    thisMonth.utc(thisMonth).set('hour', 0).set('minute', 0).set('second', 0)
+    nextMonth.utc(nextMonth).set('hour', 0).set('minute', 0).set('second', 0)
+    console.log(thisMonth, nextMonth)
+   
+    try{
+      const query = {$and : [
+            {BookingDate : {$gte: thisMonth}},
+            {BookingDate : {$lt: nextMonth}}
+        ]}
+        const employees = await Employment.find(query)
+        if(employees.length===0){
+            res.send('no employees working that day')
+            return
+        }
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+module.exports={addEmployment,findAllEmployments,findFutureEmployment,findTodayEmployment,updateEmploymentStatus,updateEmploymentToday,  getEmployeesByEmployerID,
+    getEmployeesByEmployerIDAndStatus,
+    getEmploymentsByWorkDate, getEmployeesByStatus, getEmploymentsByBookingDate, getEmploymentsByBookingDateMonth}
 
