@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>contractorSearch</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+ 
+      <table>
+        <% employers.forEach((item)=>{%>
+        <tr>
+          <th>full name</th>
+          <th>company name</th>
+          <th>position</th>
+          <th>phone</th>
+          <th>createdAt</th>
+          <th>updatedAt</th>
+        </tr>
+        <tr>
+          <td><%=item.fullName%></td>
+          <td><%=item.companyName%></td>
+          <td><%=item.position%></td>
+          <td><%=item.phone%></td>
+          <td><%=item.createdAt%></td>
+          <td><%=item.updatedAt%></td>
+        </tr>
+        <%});%>
+      </table>
+
+</body>
+</html>
