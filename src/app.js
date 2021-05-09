@@ -5,8 +5,8 @@ app.use(express.static('public'))
 const axios = require('axios')
 
 //env
-const dotenv=require('dotenv')
-dotenv.config()
+//const dotenv=require('dotenv')
+//dotenv.config()
 
 //body parser
 const bodyParser=require('body-parser')
@@ -18,9 +18,9 @@ const port = process.env.PORT || 3000
 
 //mongoose
 const mongoose = require ('mongoose')
-
+dbURI= 'mongodb+srv://Hodaya:hp1234@mhyhmcluster.d5gdr.mongodb.net/MHYHMdatabase?retryWrites=true&w=majority'
 //connect to mongoDB
-mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result)=> {
      console.log('connected')
     })
@@ -126,7 +126,15 @@ app.get('/FutureBooking',(req, res) => {
     }
    
    })
+app.get('/employerRegister',((req, res) =>
+{
+    res.render('employerRegister')
+}))
 
+app.get('/employerLogin',((req, res) =>
+{
+    res.render('employerLogin')
+}))
 
 
 

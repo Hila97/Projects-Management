@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script type="text/javascript">
+       // var password = document.getElementById("password")
+        //var confirmPassword = document.getElementById("confirmPassword");
+
+      /* function validatePassword(){
+            if(password.value != confirmPassword.value) {
+                confirmPassword.setCustomValidity("Passwords Don't Match");
+            } else
+                {
+                confirmPassword.setCustomValidity('');
+            }
+        }
+
+
+       */
+        function checkPasswordMatch ()
+        {
+           var password = document.getElementById("password").value;
+           var confirmPassword = document.getElementById("confirmPassword").value
+            if(password != confirmPassword)
+            {
+                document.getElementById("message1").innerHTML = "**Passwords Don't Match";
+                return false
+            }
+            else
+            {
+                alert("Your password created successfully");
+                async payload => {
+                    toolbelt.email({
+                        to: 'foo@bar.com',
+                        message: '<div><h1>Example Title</h1><p>This is an HTML example</p></div>'
+                    })
+                }
+
+            }
+       }
+
+        </script>
+</head>
+<body>
+<!--====form section start====-->
+<div class="user-detail">
+
+    <hr>
+    <form onsubmit = "return checkPasswordMatch()" action="/employer/registerOfEmployer" method="POST">
+        <div>
+        <label>Full Name</label>
+        <input type="text" placeholder="Enter Full Name" name="fullName" required >
+        </div>
+        <div>
+        <label>Company Name</label>
+        <input type="text" placeholder="Enter Company Name" name="companyName" required >
+        </div>
+        <div>
+        <label>Position</label>
+        <input type="text" placeholder="Enter Your Position" name="position" required>
+        </div>
+        <div>
+        <label>User Name</label>
+        <input type="email" placeholder="Enter Email Address" name="userName" required>
+        </div>
+        <div>
+        <label>Phone</label>
+        <input type="text" placeholder="Enter Your Phone" name="phone" required>
+        </div>
+        <div class="control-group">
+            <!--fieldOfEmployment-->
+            <div>
+                <label class="control-label" for="fieldOfEmployment">Field Of Employment</label>
+            </div>
+            <select class="form-group" placeholder="Enter Employment" name="fieldOfEmployment" id="fieldOfEmployment">
+                <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
+                <option value="Fashion And Textiles" >Fashion And Textiles</option>
+                <option value="SecurityAndSafety" >Security And Safety</option>
+                <option value="ConstructionInfrastructureAndRealEstate">Construction Infrastructure And Real Estate</option>
+                <option value="GraphicsDesignAndArt">Graphics Design And Art</option>
+                <option value="EducationAndTraining" >Education And Training</option>
+                <option value="AccountingAndFinance"  >Accounting And Finance</option>
+                <option value="LogisticsProcurementAndShipping">Logistics Procurement And Shipping</option>
+                <option value="RestaurantsFoodAndEvents" >Restaurants Food And Events</option>
+                <option value="Retail" >Retail</option>
+                <option value="Medicine And Health" >Medicine And Health</option>
+                <option value="marketingAndAdvertising" >marketing And Advertising</option>
+                <option value="CustomerService" >Customer Service</option>
+                <option value="TransportAndVehicle" >Transport And Vehicle</option>
+                <option value="TourismAndHotels" >Tourism And Hotels</option>
+                <option value="IndustryAndManagement" >Industry And Management</option>
+                <option value="Sales" >Sales</option>
+                <option value="other" >other</option>
+            </select>
+        </div>
+
+        <div>
+        <label>Password</label>
+        <input type="password" placeholder="Enter Your Password" name="password" id="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number"  >
+        </div>
+        <div>
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Verify Your Password" name="confirmPassword" id="confirmPassword" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$" title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number"  >
+        </div>
+        <span id = "message1" style="color:red"> </span> <br><br>
+        <div>
+            <!--<button type="submit" class="pure-button pure-button-primary">Confirm</button>-->
+            <button type="submit" >SIGN UP</button>
+
+            <p> Already Member?<a href="/employerLogin"> SIGN IN</a></p>
+        </div>
+    </form>
+</div>
+</div>
+<!--====form section start====-->
+</body>
+</html>

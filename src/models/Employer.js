@@ -32,12 +32,13 @@ const employerSchema = new schema(
                 validate: [validatePassword, 'Please fill a valid password'],
                 match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/, 'Please fill a valid password']
             },
-        /*confirmPassword:
+        confirmPassword:
             {
                 type: String,
-                required: true
+                required: true,
+                validate: [validatePassword, 'Please fill a valid password'],
+                match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/, 'Please fill a valid password']
             },
-            */
         fullName:
             {
                 type: String,
