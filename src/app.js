@@ -64,6 +64,13 @@ app.get('/ContractorHome', (req, res)=>{
     res.render('HomeContractor')
 })
 
+
+
+app.get('/editProfile', (req, res)=>{
+    res.render('editProfileContractor')
+})
+
+
 app.get('/EmployerHome', (req, res)=>{
     res.render('HomeEmployer')
 })

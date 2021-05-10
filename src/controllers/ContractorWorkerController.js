@@ -81,10 +81,23 @@ const editProfile=(req, res)=>{
         .catch(err=>{
             console.log(err)
         })
+
 }
+
+const displayEditProfile= async (req,res)=>{
+    let contractor=await contractorWorkerController.findOne({ID:req.params.ID})
+    if(contractor){
+        res.render('../views/displayProfileContractor',contractor)
+    }
+    else{
+        return res.status(400).send('That contractor ID not valid')
+    }
+}
+
+
 const loginOfContractorWorker= async (req, res) =>
 {
-    var userName = req.body.email
+    var userName = req.body.userName
     var password = req.body.password
     contractorWorkerController.findOne({userName: userName, password: password}, function (err, contractorWorker)
     {
@@ -127,5 +140,6 @@ module.exports =
     findWorkerByExperience,
     findContractorByAreaOfResidence,
     findContractorByFieldOfEmployment,
-    loginOfContractorWorker
+    loginOfContractorWorker,
+    displayEditProfile
 }
