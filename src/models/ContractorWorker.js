@@ -27,7 +27,7 @@ const contractorSchema = new schema ({
         type: Number,
         unique: true,
         validate:[validateID, 'Please fill a valid ID'],
-        match: [/^(\d\d\d\d\d\d\d\d\d) $/, 'Please fill a valid ID'],
+        match: [/^(\d\d\d\d\d\d\d\d\d)$/, 'Please fill a valid ID'],
         required: true
     },
     firstName: {
@@ -52,7 +52,7 @@ const contractorSchema = new schema ({
         //required: true
     },
 
-    email: {
+    userName: {
         type: String,
         unique: true,
         //required: true,

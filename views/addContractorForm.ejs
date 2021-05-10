@@ -9,9 +9,9 @@
         </div>
         <div class="control-group">
             <!-- ID -->
-            <label class="control-label"  for="ID">ID:</label>
+            <label class="control-label" for="ID">ID:</label>
             <div class="controls">
-                <input type="number" id="ID" name="ID" placeholder="" class="input-xlarge" required>
+                <input type="number" id="ID" name="ID" placeholder="Enter Contractor ID" class="input-xlarge" required pattern="{9}" title="Enter valid ID">
             </div>
         </div>
 
@@ -19,7 +19,7 @@
             <!-- firstName -->
             <label class="control-label"  for="firstName">First Name:</label>
             <div class="controls">
-                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge" required>
+                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
             </div>
         </div>
 
@@ -27,7 +27,7 @@
             <!-- lastName -->
             <label class="control-label"  for="lastName">Last Name:</label>
             <div class="controls">
-                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge" required>
+                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
             </div>
         </div>
 
@@ -35,7 +35,7 @@
             <!-- telephone -->
             <label class="control-label"  for="lastName">Phone Number:</label>
             <div class="controls">
-                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge" required>
+                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge" required  pattern="[0-9]+">
             </div>
         </div>
 
@@ -69,7 +69,7 @@
             <!-- hourlyWage -->
             <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
             <div class="controls">
-                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge" required>
+                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge" required pattern="[0-9]+">
             </div>
         </div>
 
@@ -77,7 +77,7 @@
             <!--bankAccount.bankName-->
             <label class="control-label"  for="bankAccount.bankName"> Bank Name:</label>
             <div class="controls">
-                <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge" required>
+                <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
             </div>
         </div>
 
@@ -85,14 +85,14 @@
             <!--bankAccount.branch-->
             <label class="control-label"  for="bankAccount.branch"> branch:</label>
             <div class="controls">
-                <input type="text" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge" required>
+                <input type="number" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge" required pattern="[0-9]+">
             </div>
         </div>
         <div class="control-group">
             <!--bankAccount.accountNumber-->
             <label class="control-label"  for="bankAccount.accountNumber">Account Number:</label>
             <div class="controls">
-                <input type="text" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge" required>
+                <input type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge" required pattern="[0-9]+">
             </div>
         </div>
 
@@ -144,15 +144,15 @@
             <!-- Experience -->
             <label class="control-label"  for="Experience">Experience:</label>
             <div class="controls">
-                <input type="number" id="Experience" name="Experience" placeholder="" class="input-xlarge" required>
+                <input type="number" id="Experience" name="Experience" placeholder="Enter the contractor's years of experience if there is no,Enter 0" class="input-xlarge" required pattern="[0-9]+">
             </div>
         </div>
 
         <div class="control-group">
             <!-- E-mail -->
-            <label class="control-label" for="email">E-mail:</label>
+            <label class="control-label" for="userName">E-mail:</label>
             <div class="controls">
-                <input type="email" id="email" name="email" placeholder="" class="input-xlarge" required>
+                <input type="email" id="userName" name="userName" placeholder="" class="input-xlarge" required>
             </div>
         </div>
 
@@ -160,7 +160,7 @@
             <!-- Password-->
             <label class="control-label" for="password">Password:</label>
             <div class="controls">
-                <input type="password" id="password" name="password" placeholder="" class="input-xlarge" required>
+                <input type="password" placeholder="Enter an contractor password " name="password" id="password" required title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number">
                 <p class="space row">          </p>
             </div>
         </div>
