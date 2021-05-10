@@ -10,6 +10,9 @@ const router = express.Router();
 const addCompanyEmployee=(req, res)=>
 {
     console.log("add")
+    console.log(req.cookie.contractorWorkerIDCookie)
+    console.log(req.cookie.companyEmployeeIDCookie)
+    console.log(req.cookie.employerIDCookie)
     const newCompanyEmployee = new companyEmployee(req.body)
     newCompanyEmployee.save().then(companyEmployee=>{
         console.log(req.body)
@@ -22,7 +25,7 @@ const loginOfCompanyEmployee= async (req, res) =>
 {
     var userName = req.body.userName
     var password = req.body.password
-    companyEmployee.findOne({userName: userName,password: password},function (err,employee)
+    companyEmployee.findOne({userName: userName, password: password},function (err,employee)
     {
         if((/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(userName)) == false)
         {
@@ -47,7 +50,16 @@ const loginOfCompanyEmployee= async (req, res) =>
         {
             return res.json({ status: 'error', error: 'USER NOT FOUND' })
         }
-        return res.json({ status: 'ok', data: req.body })
+    }).then(result=>
+    {
+        let companyEmployeeIDCookie =
+            {
+                id: result._id
+            }
+        console.log(result._id)
+        res.cookie("userData", companyEmployeeIDCookie);
+        console.log(companyEmployeeIDCookie)
+        return res.json({status: 'ok', data: req.body})
     })
 }
 

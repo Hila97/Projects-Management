@@ -1,8 +1,16 @@
 const mongoose = require ('mongoose');
-const contractorWorkerController = require('../models/ContractorWorker')
+const contractorWorker = require('../models/ContractorWorker')
+const express = require("express");
+const validationResult = require("express-validator");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const router = express.Router();
+
 
 const addContractor = (req, res)=>{
-    const newContractor=new contractorWorkerController(req.body)
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
+    console.log(req.cookie)
+    const newContractor=new contractorWorker(req.body)
     newContractor.save().then(contractor =>{
         res.json({newContractor})
         console.log("contractor added")
@@ -13,52 +21,54 @@ const addContractor = (req, res)=>{
 
 
 const findAllContractor =(req, res)=>{
-    const newContractor=new contractorWorkerController(req.body)
-    contractorWorkerController.find()
+    console.log(req.cookies)
+    const newContractor=new contractorWorker(req.body)
+    contractorWorker.find()
         .then(contractor =>{
             res.send(contractor)
         })
         .catch(err=>{
             console.log(err)
         })
+
 }
 
 
 function findContractorByID(req,res){
-    contractorWorkerController.find({ID:req.params.ID}).then((result)=>{
+    contractorWorker.find({ID:req.params.ID}).then((result)=>{
         res.send(result)
     })
 }
 
 function findContractorByAreaOfResidence(req,res){
-    contractorWorkerController.find({areaOfResidence:req.params.areaOfResidence}).then((result)=>{
+    contractorWorker.find({areaOfResidence:req.params.areaOfResidence}).then((result)=>{
         res.send(result)
     })
 }
 
 
 function findContractorByFieldOfEmployment(req,res){
-    contractorWorkerController.find({fieldOfEmployment:req.params.fieldOfEmployment}).then((result)=>{
+    contractorWorker.find({fieldOfEmployment:req.params.fieldOfEmployment}).then((result)=>{
         res.send(result)
     })
 }
 
 function findWorkerByRating(req,res){
     var query={rating:{$gte:req.params.rating}}
-    contractorWorkerController.find(query).then((result)=>{
+    contractorWorker.find(query).then((result)=>{
         res.send(result)
     })
 }
 
 function findWorkerByExperience(req,res){
-    contractorWorkerController.find({experience:{$gte:req.params.experience}}).then((result)=>{
+    contractorWorker.find({experience:{$gte:req.params.experience}}).then((result)=>{
         res.send(result)
     })
 }
 ////////////not good////////////
 function findWorkerByHourlyWage(req,res,next){
     var query={hourlyWage:{$gte:req.params.min,$lte:req.params.max}}
-    contractorWorkerController.find(query).then((result)=>{
+    contractorWorker.find(query).then((result)=>{
         res.send(result)
     })
 }
@@ -70,7 +80,7 @@ const editProfile=(req, res)=>{
             .status(400)
             .send({message:"error"})
     const  id = req.params.ID
-    contractorWorkerController.findOneAndUpdate(id, req.body)
+    contractorWorker.findOneAndUpdate(id, req.body)
         .then(contractor=>{
             if(!contractor) {
                 res.status(404).send({message: 'error'})
@@ -99,7 +109,8 @@ const loginOfContractorWorker= async (req, res) =>
 {
     var userName = req.body.userName
     var password = req.body.password
-    contractorWorkerController.findOne({userName: userName, password: password}, function (err, contractorWorker)
+    console.log(userName,password)
+    contractorWorker.findOne({userName: userName, password: password}, function (err, contractorW)
     {
         if ((/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/.test(userName)) == false)
         {
@@ -119,13 +130,23 @@ const loginOfContractorWorker= async (req, res) =>
             console.log(err)
             return res.status(500).send()
         }
-        if (!contractorWorker)
+        console.log(contractorW)
+        if (!contractorW)
         {
             return res.json({status: 'error', error: 'USER NOT FOUND'})
         }
-
+    }).then(result=>
+    {
+        let contractorWorkerIDCookie =
+        {
+            id: result._id
+        }
+        console.log(result._id)
+        res.cookie("userData", contractorWorkerIDCookie);
+        console.log(contractorWorkerIDCookie)
         return res.json({status: 'ok', data: req.body})
     })
+
 }
 
 

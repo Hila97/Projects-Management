@@ -6,6 +6,7 @@ router.post('/loginOfEmployer',(employer.loginOfEmployer))
 router.post('/registerOfEmployer',(employer.registerOfEmployer))
 router.get('/getBookedEmployeesToday',(employer.getBookedEmployeesToday))
 router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
+router.get('/getAllEmployers',(employer.findAllE))
 
 
 module.exports=router
