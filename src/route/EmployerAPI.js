@@ -1,12 +1,12 @@
-const router=require('express').Router()
-const employer = require('../controllers/EmployerController')
+// const router=require('express').Router()
+// const employer = require('../controllers/EmployerController')
 
-router.post('/addEmployer',(employer.addEmployer))
-router.post('/loginOfEmployer',(employer.loginOfEmployer))
-router.post('/registerOfEmployer',(employer.registerOfEmployer))
-router.get('/getBookedEmployeesToday',(employer.getBookedEmployeesToday))
-router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
-router.get('/getAllEmployers',(employer.findAllE))
+// router.post('/addEmployer',(employer.addEmployer))
+// router.post('/loginOfEmployer',(employer.loginOfEmployer))
+// router.post('/registerOfEmployer',(employer.registerOfEmployer))
+// router.get('/getBookedEmployeesToday',(employer.getBookedEmployeesToday))
+// router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
+// router.get('/getAllEmployers',(employer.findAllE))
 
 
-module.exports=router
+// module.exports=router

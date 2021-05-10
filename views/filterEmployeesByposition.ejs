@@ -7,12 +7,15 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>the employer and worker in compagny <%= employees[1].companyName%> </h2>
+    <h2>the employer and worker in compagny <%= employees[1].position%> </h2>
     <ul>
           <% employees.forEach((item)=>{%>
-          <li>name of compagny : <%=item.companyName%></li> 
+          <li>name of compagny : <%=item.position%></li> 
          <li>full name: <%=item.fullName%></li> 
+ 
           <%});%>
     </ul>
+
+    
 </body>
 </html>

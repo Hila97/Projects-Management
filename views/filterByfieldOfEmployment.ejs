@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>companyName</title>
     <style>
         table {
           font-family: arial, sans-serif;
@@ -29,18 +29,22 @@
  <body>
  
    <table>
-     <% workerArr.forEach((item)=>{%>
+     <% employees.forEach((item)=>{%>
      <tr>
-       <th>first name</th>
-       <th>last name</th>
-       <th>telephone</th>
-       <th>email</th>
+       <th>user name</th>
+       <th>full name</th>
+       <th>company name</th>
+       <th>position</th>
+       <th>phone</th>
+       <th>fieldOfEmployment</th>
      </tr>
      <tr>
-       <td><%=item.firstName%></td>
-       <td><%=item.lastName%></td>
-       <td><%=item.telephone%></td>
-       <td><%=item.email%></td>
+       <td><%=item.userName%></td>
+       <td><%=item.fullName%></td>
+       <td><%=item.companyName%></td>
+       <td><%=item.position%></td>
+       <td><%=item.phone%></td>
+       <td><%=item.fieldOfEmployment%></td>
      </tr>
      <%});%>
    </table>
