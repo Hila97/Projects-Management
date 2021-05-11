@@ -6,8 +6,8 @@ const axios = require('axios')
 const moment = require('moment')
 
 //env
-const dotenv=require('dotenv')
-dotenv.config()
+//const dotenv=require('dotenv')
+//dotenv.config()
 
 //use cookie
 var cookieParser = require('cookie-parser')
@@ -23,9 +23,9 @@ const port = process.env.PORT || 3000
 
 //mongoose
 const mongoose = require ('mongoose')
-//dbURI= 'mongodb+srv://Hodaya:hp1234@mhyhmcluster.d5gdr.mongodb.net/MHYHMdatabase?retryWrites=true&w=majority'
+dbURI= 'mongodb+srv://Hodaya:hp1234@mhyhmcluster.d5gdr.mongodb.net/MHYHMdatabase?retryWrites=true&w=majority'
 //connect to mongoDB
-mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+mongoose.connect(dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result)=> {
      console.log('connected')
     })
