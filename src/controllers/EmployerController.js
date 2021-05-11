@@ -66,7 +66,8 @@ const registerOfEmployer = async (req, res) =>
     let employer = await Employer.findOne({userName: req.body.userName})
     if (employer)
     {
-        return res.json({status: 'error', error: 'ACCOUNT ALREADY EXISTS'})
+        res.render('authViews/errorAlreadyExist')
+       // return res.json({status: 'error', error: 'ACCOUNT ALREADY EXISTS'})
     }
     newEmployer.save(function (err, savedEmployer)
     {
@@ -84,7 +85,7 @@ const registerOfEmployer = async (req, res) =>
     }
     console.log(newEmployer._id)
     res.cookie("employerIDCookie", employerIDCookie);
-    console.log(epmployerIDCookie)
+    console.log(employerIDCookie)
     //return res.json({status: 'ok', data: req.body})
     res.render('HomeEmployer')
    // })
@@ -116,7 +117,8 @@ const loginOfEmployer= async (req, res) =>
         }
         if (!employer)
         {
-            return res.json({status: 'error', error: 'USER NOT EXIST'})
+          //  return res.json({status: 'error', error: 'USER NOT EXIST'})
+            res.render('authViews/errorEmployerNotExist')
         }
     }).then(result=>
     {

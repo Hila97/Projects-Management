@@ -46,7 +46,8 @@ const loginOfCompanyEmployee= async (req, res) =>
         }
         if(!employee)
         {
-            return res.json({ status: 'error', error: 'USER NOT FOUND' })
+            //return res.json({ status: 'error', error: 'USER NOT FOUND' })
+            res.render('authViews/errorCompanyEmployeeNotExist')
         }
     }).then(result=>
     {

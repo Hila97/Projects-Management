@@ -250,7 +250,8 @@ const loginOfContractorWorker= async (req, res) =>
         console.log(contractorW)
         if (!contractorW)
         {
-            return res.json({status: 'error', error: 'USER NOT FOUND'})
+           // return res.json({status: 'error', error: 'USER NOT FOUND'})
+            res.render('authViews/errorContractorWorkerNotExist')
         }
     }).then(result=>
     {
