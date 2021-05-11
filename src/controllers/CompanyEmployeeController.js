@@ -1,4 +1,4 @@
-const companyEmployee = require('../models/companyEmployees')
+const companyEmployee = require('../models/CompanyEmployees')
     //const auth = require('../middleware/auth')
 const express = require("express");
 const validationResult = require("express-validator");
