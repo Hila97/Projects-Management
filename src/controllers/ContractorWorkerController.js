@@ -79,13 +79,14 @@ function findWorkerByHourlyWage(req,res,next){
 //////////////////////////////////
 const displayEditProfile= async (req,res)=>
 {
-    let contractor=await contractorWorker.findOne({ID:req.params.ID})
-    if(contractor){
-        res.render('../views/displayProfileContractor',contractor)
-    }
-    else{
+    contractorWorker.findById({_id:req.cookies.contractorWorkerIDCookie.id})
+        .then(contractor=> {
+            console.log(contractor)
+        res.render("displayProfileContractor",{contractor})
+    }).catch(err=>
+    {
         return res.status(400).send('That contractor ID not valid')
-    }
+    })
 }
 const editProfile=(req, res)=>{
     if(!req.body)

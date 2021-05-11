@@ -1,8 +1,9 @@
 const router = require('express').Router()
 const contractorWorker = require('../controllers/ContractorWorkerController')
 
-router.get('/displayProfile/:ID',contractorWorker.displayEditProfile)
-router.post('/editProfile/:ID',contractorWorker.editProfile)
+router.get('/displayProfile',contractorWorker.displayEditProfile)
+
+router.put('/editProfile',contractorWorker.editProfile)
 router.post('/addContractor',contractorWorker.addContractor)
 router.get('/findAllContractor',contractorWorker.findAllContractor)
 router.get('/findWorkerByRating',(contractorWorker.findWorkerByRating))
@@ -21,5 +22,7 @@ router.get('/contractorWorkerLogin',(req, res) =>
     res.render('authViews/contractorWorkerLogin')
 })
 
-
+router.get('/editContractorWorker',(req,res)=>{
+    res.render('editProfileContractor')
+})
 module.exports=router
