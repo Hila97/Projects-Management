@@ -1,3 +1,4 @@
+
 const router=require('express').Router()
 const employment=require('../controllers/EmploymentController')
 router.post('/addEmployment',employment.addEmployment)
@@ -13,6 +14,13 @@ router.get('/getEmploymentsByWorkDate/:WorkDate',employment.getEmploymentsByWork
 router.get('/getEmploymentsByBookingDate/:BookingDate',employment.getEmploymentsByBookingDate) // the date should be inserted like this '2021-05-03'
 router.get('/getEmploymentsByBookingDateMonth/:month',employment.getEmploymentsByBookingDateMonth) 
 router.put('/updateEmploymentStatus/:_id/:status',employment.updateEmploymentStatus)
+router.get('/getEmployeesByposition/:employerID',employment.getEmployeesByposition)
+router.get('/getEmployeesBycompanyName/:employerID',employment.getEmployeesBycompanyName)
+router.get('/filterByfieldOfEmployment/:employerID',employment.filterByfieldOfEmployment)
+
+
+
 //router.put('/updateEmploymentToday/:employerID',employment.updateEmploymentToday)
 
-module.exports=router
+
+module.exports =router

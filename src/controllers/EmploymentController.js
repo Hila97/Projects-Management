@@ -43,7 +43,7 @@ const Updatestatus= async (req,res)=>{
     }  
 }
 
-/*
+
 const findEmploymentById=(req,res)=>{
     Employment.findById()
         .then((result)=>{
@@ -54,7 +54,7 @@ const findEmploymentById=(req,res)=>{
         })
 }
 
- */
+
 function findFutureEmployment(req,res,next)
 {
     var query=
@@ -101,6 +101,62 @@ function updateEmploymentStatus(req,res,next)
 }).catch(next)
 }
 
+
+
+
+// const getEmploymentsByWorkDate= async (req,res)=>
+// {
+//     let {WorkDate} = req.params
+//     WorkDate = new moment(WorkDate)
+//     WorkDate.utc(WorkDate).set('hour', 0).set('minute', 0).set('second', 0)
+//     const tomorrow = new moment(WorkDate)
+//     tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+ 
+   
+//     try{
+//       const query = {$and : [
+//             {workDate : {$gte: WorkDate}},
+//             {workDate : {$lt: tomorrow}}
+//         ]}
+//         const employees = await Employment.find(query)
+//         if(employees.length===0){
+//             res.send('no employees working that day')
+//             return
+//         }
+//        return  res.json(employees)
+//     }
+//     catch(e)
+//     {
+//         console.log(e)
+//     }  
+// }
+
+// const getEmploymentsByBookingDate= async (req,res)=>
+// {
+//     let {BookingDate} = req.params
+//     BookingDate = new moment(BookingDate)
+//     BookingDate.utc(BookingDate).set('hour', 0).set('minute', 0).set('second', 0)
+//     const tomorrow = new moment(BookingDate)
+//     tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+//     console.log(BookingDate, tomorrow)
+   
+//     try{
+//       const query = {$and : [
+//             {bookingDate : {$gte: BookingDate}},
+//             {bookingDate : {$lt: tomorrow}}
+//         ]}
+//         const employees = await Employment.find(query)
+//         if(employees.length===0){
+//             res.send('no employees working that day')
+//             return
+//         }
+//        return  res.json(employees)
+//     }
+//     catch(e)
+//     {
+//         console.log(e)
+//     }  
+// }
 
 const getEmployeesByEmployerID= async (req,res)=>
 {
@@ -217,25 +273,27 @@ const getEmploymentsByBookingDate= async (req,res)=>
     }
 }
 
+
 const getEmploymentsByBookingDateMonth= async (req,res)=>
 {
     let {month} = req.params
     const date = '2021-' + month + '-01'
-    const nextMonthNum = parseInt(month, 10) + 1
-    const nextMonthNumString = new Date('2021-' + nextMonthNum.toString() + '-01')
-    console.log(nextMonthNumString)
+    const nextMonthNum = '0' + (parseInt(month, 10) + 1).toString()
+    const nextMonthString = '2021-' + nextMonthNum + '-01'
+    console.log(nextMonthString)
 
-    thisMonth = new moment(date)
-    nextMonth = new moment(nextMonthNumString)
+    thisMonth = moment(date)
+    nextMonth = moment(nextMonthString)
+
 
     thisMonth.utc(thisMonth).set('hour', 0).set('minute', 0).set('second', 0)
     nextMonth.utc(nextMonth).set('hour', 0).set('minute', 0).set('second', 0)
     console.log(thisMonth, nextMonth)
-
+   
     try{
       const query = {$and : [
-            {BookingDate : {$gte: thisMonth}},
-            {BookingDate : {$lt: nextMonth}}
+            {bookingDate : {$gte: thisMonth}},
+            {bookingDate : {$lt: nextMonth}}
         ]}
         const employees = await Employment.find(query)
         if(employees.length===0){
@@ -247,24 +305,72 @@ const getEmploymentsByBookingDateMonth= async (req,res)=>
     catch(e)
     {
         console.log(e)
-    }
+    }  
 }
+
+
+const getEmployeesBycompanyName= async (req,res)=>
+{
+    const {companyName} = req.params
+    try
+    {  
+        const employees = await Employment.find({  companyName : companyName }).populate('employerID')
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+//11111111111111111111111111111
+const getEmployeesByposition= async (req,res)=>
+{
+    const {position} = req.params
+    try
+    {  
+        const employees = await Employment.find({  position : position }).populate('employerID')
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+//11111111111111111111111111111
+const filterByfieldOfEmployment= async (req,res)=>
+{
+    const {fieldOfEmployment} = req.params
+    try
+    {  
+        const employees = await Employment.find({  fieldOfEmployment : fieldOfEmployment }).populate('employerID')
+        if(employees.length===0)
+        {
+            res.send("No workers found")
+            return
+        }
+        
+       return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
 
 module.exports={addEmployment,findAllEmployments,findFutureEmployment,findTodayEmployment,updateEmploymentStatus,updateEmploymentToday,  getEmployeesByEmployerID,
     getEmployeesByEmployerIDAndStatus,
-    getEmploymentsByWorkDate, getEmployeesByStatus, getEmploymentsByBookingDate, getEmploymentsByBookingDateMonth}
-module.exports=
-    {
-        addEmployment,
-        findAllEmployments,
-        findFutureEmployment,
-        findTodayEmployment,
-        updateEmploymentStatus,
-        getEmployeesByEmployerID,
-        getEmployeesByEmployerIDAndStatus,
-        getEmploymentsByWorkDate,
-        getEmployeesByStatus,
-        getEmploymentsByBookingDate,
-        getEmploymentsByBookingDateMonth
-    }
-
+    getEmploymentsByWorkDate, getEmployeesByStatus, getEmploymentsByBookingDate, getEmploymentsByBookingDateMonth
+    ,getEmployeesBycompanyName,getEmployeesByposition,filterByfieldOfEmployment}

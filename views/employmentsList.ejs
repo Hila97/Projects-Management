@@ -10,6 +10,8 @@
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
+        position: relative;
+        margin: "20rem";
       }
       
       td, th {
@@ -21,12 +23,27 @@
       tr:nth-child(even) {
         background-color: #dddddd;
       }
+      .button{
+        background-color:#18c6c0;
+        font-size:24px;
+        color:white;
+        border: none;
+        position: relative;
+        left: 40%;
+        cursor: pointer;
+
+      }
+      h2{
+        position: relative;
+      }
       </style>
 </head>
 <body>
   
-  
-  <h2>employments</h2>
+  <button onclick="showEmployees()" class="button" ><b>Employments list</b></button>
+ 
+  <div id="employees" style="display: none;">
+    <h2 >employments</h2>
 
   <table>
     <% employments.forEach((item)=>{%>
@@ -44,6 +61,16 @@
     </tr>
     <%});%>
   </table>
+  </div>
 
 </body>
+
+<script>
+  function showEmployees() {
+   let employeesDiv = document.getElementById("employees")
+   console.log(employeesDiv.style.display)
+   if(employeesDiv.style.display === 'none') employeesDiv.style.display = 'flex'
+   else employeesDiv.style.display = 'none'
+  }
+  </script>
 </html>
