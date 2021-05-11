@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search contractor worker</title>
+    <script>
+        function checkHourlyWage()
+        {
+            var min=document.getElementById("min").value;
+            var max=document.getElementById("max").value;
+            console.log(min,max)
+            if(min>max)
+            {
+                document.getElementById("message1").innerHTML="min cant be bigger than max";
+                return false
+            }
+        }
+    </script>
+</head>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+<form class="form-horizontal" onsubmit="return checkHourlyWage()" action='/contractorWorker/findAvailableWorkers' method="POST">
+    <fieldset>
+        <div id="legend">
+            <legend class="">SEARCH CONTRACTOR WORKER</legend>
+        </div>
+        <div class="control-group">
+            <!--date-->
+                <label class="control-label"  for="workDate">workDate:</label>
+                <div class="controls">
+                    <input type="date" id="workDate" name="workDate" placeholder="" class="input-xlarge" required>
+                </div>
+            </div>
+            <!--<input type="date" id="workDate" name="workDate" placeholder="" class="input-xlarge" required> -->
+<!--
+             <input type="text" id="workDate" name="workDate" value="05/06/2021" class="input-xlarge"required/>
+             <script>
+                 $(function() {
+                     $('input[name="workDate"]').daterangepicker({
+                         singleDatePicker: true,
+                         showDropdowns: true,
+                         minYear: 2021,
+                         minDate:new Date(),
+                         timePicker:true
+
+                     }, function(start, end, label) {
+                         console.log("A new date selection was made: " + start.format('YYYY-MM-DD'));
+                     });
+                 });
+             </script>
+         </div>
+-->
+        <div class="control-group">
+            <!--areaOfResidence-->
+            <div>
+                <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
+            </div>
+            <select class="form-group" name="areaOfResidence" id="areaOfResidence" >
+                <option value="ALL">All</option>
+                <option value="NORTH">North</option>
+                <option value="SOUTH">South</option>
+                <option value="GALIL" >Galil</option>
+                <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
+                <option value="NEGEV" >Negev</option>
+                <option value="SHFELA" >Shfela</option>
+                <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
+                <option value="JERUSALEM" >Jerusalem</option>
+                <option value="other" >other</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <!-- hourlyWage -->
+            <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
+            <div class="controls">
+                <input type="number" id="min" name="min" placeholder="" class="input-xlarge" min="1">
+                <input type="number" id="max" name="max" placeholder="" class="input-xlarge" min="1" >
+
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!--fieldOfEmployment-->
+            <div>
+                <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+            </div>
+            <select class="form-group" name="fieldOfEmployment" id="fieldOfEmployment">
+                <option value="ALL">All</option>
+                <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
+                <option value="Fashion And Textiles" >Fashion And Textiles</option>
+                <option value="SecurityAndSafety" >Security And Safety</option>
+                <option value="ConstructionInfrastructureAndRealEstate">Construction Infrastructure And Real Estate</option>
+                <option value="GraphicsDesignAndArt">Graphics Design And Art</option>
+                <option value="EducationAndTraining" >Education And Training</option>
+                <option value="AccountingAndFinance"  >Accounting And Finance</option>
+                <option value="LogisticsProcurementAndShipping">Logistics Procurement And Shipping</option>
+                <option value="RestaurantsFoodAndEvents" >Restaurants Food And Events</option>
+                <option value="Retail" >Retail</option>
+                <option value="Medicine And Health" >Medicine And Health</option>
+                <option value="marketingAndAdvertising" >marketing And Advertising</option>
+                <option value="CustomerService" >Customer Service</option>
+                <option value="TransportAndVehicle" >Transport And Vehicle</option>
+                <option value="TourismAndHotels" >Tourism And Hotels</option>
+                <option value="IndustryAndManagement" >Industry And Management</option>
+                <option value="Sales" >Sales</option>
+                <option value="other" >other</option>
+            </select>
+        </div>
+
+        <div class="control-group">
+            <p class="space row">                      </p>
+            <!-- Experience -->
+            <label class="control-label"  for="experience">Experience:</label>
+            <div class="controls">
+                <input type="number" id="experience" name="experience" placeholder="" class="input-xlarge" min="0">
+            </div>
+        </div>
+        <div class="control-group">
+            <p class="space row">                      </p>
+            <!-- Experience -->
+            <label class="control-label"  for="rating">rating:</label>
+            <div class="controls">
+                <input type="number" id="rating" name="rating" placeholder="" class="input-xlarge" min="0">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <span id="message1" style="color:red"></span><br><br>
+                <button type="submit">SEARCH</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+</html>

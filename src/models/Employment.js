@@ -11,7 +11,7 @@ const employmentSchema = new schema({
     workDate:
         {
             type: Date,
-            default: Date.now
+            //default: Date.now
         },
     employerID:
         {
@@ -32,11 +32,13 @@ const employmentSchema = new schema({
         },
     startTime:
         {
-            type:Date
+            type:Date,
+            default:Date.now
         },
     endTime:
         {
-            type:Date
+            type:Date,
+            default:Date.now
         },
     status:
         {
@@ -45,7 +47,7 @@ const employmentSchema = new schema({
         },
     jobDescription:
         {
-            String
+            type:String
         }
 });
 

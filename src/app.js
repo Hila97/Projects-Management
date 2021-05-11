@@ -32,7 +32,7 @@ mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: t
     .catch ((err)=>console.log(err))
 
 //routers
-app.use('/user',require('./route/api'))
+//app.use('/user',require('./route/api'))
 app.use('/attendanceReport',require('./route/AttendanceReportAPI'))
 app.use('/companyEmployee',require('./route/CompanyEmployeeAPI'))
 app.use('/contractorWorker',require('./route/ContractorWorkerAPI'))
@@ -51,6 +51,23 @@ app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:
 
 
 
+const Employment=require('./models/Employment')
+async function updateEmploymentToday() {
+    var date = new Date()
+    date.setDate(date.getDate()-1)
+    var date2 = new Date()
+    date2.setDate(date.getDate()+1)
+    var q = {
+        // employerID: req.body.employerID,
+        workDate: {$gt: date, $lte: date2}
+    }
+    await Employment.updateMany(q, {$set: {status: 'Current'}}).then((result) => {
+        console.log('updated successfully')
+    }).catch(e=>{
+        console.log(e)
+    })
+
+}
 
 /*--------------------------------GET HTMLS---------------------------------*/
 //loginController(app)
@@ -72,16 +89,13 @@ app.get('/editProfile', (req, res)=>{
     res.render('editProfileContractor')
 })
 
-
-
-
-
-
-
 app.get('/attandenceReport', (req, res)=>{
     res.render('attandenceReport')
 })
 
+app.get('/book',(((req, res) => {
+    res.render('BookEmployment')
+})))
 app.get('/SearchContractorWorker',((req, res) => {
     res.render('SearchContractorWorker')
 }))
@@ -151,7 +165,6 @@ app.get('/employerSearch',((req, res) =>
 
     
 }))
-
 
 app.get('/filterEmploymentsByStatus',((req, res) =>
 {
@@ -312,5 +325,6 @@ app.get('/employmentsList',((req, res) =>
     }
 
 }))
+
 
 

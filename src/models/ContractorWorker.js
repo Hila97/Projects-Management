@@ -73,7 +73,6 @@ const contractorSchema = new schema ({
         //required: true
 
     },
-
     workingDays:{
         type: Object,
 // required:true,
@@ -84,20 +83,14 @@ const contractorSchema = new schema ({
             Thursday :{ type: Boolean},
             Friday: {type: Boolean}
     },
-
-
     hourlyWage: {
         type: Number,
         //required:true
-
     },
-
     bankAccount :{
-
         bankName:{type:String},
         branch:{type:Number},
         accountNumber:{type:Number}
-
          },
     rating:{
         type: Number,
@@ -107,6 +100,5 @@ const contractorSchema = new schema ({
         type:Number,
         default:0
     }
-
 })
 module.exports=mongoose.model('contractorWorker', contractorSchema)

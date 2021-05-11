@@ -21,7 +21,7 @@ const findAllVacations=(req,res)=>{
             console.log(err)
         })
 }
-
+/*
 function findAvailableWorker(req,res,next){
     var query={departureDate:{$gte:req.params.workDate},returningDate:{$lte: req.params.workDate}}
     var workerIdList=Vacation.find(query).then((result)=>{
@@ -29,6 +29,8 @@ function findAvailableWorker(req,res,next){
     })
 }
 
+ */
 
-module.exports={addVacation,findAllVacations,findAvailableWorker}
+
+module.exports={addVacation,findAllVacations}
 

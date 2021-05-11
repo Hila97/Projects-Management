@@ -1,8 +1,12 @@
 
 const router=require('express').Router()
 const employment=require('../controllers/EmploymentController')
-router.post('/addEmployment',employment.addEmployment)
+router.get('/BookForm/:workDate/:workerID',employment.BookForm)
+router.post('/addEmployment/:workDate',employment.addEmployment)
 router.get('/findAllEmployments',employment.findAllEmployments)
+router.get('/findFutureEmployment',employment.findFutureEmployment)
+router.get('/findTodayEmployment',employment.findTodayEmployment)
+router.put('/updateEmploymentStatus',employment.updateEmploymentStatus)
 router.get('/findFutureEmployment/:employerID',employment.findFutureEmployment)
 router.get('/findTodayEmployment/:employerID',employment.findTodayEmployment)
 router.put('/updateEmploymentStatus/:_id/:status',employment.updateEmploymentStatus)

@@ -6,11 +6,11 @@ const moment = require('moment')
 
 //const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#(&@!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
-const addEmployer=(req, res)=>
+const addEmployer= async (req, res)=>
 {
     console.log("add")
     const newEmployer = new Employer(req.body)
-    newEmployer.save().then(employer=>
+    await newEmployer.save().then(employer=>
     {
         console.log(req.body)
         res.json({newEmployer})
@@ -20,16 +20,13 @@ const addEmployer=(req, res)=>
     })
 }
 
-const findAllE=(req,res)=>
-{
+const findAllE=async (req, res) => {
     console.log("find")
-    Employer.find()
-        .then((result)=>
-        {
+    await Employer.find()
+        .then((result) => {
             res.send(result)
         })
-        .catch((err)=>
-        {
+        .catch((err) => {
             console.log(err)
         })
 }
@@ -79,7 +76,7 @@ const registerOfEmployer = async (req, res) =>
             return res.status(500).send()
         }
     })
-   // then(result=>
+    //then(result=>
    // {
     let employerIDCookie =
     {

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>try</title>
+</head>
+<body>
+<h1>COMPLETE THE EMPLOYMENT BOOKING </h1>
+<form class="form-horizontal" action='/employment/addEmployment/<%=workDate%>' method="POST">
+    <fieldset>
+
+        <div class="control-group">
+            <input type="text" id="workerID" name="workerID" hidden class="input-xlarge" value=<%= worker._id%>>
+            <input type="text" id="fieldOfEmployment" name="fieldOfEmployment" hidden class="input-xlarge" value=<%= worker.fieldOfEmployment%> >
+
+            <label class="control-label">contractor worker details:</label>
+            <br>
+
+            <label>name:</label>
+            <label><%= worker.firstName%></label>
+            <label><%= worker.lastName%></label>
+            <br>
+            <label>telephone:</label>
+            <label><%= worker.telephone%></label>
+            <br>
+            <label>field Of Employment:</label>
+            <label ><%= worker.fieldOfEmployment%></label>
+            <br>
+            <label>Date:</label>
+            <label data-type="date"><%=workDate%></label>
+            <br>
+        </div>
+
+<!--        <div class="control-group">-->
+<!--            <p class="space row">                      </p>-->
+<!--            &lt;!&ndash; endTime &ndash;&gt;-->
+<!--            <label class="control-label"  for="endTime">end Time:</label>-->
+<!--            <div class="controls">-->
+<!--                <input type="datetime-local" id="endTime" name="endTime" value=<%=workDate%> class="input-xlarge" >-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="control-group">-->
+<!--            <p class="space row">                      </p>-->
+<!--            &lt;!&ndash; startTime &ndash;&gt;-->
+<!--            <label class="control-label"  for="jobDescription">start Time:</label>-->
+<!--            <div class="controls">-->
+<!--                <input type="datetime-local" id="startTime" name="startTime" value=<%=workDate%> class="input-xlarge" >-->
+<!--            </div>-->
+<!--        </div>-->
+
+
+        <div class="control-group">
+            <p class="space row">                      </p>
+            <!-- jobDescription -->
+            <label class="control-label"  for="jobDescription">job Description:</label>
+            <div class="controls">
+                <input type="text" id="jobDescription" name="jobDescription" placeholder="write some words about the job" value="no Description " class="input-xlarge" >
+            </div>
+        </div>
+        <div class="control-group">
+            <!-- Button -->
+            <div class="controls">
+                <span id="message1" style="color:red"></span><br><br>
+                <button type="submit">CONFIRM BOOKING</button>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+
+</body>
+</html>

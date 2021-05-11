@@ -48,7 +48,8 @@ const AreaOfResidence={
     NEGEV:'Negev',
     SHFELA:'Shfela',
     HAIFA_AND_THE_KRAYOT:'Haifa and the Krayot',
-    JERUSALEM:'Jerusalem'
+    JERUSALEM:'Jerusalem',
+    OTHER:'other'
 }
 
 const Status={

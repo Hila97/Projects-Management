@@ -18,5 +18,7 @@ router.get('/employerRegister',(req, res) =>
     res.render('authViews/employerRegister')
 })
 
-
+router.get('/search',(((req, res) => {
+    res.render('EmployerViews/SearchContractorWorker')
+})))
 module.exports=router

@@ -1,20 +1,18 @@
-const companyEmployee = require('../models/CompanyEmployees')
-//const auth = require('../middleware/auth')
+const companyEmployee = require('../models/companyEmployees')
+    //const auth = require('../middleware/auth')
 const express = require("express");
 const validationResult = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
 
-
-const addCompanyEmployee=(req, res)=>
-{
+const addCompanyEmployee=async (req, res) => {
     console.log("add")
     console.log(req.cookie.contractorWorkerIDCookie)
     console.log(req.cookie.companyEmployeeIDCookie)
     console.log(req.cookie.employerIDCookie)
     const newCompanyEmployee = new companyEmployee(req.body)
-    newCompanyEmployee.save().then(companyEmployee=>{
+    await newCompanyEmployee.save().then(companyEmployee => {
         console.log(req.body)
         res.json({newCompanyEmployee})
     }).catch(err => {
@@ -65,7 +63,7 @@ const loginOfCompanyEmployee= async (req, res) =>
 }
 
 module.exports=
-{
+    {
         addCompanyEmployee,
         loginOfCompanyEmployee
-}
+    }
