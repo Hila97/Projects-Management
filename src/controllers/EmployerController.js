@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const Employment = require('../models/Employment')
 const moment = require('moment')
 
-const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#(&@!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
+//const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#(&@!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
 const addEmployer=(req, res)=>
 {
@@ -79,16 +79,17 @@ const registerOfEmployer = async (req, res) =>
             return res.status(500).send()
         }
     })
-    //then(result=>
+   // then(result=>
    // {
-        let epmployerIDCookie =
-        {
-            id: newEmployer._id
-        }
-        console.log(newEmployer._id)
-        res.cookie("userData", epmployerIDCookie);
-        console.log(epmployerIDCookie)
-        return res.json({status: 'ok', data: req.body})
+    let employerIDCookie =
+    {
+        id: newEmployer._id
+    }
+    console.log(newEmployer._id)
+    res.cookie("employerIDCookie", employerIDCookie);
+    console.log(epmployerIDCookie)
+    //return res.json({status: 'ok', data: req.body})
+    res.render('HomeEmployer')
    // })
 }
 
@@ -127,9 +128,10 @@ const loginOfEmployer= async (req, res) =>
           id: result._id
         }
         console.log(result._id)
-        res.cookie('userData', employerIDCookie);
+        res.cookie("employerIDCookie", employerIDCookie);
         console.log(employerIDCookie)
-        return res.json({status: 'ok', data: req.body})
+       // return res.json({status: 'ok', data: req.body})
+        res.render('HomeEmployer')
     })
 }
 
@@ -138,7 +140,8 @@ const getBookedEmployeesToday= async (req, res)=> {
     const tomorrow = moment().utc(moment()).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
     // console.log(today)
     // console.log(tomorrow)
-
+ 
+   
     try{
       const query = {$and : [
             {bookingDate : {$gte: today}},
@@ -165,10 +168,10 @@ const getBookedEmployeesFuture= async (req,res)=>
         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
         if(employees.length===0)
         {
-            res.send('No workers found')
+            res.send("No workers found")
             return
-        }   
-
+        }
+       
        return  res.json(employees)
     }
     catch(e)
@@ -177,8 +180,6 @@ const getBookedEmployeesFuture= async (req,res)=>
     }  
 }
 
-
-  
 module.exports=
 {
     addEmployer,
@@ -188,4 +189,3 @@ module.exports=
     getBookedEmployeesFuture,
     getBookedEmployeesToday,
 }
-

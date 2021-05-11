@@ -9,6 +9,10 @@ router.post('/addCompanyEmployee',(companyEmployee.addCompanyEmployee))
 router.post('/loginOfCompanyEmployee',(companyEmployee.loginOfCompanyEmployee))
 
 
+router.get('/CompanyEmployeeLogin',(req, res) =>
+{
+    res.render('authViews/CompanyEmployeeLogin')
+})
 
 
 

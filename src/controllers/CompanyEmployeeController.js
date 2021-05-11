@@ -57,9 +57,10 @@ const loginOfCompanyEmployee= async (req, res) =>
                 id: result._id
             }
         console.log(result._id)
-        res.cookie("userData", companyEmployeeIDCookie);
+        res.cookie("companyEmployeeIDCookie", companyEmployeeIDCookie);
         console.log(companyEmployeeIDCookie)
-        return res.json({status: 'ok', data: req.body})
+        //return res.json({status: 'ok', data: req.body})
+        res.render('HomeEmployee')
     })
 }
 

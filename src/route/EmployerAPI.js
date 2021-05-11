@@ -8,5 +8,15 @@ router.get('/getBookedEmployeesToday',(employer.getBookedEmployeesToday))
 router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
 router.get('/getAllEmployers',(employer.findAllE))
 
+router.get('/employerLogin',(req, res) =>
+{
+    res.render('authViews/employerLogin')
+})
+
+router.get('/employerRegister',(req, res) =>
+{
+    res.render('authViews/employerRegister')
+})
+
 
 module.exports=router

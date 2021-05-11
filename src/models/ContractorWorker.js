@@ -4,10 +4,10 @@ const {FieldOfEmployment} = require("./enums");
 const {AreaOfResidence} = require("./enums");
 const {Days} = require("./enums");
 
-var validateEmail = function(email)
+var validateEmail = function(userName)
 {
     var re = /^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/;
-    return re.test(email)
+    return re.test(userName)
 };
 
 var validateID = function(ID){
@@ -55,7 +55,7 @@ const contractorSchema = new schema ({
     userName: {
         type: String,
         unique: true,
-        //required: true,
+        required: true,
         validate: [validateEmail, 'Please fill a valid email address'],
         match: [/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/, 'Please fill a valid email address']
     },

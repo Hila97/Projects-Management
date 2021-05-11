@@ -9,7 +9,7 @@ const router = express.Router();
 
 const addContractor = (req, res)=>{
     console.log("aaaaaaaaaaaaaaaaaaaaaaaaa")
-    console.log(req.cookie)
+    //console.log(req.cookie)
     const newContractor=new contractorWorker(req.body)
     newContractor.save().then(contractor =>{
         res.json({newContractor})
@@ -142,9 +142,10 @@ const loginOfContractorWorker= async (req, res) =>
             id: result._id
         }
         console.log(result._id)
-        res.cookie("userData", contractorWorkerIDCookie);
+        res.cookie("contractorWorkerIDCookie", contractorWorkerIDCookie);
         console.log(contractorWorkerIDCookie)
-        return res.json({status: 'ok', data: req.body})
+       // return res.json({status: 'ok', data: req.body})
+        res.render('HomeContractor')
     })
 
 }

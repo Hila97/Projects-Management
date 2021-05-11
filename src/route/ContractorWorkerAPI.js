@@ -11,5 +11,10 @@ router.get('/findAllContractor',(contractorWorker.findAllContractor))
 
 router.post('/loginOfContractorWorker',(contractorWorker.loginOfContractorWorker))
 
+router.get('/contractorWorkerLogin',(req, res) =>
+{
+    res.render('authViews/contractorWorkerLogin')
+})
+
 
 module.exports=router
