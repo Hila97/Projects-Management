@@ -14,6 +14,13 @@ this project contain 2 first pages of web: home page and login / signup pages
 * node.js
 * circleCI - creating a process of integration Continues
 * Heroku - for server setup
+* postman - for runing and chacking server side
+* express.js
+* mongoose
+* nodemon 2.0.7
+* mocha
+* body parcer
+* bcrypt
 languages: javaScript, html, css
 
 ## setup:
@@ -34,13 +41,35 @@ npm install --save-dev eslint
 npm run lint
 #### run the project:
 npm run dev
+#### for wnv file:
+npm install dotenv
+#### install express:
+npm install express
+npm install express-validator
+#### install mongoose:
+npm mongoose --save
+#### install body parser:
+npm body-parser
+#### more installations:
+npm install bcryptjs jsonwebtoken
 
-## Features and methods:
-### test_signup():
-This function checks the validity of the input entered by the user for the fields: Email and Password
-### test_signin():
-This function checks if the field: email and password is ot empty,
-and if it is, the function print error message to user.
+npm install bcrypt
+
+npm install joi
+
+npm install joi-objectid --save
+
+npm install jsonwebtoken
+
+npm i -g npm
+
+npm i --save lodash
+
+npm install nodemailer
+#### install cookies:
+npm install express cookie-parser --save
+
+
 
 ## Authors:
 * https://github.com/Hila97
