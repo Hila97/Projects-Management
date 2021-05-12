@@ -79,12 +79,6 @@ app.get('/addContractorForm', (req, res)=>{
     res.render('addContractorForm')
 })
 
-
-
-
-
-
-
 app.get('/editProfile', (req, res)=>{
     res.render('editProfileContractor')
 })

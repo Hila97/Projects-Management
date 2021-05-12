@@ -14,6 +14,13 @@
                 document.getElementById("message1").innerHTML="min cant be bigger than max";
                 return false
             }
+            var date=new Date()
+            var date2=new Date(document.getElementById("workDate").value);
+            if(date2<date)
+            {
+                document.getElementById("message1").innerHTML="invalid date";
+                return false
+            }
         }
     </script>
 </head>
@@ -117,7 +124,7 @@
             <!-- Experience -->
             <label class="control-label"  for="experience">Experience:</label>
             <div class="controls">
-                <input type="number" id="experience" name="experience" placeholder="" class="input-xlarge" min="0">
+                <input type="number" id="experience" name="experience" placeholder="" class="input-xlarge" min="0" max="20">
             </div>
         </div>
         <div class="control-group">
@@ -125,7 +132,7 @@
             <!-- Experience -->
             <label class="control-label"  for="rating">rating:</label>
             <div class="controls">
-                <input type="number" id="rating" name="rating" placeholder="" class="input-xlarge" min="0">
+                <input type="number" id="rating" name="rating" placeholder="" class="input-xlarge" min="0" max="5">
             </div>
         </div>
 
