@@ -370,8 +370,8 @@ module.exports={
         getEmploymentsByBookingDate,
         getEmploymentsByBookingDateMonth,
         BookForm,
-    getEmployeesBycompanyName,
-    getEmployeesByposition,
-    filterByfieldOfEmployment
+         getEmployeesBycompanyName,
+         getEmployeesByposition,
+        filterByfieldOfEmployment
 
 }
