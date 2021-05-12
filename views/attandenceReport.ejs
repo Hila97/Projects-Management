@@ -5,67 +5,53 @@
     <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 </head>
 <body>
+<fieldset>
 <form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
-    <fieldset>
+
         <div id="legend">
            <h1> Attandence Report </h1>
         </div>
-        <div class="control-group">
-            <!-- Username -->
-            <label class="control-label"  for="username">start Shift</label>
-            <div class="controls">
-                <input type="date" id="startShift" name="startShift" placeholder="" class="input-xlarge">
-            </div>
-        </div>
-
-        <div class="control-group">
-            <!-- E-mail -->
-            <label class="control-label" for="email">end Shift</label>
-            <div class="controls">
-                <input type="date" id="endShift" name="endShift" placeholder="" class="input-xlarge">
-            </div>
-        </div>
-
-        <div class="control-group">
-            <!-- Password-->
-            <label class="control-label" for="password">start Break</label>
-            <div class="controls">
-                <input type="date" id="startBreak" name="startBreak" placeholder="" class="input-xlarge">
-            </div>
-        </div>
-
-<!--        <div class="control-group">-->
-<!--            &lt;!&ndash; Password &ndash;&gt;-->
-<!--            <label class="control-label"  for="password_confirm">End Break</label>-->
-<!--            <div class="controls">-->
-<!--                <input type="date" id="endBreak" name="endBreak" placeholder="" class="input-xlarge">-->
-<!--            </div>-->
-<!--        </div>-->
-
+                <script>
+                    function getCurrentTime() {
+                        var currentdate = new Date();
+                        var timenow = + currentdate.getHours() + ":"
+                            + currentdate.getMinutes() + ":"
+                            + currentdate.getSeconds();
+                        document.getElementById("datebtn").innerHTML = currentdate;
+                    }
+                </script>
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button onclick="validation();" class="btn btn-success" type="submit">report</button>
-                <script>
-                    function validation(){
+                <button class="btn btn-success" type="submit">start shift</button>
 
-                    }
-                </script>
-
-                <label class="control-label" for="endBreak">end break</label>
-                <div class="controls">
-                    <button  type="submit" value="time" display="time" onclick="getCurrentTime()" name="endBreak" >Start</button>
-
-                    <script>
-                        function getCurrentTime() {
-                            alert(new Date());
-                        }
-                    </script>
-
-                </div>
-                </div>
+            </div>
         </div>
-    </fieldset>
+    </form>
+<form class="form-horizontal" action='/attendanceReport/editStartBreak' method="post">
+        <div class="control-group">
+            <div class="controls">
+                <button class="btn btn-success" type="submit">start break</button>
+            </div>
+        </div>
 </form>
+    <form class="form-horizontal" action='/attendanceReport/editEndBreak' method="post">
+        <div class="control-group">
+            <div class="controls">
+            <button  class="btn btn-success" type="submit">end break</button>
+        </div>
+        </div>
+    </form>
+    <form class="form-horizontal" action='/attendanceReport/editExistingTime' method="post">
+        <div class="control-group">
+            <div class="controls">
+                <button  class="btn btn-success" type="submit">end shift</button>
+            </div>
+        </div>
+    </form>
+    </fieldset>
+<div>
+
+</div>
 </body>
 </html>

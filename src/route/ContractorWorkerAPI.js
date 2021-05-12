@@ -13,6 +13,7 @@ router.get('/findContractorByID/:ID',contractorWorker.findContractorByID)
 router.post('/editProfile',(contractorWorker.editProfile))
 router.get('/findAllContractor',(contractorWorker.findAllContractor))
 //router.get('/findWorkerByHourlyWage/:min&max',contractorWorker.findWorkerByHourlyWage)
+//router.post('displayProfile', (contractorWorker.displayProfile))
 
 router.post('/findAvailableWorkers',contractorWorker.findAvailableWorkers)
 router.post('/loginOfContractorWorker',(contractorWorker.loginOfContractorWorker))

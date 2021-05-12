@@ -4,7 +4,8 @@ const AttendanceReportCtrl=require('../models/AttendanceReport')
 
 const addAttendanceReport=(req, res)=> {
     console.log("add")
-    const newAttendanceReport = new AttendanceReportCtrl(req.body)
+    console.log(req.params.contractorWorkerID)
+    const newAttendanceReport = new AttendanceReportCtrl({contractorWorkerID: req.cookies.contractorWorkerIDCookie.id})
     newAttendanceReport.save().then(report=>{
         res.render("attandenceReport", {report})
        // res.json({newAttendanceReport})
@@ -31,25 +32,38 @@ const findAttendanceById=(req,res)=>{
 
 
 var editExistingTime=(req, res)=> {
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID: req.params.contractorWorkerID}, req.params.endShift ).then((result) => {
+    var d = new Date()
+    console.log(d)
+    req.body.startBreak = d
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
         res.send(result)
     })
 }
 
 var editEnteringTime=(req, res)=> {
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID: req.params.contractorWorkerID}, req.params.startShift ).then((result) => {
+    var d = new Date()
+    console.log(d)
+    req.body.startBreak = d
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
         res.send(result)
     })
 }
 
 var editStartBreak=(req, res)=> {
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID: req.params.contractorWorkerID}, req.params.startBreak ).then((result) => {
+    var d = new Date()
+    console.log(d)
+    req.body.startBreak = d
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startBreak: d}} ).then((result) => {
         res.send(result)
     })
+    console.log("edit startbreak")
 }
 
 var editEndBreak=(req, res)=> {
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID: req.params.contractorWorkerID}, req.params.endBreak ).then((result) => {
+    var d = new Date()
+    console.log(d)
+    req.body.startBreak = d
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endBreak: d}} ).then((result) => {
         res.send(result)
     })
 }

@@ -15,7 +15,7 @@
             <!-- ID-->
             <label class="control-label" for="ID">ID:</label>
             <div class="controls">
-                <input type="number" placeholder="Enter contractor ID" name="ID" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid" >
+                <input type="number" placeholder="Enter contractor ID" name="ID" min="100000000" max="999999999" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid" >
             </div>
         </div>
 
@@ -56,8 +56,9 @@
             <!--dateOfBirth -->
             <label class="control-label"  for="dateOfBirth">Birthday:</label>
             <div class="controls">
-                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge" required >
+                <input type="date" id="workDate" name="dateOfBirth" placeholder="" class="input-xlarge" required >
             </div>
+            <span id="message1" style="color:red"></span>
         </div>
 
         <div class="control-group">
@@ -181,7 +182,18 @@
         <div class="control-group">
             <!-- Button -->
             <div class="controls">
-                <button class="btn btn-success" type="submit">Add New Contractor</button>
+                <button class="btn btn-success" type="submit" onclick="checkHourlyWage()">Add New Contractor</button>
+                <script>
+                    function checkHourlyWage() {
+                        var date=new Date()
+                        var date2=new Date(document.getElementById("workDate").value);
+                        if(date2>date)
+                        {
+                            document.getElementById("message1").innerHTML="invalid date";
+                            return false
+                        }
+                    }
+                </script>
             </div>
         </div>
     </fieldset>

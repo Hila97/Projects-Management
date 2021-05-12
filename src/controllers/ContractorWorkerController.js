@@ -96,6 +96,7 @@ const editProfile=(req, res)=>{
     const  id = req.params.ID
     contractorWorker.findOneAndUpdate(id, req.body)
         .then(contractor=>{
+            res.render('HomeContractor')
             if(!contractor) {
                 res.status(404).send({message: 'error'})
             }else {
