@@ -49,7 +49,7 @@ const contractorSchema = new schema ({
         type: String,
         validate:[validatePassword, 'Please fill a valid password'],
         match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/, 'Please fill a valid password'],
-        //required: true
+        required: true
     },
 
     userName: {
@@ -92,6 +92,7 @@ const contractorSchema = new schema ({
         branch:{type:Number},
         accountNumber:{type:Number}
          },
+
     rating:{
         type: Number,
         default:0

@@ -85,7 +85,7 @@ const displayEditProfile= async (req,res)=>
         res.render("displayProfileContractor",{contractor})
     }).catch(err=>
     {
-        return res.status(400).send('That contractor ID not valid')
+        return res.status(400).send('That contractor not found')
     })
 }
 const editProfile=(req, res)=>{

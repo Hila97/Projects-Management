@@ -6,7 +6,7 @@ const attendanceReportSchema = new schema({
 
     contractorWorkerID: {type: mongoose.Types.ObjectId, ref: 'ContractorWorker',required:false},
 
-    reportDate: {type: Date, default: Date.now,required:false},
+    //reportDate: {type: Date, default: Date.now,required:false},
 
     startShift: {type:Date},
 
@@ -14,8 +14,7 @@ const attendanceReportSchema = new schema({
 
     startBreak: {type:Date},
 
-
-    startBreak: {type:Date}
+    endBreak: {type:Date}
 });
 
 module.exports = mongoose.model('AttendanceReport',attendanceReportSchema);

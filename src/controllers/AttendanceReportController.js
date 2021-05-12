@@ -7,7 +7,7 @@ const addAttendanceReport=(req, res)=> {
     const newAttendanceReport = new AttendanceReportCtrl(req.body)
     newAttendanceReport.save().then(report=>{
         res.render("attandenceReport", {report})
-        res.json({newAttendanceReport})
+       // res.json({newAttendanceReport})
     }).catch(err => {
         console.log(err)
     })

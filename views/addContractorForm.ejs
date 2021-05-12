@@ -1,25 +1,37 @@
 <!DOCTYPE html>
+<html>
+<head>
 
-</head>
 <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+</head>
+<body>
 <form class="form-horizontal" action='/contractorWorker/addContractor' method="POST">
     <fieldset>
         <div id="legend">
             <legend class="">Add New Contractor</legend>
         </div>
+
         <div class="control-group">
-            <!-- ID -->
+            <!-- ID-->
             <label class="control-label" for="ID">ID:</label>
             <div class="controls">
-                <input type="number" id="ID" name="ID" placeholder="Enter Contractor ID" class="input-xlarge" required pattern="{9}" title="Enter valid ID">
+                <input type="number" placeholder="Enter contractor ID" name="ID" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid" >
             </div>
         </div>
+
+<!--        <div class="control-group">-->
+<!--            &lt;!&ndash; ID &ndash;&gt;-->
+<!--            <label class="control-label" for="ID">ID:</label>-->
+<!--            <div class="controls">-->
+<!--                <input type="number" id="ID" name="ID" placeholder="Enter Contractor ID"  pattern="/^\d{9}$/" title="Enter valid ID" required>-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="control-group">
             <!-- firstName -->
             <label class="control-label"  for="firstName">First Name:</label>
             <div class="controls">
-                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
+                <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required  >
             </div>
         </div>
 
@@ -27,15 +39,15 @@
             <!-- lastName -->
             <label class="control-label"  for="lastName">Last Name:</label>
             <div class="controls">
-                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
+                <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required >
             </div>
         </div>
 
         <div class="control-group">
             <!-- telephone -->
-            <label class="control-label"  for="lastName">Phone Number:</label>
+            <label class="control-label"  for="telephone">Phone Number:</label>
             <div class="controls">
-                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge" required  pattern="[0-9]+">
+                <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge"   pattern="[0-9]+" required >
             </div>
         </div>
 
@@ -44,7 +56,7 @@
             <!--dateOfBirth -->
             <label class="control-label"  for="dateOfBirth">Birthday:</label>
             <div class="controls">
-                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge" required>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge" required >
             </div>
         </div>
 
@@ -69,7 +81,7 @@
             <!-- hourlyWage -->
             <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
             <div class="controls">
-                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge" required pattern="[0-9]+">
+                <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge"  pattern="[0-9]+" required >
             </div>
         </div>
 
@@ -77,7 +89,7 @@
             <!--bankAccount.bankName-->
             <label class="control-label"  for="bankAccount.bankName"> Bank Name:</label>
             <div class="controls">
-                <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge" required pattern="[a-zA-z]+">
+                <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required >
             </div>
         </div>
 
@@ -85,14 +97,15 @@
             <!--bankAccount.branch-->
             <label class="control-label"  for="bankAccount.branch"> branch:</label>
             <div class="controls">
-                <input type="number" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge" required pattern="[0-9]+">
+                <input type="number" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge"  pattern="[0-9]+" required >
             </div>
         </div>
+
         <div class="control-group">
             <!--bankAccount.accountNumber-->
             <label class="control-label"  for="bankAccount.accountNumber">Account Number:</label>
             <div class="controls">
-                <input type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge" required pattern="[0-9]+">
+                <input type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge"  pattern="[0-9]+" required >
             </div>
         </div>
 
@@ -125,18 +138,18 @@
         </div>
 
 
-        <div>
-            <p class="space row">                      </p>
-            <label> working Days:</label>
-            <div id = " workingDays">
-                <label><input type="checkbox" name="workingDays.Sunday" value="Sunday">Sunday</label>
-                <label><input type="checkbox" name="workingDays.Monday" value="Monday" >Monday</label>
-                <label><input type="checkbox" name="workingDays.Tuesday" value="Tuesday">Tuesday</label>
-                <label><input type="checkbox" name="workingDays.Wednesday" value="Wednesday">Wednesday</label>
-                <label><input type="checkbox" name="workingDays.Thursday" value="Thursday" >Thursday</label>
-                <label><input type="checkbox" name="workingDays.Friday" value="Friday">Friday</label>
-            </div>
-        </div>
+<!--        <div>-->
+<!--            <p class="space row">                      </p>-->
+<!--            <label> working Days:</label>-->
+<!--            <div id = " workingDays">-->
+<!--                <label><input type="checkbox" name="workingDays.Sunday" value="Sunday">Sunday</label>-->
+<!--                <label><input type="checkbox" name="workingDays.Monday" value="Monday" >Monday</label>-->
+<!--                <label><input type="checkbox" name="workingDays.Tuesday" value="Tuesday">Tuesday</label>-->
+<!--                <label><input type="checkbox" name="workingDays.Wednesday" value="Wednesday">Wednesday</label>-->
+<!--                <label><input type="checkbox" name="workingDays.Thursday" value="Thursday" >Thursday</label>-->
+<!--                <label><input type="checkbox" name="workingDays.Friday" value="Friday">Friday</label>-->
+<!--            </div>-->
+<!--        </div>-->
 
 
         <div class="control-group">
@@ -144,7 +157,7 @@
             <!-- Experience -->
             <label class="control-label"  for="Experience">Experience:</label>
             <div class="controls">
-                <input type="number" id="Experience" name="Experience" placeholder="Enter the contractor's years of experience if there is no,Enter 0" class="input-xlarge" required pattern="[0-9]+">
+                <input type="number" id="Experience" name="Experience" placeholder="Enter the contractor's years of experience if there is no,Enter 0" class="input-xlarge" required pattern="[0-9]+" >
             </div>
         </div>
 
@@ -152,7 +165,7 @@
             <!-- E-mail -->
             <label class="control-label" for="userName">E-mail:</label>
             <div class="controls">
-                <input type="email" id="userName" name="userName" placeholder="" class="input-xlarge" required>
+                <input type="email" id="userName" name="userName" placeholder="Enter contractor's email" class="input-xlarge" required>
             </div>
         </div>
 
@@ -160,7 +173,7 @@
             <!-- Password-->
             <label class="control-label" for="password">Password:</label>
             <div class="controls">
-                <input type="password" placeholder="Enter an contractor password " name="password" id="password" required title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number">
+                <input type="password" placeholder="Enter contractor password " name="password" id="password"  required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
                 <p class="space row">          </p>
             </div>
         </div>
@@ -173,4 +186,5 @@
         </div>
     </fieldset>
 </form>
+</body>
 </html>

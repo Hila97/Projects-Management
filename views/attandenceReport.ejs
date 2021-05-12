@@ -34,13 +34,13 @@
             </div>
         </div>
 
-        <div class="control-group">
-            <!-- Password -->
-            <label class="control-label"  for="password_confirm">End Break</label>
-            <div class="controls">
-                <input type="date" id="endBreak" name="endBreak" placeholder="" class="input-xlarge">
-            </div>
-        </div>
+<!--        <div class="control-group">-->
+<!--            &lt;!&ndash; Password &ndash;&gt;-->
+<!--            <label class="control-label"  for="password_confirm">End Break</label>-->
+<!--            <div class="controls">-->
+<!--                <input type="date" id="endBreak" name="endBreak" placeholder="" class="input-xlarge">-->
+<!--            </div>-->
+<!--        </div>-->
 
         <div class="control-group">
             <!-- Button -->
@@ -51,7 +51,19 @@
 
                     }
                 </script>
-            </div>
+
+                <label class="control-label" for="endBreak">end break</label>
+                <div class="controls">
+                    <button  type="submit" value="time" display="time" onclick="getCurrentTime()" name="endBreak" >Start</button>
+
+                    <script>
+                        function getCurrentTime() {
+                            alert(new Date());
+                        }
+                    </script>
+
+                </div>
+                </div>
         </div>
     </fieldset>
 </form>
