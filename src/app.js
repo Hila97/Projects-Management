@@ -85,6 +85,7 @@ app.get('/addContractorForm', (req, res)=>{
 
 
 
+mongoose.set('useFindAndModify', false)
 app.get('/editProfile', (req, res)=>{
     res.render('editProfileContractor')
 })
