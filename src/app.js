@@ -92,7 +92,7 @@ app.get('/employeesFilters',((req, res) => {
 app.get('/getBookedEmployeesToday',(req, res) => {
     try {
         const fetchBooking = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employer/getBookedEmployeesToday')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employer/getBookedEmployeesToday')
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
             }
@@ -114,7 +114,7 @@ app.get('/filterEmploymentsByDate/:BookingDate',(req, res) => {
     try {
         const {BookingDate} = req.params
         const fetchBooking = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmploymentsByBookingDate/${BookingDate}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employment/getEmploymentsByBookingDate/${BookingDate}`)
             console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -136,7 +136,7 @@ app.get('/filterEmploymentsByDate/:BookingDate',(req, res) => {
 app.get('/filterEmploymentsByDate',(req, res) => {
     try {
         const fetchBooking = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employment/getAllEmployees')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employment/getAllEmployees')
             // console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -162,7 +162,7 @@ app.get('/filterEmploymentsByMonth/:month',(req, res) => {
     try {
         const {month} = req.params
         const fetchBooking = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmploymentsByBookingDateMonth/${month}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employment/getEmploymentsByBookingDateMonth/${month}`)
             console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -186,7 +186,7 @@ app.get('/filterEmploymentsByMonth/:month',(req, res) => {
 app.get('/filterEmploymentsByMonth',(req, res) => {
     try {
         const fetchBooking = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employment/getAllEmployees')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employment/getAllEmployees')
             // console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -289,7 +289,7 @@ app.get('/filterEmploymentsByStatus',((req, res) =>
 
     try {
         const fetchEmployees = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employment/getAllEmployees')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employment/getAllEmployees')
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -311,7 +311,7 @@ app.get('/filterEmploymentsByStatus/:status',((req, res) =>
     const {status} = req.params
     try {
         const fetchEmployees = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmployeesByStatus/${status}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employment/getEmployeesByStatus/${status}`)
             console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -334,7 +334,7 @@ app.get('/updateEmploymentsStatus',((req, res) =>
     const id = '6091ae775ce4c02e98d9f99c'
     try {
         const fetchEmployees = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employment/updateEmploymentsStatus/${id}/${status}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employment/updateEmploymentsStatus/${id}/${status}`)
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -404,7 +404,7 @@ app.get('/filterbycompanyName',((req, res) =>
 {
     try {
         const fetchEmployees = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employer/getAllEmployers')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employer/getAllEmployers')
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -425,7 +425,7 @@ app.get('/filterbycompanyName/:companyName',((req, res) =>
     const {companyName} = req.params
     try {
         const fetchEmployees = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employer/getEmployeesBycompanyName/${companyName}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employer/getEmployeesBycompanyName/${companyName}`)
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -546,7 +546,7 @@ app.get('/filterContractorsByDate',((req, res) =>
     console.log(today)
     try {
         const fetchBookingByDate = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employment/getEmploymentsByBookingDate/${today}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employment/getEmploymentsByBookingDate/${today}`)
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -567,7 +567,7 @@ app.get('/employmentsList',((req, res) =>
 {
     try {
         const fetchEmployments = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employment/findAllEmployments')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employment/findAllEmployments')
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
