@@ -4,18 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>field</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 </head>
 <body>
-    <h2>the employer and worker in compagny <%= employees[1].position%> </h2>
-    <ul>
-          <% employees.forEach((item)=>{%>
-          <li>name of compagny : <%=item.position%></li> 
-         <li>full name: <%=item.fullName%></li> 
- 
-          <%});%>
-    </ul>
 
-    
+
+<h2 >Filter by position</h2>
+<input id="position" type="text" />
+<button onclick="filter()">Filter by position</button>
+<p style="color: red;" id="error"></p>
+<table>
+
+
+    <tr>
+
+        <th>user name</th>
+        <th>full name</th>
+        <th>company name</th>
+        <th>position</th>
+        <th>phone</th>
+        <th>fieldOfEmployment</th>
+    </tr>
+    <% employees.forEach((item)=>{%>
+    <tr>
+
+        <td><%=item.userName%></td>
+        <td><%=item.fullName%></td>
+        <td><%=item.companyName%></td>
+        <td><%=item.position%></td>
+        <td><%=item.phone%></td>
+        <td><%=item.fieldOfEmployment%></td>
+    </tr>
+    <%});%>
+</table>
 </body>
+<script>
+    function filter(){
+        let position = document.getElementById('position').value
+        if(!position){
+            document.getElementById('error').innerHTML = 'must insert position'
+            return
+        }
+
+        window.location.href =`/filterEmployeesByposition/${position}`
+    }
+</script>
 </html>

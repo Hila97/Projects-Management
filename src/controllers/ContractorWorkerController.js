@@ -79,7 +79,7 @@ function findWorkerByHourlyWage(req,res,next){
 //////////////////////////////////
 const displayEditProfile= async (req,res)=>
 {
-    contractorWorker.findById({_id:req.cookies.contractorWorkerIDCookie.id})
+    await contractorWorker.findById({_id:req.cookies.contractorWorkerIDCookie.id})
         .then(contractor=> {
             console.log(contractor)
         res.render("displayProfileContractor",{contractor})
@@ -88,13 +88,14 @@ const displayEditProfile= async (req,res)=>
         return res.status(400).send('That contractor not found')
     })
 }
+
 const editProfile=(req, res)=>{
     if(!req.body)
         return res
             .status(400)
             .send({message:"error"})
-    const  id = req.params.ID
-    contractorWorker.findOneAndUpdate(id, req.body)
+   // const id = req.params.ID
+    contractorWorker.findByIdAndUpdate(req.cookies.contractorWorkerIDCookie.id, req.body)
         .then(contractor=>{
             res.render('HomeContractor')
             if(!contractor) {

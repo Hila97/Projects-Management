@@ -139,18 +139,23 @@ const getBookedEmployeesToday= async (req, res)=> {
     const tomorrow = moment().utc(moment()).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
     // console.log(today)
     // console.log(tomorrow)
- 
-   
+
+
     try{
       const query = {$and : [
             {bookingDate : {$gte: today}},
             {bookingDate : {$lt: tomorrow}}
-        ]}
-        const employees = await Employment.find(query).populate('employerID').populate('workerID')
+        ],
+          employerID:req.cookies.employerIDCookie
+      }
+        const employees = await Employment.find(query).populate('workerID')
         if(employees.length===0){
-            res.send('no employees booked that day')
+            res.send('no employees booked today')
             return
         }
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('one or more of the workerIDs doesnt exist')
+        })
        return  res.json(employees)
     }
     catch(e)
@@ -159,25 +164,114 @@ const getBookedEmployeesToday= async (req, res)=> {
     }  
 }
 
-const getBookedEmployeesFuture= async (req,res)=>
+
+// const getBookedEmployeesFuture= async (req,res)=>
+// {
+//     const {id} = req.params
+//     try
+//     {
+//         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
+//         if(employees.length===0)
+//         {
+//             res.send('No workers found')
+//             return
+//         }
+//         if(employees.length===0){
+//             res.send('no employees booked that day')
+//             return
+//         }
+//         employees.forEach(e => {
+//             if(!e.workerID) return res.send('one or more of the workerIDs doesnt exist')
+//         })
+//
+//
+//         return  res.json(employees)
+//     }
+//     catch(e)
+//     {
+//         console.log(e)
+//     }
+//}
+
+const getEmployeesByEmployerName = async (req, res)=> {
+    const {employerName} = req.params
+    console.log(req.params)
+    try{
+
+        const employer = await Employer.findOne({fullName: employerName})
+        if(!employer){
+            res.send('no employer with that name')
+            return
+        }
+        return  res.json(employer)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+
+/*const filterByfieldOfEmployment= async (req, res)=>
 {
-    const {id} = req.params
+    const {fieldOfEmployment} = req.params
     try
-    {  
-        const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
+    {
+        const employees = await Employer.find({  fieldOfEmployment : fieldOfEmployment })
+        if(employees.length===0) {
+            res.send("No workers found")
+            return
+        }
+        return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+
+ */
+
+const getEmployeesBycompanyName= async (req,res)=>
+{
+    const {companyName} = req.params
+    try
+    {
+        const employers = await Employer.find({  companyName : companyName })
+        if(employers.length===0)
+        {
+            res.send("No employers found")
+            return
+        }
+
+        return  res.json(employers)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+
+/*const getEmployeesByposition= async (req,res)=>
+{
+    const {position} = req.params
+    try
+    {
+        const employees = await Employer.find({  position : position })
         if(employees.length===0)
         {
             res.send("No workers found")
             return
         }
-       
-       return  res.json(employees)
+
+        return  res.json(employees)
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
+
+ */
 
 module.exports=
 {
@@ -185,6 +279,9 @@ module.exports=
     findAllE,
     registerOfEmployer,
     loginOfEmployer,
-    getBookedEmployeesFuture,
     getBookedEmployeesToday,
+    getEmployeesByEmployerName,
+   // filterByfieldOfEmployment,
+    getEmployeesBycompanyName
+    //getEmployeesByposition
 }

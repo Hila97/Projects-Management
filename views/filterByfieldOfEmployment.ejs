@@ -4,48 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>companyName</title>
+    <title>field</title>
+
     <style>
         table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
-        
+
         td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
-        
+
         tr:nth-child(even) {
-          background-color: #dddddd;
+            background-color: #dddddd;
         }
-        </style>
+    </style>
 </head>
 <body>
-  
- <body>
- 
-   <table>
-     <% employees.forEach((item)=>{%>
-     <tr>
-       <th>user name</th>
-       <th>full name</th>
-       <th>company name</th>
-       <th>position</th>
-       <th>phone</th>
-       <th>fieldOfEmployment</th>
-     </tr>
-     <tr>
-       <td><%=item.userName%></td>
-       <td><%=item.fullName%></td>
-       <td><%=item.companyName%></td>
-       <td><%=item.position%></td>
-       <td><%=item.phone%></td>
-       <td><%=item.fieldOfEmployment%></td>
-     </tr>
-     <%});%>
-   </table>
+
+
+<h2 >Filter by field of employment</h2>
+
+
+<input id="fieldOfEmployment" type="text" />
+<button onclick="filter()">Filter by field of employment</button>
+<p style="color: red;" id="error"></p>
+<table>
+    <% employees.forEach((item)=>{%>>
+    <tr>
+
+        <th>user name</th>
+        <th>full name</th>
+        <th>company name</th>
+        <th>position</th>
+        <th>phone</th>
+        <th>fieldOfEmployment</th>
+    </tr>
+    <tr>
+
+        <td><%=item.userName%></td>
+        <td><%=item.fullName%></td>
+        <td><%=item.companyName%></td>
+        <td><%=item.position%></td>
+        <td><%=item.phone%></td>
+        <td><%=item.fieldOfEmployment%></td>
+    </tr>
+    <%});%>
+</table>
 </body>
+<script>
+    function filter(){
+        let fieldOfEmployment = document.getElementById('fieldOfEmployment').value
+        if(!fieldOfEmployment){
+            document.getElementById('error').innerHTML = 'must insert fieldofemployment'
+            return
+        }
+
+        window.location.href =`/filterByfieldOfEmployment/${fieldOfEmployment}`
+    }
+</script>
 </html>

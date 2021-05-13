@@ -25,21 +25,38 @@
 </head>
 <body>
 
+  <input id="employerID" type="text" />
+  <button onclick="filter()">Filter by employerID</button>
+  <p style="color: red;" id="error"></p>
+ 
    <table>
-     <% employees.forEach((item)=>{%>
+
      <tr>
        <th>first name</th>
        <th>last name</th>
        <th>telephone</th>
        <th>email</th>
      </tr>
+       <% employees.forEach((item)=>{%>
      <tr>
        <td><%=item.firstName%></td>
        <td><%=item.lastName%></td>
        <td><%=item.telephone%></td>
-       <td><%=item.userName%></td>
+         <td><%=item.userName%></td>
      </tr>
      <%});%>
    </table>
 </body>
+<script>
+  function filter(){
+      let employerID = document.getElementById('employerID').value
+      if(!employerID){
+          document.getElementById('error').innerHTML = 'must insert employerID'
+          return
+      }
+      // console.log(employerID)
+   
+      window.location.href =`/filterEmploymentsByemployerID/${employerID}`
+  }
+</script>
 </html>

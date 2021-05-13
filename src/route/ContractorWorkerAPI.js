@@ -22,7 +22,9 @@ router.get('/contractorWorkerLogin',(req, res) =>
 {
     res.render('authViews/contractorWorkerLogin')
 })
-
+router.get('/attandenceReport', (req, res)=>{
+    res.render('attandenceReport')
+})
 router.get('/editContractorWorker',(req,res)=>{
     res.render('editProfileContractor')
 })

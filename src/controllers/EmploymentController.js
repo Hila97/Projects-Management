@@ -68,25 +68,25 @@ const findAllEmployments=async (req,res)=>{
 }
 
 
-const UpdateStatus= async (req,res)=>{
-   const {workerID,status}= req.body
-    try{
-        const employeeStatus  = await Employment.findOneAndUpdate({status : {"$gte": next}}).populate('status')
-        if(next==="close"){
-         //   res.save(next)
-            res.send("you close")
-            return
-        }
-        if(next=="cancel"){
-            res.send("you cancel")
-            return
-        }
-       
-       return  res.json(employeeStatus )
-    }catch(e){
-        console.log(e)
-    }  
-}
+// const UpdateStatus= async (req,res)=>{
+//    const {workerID,status}= req.body
+//     try{
+//         const employeeStatus  = await Employment.findOneAndUpdate({status : {"$gte": next}}).populate('status')
+//         if(next==="close"){
+//          //   res.save(next)
+//             res.send("you close")
+//             return
+//         }
+//         if(next=="cancel"){
+//             res.send("you cancel")
+//             return
+//         }
+//
+//        return  res.json(employeeStatus )
+//     }catch(e){
+//         console.log(e)
+//     }
+// }
 
 
 const findEmploymentById=(req,res)=>{
@@ -99,15 +99,27 @@ const findEmploymentById=(req,res)=>{
         })
 }
 
+
+
 async function findFutureEmployment(req, res, next) {
+    console.log("the employer now is ",req.cookies.employerIDCookie.id)
     var query =
         {
-            employerID: req.body.employerID,
+            employerID: req.cookies.employerIDCookie.id,
             status: 'Future'
         }
-    await Employment.find(query).then((result) => {
-        res.send(result)
-    }).catch(next)
+    await Employment.find(query).populate('workerID').then((workerArr) => {
+        console.log(workerArr)
+        if(workerArr.length===0)
+        {
+            res.send("No workers found")
+        }
+        else
+            res.render('FutureBooking',{workerArr})
+    }).catch(e=>
+    {
+        console.log(e)
+    })
 }
 /*
 async function updateEmploymentToday(req,res,next)
@@ -144,20 +156,63 @@ async function updateEmploymentStatus(req, res, next) {
     }).catch(next)
 }
 
-
-const getEmployeesByEmployerID= async (req,res)=>
+const updateEmploymentsStatus= async (req,res)=>
 {
-    const {id} = req.params
+    const {workerID, status} = req.params
     try
     {
-        const employees = await Employment.find({ employerID : id})
+        let employee = await Employment.findOne({ workerID : workerID})
+        if(!employee)
+        {
+            res.send("No worker found")
+            return
+        }
+        employee.status = status
+        await employee.save()
+        return  res.send('updated successfully')
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+const getAllEmployees= async (req,res)=>
+{
+    try
+    {
+        let employees = await Employment.find().populate('workerID')
+        if(!employees.length)
+        {
+            res.send("No workers found")
+            return
+        }
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('one of the worker ID doesnt exist')
+        });
+
+        return  res.json(employees)
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+}
+const getEmployeesByEmployerID= async (req,res)=>
+{
+    const {employerID} = req.params
+    try
+    {
+        const employees = await Employment.find({ employerID :employerID }).populate('workerID')
         if(employees.length===0)
         {
             res.send("No workers found")
             return
         }
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('this worker ID doesnt exist')
+        });
 
-       return  res.json(employees)
+        return  res.json(employees)
     }
     catch(e)
     {
@@ -176,8 +231,10 @@ const getEmployeesByEmployerIDAndStatus= async (req,res)=>
             res.send("No workers found")
             return
         }
-
-       return  res.json(employees)
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('this worker ID doesnt exist')
+        });
+        return  res.json(employees)
     }
     catch(e)
     {
@@ -196,8 +253,11 @@ const getEmployeesByStatus= async (req,res)=>
             res.send("No workers found")
             return
         }
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('this worker ID doesnt exist')
+        });
 
-       return  res.json(employees)
+        return  res.json(employees)
     }
     catch(e)
     {
@@ -244,14 +304,18 @@ const getEmploymentsByBookingDate= async (req,res)=>
 
     try{
         const query = {$and : [
-                {BookingDate : {$gte: BookingDate}},
-                {BookingDate : {$lt: tomorrow}}
+                {bookingDate : {$gte: BookingDate}},
+                {bookingDate : {$lt: tomorrow}}
             ]}
-        const employees = await Employment.find(query)
+        const employees = await Employment.find(query).populate('workerID')
         if(employees.length===0){
             res.send('no employees working that day')
             return
         }
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('this worker ID doesnt exist')
+        });
+
         return  res.json(employees)
     }
     catch(e)
@@ -269,8 +333,8 @@ const getEmploymentsByBookingDateMonth= async (req,res)=>
     const nextMonthString = '2021-' + nextMonthNum + '-01'
     console.log(nextMonthString)
 
-    thisMonth = moment(date)
-    nextMonth = moment(nextMonthString)
+    thisMonth = moment(new Date(date))
+    nextMonth = moment(new Date(nextMonthString))
 
 
     thisMonth.utc(thisMonth).set('hour', 0).set('minute', 0).set('second', 0)
@@ -278,84 +342,58 @@ const getEmploymentsByBookingDateMonth= async (req,res)=>
     console.log(thisMonth, nextMonth)
 
     try{
-      const query = {$and : [
-            {bookingDate : {$gte: thisMonth}},
-            {bookingDate : {$lt: nextMonth}}
-        ]}
-        const employees = await Employment.find(query)
+        const query = {$and : [
+                {bookingDate : {$gte: thisMonth}},
+                {bookingDate : {$lt: nextMonth}}
+            ]}
+        const employees = await Employment.find(query).populate('workerID')
         if(employees.length===0){
             res.send('no employees working that day')
             return
         }
-       return  res.json(employees)
+        employees.forEach(e => {
+            if(!e.workerID) return res.send('this worker ID doesnt exist')
+        });
+
+        return  res.json(employees)
     }
     catch(e)
     {
         console.log(e)
     }
 }
-
-
-const getEmployeesBycompanyName= async (req,res)=>
-{
-    const {companyName} = req.params
-    try
-    {
-        const employees = await Employment.find({  companyName : companyName }).populate('employerID')
-        if(employees.length===0)
-        {
-            res.send("No workers found")
-            return
-        }
-
-       return  res.json(employees)
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-//11111111111111111111111111111
-const getEmployeesByposition= async (req,res)=>
-{
-    const {position} = req.params
-    try
-    {
-        const employees = await Employment.find({  position : position }).populate('employerID')
-        if(employees.length===0)
-        {
-            res.send("No workers found")
-            return
-        }
-
-       return  res.json(employees)
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-//11111111111111111111111111111
-const filterByfieldOfEmployment= async (req,res)=>
-{
-    const {fieldOfEmployment} = req.params
-    try
-    {
-        const employees = await Employment.find({  fieldOfEmployment : fieldOfEmployment }).populate('employerID')
-        if(employees.length===0)
-        {
-            res.send("No workers found")
-            return
-        }
-
-       return  res.json(employees)
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-
+//
+//
+// const getEmploymentsByWorkDate= async (req,res)=>
+// {
+//     let {WorkDate} = req.params
+//     WorkDate = new moment(WorkDate)
+//     WorkDate.utc(WorkDate).set('hour', 0).set('minute', 0).set('second', 0)
+//     const tomorrow = new moment(WorkDate)
+//     tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+//
+//
+//     try{
+//         const query = {$and : [
+//                 {workDate : {$gte: WorkDate}},
+//                 {workDate : {$lt: tomorrow}}
+//             ]}
+//         const employees = await Employment.find(query).populate('workerID')
+//         if(employees.length===0){
+//             res.send('no employees working that day')
+//             return
+//         }
+//         employees.forEach(e => {
+//             if(!e.workerID) return res.send('this worker ID doesnt exist')
+//         });
+//
+//         return  res.json(employees)
+//     }
+//     catch(e)
+//     {
+//         console.log(e)
+//     }
+// }
 
 module.exports={
         addEmployment,
@@ -365,13 +403,13 @@ module.exports={
         updateEmploymentStatus,
         getEmployeesByEmployerID,
         getEmployeesByEmployerIDAndStatus,
-        getEmploymentsByWorkDate,
+       // getEmploymentsByWorkDate,
         getEmployeesByStatus,
         getEmploymentsByBookingDate,
         getEmploymentsByBookingDateMonth,
         BookForm,
-         getEmployeesBycompanyName,
-         getEmployeesByposition,
-        filterByfieldOfEmployment
+    updateEmploymentsStatus,
+         getAllEmployees,
+
 
 }

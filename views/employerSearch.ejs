@@ -7,44 +7,58 @@
     <title>contractorSearch</title>
     <style>
         table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
-        
+
         td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
-        
+
         tr:nth-child(even) {
-          background-color: #dddddd;
+            background-color: #dddddd;
         }
-        </style>
+    </style>
 </head>
 <body>
- 
-      <table>
-        <% employers.forEach((item)=>{%>
-        <tr>
-          <th>full name</th>
-          <th>company name</th>
-          <th>position</th>
-          <th>phone</th>
-          <th>createdAt</th>
-          <th>updatedAt</th>
-        </tr>
-        <tr>
-          <td><%=item.fullName%></td>
-          <td><%=item.companyName%></td>
-          <td><%=item.position%></td>
-          <td><%=item.phone%></td>
-          <td><%=item.createdAt%></td>
-          <td><%=item.updatedAt%></td>
-        </tr>
-        <%});%>
-      </table>
+<input id="name" type="text" />
+<button onclick="filter()">Filter by name</button>
+<p style="color: red;" id="error"></p>
+
+<table>
+    <% employers.forEach((item)=>{%>
+    <tr>
+        <th>full name</th>
+        <th>company name</th>
+        <th>position</th>
+        <th>phone</th>
+        <th>createdAt</th>
+        <th>updatedAt</th>
+    </tr>
+    <tr>
+        <td><%=item.fullName%></td>
+        <td><%=item.companyName%></td>
+        <td><%=item.position%></td>
+        <td><%=item.phone%></td>
+        <td><%=item.createdAt%></td>
+        <td><%=item.updatedAt%></td>
+    </tr>
+    <%});%>
+</table>
 
 </body>
+<script>
+    function filter(){
+        let employerName = document.getElementById('name').value
+        if(!employerName){
+            document.getElementById('error').innerHTML = 'must insert name'
+            return
+        }
+        console.log(employerName)
+        window.location.href =`/employerSearch/${employerName}`
+    }
+</script>
 </html>

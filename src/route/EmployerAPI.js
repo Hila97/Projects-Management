@@ -5,8 +5,12 @@ router.post('/addEmployer',(employer.addEmployer))
 router.post('/loginOfEmployer',(employer.loginOfEmployer))
 router.post('/registerOfEmployer',(employer.registerOfEmployer))
 router.get('/getBookedEmployeesToday',(employer.getBookedEmployeesToday))
-router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
+//router.get('/getBookedEmployeesFuture/:id',(employer.getBookedEmployeesFuture))
 router.get('/getAllEmployers',(employer.findAllE))
+//router.get('/getEmployeesByposition/:employerID',employer.getEmployeesByposition)
+router.get('/getEmployeesBycompanyName/:companyName',employer.getEmployeesBycompanyName)
+router.get('/getEmployeesByEmployerName/:employerName',employer.getEmployeesByEmployerName)
+//router.get('/filterByfieldOfEmployment/:fieldOfEmployment',employer.filterByfieldOfEmployment)
 
 router.get('/employerLogin',(req, res) =>
 {
