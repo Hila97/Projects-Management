@@ -234,7 +234,7 @@ app.get('/employerSearch',((req, res) =>
 {
     try {
         const fetchEmployers = async () =>{
-            const {data} = await axios.get('http://127.0.0.1:3000/employer/getAllEmployers')
+            const {data} = await axios.get('https://project-management-2021-sce.herokuapp.com/employer/getAllEmployers')
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
@@ -259,7 +259,7 @@ app.get('/employerSearch/:employerName',((req, res) =>
         //employment/getEmployeesByEmployerID/60897c4e3b16b63e2437bbad`
 
         const fetchEmployers = async () =>{
-            const {data} = await axios.get(`http://127.0.0.1:3000/employer/getEmployeesByEmployerName/${employerName}`)
+            const {data} = await axios.get(`https://project-management-2021-sce.herokuapp.com/employer/getEmployeesByEmployerName/${employerName}`)
             //    console.log(data)
             if(typeof data === 'string'){
                 return res.render('Error', {message : data})
