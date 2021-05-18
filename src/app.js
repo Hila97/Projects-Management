@@ -440,7 +440,7 @@ app.get('/filterbycompanyName/:companyName',((req, res) =>
     }
 
 }))
-
+/*
 app.get('/filterEmployeesByposition',((req, res) =>
 {
     try {
@@ -462,7 +462,8 @@ app.get('/filterEmployeesByposition',((req, res) =>
 
 }))
 
-
+*/
+/*
 app.get('/filterEmployeesByposition/:position',((req, res) =>
 {
     const {position} = req.params
@@ -486,7 +487,7 @@ app.get('/filterEmployeesByposition/:position',((req, res) =>
 }))
 
 
-
+*/
 /*
 app.get('/filterByfieldOfEmployment',((req, res) =>
 {
