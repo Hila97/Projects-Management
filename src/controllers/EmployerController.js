@@ -251,6 +251,7 @@ const getEmployeesBycompanyName= async (req,res)=>
     }
 }
 
+/*
 const getEmployeesByposition= async (req,res)=>
 {
     const {position} = req.params
@@ -270,7 +271,7 @@ const getEmployeesByposition= async (req,res)=>
         console.log(e)
     }
 }
-
+*/
  
 
 module.exports=
@@ -282,6 +283,6 @@ module.exports=
     getBookedEmployeesToday,
     getEmployeesByEmployerName,
    // filterByfieldOfEmployment,
-    getEmployeesBycompanyName,
-    getEmployeesByposition
+    getEmployeesBycompanyName
+   // getEmployeesByposition
 }
