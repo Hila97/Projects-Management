@@ -22,37 +22,44 @@ var validatePassword = function(password)
     return pass.test(password)
 };
 
-const contractorSchema = new schema ({
-    ID: {
+const contractorSchema = new schema (
+{
+    ID:
+    {
         type: Number,
         unique: true,
         validate:[validateID, 'Please fill a valid ID'],
         match: [/^(\d\d\d\d\d\d\d\d\d)$/, 'Please fill a valid ID'],
         required: true
     },
-    firstName: {
+    firstName:
+    {
         type: String,
         maxLength:15,
         //required: true
     },
-    lastName: {
+    lastName:
+    {
         type: String,
         maxLength:15,
         //required: true
     },
-    telephone: {
+    telephone:
+    {
         type: String,
        // required: true
     },
 
-    password: {
+    password:
+    {
         type: String,
         validate:[validatePassword, 'Please fill a valid password'],
         match: [/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/, 'Please fill a valid password'],
         required: true
     },
 
-    userName: {
+    userName:
+    {
         type: String,
         unique: true,
         required: true,
@@ -60,44 +67,51 @@ const contractorSchema = new schema ({
         match: [/^[a-zA-Z0-9.!#$%&'+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$/, 'Please fill a valid email address']
     },
 
-    dateOfBirth: {
+    dateOfBirth:
+    {
         type: Date ,
 // required: true
     },
-    areaOfResidence: {
+    areaOfResidence:
+    {
         type:AreaOfResidence ,
         //required:true
     },
-    fieldOfEmployment:{
+    fieldOfEmployment:
+    {
         type: FieldOfEmployment ,
         //required: true
 
     },
-    workingDays:{
+    workingDays:
+    {
         type: Object,
 // required:true,
-            Sunday :{ type: Boolean},
-            Monday :{ type: Boolean},
-            Tuesday :{ type: Boolean},
-            Wednesday:{ type: Boolean},
-            Thursday :{ type: Boolean},
-            Friday: {type: Boolean}
+        Sunday :{ type: Boolean},
+        Monday :{ type: Boolean},
+        Tuesday :{ type: Boolean},
+        Wednesday:{ type: Boolean},
+        Thursday :{ type: Boolean},
+        Friday: {type: Boolean}
     },
-    hourlyWage: {
+    hourlyWage:
+    {
         type: Number,
         //required:true
     },
-    bankAccount :{
+    bankAccount :
+    {
         bankName:{type:String},
         branch:{type:Number},
         accountNumber:{type:Number}
-         },
-
-    rating:{
+    },
+    rating:
+    {
         type: Number,
         default:0
     },
-    Experience:{
+    Experience:
+    {
         type:Number,
         default:0
     }

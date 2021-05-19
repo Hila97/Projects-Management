@@ -32,5 +32,9 @@ function findAvailableWorker(req,res,next){
  */
 
 
-module.exports={addVacation,findAllVacations}
+module.exports=
+    {
+        addVacation,
+        findAllVacations
+    }
 

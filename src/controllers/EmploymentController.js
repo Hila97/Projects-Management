@@ -4,7 +4,7 @@ const contractorWorker = require('../models/ContractorWorker')
 const vacation=require('../models/Vacation')
 
 async function BookForm(req, res) {
-   // console.log(req.cookies.employerIDCookie.id)
+    // console.log(req.cookies.employerIDCookie.id)
     var workDate=new Date(req.params.workDate)
     console.log("the date that i got from the table to the form",workDate)
     console.log(req.params.workerID)
@@ -22,7 +22,7 @@ const addEmployment=async (req, res)=> {
     var workDate=new Date(req.params.workDate)
     console.log("the date i want to add",workDate)
     //let date=new Date(req.body.workDate,toString())
-   // console.log(date)
+    // console.log(date)
     const s={
         workDate:workDate,
         employerID:req.cookies.employerIDCookie.id,
@@ -396,20 +396,20 @@ const getEmploymentsByBookingDateMonth= async (req,res)=>
 // }
 
 module.exports={
-        addEmployment,
-        findAllEmployments,
-        findFutureEmployment,
-        findTodayEmployment,
-        updateEmploymentStatus,
-        getEmployeesByEmployerID,
-        getEmployeesByEmployerIDAndStatus,
-       // getEmploymentsByWorkDate,
-        getEmployeesByStatus,
-        getEmploymentsByBookingDate,
-        getEmploymentsByBookingDateMonth,
-        BookForm,
+    addEmployment,
+    findAllEmployments,
+    findFutureEmployment,
+    findTodayEmployment,
+    updateEmploymentStatus,
+    getEmployeesByEmployerID,
+    getEmployeesByEmployerIDAndStatus,
+    // getEmploymentsByWorkDate,
+    getEmployeesByStatus,
+    getEmploymentsByBookingDate,
+    getEmploymentsByBookingDateMonth,
+    BookForm,
     updateEmploymentsStatus,
-         getAllEmployees,
+    getAllEmployees,
 
 
 }

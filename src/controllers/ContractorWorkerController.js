@@ -7,7 +7,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 
-const addContractor = async (req, res) => {
+const addContractor = async (req, res) =>
+{
     console.log(req.body)
     const newContractor = new contractorWorker(req.body)
     await newContractor.save().then(contractor => {
@@ -18,8 +19,11 @@ const addContractor = async (req, res) => {
        // res.status(500).json({error:"error"})
     })
 }
-const findAllContractor =async (req, res)=>{
-    await contractorWorker.find({},{firstName:1,
+const findAllContractor =async (req, res)=>
+{
+    await contractorWorker.find({},
+    {
+        firstName:1,
         lastName:1,
         workingDays:1,
         fieldOfEmployment:1,
@@ -28,7 +32,8 @@ const findAllContractor =async (req, res)=>{
         rating:1,
         Experience:1
     })
-        .then(workerList=> {
+        .then(workerList=>
+        {
             res.render("AllAvailableWorkers", {workerList})
         })
         .catch(err=>{
@@ -38,7 +43,8 @@ const findAllContractor =async (req, res)=>{
 }
 
 
-async function findContractorByID(req, res) {
+async function findContractorByID(req, res)
+{
     await contractorWorker.find({ID: req.body.ID}).then((result) => {
         res.send(result)
     })
@@ -52,7 +58,9 @@ async function findContractorByAreaOfResidence(req, res) {
 
 
 async function findContractorByFieldOfEmployment(req, res) {
-    await contractorWorker.find({fieldOfEmployment: req.body.fieldOfEmployment}).then((result) => {
+    await contractorWorker.find({fieldOfEmployment: req.body.fieldOfEmployment}).then((result) =>
+    {
+        if()
         res.send(result)
     })
 }
