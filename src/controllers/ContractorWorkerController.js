@@ -60,7 +60,6 @@ async function findContractorByAreaOfResidence(req, res) {
 async function findContractorByFieldOfEmployment(req, res) {
     await contractorWorker.find({fieldOfEmployment: req.body.fieldOfEmployment}).then((result) =>
     {
-        if()
         res.send(result)
     })
 }
