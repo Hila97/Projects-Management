@@ -74,17 +74,6 @@ async function updateEmploymentToday() {
 app.get('/', (req, res)=>{
  res.render('HomeNavUser')
 })
-/*
-app.get('/addContractorForm', (req, res)=>{
-    res.render('addContractorForm')
-})
-app.get('/editProfile', (req, res)=>{
-    res.render('editProfileContractor')
-})
-app.get('/attandenceReport', (req, res)=>{
-    res.render('attandenceReport')
-})
- */
 
 app.get('/employeesFilters',((req, res) => {
     res.render('employeesFilters')
