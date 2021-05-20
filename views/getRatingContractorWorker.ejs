@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>position</title>
+    
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+</head>
+<body>
+   
+   
+ <body>
+ 
+  <h2 >Rating</h2>
+  <input id="fieldOfEmployment" type="text" />
+  <button onclick="filter()">Search</button>
+  <p style="color: red;" id="error"></p>
+   <table >
+     <!-- added line 38 -->
+     <% if (locals.contractorworkers) { %>
+        <% contractorworkers.forEach((item)=>{%>
+        <tr>
+          <th>rating</th>
+          <th>user name</th>
+          <th>fieldOfEmployment</th>
+        </tr>
+        <tr>
+          <td><%=item.rating%></td>
+          <td><%=item.userName%></td>
+          <td><%=item.fieldOfEmployment%></td>
+     </tr>
+     <%});%>
+     <!-- added line 59 -->
+     <% } %>
+   </table>
+
+ 
+
+</body>
+<script>
+  function filter(){
+      let fieldOfEmployment = document.getElementById('fieldOfEmployment').value
+      if(!fieldOfEmployment){
+          document.getElementById('error').innerHTML = 'must insert fieldOfEmployment'
+          return
+      }
+   
+      // window.location.href = `employer/getEmployeesBycompanyName/${companyName}`
+    //  window.history.pushState({}, document.title, "/" + `employer/filterEmployeesByposition/${fieldOfEmpositionployment}`);
+      window.location.pathname = `contractorWorker/getRatingContractorWorker/${fieldOfEmployment}`
+  }
+</script>
+</html>

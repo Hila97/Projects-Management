@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <h2 >Filter by status</h2>
+
+<input id="status" type="text" />
+<button onclick="filter()">Filter by status</button>
+<p style="color: red;" id="error"></p>
+
+<table>
+    <% if (locals.employees) { %>
+        <% employees.forEach((item)=>{%>
+    <tr>
+        <th>first name</th>
+        <th>last name</th>
+        <th>telephone</th>
+        <th>email</th>
+    </tr>
+    <tr>
+        <td><%=item.firstName%></td>
+        <td><%=item.lastName%></td>
+        <td><%=item.telephone%></td>
+        <td><%=item.userName%></td>
+    </tr>
+    <%});%>
+</table>
+</body>
+<script>
+    function filter(){
+        let status = document.getElementById('status').value
+        if(!status){
+            document.getElementById('error').innerHTML = 'must insert status'
+            return
+        }
+        status = status.toUpperCase()
+        console.log(status)
+        switch(status){
+            case 'CURRENT':
+                status = 'Current'
+                break
+            case 'FUTURE':
+                status = 'Future'
+                break
+            case 'CANCELD':
+                status = 'Canceld'
+                break
+            default:
+                document.getElementById('error').innerHTML = 'the status \"' + status + '\" not recognized'
+                return
+        }
+       // window.location.pathname = `employment/filterEmploymentsByBookingDate/${BookingDate}`
+
+        window.location.pathname =`employment/filterEmployeesByStatus/${status}`
+    }
+</script>
+</html>
