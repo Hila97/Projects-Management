@@ -211,68 +211,69 @@ const getEmployeesByEmployerName = async (req, res)=> {
     }
 }
 
-/*const filterByfieldOfEmployment= async (req, res)=>
-{
-    const {fieldOfEmployment} = req.params
-    try
-    {
-        const employees = await Employer.find({  fieldOfEmployment : fieldOfEmployment })
-        if(employees.length===0) {
-            res.send("No workers found")
-            return
-        }
-        return  res.json(employees)
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-
- */
-
 const getEmployeesBycompanyName= async (req,res)=>
 {
     const {companyName} = req.params
     try
-    {
+    {  
         const employers = await Employer.find({  companyName : companyName })
         if(employers.length===0)
         {
-            res.send("No employers found")
+            // res.send('No employers found')
+            res.render('Error',{message : 'No employers found'})
             return
         }
-
-        return  res.json(employers)
+        
+    //    return  res.json(employers)
+        res.render('filterbycompanyName',{employers : employers})
     }
     catch(e)
     {
         console.log(e)
-    }
+    }  
 }
 
-/*
 const getEmployeesByposition= async (req,res)=>
 {
     const {position} = req.params
     try
-    {
-        const employees = await Employer.find({  position : position })
-        if(employees.length===0)
+    {  
+        const employers = await Employer.find({  position : position })
+        if(employers.length===0)
         {
+            // res.send("No employers found")
+            res.render('Error',{message : 'No employers found'})
+            return
+        }
+        
+    //    return  res.json(employers)
+    res.render('filterEmployeesByposition',{employers : employers})
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+const filterByfieldOfEmployment= async (req, res)=>
+{
+    const {fieldOfEmployment} = req.params
+    try
+    {
+        const employers = await Employer.find({  fieldOfEmployment : fieldOfEmployment })
+        if(employers.length===0) {
             res.send("No workers found")
             return
         }
+        res.render('filterByfieldOfEmployment',{employers : employers})
 
-        return  res.json(employees)
+        //return  res.json(employees)
     }
     catch(e)
     {
         console.log(e)
     }
 }
-*/
- 
 
 module.exports=
 {
@@ -282,7 +283,7 @@ module.exports=
     loginOfEmployer,
     getBookedEmployeesToday,
     getEmployeesByEmployerName,
-   // filterByfieldOfEmployment,
-    getEmployeesBycompanyName
-   // getEmployeesByposition
+    filterByfieldOfEmployment,
+    getEmployeesBycompanyName,
+    getEmployeesByposition
 }
