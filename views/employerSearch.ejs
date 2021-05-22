@@ -29,24 +29,26 @@
 <p style="color: red;" id="error"></p>
 
 <table>
-    <% employers.forEach((item)=>{%>
-    <tr>
-        <th>full name</th>
-        <th>company name</th>
-        <th>position</th>
-        <th>phone</th>
-        <th>createdAt</th>
-        <th>updatedAt</th>
-    </tr>
-    <tr>
-        <td><%=item.fullName%></td>
-        <td><%=item.companyName%></td>
-        <td><%=item.position%></td>
-        <td><%=item.phone%></td>
-        <td><%=item.createdAt%></td>
-        <td><%=item.updatedAt%></td>
-    </tr>
-    <%});%>
+    <% if (locals.employers) { %>
+        <% employers.forEach((item)=>{%>
+        <tr>
+            <th>full name</th>
+            <th>company name</th>
+            <th>position</th>
+            <th>phone</th>
+            <th>createdAt</th>
+            <th>updatedAt</th>
+        </tr>
+        <tr>
+            <td><%=item.fullName%></td>
+            <td><%=item.companyName%></td>
+            <td><%=item.position%></td>
+            <td><%=item.phone%></td>
+            <td><%=item.createdAt%></td>
+            <td><%=item.updatedAt%></td>
+        </tr>
+        <%});%>
+    <% } %>
 </table>
 
 </body>
@@ -58,7 +60,8 @@
             return
         }
         console.log(employerName)
-        window.location.href =`/employerSearch/${employerName}`
+        window.location.pathname = `employer/getEmployersByEmployerName/${employerName}`
+
     }
 </script>
 </html>

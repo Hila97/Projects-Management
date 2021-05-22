@@ -279,6 +279,104 @@ const loginOfContractorWorker= async (req, res) =>
 }
 
 
+const getRatingContractorWorker= async (req,res)=>
+{
+    const {fieldOfEmployment} = req.params
+    try
+    {  
+        const contractorworkers  = await contractorWorker.find({  fieldOfEmployment : fieldOfEmployment })
+        if(contractorworkers .length===0)
+        {
+            // res.send("No employers found")
+            res.render('Error',{message : 'No employers found'})
+            return
+        }
+        
+    //    return  res.json(employers)
+    res.render('getRatingContractorWorker',{contractorworkers  : contractorworkers })
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+/*
+// function getBusinessDatesCount(startDate, endDate) {
+//     var count = 0;
+//     var curDate = startDate;
+//     while (curDate <= endDate) {
+//         var dayOfWeek = curDate.getDay();
+//         if(!((dayOfWeek == 6) || (dayOfWeek == 0)))
+//            count++;
+//         curDate.setDate(curDate.getDate() + 1);
+//     }
+//     return count;
+const TotalhourWorkinMonth= async (req,res)=>
+{
+    const {startShift,endShift} = req.params
+    // var diff =(endShift.getTime() - startShift.getTime()) / 1000;
+    // diff /= (60 * 60);
+        // console.log(diff_hours(startShift, endShift));
+
+
+    // var startShift = moment("9:00 am", "hh:mm a");
+    // var endShift = moment("5:00 pm", "hh:mm a");
+    // var startBreak = moment("0.30", "hh.mm");
+    // var TotalTime = ((endShift.subtract(startShift)).subtract(startBreak)).format("hh.mm");4
+    
+    try
+    {  
+        const contractorworkers  = await contractorWorker.find({  startShift : startShift, endShift : endShift })
+        if(contractorworkers .length===0)
+        {
+            // res.send("No employers found")
+            res.render('Error',{message : 'No employers found'})
+            return
+        }
+        
+    //    return  res.json(employers)
+        res.render('TotalhourWorkinMonth',{contractorworkers  : contractorworkers })
+        return Math.abs(Math.round(diff));
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}
+
+
+
+const TodaySalary= async (req,res)=>
+{
+    const today = moment().utc(moment()).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = moment().utc(moment()).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+    // console.log(today)
+    // console.log(tomorrow)
+    try
+    {  
+        const query = {$and : [
+            {bookingDate : {$gte: today}},
+            {bookingDate : {$lt: tomorrow}}
+        ],
+          employerID:req.cookies.employerIDCookie
+      }
+      const employees = await Employment.find(query).populate('workerID')
+        if(employees .length===0)
+        {
+            // res.send("No employers found")
+            res.render('Error',{message : 'No employers found'})
+            return
+        }
+        
+    //    return  res.json(employers)
+        res.render('TodaySalary',{employees  : employees })
+       // return Math.abs(Math.round(diff));
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
+}*/
 module.exports =
 {
     addContractor,
@@ -292,5 +390,8 @@ module.exports =
     findContractorByFieldOfEmployment,
     loginOfContractorWorker,
     displayEditProfile,
-    findAvailableWorkers
+    findAvailableWorkers,
+    getRatingContractorWorker,
+    //TotalhourWorkinMonth,
+    //TodaySalary
 }

@@ -8,7 +8,7 @@ router.post('/editExistingTime', attendanceReport.editExistingTime)
 router.post('/editEnteringTime', attendanceReport.editEnteringTime)
 router.post('/editStartBreak', attendanceReport.editStartBreak)
 router.post('/editEndBreak', attendanceReport.editEndBreak)
-
+router.get('/getWageByMonth/:contractorWorkerID/:month', attendanceReport.getWageByMonth)
 
 
 router.get('/addContractorForm', (req, res)=>{

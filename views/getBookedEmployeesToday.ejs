@@ -26,7 +26,9 @@
 <body>
 
    <table>
-     <% workerArr.forEach((item)=>{%>
+    <% if (locals.employees) { %>
+
+     <% employees.forEach((item)=>{%>
      <tr>
        <th>first name</th>
        <th>last name</th>
@@ -40,6 +42,7 @@
        <td><%=item.email%></td>
      </tr>
      <%});%>
+     <%}%>
    </table>
 </body>
 </html>

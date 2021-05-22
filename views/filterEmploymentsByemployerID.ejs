@@ -24,6 +24,8 @@
         </style>
 </head>
 <body>
+  <h2 >Filter by employerID</h2>
+
 
   <input id="employerID" type="text" />
   <button onclick="filter()">Filter by employerID</button>
@@ -37,7 +39,8 @@
        <th>telephone</th>
        <th>email</th>
      </tr>
-       <% employees.forEach((item)=>{%>
+     <% if (locals.employers) { %>
+       <% employers.forEach((item)=>{%>
      <tr>
        <td><%=item.firstName%></td>
        <td><%=item.lastName%></td>
@@ -54,9 +57,10 @@
           document.getElementById('error').innerHTML = 'must insert employerID'
           return
       }
-      // console.log(employerID)
-   
-      window.location.href =`/filterEmploymentsByemployerID/${employerID}`
+      window.history.pushState({}, document.title, "/" + `employer/filterEmploymentsByemployerID/${employerID}`);
+      window.location.reload()
+
+
   }
 </script>
 </html>

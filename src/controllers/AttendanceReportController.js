@@ -67,6 +67,89 @@ var editEndBreak=(req, res)=> {
         res.send(result)
     })
 }
+const calcTotalWork = (attendanceArr, hourlyWage) => {
+    let totalWork = 0
+    
+    attendanceArr.forEach(a => {
+       const start = a.startShift.getTime()
+       const end = a.endShift.getTime()
+       let total = end - start
+
+
+       const startBreak = a.startBreak.getTime()
+       const endBreak = a.endBreak.getTime()
+       let totalBreak = endBreak - startBreak
+
+       // sub break hours from work hours 
+       total -= totalBreak
+
+       totalWork += total
+    })
+
+       let hours = Math.floor(totalWork / 1000 / 60 / 60)
+       totalWork -= hours * 1000 * 60 * 60
+       let minutes = Math.floor(totalWork / 1000 / 60)
+       totalWork -= minutes * 1000 * 60 
+       let seconds = Math.floor(totalWork / 1000)
+       
+       const result =  (hours < 9 ? '0' : '') + hours + ':' + (minutes < 9 ? '0' : '') + minutes + ':' + (seconds < 9 ? '0' : '') + seconds
+
+       let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
+
+
+
+   return  {totalHours: result, totalWage: totalWage}
+}
+
+
+const getWageByMonth= async (req, res)=> {
+
+    // get all attendance by month and contractorID
+    let {month, contractorWorkerID} = req.params
+    const date = '2021-' + month + '-01'
+    const nextMonthNum = '0' + (parseInt(month, 10) + 1).toString()
+    const nextMonthString = '2021-' + nextMonthNum + '-01'
+    console.log(nextMonthString)
+
+    thisMonth = moment(new Date(date))
+    nextMonth = moment(new Date(nextMonthString))
+
+
+    thisMonth.utc(thisMonth).set('hour', 0).set('minute', 0).set('second', 0)
+    nextMonth.utc(nextMonth).set('hour', 0).set('minute', 0).set('second', 0)
+    console.log(thisMonth, nextMonth)
+
+    try{
+        const query = {
+            $and : [
+                {startShift : {$gte: thisMonth}},
+                {startShift : {$lt: nextMonth}},
+            ],
+             contractorWorkerID: contractorWorkerID
+        }
+      
+        const attendance = await AttendanceReport.find(query).populate('contractorWorkerID')
+        if(attendance.length===0){
+            res.send('no employees working that month')
+            return
+        }
+         // for each attendance calc work hours
+        const hourlyWage = attendance[0].contractorWorkerID.hourlyWage
+        const result = calcTotalWork(attendance, hourlyWage)
+        //return  res.json(result)
+        return  res.render('TotalWageByMonth',{result: result})
+    }
+    catch(e)
+    {
+        console.log(e)
+    }
+   
+
+
+
+
+   
+}
 
 
 module.exports={
@@ -76,6 +159,8 @@ module.exports={
     editExistingTime,
     editEnteringTime,
     editStartBreak,
-    editEndBreak
+    editEndBreak,
+    calcTotalWork,
+    getWageByMonth
 }
 

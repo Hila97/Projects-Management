@@ -12,6 +12,10 @@ router.get('/findContractorByFieldOfEmployment',contractorWorker.findContractorB
 router.get('/findContractorByID/:ID',contractorWorker.findContractorByID)
 router.post('/editProfile',(contractorWorker.editProfile))
 router.get('/findAllContractor',(contractorWorker.findAllContractor))
+
+//router.get('/TodaySalary/:hourlyWage',(contractorWorker.TodaySalary))
+//router.get('/getRatingContractorWorker/:fieldOfEmployment',(contractorWorker.getRatingContractorWorker))
+//router.get('/TotalhourWorkinMonth/:startShift/:endShift',(contractorWorker.TotalhourWorkinMonth))
 //router.get('/findWorkerByHourlyWage/:min&max',contractorWorker.findWorkerByHourlyWage)
 //router.post('displayProfile', (contractorWorker.displayProfile))
 

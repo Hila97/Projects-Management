@@ -11,7 +11,7 @@
         border-collapse: collapse;
         width: 100%;
         position: relative;
-        margin:20px ;
+        margin: "20rem";
       }
       
       td, th {
@@ -38,37 +38,31 @@
       }
       </style>
 </head>
+
 <body>
+
+  <h2 >employment list</h2>
+
   
-
-    <h2 >employment list</h2>
-
-  <table>
-    <% employments.forEach((item)=>{%>
-    <tr>
-      <th>field</th>
-      <th>status</th>
-      <th>bookingDate</th>
-      <th>workDate</th>
-    </tr>
-    <tr>
-      <td><%=item.field%></td>
-      <td><%=item.status%></td>
-      <td><%=item.bookingDate%></td>
-      <td><%=item.workDate%></td>
-    </tr>
-    <%});%>
-  </table>
-  </div>
-
+    <table>
+      <% if (locals.employments) { %>
+        <% employments.forEach((item)=>{%>
+        <tr>
+          <th>field</th>
+          <th>status</th>
+          <th>bookingDate</th>
+          <th>workDate</th>
+        </tr>
+        <tr>
+          <td><%=item.field%></td>
+          <td><%=item.status%></td>
+          <td><%=item.bookingDate%></td>
+          <td><%=item.workDate%></td>
+        </tr>
+        <%});%>
+      <% } %>
+    </table>
+    </div>
 </body>
 
-<script>
-  function showEmployees() {
-   let employeesDiv = document.getElementById("employees")
-   console.log(employeesDiv.style.display)
-   if(employeesDiv.style.display === 'none') employeesDiv.style.display = 'flex'
-   else employeesDiv.style.display = 'none'
-  }
-  </script>
 </html>

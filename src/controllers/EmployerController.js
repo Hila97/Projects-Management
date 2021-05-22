@@ -140,23 +140,23 @@ const getBookedEmployeesToday= async (req, res)=> {
     // console.log(today)
     // console.log(tomorrow)
 
-
     try{
       const query = {$and : [
             {bookingDate : {$gte: today}},
             {bookingDate : {$lt: tomorrow}}
-        ],
-          employerID:req.cookies.employerIDCookie
-      }
+        ]}
         const employees = await Employment.find(query).populate('workerID')
         if(employees.length===0){
-            res.send('no employees booked today')
+            res.render('Error', {message: 'no employees booked that day'})
             return
         }
         employees.forEach(e => {
-            if(!e.workerID) return res.send('one or more of the workerIDs doesnt exist')
+            if(!e.workerID) return res.render('Error', {message: 'one or more of the workerIDs doesnt exist'})
         })
-       return  res.json(employees)
+        const resData = employees.map(e=>e.workerID)
+        res.render('getBookedEmployeesToday',{employees : resData})
+
+      // return  res.json(employees)
     }
     catch(e)
     {
@@ -164,52 +164,32 @@ const getBookedEmployeesToday= async (req, res)=> {
     }  
 }
 
-
-// const getBookedEmployeesFuture= async (req,res)=>
-// {
-//     const {id} = req.params
-//     try
-//     {
-//         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
-//         if(employees.length===0)
-//         {
-//             res.send('No workers found')
-//             return
-//         }
-//         if(employees.length===0){
-//             res.send('no employees booked that day')
-//             return
-//         }
-//         employees.forEach(e => {
-//             if(!e.workerID) return res.send('one or more of the workerIDs doesnt exist')
-//         })
-//
-//
-//         return  res.json(employees)
-//     }
-//     catch(e)
-//     {
-//         console.log(e)
-//     }
-//}
-
-const getEmployeesByEmployerName = async (req, res)=> {
-    const {employerName} = req.params
-    console.log(req.params)
-    try{
-
-        const employer = await Employer.findOne({fullName: employerName})
-        if(!employer){
-            res.send('no employer with that name')
+const getBookedEmployeesFuture= async (req,res)=>
+{
+    const {id} = req.params
+    try
+    {
+        const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
+        
+        if(employees.length===0)
+        {
+            res.render('Error',{message: 'No workers found'})
             return
-        }
-        return  res.json(employer)
+        }      
+        
+        employees.forEach(e => {
+            if(!e.workerID) return res.render('Error',{message: 'one or more of the workerIDs doesnt exist'})
+        })
+
+        const resData = employees.map(e=>e.workerID)
+        return  res.render('filterEmployeesByStatusFuture',{employees: resData})
     }
     catch(e)
     {
         console.log(e)
     }
 }
+
 
 const getEmployeesBycompanyName= async (req,res)=>
 {
@@ -267,12 +247,32 @@ const filterByfieldOfEmployment= async (req, res)=>
         }
         res.render('filterByfieldOfEmployment',{employers : employers})
 
-        //return  res.json(employees)
     }
     catch(e)
     {
         console.log(e)
     }
+}
+const getEmployersByEmployerName= async (req,res)=>
+{
+    const {employerName} = req.params
+    try
+    {  
+        const employers = await Employer.find({  fullName : employerName })
+        if(employers.length===0)
+        {
+            // res.send('No employers found')
+            res.render('Error',{message : 'No employers found'})
+            return
+        }
+        
+    //    return  res.json(employers)
+        res.render('employerSearch',{employers : employers})
+    }
+    catch(e)
+    {
+        console.log(e)
+    }  
 }
 
 module.exports=
@@ -282,8 +282,9 @@ module.exports=
     registerOfEmployer,
     loginOfEmployer,
     getBookedEmployeesToday,
-    getEmployeesByEmployerName,
+    getBookedEmployeesFuture,
     filterByfieldOfEmployment,
     getEmployeesBycompanyName,
-    getEmployeesByposition
+    getEmployeesByposition,
+    getEmployersByEmployerName
 }

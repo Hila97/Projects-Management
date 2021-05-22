@@ -59,7 +59,6 @@
         margin-right: auto;
         margin-left: 1em;
     }
-
     .myButton {
         background-color: #0f9f8e;
         border-radius:28px;
@@ -101,14 +100,40 @@
             <li><a href="/employer/search">SEARCH WORKER</a></li>
             <li><a href="#">Profile</a></li>
            <!-- <li><a href="/FutureBooking"> FUTURE EMPLOYMENTS</a></li>-->
-            <li><a href="/getBookedEmployeesToday"> TODAY EMPLOYMENTS</a></li>
+            <li><a href="/employer/getBookedEmployeesToday"> TODAY EMPLOYMENTS</a></li>
+            <li> <a onclick="getEmployees()" >Future EMPLOYMENTS</a> </li>
 <!--            <li><a href="/updateEmploymentStatus"> update Employment Status</a></li>-->
 <!--            <a href="/login"><button class="myButton">Log-In</button></a>-->
         </ul>
     </div>
+
+
     </body>
-</div>
-</body>
+    <!-- added this script -->
+    <script>
+        function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+                }
+            }
+            return '';
+            }
+
+        function getEmployees(){
+           
+           const employerID = getCookie('employerIDCookie')
+           let tmp = employerID.split(':')[2].split('\"')[1]
+            console.log(employerID.split(':')[2].split('\"')[1])
+            // const employerID = '60897c4e3b16b63e2437bbad'
+            window.location.pathname =`/employer/getBookedEmployeesFuture/${tmp}`
+        }
+    </script>
 </html>
-
-

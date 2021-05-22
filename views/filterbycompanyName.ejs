@@ -25,13 +25,17 @@
         </style>
 </head>
 <body>
-
+   
+   
+ <body>
  
   <h2 >Filter by company name</h2>
   <input id="companyName" type="text" />
   <button onclick="filter()">Filter by companyName</button>
   <p style="color: red;" id="error"></p>
-   <table>
+   <table >
+     <!-- added line 38 -->
+    <% if (locals.employers) { %>
      <% employers.forEach((item)=>{%>
      <tr>
        
@@ -52,7 +56,12 @@
        <td><%=item.fieldOfEmployment%></td>
      </tr>
      <%});%>
+     <!-- added line 59 -->
+     <% } %>
    </table>
+
+ 
+
 </body>
 <script>
   function filter(){
@@ -61,8 +70,8 @@
           document.getElementById('error').innerHTML = 'must insert companyName'
           return
       }
-   
-      window.location.href = `/filterbycompanyName/${companyName}`
+      window.location.pathname = `employer/getEmployeesBycompanyName/${companyName}`
+
   }
 </script>
 </html>
