@@ -2,9 +2,10 @@ const Employment=require('../models/Employment')
 const moment = require('moment')
 const contractorWorker = require('../models/ContractorWorker')
 const vacation=require('../models/Vacation')
+const {confirmation}=require('../models/enums')
 
 async function BookForm(req, res) {
-    // console.log(req.cookies.employerIDCookie.id)
+   // console.log(req.cookies.employerIDCookie.id)
     var workDate=new Date(req.params.workDate)
     console.log("the date that i got from the table to the form",workDate)
     console.log(req.params.workerID)
@@ -22,7 +23,7 @@ const addEmployment=async (req, res)=> {
     var workDate=new Date(req.params.workDate)
     console.log("the date i want to add",workDate)
     //let date=new Date(req.body.workDate,toString())
-    // console.log(date)
+   // console.log(date)
     const s={
         workDate:workDate,
         employerID:req.cookies.employerIDCookie.id,
@@ -185,7 +186,7 @@ const getAllEmployees= async (req,res)=>
 const filterEmployeesByStatus = async (req,res)=>
 {
 
-  
+
     const {status} = req.params
     try{
         const employees = await Employment.find({  status : status }).populate('workerID')
@@ -199,7 +200,7 @@ const filterEmployeesByStatus = async (req,res)=>
             return
         })
 
-        const resData = employees.map(e=>e.workerID) 
+        const resData = employees.map(e=>e.workerID)
         res.render('filterEmployeesByStatus',{employees : resData})
 
     }
@@ -227,12 +228,12 @@ const filterEmploymentsByBookingDate= async (req,res)=>
            // res.render('Error',{message : 'No employees working that day'})
             res.send('no employees working that day')
             return
-            
+
         }
         const employeesArr = []
         employees.forEach(e => {
             // if(!e.workerID) return res.send('this worker ID doesnt exist')
-            if(!e.workerID){ 
+            if(!e.workerID){
                 res.render('Error',{message : 'this worker ID doesnt exist'})
                 return
             }
@@ -280,13 +281,13 @@ const filterEmploymentsByBookingMonth= async (req,res)=>
             const employeesArr = []
             employees.forEach(e => {
                 // if(!e.workerID) return res.send('this worker ID doesnt exist')
-                if(!e.workerID){ 
+                if(!e.workerID){
                     res.render('Error',{message : 'this worker ID doesnt exist'})
                     return
                 }
                 employeesArr.push(e.workerID)
             })
-    
+
         res.render('filterEmploymentsByBookingMonth',{employees : employeesArr})
         //return  res.json(employees)
     }
@@ -305,7 +306,69 @@ const getEmploymentsList = async (req,res)=>{
             console.log(err)
         })
 }
-
+async function findPastEmployments(req, res, next) {
+    console.log("the employer now is ",req.cookies.employerIDCookie.id)
+    var today1= moment()
+    today1.set({hour:0,minute:0,second:0,millisecond:0})
+    var query =
+        {
+            employerID: req.cookies.employerIDCookie.id,
+            workDate : {$lt: today1},
+            confirmation:confirmation.APPROVED
+        }
+    await Employment.find(query).populate('workerID').sort({workDate:-1}).then((employments) => {
+        if(employments.length===0)
+        {
+            res.send("No employments found")
+        }
+        else
+            res.render('EmployerViews/HistoryOfEmployments',{employments})
+    }).catch(e=>
+    {
+        console.log(e)
+    })
+}
+async function calculateRatingOfWorker(employmentID,rank)
+{
+    console.log(employmentID,rank)
+    await Employment.findById(employmentID,{_id:0,workerID:1}).then(z=>
+    {
+        console.log(z)
+        var w_id=z.workerID
+        Employment.aggregate(
+            [
+                {
+                    $match:
+                        {
+                            workerID: w_id,
+                            rank:{$ne:0}
+                        }
+                },
+                {
+                    $group:
+                        {
+                            _id: "$workerID",
+                            AverageValue: { $avg: "$rank" }
+                        }
+                }
+            ]
+        ).then(avg=>
+        {
+            console.log("4444444444444444",avg)
+            var newRank=avg[0].AverageValue
+            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}})
+        })
+    })
+}
+async function rateEmployment(req,res)
+{
+    const employmentID=req.body.employmentID
+    var stars=req.body.rate;
+    await Employment.findByIdAndUpdate(employmentID,{$set:{rank:stars}}).then(x=>{
+        calculateRatingOfWorker(employmentID,stars);
+        res.redirect('/employment/history')
+    })
+}
 module.exports={
         addEmployment,
         findAllEmployments,
@@ -316,7 +379,9 @@ module.exports={
         filterEmploymentsByBookingMonth,
         BookForm,
         getAllEmployees,
-        getEmploymentsList
+        getEmploymentsList,
+    findPastEmployments,
+    rateEmployment
 
 
 }

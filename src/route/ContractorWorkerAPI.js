@@ -2,7 +2,6 @@ const router = require('express').Router()
 const contractorWorker = require('../controllers/ContractorWorkerController')
 
 router.get('/displayProfile',contractorWorker.displayEditProfile)
-
 router.put('/editProfile',contractorWorker.editProfile)
 router.post('/addContractor',contractorWorker.addContractor)
 router.get('/findAllContractor',contractorWorker.findAllContractor)
@@ -18,7 +17,6 @@ router.get('/findAllContractor',(contractorWorker.findAllContractor))
 //router.get('/TotalhourWorkinMonth/:startShift/:endShift',(contractorWorker.TotalhourWorkinMonth))
 //router.get('/findWorkerByHourlyWage/:min&max',contractorWorker.findWorkerByHourlyWage)
 //router.post('displayProfile', (contractorWorker.displayProfile))
-
 router.post('/findAvailableWorkers',contractorWorker.findAvailableWorkers)
 router.post('/loginOfContractorWorker',(contractorWorker.loginOfContractorWorker))
 

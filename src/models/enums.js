@@ -58,4 +58,10 @@ const Status={
     CLOSED:'Closed',
     CANCELED:'Canceled'
 }
-module.exports={FieldOfEmployment,Days,AreaOfResidence,Months,Status}
+const confirmation={
+    PENDING: 'pending',
+    APPROVED:'approved',
+    CANCELED:'canceled'
+
+}
+module.exports={FieldOfEmployment,Days,AreaOfResidence,Months,Status,confirmation}

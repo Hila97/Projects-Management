@@ -2,6 +2,7 @@ const mongoose = require ('mongoose');
 const schema= mongoose.Schema
 const {FieldOfEmployment} = require("./enums");
 const {Status}=require('./enums')
+const {confirmation}=require('./enums')
 const employmentSchema = new schema({
     bookingDate:
         {
@@ -48,6 +49,18 @@ const employmentSchema = new schema({
     jobDescription:
         {
             type:String
+        },
+    confirmation:
+        {
+            type:confirmation,
+            default:confirmation.PENDING
+        },
+    rank:
+        {
+            type:Number,
+            min:0,
+            max:5,
+            default:0
         }
 });
 
