@@ -22,16 +22,21 @@ const addEmployment=async (req, res)=> {
     console.log(req.body)
     var workDate=new Date(req.params.workDate)
     console.log("the date i want to add",workDate)
-    //let date=new Date(req.body.workDate,toString())
-   // console.log(date)
+    const dateStr = workDate.toISOString().split('T').shift();
+    const startTimeAndDate = moment(dateStr + ' ' + req.body.startTime).toDate();
+    startTimeAndDate.setHours(startTimeAndDate.getHours()+3)
+    console.log("the date i want to start",startTimeAndDate)
+    const endTimeAndDate = moment(dateStr + ' ' + req.body.endTime).toDate();
+    endTimeAndDate.setHours(endTimeAndDate.getHours()+3)
+    console.log("the date i want to start",endTimeAndDate)
     const s={
         workDate:workDate,
         employerID:req.cookies.employerIDCookie.id,
         workerID:req.body.workerID,
         field:req.body.fieldOfEmployment,
         jobDescription:req.body.jobDescription,
-        startTime:workDate,
-        endTime:workDate
+        startTime:startTimeAndDate,
+        endTime:endTimeAndDate
     }
     const newEmployment = new Employment(s)
     await newEmployment.save().then(x=>
@@ -56,25 +61,9 @@ const addEmployment=async (req, res)=> {
     }).catch(err => {
         console.log(err)
     })
+
 }
 
-/*
-async function updateEmploymentToday(req,res,next)
-{
-    var date =new Date("2021-05-03")
-    console.log(date, date.getDate)
-    var date2=new Date().setDate(date.getDate()+1)
-    var q={
-        employerID: req.params.employerID,
-        workDate:{$gte:date,$lt:date2}
-    }
-    Employment.updateMany(q,{$set: {status: 'Current'}}).then((result)=>{
-        //res.send(result)
-        console.log("updated successfully")
-    }).catch(next)
-}
-
- */
 async function findTodayEmployment(req, res, next) {
     var query =
         {
@@ -118,17 +107,6 @@ const findAllEmployments=async (req,res)=>{
 //         console.log(e)
 //     }
 // }
-
-
-const findEmploymentById=(req,res)=>{
-    Employment.findById()
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-}
 
 async function findFutureEmployment(req, res, next) {
     console.log("the employer now is ",req.cookies.employerIDCookie.id)
@@ -354,7 +332,7 @@ async function calculateRatingOfWorker(employmentID,rank)
             ]
         ).then(avg=>
         {
-            console.log("4444444444444444",avg)
+            //console.log("4444444444444444",avg)
             var newRank=avg[0].AverageValue
             contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}})
         })
@@ -368,6 +346,10 @@ async function rateEmployment(req,res)
         calculateRatingOfWorker(employmentID,stars);
         res.redirect('/employment/history')
     })
+}
+async function findEmploymentsForConfirmation(req,res)
+{
+    console.log("the contractor worker now is ",req.cookies.contractorWorkerIDCookie.id)
 }
 module.exports={
         addEmployment,

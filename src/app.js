@@ -58,12 +58,20 @@ async function updateEmploymentToday() {
     var date = new Date()
     date.setDate(date.getDate()-1)
     var date2 = new Date()
-    date2.setDate(date.getDate()+1)
+    date2.setDate(date.getDate()+2)
     var q = {
-        // employerID: req.body.employerID,
         workDate: {$gt: date, $lte: date2}
     }
     await Employment.updateMany(q, {$set: {status: 'Current'}}).then((result) => {
+        console.log('updated successfully')
+    }).catch(e=>{
+        console.log(e)
+    })
+    var date2 = new Date()
+    var q2={
+        workDate:{$lt:date2}
+    }
+    await Employment.updateMany(q2, {$set: {status: 'Closed'}}).then((result) => {
         console.log('updated successfully')
     }).catch(e=>{
         console.log(e)
@@ -74,7 +82,9 @@ async function updateEmploymentToday() {
 /*--------------------------------GET HTMLS---------------------------------*/
 //loginController(app)
 app.get('/', (req, res)=>{
- res.render('HomeNavUser')
+     updateEmploymentToday().then(z=>{
+         res.render('HomeNavUser')
+     })
 })
 
 app.get('/employeesFilters',((req, res) => {

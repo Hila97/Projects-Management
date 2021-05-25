@@ -3,10 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>try</title>
+    <script>
+        function checkHours()
+        {
+            var startTime=document.getElementById("startTime").value;
+            var endTime=document.getElementById("endTime").value;
+            if(startTime>endTime)
+            {
+                document.getElementById("message1").innerHTML="start Time cant be later than end Time";
+                return false
+            }
+        }
+    </script>
 </head>
 <body>
 <h1>COMPLETE THE EMPLOYMENT BOOKING </h1>
-<form class="form-horizontal" action='/employment/addEmployment/<%=workDate%>' method="POST">
+<form class="form-horizontal" onsubmit="return checkHours()" action='/employment/addEmployment/<%=workDate%>' method="POST">
     <fieldset>
 
         <div class="control-group">
@@ -31,24 +43,25 @@
             <br>
         </div>
 
-<!--        <div class="control-group">-->
-<!--            <p class="space row">                      </p>-->
-<!--            &lt;!&ndash; endTime &ndash;&gt;-->
-<!--            <label class="control-label"  for="endTime">end Time:</label>-->
-<!--            <div class="controls">-->
-<!--                <input type="datetime-local" id="endTime" name="endTime" value=<%=workDate%> class="input-xlarge" >-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="control-group">
+            <p class="space row">                      </p>
+            <!-- Experience -->
+            <label class="control-label"  for="rating">start time:</label>
+            <div class="controls">
+                <input type="time" id="startTime" name="startTime" placeholder="" class="input-xlarge"  min="06:00" max="23:00">
+            </div>
+        </div>
 
-<!--        <div class="control-group">-->
-<!--            <p class="space row">                      </p>-->
-<!--            &lt;!&ndash; startTime &ndash;&gt;-->
-<!--            <label class="control-label"  for="jobDescription">start Time:</label>-->
-<!--            <div class="controls">-->
-<!--                <input type="datetime-local" id="startTime" name="startTime" value=<%=workDate%> class="input-xlarge" >-->
-<!--            </div>-->
-<!--        </div>-->
+        <div class="control-group">
+            <p class="space row">                      </p>
+            <!-- Experience -->
+            <label class="control-label"  for="rating">end time:</label>
+            <div class="controls">
+                <input type="time" id="endTime" name="endTime" placeholder="" class="input-xlarge"  min="06:00" max="23:00">
+            </div>
+        </div>
 
+        <span id="message1" style="color:red"></span><br><br>
 
         <div class="control-group">
             <p class="space row">                      </p>

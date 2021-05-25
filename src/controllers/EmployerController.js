@@ -172,7 +172,7 @@ const getBookedEmployeesFuture= async (req,res)=>
     const {id} = req.params
     try
     {
-        const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
+        const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID').sort({workDate:1})
 
         if(employees.length===0)
         {
@@ -185,7 +185,7 @@ const getBookedEmployeesFuture= async (req,res)=>
         })
 
         const resData = employees.map(e=>e.workerID)
-        return  res.render('filterEmployeesByStatusFuture',{employees: resData})
+        return  res.render('filterEmployeesByStatusFuture',{employees})
     }
     catch(e)
     {

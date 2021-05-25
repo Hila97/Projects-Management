@@ -285,8 +285,8 @@ const getRatingContractorWorker= async (req,res)=>
     const {fieldOfEmployment} = req.params
     try
     {  
-        const contractorworkers  = await contractorWorker.find({  fieldOfEmployment : fieldOfEmployment })
-        if(contractorworkers .length===0)
+        const contractorWorkers  = await contractorWorker.find({  fieldOfEmployment : fieldOfEmployment })
+        if(contractorWorkers .length===0)
         {
             // res.send("No employers found")
             res.render('Error',{message : 'No employers found'})
@@ -294,7 +294,7 @@ const getRatingContractorWorker= async (req,res)=>
         }
         
     //    return  res.json(employers)
-    res.render('getRatingContractorWorker',{contractorworkers  : contractorworkers })
+    res.render('getRatingContractorWorker',{contractorworkers  : contractorWorkers })
     }
     catch(e)
     {

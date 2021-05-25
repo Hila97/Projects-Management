@@ -25,31 +25,28 @@
         </style>
 </head>
 <body>
-   
-   
- <body>
+
  
   <h2 >Filter by future status</h2>
 
    <table >
      <!-- added line 38 -->
-     <table>
-        <% if (locals.employees) { %>
-            <% employees.forEach((item)=>{%>
-        <tr>
-            <th>first name</th>
-            <th>last name</th>
-            <th>telephone</th>
-            <th>email</th>
-        </tr>
-        <tr>
-            <td><%=item.firstName%></td>
-            <td><%=item.lastName%></td>
-            <td><%=item.telephone%></td>
-            <td><%=item.userName%></td>
-        </tr>
-        <%});%>
-        <% } %>
+       <tr>
+           <th>status</th>
+           <th>work Date</th>
+           <th>confirmation</th>
+           <th>worker</th>
+           <th>telephone</th>
+       </tr>
+       <% employees.forEach((item)=>{%>
+           <tr>
+               <td><%=item.status%></td>
+               <td><%=item.workDate.toDateString()%></td>
+               <td><%=item.confirmation%></td>
+               <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
+               <td><%=item.workerID.telephone%></td>
+           </tr>
+       <%});%>
     </table>
 
  
