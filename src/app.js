@@ -32,7 +32,9 @@ mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: t
     .catch ((err)=>console.log(err))
 
 //routers
+
 //app.use('/user',require('./route/api'))
+app.use('/salary',require('./route/SalaryAPI'))
 app.use('/attendanceReport',require('./route/AttendanceReportAPI'))
 app.use('/companyEmployee',require('./route/CompanyEmployeeAPI'))
 app.use('/contractorWorker',require('./route/ContractorWorkerAPI'))

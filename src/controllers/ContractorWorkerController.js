@@ -198,7 +198,8 @@ async function findAvailableWorkers(req, res) {
     }
     var query2={departureDate:{$lte:workDate},returningDate:{$gte: workDate}}
     const workerList=[]
-    const workerIdList = await contractorWorker.find(query1, {
+    const workerIdList = await contractorWorker.find(query1,
+    {
         firstName: 1,
         lastName: 1,
         telephone:1,

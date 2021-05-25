@@ -20,7 +20,8 @@ const addEmployer= async (req, res)=>
     })
 }
 
-const findAllE=async (req, res) => {
+const findAllE=async (req, res) =>
+{
     console.log("find")
     await Employer.find()
         .then((result) => {
@@ -134,11 +135,13 @@ const loginOfEmployer= async (req, res) =>
     })
 }
 
-const getBookedEmployeesToday= async (req, res)=> {
+const getBookedEmployeesToday= async (req, res)=>
+{
     const today = moment().utc(moment()).set('hour', 0).set('minute', 0).set('second', 0)
     const tomorrow = moment().utc(moment()).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
     // console.log(today)
     // console.log(tomorrow)
+
 
     try{
       const query = {$and : [
@@ -161,7 +164,7 @@ const getBookedEmployeesToday= async (req, res)=> {
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
 
 const getBookedEmployeesFuture= async (req,res)=>
@@ -170,13 +173,13 @@ const getBookedEmployeesFuture= async (req,res)=>
     try
     {
         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID')
-        
+
         if(employees.length===0)
         {
             res.render('Error',{message: 'No workers found'})
             return
-        }      
-        
+        }
+
         employees.forEach(e => {
             if(!e.workerID) return res.render('Error',{message: 'one or more of the workerIDs doesnt exist'})
         })
@@ -195,7 +198,7 @@ const getEmployeesBycompanyName= async (req,res)=>
 {
     const {companyName} = req.params
     try
-    {  
+    {
         const employers = await Employer.find({  companyName : companyName })
         if(employers.length===0)
         {
@@ -203,21 +206,21 @@ const getEmployeesBycompanyName= async (req,res)=>
             res.render('Error',{message : 'No employers found'})
             return
         }
-        
+
     //    return  res.json(employers)
         res.render('filterbycompanyName',{employers : employers})
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
 
 const getEmployeesByposition= async (req,res)=>
 {
     const {position} = req.params
     try
-    {  
+    {
         const employers = await Employer.find({  position : position })
         if(employers.length===0)
         {
@@ -225,14 +228,14 @@ const getEmployeesByposition= async (req,res)=>
             res.render('Error',{message : 'No employers found'})
             return
         }
-        
+
     //    return  res.json(employers)
     res.render('filterEmployeesByposition',{employers : employers})
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
 
 const filterByfieldOfEmployment= async (req, res)=>
@@ -247,6 +250,7 @@ const filterByfieldOfEmployment= async (req, res)=>
         }
         res.render('filterByfieldOfEmployment',{employers : employers})
 
+        return  res.json(employees)
     }
     catch(e)
     {
@@ -257,7 +261,7 @@ const getEmployersByEmployerName= async (req,res)=>
 {
     const {employerName} = req.params
     try
-    {  
+    {
         const employers = await Employer.find({  fullName : employerName })
         if(employers.length===0)
         {
@@ -265,14 +269,14 @@ const getEmployersByEmployerName= async (req,res)=>
             res.render('Error',{message : 'No employers found'})
             return
         }
-        
+
     //    return  res.json(employers)
         res.render('employerSearch',{employers : employers})
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
 
 module.exports=

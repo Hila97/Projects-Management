@@ -2,7 +2,8 @@ const mongoose = require ('mongoose');
 const AttendanceReportCtrl=require('../models/AttendanceReport')
 
 
-const addAttendanceReport=(req, res)=> {
+const addAttendanceReport=(req, res)=>
+{
     console.log("add")
     console.log(req.params.contractorWorkerID)
     const newAttendanceReport = new AttendanceReportCtrl({contractorWorkerID: req.cookies.contractorWorkerIDCookie.id})
@@ -13,7 +14,8 @@ const addAttendanceReport=(req, res)=> {
         console.log(err)
     })
 }
-const findAllAttendanceReports=(req,res)=>{
+const findAllAttendanceReports=(req,res)=>
+{
     console.log("find")
     AttendanceReportCtrl.find()
         .then((result)=>{
@@ -24,14 +26,16 @@ const findAllAttendanceReports=(req,res)=>{
         })
 }
 
-const findAttendanceById=(req,res)=>{
+const findAttendanceById=(req,res)=>
+{
     AttendanceReportCtrl.find({contractorWorkerID: req.params.contractorWorkerID}).then((result) => {
         res.send(result)
     })
 }
 
 
-var editExistingTime=(req, res)=> {
+var editExistingTime=(req, res)=>
+{
     var d = new Date()
     console.log(d)
     req.body.startBreak = d
@@ -40,7 +44,8 @@ var editExistingTime=(req, res)=> {
     })
 }
 
-var editEnteringTime=(req, res)=> {
+var editEnteringTime=(req, res)=>
+{
     var d = new Date()
     console.log(d)
     req.body.startBreak = d
@@ -49,7 +54,8 @@ var editEnteringTime=(req, res)=> {
     })
 }
 
-var editStartBreak=(req, res)=> {
+var editStartBreak=(req, res)=>
+{
     var d = new Date()
     console.log(d)
     req.body.startBreak = d
@@ -59,7 +65,8 @@ var editStartBreak=(req, res)=> {
     console.log("edit startbreak")
 }
 
-var editEndBreak=(req, res)=> {
+var editEndBreak=(req, res)=>
+{
     var d = new Date()
     console.log(d)
     req.body.startBreak = d
