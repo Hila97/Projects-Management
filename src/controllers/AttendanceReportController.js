@@ -13,6 +13,9 @@ const addAttendanceReport=(req, res)=>
     }).catch(err => {
         console.log(err)
     })
+    var d = new Date()
+    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
+    console.log(d)
 }
 const findAllAttendanceReports=(req,res)=>
 {
@@ -37,19 +40,21 @@ const findAttendanceById=(req,res)=>
 var editExistingTime=(req, res)=>
 {
     var d = new Date()
-    console.log(d)
+    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
         res.send(result)
     })
+    console.log(d)
 }
 
 var editEnteringTime=(req, res)=>
 {
     var d = new Date()
+    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     console.log(d)
     req.body.startBreak = d
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startShift: d}} ).then((result) => {
         res.send(result)
     })
 }
@@ -57,6 +62,7 @@ var editEnteringTime=(req, res)=>
 var editStartBreak=(req, res)=>
 {
     var d = new Date()
+    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     console.log(d)
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startBreak: d}} ).then((result) => {
@@ -68,6 +74,7 @@ var editStartBreak=(req, res)=>
 var editEndBreak=(req, res)=>
 {
     var d = new Date()
+    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     console.log(d)
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endBreak: d}} ).then((result) => {
@@ -76,7 +83,7 @@ var editEndBreak=(req, res)=>
 }
 const calcTotalWork = (attendanceArr, hourlyWage) => {
     let totalWork = 0
-    
+
     attendanceArr.forEach(a => {
        const start = a.startShift.getTime()
        const end = a.endShift.getTime()
@@ -87,7 +94,7 @@ const calcTotalWork = (attendanceArr, hourlyWage) => {
        const endBreak = a.endBreak.getTime()
        let totalBreak = endBreak - startBreak
 
-       // sub break hours from work hours 
+       // sub break hours from work hours
        total -= totalBreak
 
        totalWork += total
@@ -96,9 +103,9 @@ const calcTotalWork = (attendanceArr, hourlyWage) => {
        let hours = Math.floor(totalWork / 1000 / 60 / 60)
        totalWork -= hours * 1000 * 60 * 60
        let minutes = Math.floor(totalWork / 1000 / 60)
-       totalWork -= minutes * 1000 * 60 
+       totalWork -= minutes * 1000 * 60
        let seconds = Math.floor(totalWork / 1000)
-       
+
        const result =  (hours < 9 ? '0' : '') + hours + ':' + (minutes < 9 ? '0' : '') + minutes + ':' + (seconds < 9 ? '0' : '') + seconds
 
        let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
@@ -134,7 +141,7 @@ const getWageByMonth= async (req, res)=> {
             ],
              contractorWorkerID: contractorWorkerID
         }
-      
+
         const attendance = await AttendanceReport.find(query).populate('contractorWorkerID')
         if(attendance.length===0){
             res.send('no employees working that month')
@@ -150,12 +157,12 @@ const getWageByMonth= async (req, res)=> {
     {
         console.log(e)
     }
-   
 
 
 
 
-   
+
+
 }
 
 
