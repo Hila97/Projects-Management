@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search contractor worker</title>
+</head>
+<body>
+
+<form class="form-horizontal" action="/contractorWorker/findContractorWorkerById" method="POST">
+    <fieldset>
+        <div id="legend">
+            <legend class="">Search contractor worker</legend>
+        </div>
+        <div class="control-group">
+            <!-- ID-->
+            <label> Enter Contractor ID: </label>
+            <div class="controls">
+                <input type="text" placeholder=" ID" name="ID" min="100000000" max="999999999" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid, ID must contain 9 digits" >
+            </div>
+        </div>
+    </fieldset>
+    <div>
+        <button type="submit" >SEARCH</button>
+    </div>
+</form>
+</body>
+</html>

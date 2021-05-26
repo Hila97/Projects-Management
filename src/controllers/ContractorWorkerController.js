@@ -45,7 +45,7 @@ const findAllContractor =async (req, res)=>
 
 async function findContractorByID(req, res)
 {
-    await contractorWorker.find({ID: req.body.ID}).then((result) => {
+    await contractorWorker.find({ID: req.body.ID}).then((result) =>{
         res.send(result)
     })
 }
@@ -378,6 +378,40 @@ const TodaySalary= async (req,res)=>
         console.log(e)
     }  
 }*/
+
+const findContractorWorkerById = async (req, res)=>
+{
+    var ID= req.body.ID
+    contractorWorker.findOne({ID: ID}, function(err,worker)
+    {
+        if((/^\d{9}$/.test(ID)) == false)
+        {
+            return res.json({ status: 'error', error: 'INVALID ID' })
+        }
+        if(err)
+        {
+            console.log(err)
+            return res.status(500).send()
+        }
+        if(!worker)
+        {
+            //return res.json({ status: 'error', error: 'WORKER NOT FOUND' })
+            res.render('EmployeeViews/FailureToFindContractor')
+        }
+        else
+            res.render('EmployeeViews/EmployeeSalaryAndReportOption',{ID})
+        //return res.json({status: 'ok', data: req.body})
+    })
+
+   //      .then(result=>
+   //  {
+   //    res.render('EmployeeViews/EmployeeSalaryAndReportOption',{ID})
+   //      console.log(result)
+   //
+   //  })
+   // // console.log(contractor)
+}
+
 module.exports =
 {
     addContractor,
@@ -393,6 +427,7 @@ module.exports =
     displayEditProfile,
     findAvailableWorkers,
     getRatingContractorWorker,
+    findContractorWorkerById
     //TotalhourWorkinMonth,
     //TodaySalary
 }

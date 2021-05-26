@@ -16,4 +16,14 @@ router.get('/addContractorForm', (req, res)=>{
 res.render('addContractorForm')
 })
 
+router.get('/searchContractorWorker', (req, res)=>{
+    res.render('EmployeeViews/ContractorWorkerInformation')
+})
+router.get('/ViewAttendanceReports', (req, res)=>{
+    res.render('EmployeeViews/ViewAttendanceReports')
+})
+router.get('/ViewSalaries', (req, res)=>{
+    res.render('EmployeeViews/ViewSalaries')
+})
+
 module.exports=router

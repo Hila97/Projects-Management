@@ -12,6 +12,9 @@ router.get('/findContractorByID/:ID',contractorWorker.findContractorByID)
 router.post('/editProfile',(contractorWorker.editProfile))
 router.get('/findAllContractor',(contractorWorker.findAllContractor))
 
+
+router.post('/findContractorWorkerById',(contractorWorker.findContractorWorkerById))
+
 //router.get('/TodaySalary/:hourlyWage',(contractorWorker.TodaySalary))
 //router.get('/getRatingContractorWorker/:fieldOfEmployment',(contractorWorker.getRatingContractorWorker))
 //router.get('/TotalhourWorkinMonth/:startShift/:endShift',(contractorWorker.TotalhourWorkinMonth))
@@ -30,4 +33,7 @@ router.get('/attandenceReport', (req, res)=>{
 router.get('/editContractorWorker',(req,res)=>{
     res.render('editProfileContractor')
 })
+
+
+
 module.exports=router
