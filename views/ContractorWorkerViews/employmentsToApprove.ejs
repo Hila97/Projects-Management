@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h1>employments orders to confirm:</h1>
+<table>
+
+    <tr>
+        <th>work Date</th>
+        <th>Description</th>
+        <th>field</th>
+        <th>start Time</th>
+        <th>end Time</th>
+        <th>companyName</th>
+        <th>employer phone</th>
+        <th>confirm</th>
+    </tr>
+    <% employments.forEach((item)=>{%>
+    <%var ID=item._id;%>
+    <%var s=item.startTime.getHours()+":"+item.startTime.getMinutes();
+        var e=item.endTime.getHours()+":"+item.endTime.getMinutes()%>
+
+        <tr>
+            <td><%=item.workDate.toDateString()%></td>
+            <td><%=item.jobDescription%></td>
+            <td><%=item.field%></td>
+            <td><%=s%></td>
+            <td><%=e%></td>
+            <td><%=item.employerID.companyName%></td>
+            <td><%=item.employerID.phone%></td>
+            <td>
+            <a class="btn" href="/employment/confirmEmployment/<%=ID%>">APPROVE</a>
+            <a class="btn" href="/employment/rejectEmployment/<%=ID%>">REJECT</a>
+            </td>
+        </tr>
+    <%});%>
+</table>
+</body>
+</html>

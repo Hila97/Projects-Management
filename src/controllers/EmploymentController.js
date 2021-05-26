@@ -3,7 +3,7 @@ const moment = require('moment')
 const contractorWorker = require('../models/ContractorWorker')
 const vacation=require('../models/Vacation')
 const {confirmation}=require('../models/enums')
-
+const {Status}=require('../models/enums')
 async function BookForm(req, res) {
    // console.log(req.cookies.employerIDCookie.id)
     var workDate=new Date(req.params.workDate)
@@ -349,7 +349,33 @@ async function rateEmployment(req,res)
 }
 async function findEmploymentsForConfirmation(req,res)
 {
-    console.log("the contractor worker now is ",req.cookies.contractorWorkerIDCookie.id)
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    var q={
+        workerID:workerID,
+        confirmation:confirmation.PENDING,
+        status:Status.FUTURE
+    }
+   await Employment.find(q).populate('employerID').then(employments=>{
+       res.render('ContractorWorkerViews/employmentsToApprove',{employments})
+   })
+}
+async function confirmEmployment(req,res)
+{
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    console.log(req.params.ID)
+    await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.APPROVED}})
+    res.render('HomeContractor')
+}
+async function rejectEmployment(req,res)
+{
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    console.log(req.params.ID)
+    await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
+    res.render('HomeContractor')
 }
 module.exports={
         addEmployment,
@@ -363,7 +389,10 @@ module.exports={
         getAllEmployees,
         getEmploymentsList,
     findPastEmployments,
-    rateEmployment
+    rateEmployment,
+    findEmploymentsForConfirmation,
+    confirmEmployment,
+    rejectEmployment
 
 
 }
