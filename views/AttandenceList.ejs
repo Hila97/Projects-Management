@@ -2,17 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>shifts</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            position: relative;
+            margin: 20rem;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .button{
+            background-color:#18c6c0;
+            font-size:24px;
+            color:white;
+            border: none;
+            position: relative;
+            left: 40%;
+            cursor: pointer;
+
+        }
+        h2{
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action active">
-        Cras justo odio
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-    <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-    <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+
+<h2 >employment list</h2>
+
+
+<table>
+    <% if (locals.employments) { %>
+        <% employments.forEach((item)=>{%>
+        <tr>
+            <th>field</th>
+            <th>status</th>
+            <th>bookingDate</th>
+            <th>workDate</th>
+        </tr>
+        <tr>
+            <td><%=item.field%></td>
+            <td><%=item.status%></td>
+            <td><%=item.bookingDate%></td>
+            <td><%=item.workDate%></td>
+        </tr>
+        <%});%>
+    <% } %>
+</table>
 </div>
 </body>
+
 </html>

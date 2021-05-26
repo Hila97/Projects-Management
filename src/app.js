@@ -172,6 +172,12 @@ app.get('/employmentsList',((req, res) =>
 {
     res.render('employmentsList')
  }))
+
+app.get('/AttandenceList',((req, res) =>
+{
+    res.render('AttandenceList')
+}))
+
 mongoose.set('useFindAndModify', false)
 
 

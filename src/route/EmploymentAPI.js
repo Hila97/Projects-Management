@@ -15,6 +15,7 @@ router.get('/filterEmploymentsByBookingDate/:BookingDate', employment.filterEmpl
 router.get('/filterEmploymentsByBookingMonth/:month', employment.filterEmploymentsByBookingMonth)
 router.get('/getAllEmployees', employment.getAllEmployees)
 router.get('/getEmploymentsList', employment.getEmploymentsList)
+router.get('/getEmploymentsListForContractor', employment.getEmploymentsListForContractor)
 router.get('/history',employment.findPastEmployments)
 router.post('/rateEmployment',employment.rateEmployment)
 router.get('/pastWorkers',(req, res)=>{

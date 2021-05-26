@@ -8,8 +8,10 @@ const addAttendanceReport=(req, res)=>
     console.log(req.params.contractorWorkerID)
     const newAttendanceReport = new AttendanceReportCtrl({contractorWorkerID: req.cookies.contractorWorkerIDCookie.id})
     newAttendanceReport.save().then(report=>{
-        res.render("attandenceReport", {report})
-       // res.json({newAttendanceReport})
+        console.log(report)
+        //res.send("report")
+       res.render("HomeContractor", {report})
+       //res.json({newAttendanceReport})
     }).catch(err => {
         console.log(err)
     })

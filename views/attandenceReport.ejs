@@ -4,6 +4,17 @@
     <title>Attandence Report</title>
     <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
     <style>
+        #panel, #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
@@ -15,113 +26,101 @@
             text-align: left;
             padding: 8px;
         }
-
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
         tr:nth-child(even) {
             background-color: #dddddd;
+        }
+        .hidden_row td{
+            display:none;
+            /* height: 0px; */
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $(".btn1").click(function(){
-                $("p").slideUp();
+        $(document).ready(function() {
+            $("#flip").click(function () {
+                $("#panel").slideDown("slow");
             });
-            $(".btn2").click(function(){
-                $("p").slideDown();
+            $("#panel").click(function () {
+                $("#panel").slideUp();
             });
         });
+
+    </script>
+    <script>
+        function func(){
+            $("#panel").slideDown("slow");
+        }
+        function func2() {
+            $('startBtn').click(function(){
+                // Add functionality here, then...
+                $(this).attr("disabled", true);
+            });
+
+        }
+    </script>
+    <script type="text/javascript">
+        function disableButton(){
+            //.getElementById(btn.id).disabled = true;
+            setTimeout(function(){
+                document.getElementById('startBtn').disabled = null;
+            },10000);
+            <%employments.temp=1%>
+        }
     </script>
 </head>
 <body>
-<table>
+<script>
+
+</script>
+<div id="legend">
+    <h1> Attandence Report </h1>
+</div>
+<table class="center">
     <tr>
         <th>Company</th>
-        <th>Contact</th>
-        <th>Country</th>
     </tr>
-    <tr>
-        <td>Alfreds Futterkiste
-            <p>This is a paragraph.</p>
-            <button class="btn1">Slide up</button>
-            <button class="btn2">Slide down</button>
+    <% if (locals.employments) {
+        d = new Date()%>
+        <% employments.forEach((item)=>{%>
+    <tr >
+        <td>
+        <%=item.workDate%>
+            <%if (item.workDate.getDate()==d.getDate()) {%>
+            <button onclick="func()"  >REPORT</button>
+            <%};%>
         </td>
-        <td>Maria Anders</td>
-        <td>Germany</td>
+        <div id="panel">hello world
+            <form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
+                <!-- Button -->
+                <div class="controls" id="start">
+                    <button id="startBtn" class="btn btn-success" type="submit" >start shift</button>
+                </div>
+            </form>
+            <form class="form-horizontal" action='/attendanceReport/editStartBreak' method="post">
+                <div class="controls">
+                    <button class="btn btn-success" type="submit">start break</button>
+                </div>
+            </form>
+            <form class="form-horizontal" action='/attendanceReport/editEndBreak' method="post">
+                <div class="controls">
+                    <button  class="btn btn-success" type="submit">end break</button>
+                </div>
+            </form>
+            <form class="form-horizontal" action='/attendanceReport/editExistingTime' method="post">
+                <div class="controls">
+                    <button  class="btn btn-success" type="submit">end shift</button>
+                </div>
+            </form>
+        </div>
     </tr>
-    <tr>
-        <td>Centro comercial Moctezuma</td>
-        <td>Francisco Chang</td>
-        <td>Mexico</td>
-    </tr>
-    <tr>
-        <td>Ernst Handel</td>
-        <td>Roland Mendel</td>
-        <td>Austria</td>
-    </tr>
-    <tr>
-        <td>Island Trading</td>
-        <td>Helen Bennett</td>
-        <td>UK</td>
-    </tr>
-    <tr>
-        <td>Laughing Bacchus Winecellars</td>
-        <td>Yoshi Tannamuri</td>
-        <td>Canada</td>
-    </tr>
-    <tr>
-        <td>Magazzini Alimentari Riuniti</td>
-        <td>Giovanni Rovelli</td>
-        <td>Italy</td>
-    </tr>
+            <%});%>
+    <% } %>
 </table>
-<fieldset>
 
-<form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
 
-        <div id="legend">
-           <h1> Attandence Report </h1>
-        </div>
-                <script>
-                    function getCurrentTime() {
-                        var currentdate = new Date();
-                        var timenow = + currentdate.getHours() + ":"
-                            + currentdate.getMinutes() + ":"
-                            + currentdate.getSeconds();
-                        document.getElementById("datebtn").innerHTML = currentdate;
-                    }
-                </script>
-        <div class="control-group">
-            <!-- Button -->
-            <div class="controls">
-                <button class="btn btn-success" type="submit">start shift</button>
-
-            </div>
-        </div>
-    </form>
-<form class="form-horizontal" action='/attendanceReport/editStartBreak' method="post">
-        <div class="control-group">
-            <div class="controls">
-                <button class="btn btn-success" type="submit">start break</button>
-            </div>
-        </div>
-</form>
-    <form class="form-horizontal" action='/attendanceReport/editEndBreak' method="post">
-        <div class="control-group">
-            <div class="controls">
-            <button  class="btn btn-success" type="submit">end break</button>
-        </div>
-        </div>
-    </form>
-    <form class="form-horizontal" action='/attendanceReport/editExistingTime' method="post">
-        <div class="control-group">
-            <div class="controls">
-                <button  class="btn btn-success" type="submit">end shift</button>
-            </div>
-        </div>
-    </form>
-    </fieldset>
-<div>
-
-</div>
 </body>
 </html>

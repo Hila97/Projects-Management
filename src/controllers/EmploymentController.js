@@ -284,6 +284,30 @@ const getEmploymentsList = async (req,res)=>{
             console.log(err)
         })
 }
+
+const getEmploymentsListForContractor = async (req,res)=>{
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    var q={
+        workerID:workerID
+    }
+    Employment.find(q)
+        .then((result)=>{
+            res.render('attandenceReport', {employments: result})
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    /*var workerID=req.cookies.contractorWorkerIDCookie.id
+    await Employment.find(workerID)
+        .then((result)=>{
+            res.render('attandenceReport',{employments: result})
+    })
+        .catch((err)=>{
+            console.log(err)
+        })*/
+}
+
 async function findPastEmployments(req, res, next) {
     console.log("the employer now is ",req.cookies.employerIDCookie.id)
     var today1= moment()
@@ -388,6 +412,7 @@ module.exports={
         BookForm,
         getAllEmployees,
         getEmploymentsList,
+    getEmploymentsListForContractor,
     findPastEmployments,
     rateEmployment,
     findEmploymentsForConfirmation,
