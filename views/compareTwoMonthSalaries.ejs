@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Document</title>
+</head>
+<body>
+  <h2 >Filter salary by month</h2>
+
+    <input id="month1" value=1 type="number" />
+    <input id="month2" value=1 type="number" />
+    <button onclick="filter()">Compare salaries for those months</button>
+    <p style="color: red;" id="error"></p>
+    <% if (locals.salary1) { %>
+        month1
+        <p>Total Hours : <%=salary1.totalHours %></p>
+        <p>Total Wage : <%=salary1.totalWage %></p>
+        <% } %>
+        <% if (locals.salary2) { %>
+        month 2
+        <p>Total Hours : <%=salary2.totalHours %></p>
+        <p>Total Wage : <%=salary2.totalWage %></p>
+        <% } %>
+
+        <% if (locals.message) { %>
+            <p><%=message %></p>
+        <% } %>
+
+
+</body>
+<script>
+   function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                 let cookie = c.substring(name.length, c.length)
+                 cookie = cookie.split(':')[2].split('\"')[1]
+                 return cookie
+                }
+            }
+            return '';
+            }
+
+    function filter(){
+        let month1 = document.getElementById('month1').value
+        let month2 = document.getElementById('month2').value
+        if(!month1 || !month2){
+            document.getElementById('error').innerHTML = 'must choose month1 and month2'
+            return
+        }
+        console.log(month1,month2)
+        const workerID = getCookie('contractorWorkerIDCookie')
+
+       // window.location.href =`/filterEmploymentsByMonth/${month}`
+        window.location.pathname = `attendanceReport/getTwoMonthsSalaries/${workerID}/${month1}/${month2}`
+
+    }
+
+</script>
+</html>
+

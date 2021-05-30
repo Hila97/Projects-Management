@@ -110,19 +110,47 @@ app.get('/filterEmployeesByStatus',((req, res) =>
     res.render('filterEmployeesByStatus')
 
 }))
-app.get('/getRatingContractorWorker',((req, res) =>
-{
-    res.render('getRatingContractorWorker')
 
-}))
 app.get('/TotalhourWorkinMonth',((req, res) =>
 {
     res.render('TotalhourWorkinMonth')
 
 }))
+
+app.get('/compareTwoMonthSalaries',((req, res) =>
+{
+    res.render('compareTwoMonthSalaries')
+
+}))
+app.get('/todaySalaryContractorWorker',((req, res) =>
+{
+    res.render('todaySalaryContractorWorker')
+
+}))
+app.get('/thisYearProfit',((req, res) =>
+{
+    res.render('thisYearProfit')
+
+}))
+app.get('/rangeOfSalaryByShifts',((req, res) =>
+{
+    res.render('rangeOfSalaryByShifts')
+
+}))
 app.get('/TodaySalary',((req, res) =>
 {
     res.render('TodaySalary')
+
+}))
+
+app.get('/totalWageByMonth',((req, res) =>
+{
+    res.render('totalWageByMonth')
+
+}))
+app.get('/thisMonthSalary',((req, res) =>
+{
+    res.render('thisMonthSalary')
 
 }))
 
@@ -173,11 +201,13 @@ app.get('/employmentsList',((req, res) =>
     res.render('employmentsList')
  }))
 
+app.get('/getWageByMonth',((req, res) =>
+{
+    res.render('getWageByMonth')
+}))
+
 app.get('/AttandenceList',((req, res) =>
 {
     res.render('AttandenceList')
 }))
-
 mongoose.set('useFindAndModify', false)
-
-

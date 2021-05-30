@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/inputAndSelectStyle.css">
+    <link rel="stylesheet" href="/styles/buttonStyle.css">
+   
+    <title>Document</title>
+</head>
+<body>
+  <h2 style="color:rgb(102, 202, 169)">Filter salary by month</h2>
+
+    <input id="month" value=1 type="number" min="1" max="12" />
+    <button class="button" onclick="filter()">Get salary</button>
+    <p style="color: red;" id="error"></p>
+      <% if (locals.salary) { %>
+        <p style="font-weight: bold;">Total Hours : <%=salary.totalHours %></p>
+        <p style="font-weight: bold;">Total Wage : <%=salary.totalWage %> $</p>
+        <% } %>
+
+
+        <select onchange="activateFunc(this.options[this.selectedIndex].value)">
+            <option value="">filter by:</option>
+            <option value="getThisMonthSalary">Get This Month Salary</option>
+            <option value="getTodaySalary">Get Today Salary</option>
+            <option value="getThisYearSalary">Get this year Salary</option>
+            <option value="getRangeOfSalaryShifts">Get Salary range by shifts</option>
+            <option value="/compareTwoMonthSalaries">Compare two Months Salaries</option>
+        </select>
+
+</body>
+<script>
+   function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                 let cookie = c.substring(name.length, c.length)
+                 cookie = cookie.split(':')[2].split('\"')[1]
+                 return cookie
+                }
+            }
+            return '';
+            }
+
+    function filter(){
+        let month = document.getElementById('month').value
+        if(!month){
+            document.getElementById('error').innerHTML = 'must choose month'
+            return
+        }
+        console.log(month)
+        const workerID = getCookie('contractorWorkerIDCookie')
+
+       // window.location.href =`/filterEmploymentsByMonth/${month}`
+        window.location.pathname = `attendanceReport/getWageByMonth/${workerID}/${month}`
+
+    }
+
+    function getThisMonthSalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `salary/getThisMonthSalaryByWorkerID/${workerID}`
+
+    }
+
+    function getTodaySalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getTodaySalary/${workerID}`
+
+    }
+    function getThisYearSalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getThisYearSalary/${workerID}`
+
+    }
+    function getRangeOfSalaryShifts(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getRangeOfSalaryByShift/${workerID}`
+
+    }
+
+    function activateFunc(value){
+        switch(value){
+            case 'getThisMonthSalary': 
+                getThisMonthSalary()
+            break
+            case 'getTodaySalary': 
+                getTodaySalary()
+            break
+            case 'getThisYearSalary': 
+                getThisYearSalary()
+            break
+            case 'getRangeOfSalaryShifts': 
+            getRangeOfSalaryShifts()
+            break
+            case '/compareTwoMonthSalaries': 
+                window.location.pathname = value
+            break
+
+            default: 
+               return
+            break
+        }
+    }   
+</script>
+</html>
+

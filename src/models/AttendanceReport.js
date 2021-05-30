@@ -6,7 +6,7 @@ const attendanceReportSchema = new schema({
 
  employmentID: {type: mongoose.Types.ObjectId, ref: 'Employment', required:false},
 
- contractorWorkerID: {type: mongoose.Types.ObjectId, ref: 'ContractorWorker',required:false},
+ contractorWorkerID: {type: mongoose.Types.ObjectId, ref: 'contractorWorker',required:false},
 
  reportDate: {type: Date, default: d},
 
