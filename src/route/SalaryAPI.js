@@ -6,6 +6,7 @@ router.post('/calculateContractorSalaryForMonth/:ID', salary.calculateContractor
 
 router.post('/addSalary', salary.addSalary)
 router.get('/findAllSalaries',salary.findAllSalaries)
+router.get('/getThisMonthSalaryByWorkerID/:workerID',salary.getThisMonthSalaryByWorkerID)
 
 
 router.get('/EmployeeSalaryAndReportOption/:ID',(req,res)=>

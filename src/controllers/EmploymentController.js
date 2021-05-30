@@ -401,6 +401,20 @@ async function rejectEmployment(req,res)
     await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
     res.render('HomeContractor')
 }
+const getAllRatingsForWorker = async (req,res)=>{
+    try {
+        const {workerID} = req.params
+        console.log(workerID)
+        const employersRatings = await Employment.find({workerID: workerID}).populate('employerID').select('-_id employerID rank')
+        console.log(employersRatings)
+        if(employersRatings.length === 0){
+            return res.render('Error', {message: 'No employments found'})
+        }
+        return res.render('employersRatings', {ratings: employersRatings})
+    } catch (e) {
+        console.log(e)
+    }
+}
 module.exports={
         addEmployment,
         findAllEmployments,
@@ -417,7 +431,7 @@ module.exports={
     rateEmployment,
     findEmploymentsForConfirmation,
     confirmEmployment,
-    rejectEmployment
-
+    rejectEmployment,
+ getAllRatingsForWorker
 
 }
