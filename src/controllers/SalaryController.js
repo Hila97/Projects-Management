@@ -43,16 +43,21 @@ const findAllSalaries=(req,res)=>
 
 async function calculateContractorSalaryForMonth(req, res)
 {
+    var ID = req.params.ID
+    console.log(req.params.ID)
     //מביא את הפרטים של העובד שמרוצים לחשב עבורו את המשכורת- הid והשכר השעתי
-    var ContractorId = await contractorWorker.findOne({ID: req.body.ID},
+    var ContractorId = await contractorWorker.findOne({ID: req.params.ID},
         {
             _id: 1,
             hourlyWage: 1
         })
     console.log(ContractorId)
+    console.log(req.params.ID)
     const month = req.body.month
-    const next= parseInt(month) + 1
+    let next= parseInt(month) + 1
     const thisM = '2021-' + month + '-01'
+    if(parseInt(month)==12)
+        next= parseInt(month) -11
     const nextM = '2021-' + next + '-01'
 
     const thisMonth = moment(new Date(thisM))
@@ -69,9 +74,11 @@ async function calculateContractorSalaryForMonth(req, res)
             ]
         }
     const shifts = await attendanceReport.find(query, {startShift: 1, endShift: 1})
+    console.log(shifts)
     if (shifts.length == 0)
     {
-        res.send("this worker didnt work this month")
+        res.render('EmployeeViews/FailureToFindAttendanceReportsToCalculate',{ID})
+        //res.send("this worker didnt work this month")
     }
     else
     {
@@ -83,11 +90,11 @@ async function calculateContractorSalaryForMonth(req, res)
             totalTime=totalTime+DailyWork
          }
         var totalWork = moment.duration(totalTime)
-        var s = Math.floor(totalWork.asHours()) + moment.utc(totalTime).format(":mm:ss");
-        var time = s.split(":");
-        var hours = time[0];
-        var mins= time[1];
-        var secs = time[2];
+        var s = Math.floor(totalWork.asHours()) + moment.utc(totalTime).format(":mm:ss")
+        var time = s.split(":")
+        var hours = time[0]
+        var mins= time[1]
+        var secs = time[2]
         const hourlyWage=ContractorId.hourlyWage
 
         console.log(s)
@@ -114,7 +121,10 @@ async function calculateContractorSalaryForMonth(req, res)
                 console.log(err)
                 return res.status(500).send()
             }
-            return res.json({status: 'salary added ,ok', data: newSalary})
+
+           // return res.json({status: 'salary added ,ok', data: newSalary})
+            res.render('HomeEmployee')
+
         })
     }
 
