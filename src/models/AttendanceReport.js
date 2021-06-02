@@ -8,16 +8,16 @@ const attendanceReportSchema = new schema({
 
  contractorWorkerID: {type: mongoose.Types.ObjectId, ref: 'contractorWorker',required:false},
 
- reportDate: {type: Date, default: d},
+ reportDate: {type: Date, default: Date.now},
 
- startShift: {type:Date, default: d},
+ startShift: {type:Date, default: Date.now},
 
- endShift: {type:Date, default: d},
+ endShift: {type:Date, default: Date.now},
 
- startBreak: {type:Date, default: d},
+ startBreak: {type:Date, default: Date.now},
 
 
- endBreak: {type:Date, default: d}
+ endBreak: {type:Date, default: Date.now}
 
 });
 

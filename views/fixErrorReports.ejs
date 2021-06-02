@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            position:center;
+            /*margin: 20rem;*/
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .button{
+            background-color:#18c6c0;
+            font-size:24px;
+            color:white;
+            border: none;
+            position: relative;
+            left: 40%;
+            cursor: pointer;
+
+        }
+        h2{
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2 >Error Report List</h2>
+
+
+<table>
+    <tr>
+        <th>Attendance Report ID:</th>
+        <th>Company Employee Reporting:</th>
+        <th>Report Date Of Error Report:</th>
+        <th>Error Description:</th>
+    </tr>
+    <% if (locals.errorReports) {%>
+        <% errorReports.forEach((item)=>{%>
+        <form action="/errorReport/showErrorReport/<%=item.attendanceReportID%>" method="get">
+        <tr>
+            <td><%=item.attendanceReportID%></td>
+            <td><%=item.companyEmployeeID%></td>
+            <td><%=item.reportDate.toDateString()%></td>
+            <td><%=item.errorDescription%></td>
+            <td><button type="submit">Fix</button></td>
+    </form>
+        </tr>
+        <%});%>
+    <% } %>
+</table>
+</div>
+</body>
+
+</html>

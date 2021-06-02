@@ -329,6 +329,20 @@ const getRangeOfSalaryByShift= async (req, res)=> {
    
 }
 
+const displayEditAttendance= async (req,res)=>
+{
+    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    var ID= req.params._id
+    console.log(ID)
+    await AttendanceReportCtrl.findById({_id:ID})
+        .then(attendance=> {
+            console.log(attendance)
+            res.render("addErrorReport",{attendance})
+        }).catch(err=>
+        {
+            return res.status(400).send('That attendance not found')
+        })
+}
 
 
 
@@ -346,6 +360,7 @@ module.exports={
     getTwoMonthsSalaries,
     getTodaySalary,
     getThisYearSalary,
-    getRangeOfSalaryByShift
+    getRangeOfSalaryByShift,
+    displayEditAttendance
 }
 

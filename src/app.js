@@ -210,4 +210,17 @@ app.get('/AttandenceList',((req, res) =>
 {
     res.render('AttandenceList')
 }))
+
+app.get('/editAttendanceReport',((req, res) =>
+{
+    res.render('editAttendanceReport')
+}))
+
+app.get('/searchContractorErrorReport',((req, res) =>
+{
+    res.render('searchContractorErrorReport')
+}))
+
+
+
 mongoose.set('useFindAndModify', false)

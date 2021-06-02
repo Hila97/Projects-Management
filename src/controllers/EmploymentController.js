@@ -401,6 +401,8 @@ async function rejectEmployment(req,res)
     await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
     res.render('HomeContractor')
 }
+
+
 module.exports={
         addEmployment,
         findAllEmployments,

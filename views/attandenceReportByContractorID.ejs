@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Attandence Report</title>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+    <style>
+        #panel, #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .hidden_row td{
+            display:none;
+            /* height: 0px; */
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="legend">
+    <h1> Attandence Report </h1>
+
+
+
+    <label> Enter date of the report that wrong: </label>
+    <div class="controls">
+        <input type="date"  id="workDate" required >
+        <button class="btn btn-success" onclick="filter()">Search</button>
+    </div>
+
+<table class="center">
+    <tr>
+        <th>Company</th>
+    </tr>
+    <% if (locals.r) {%>
+        <%r.forEach((item)=>{%>
+    <tr>
+        <form action="/attendanceReport/displayEditAttendance/<%=item._id%>">
+        <td><%=item.reportDate%></td>
+        <td><%=item.contractorWorkerID%></td>
+            <td> <button type="submit">report on error</button></td>
+        </form>
+    </tr>
+    <input id="ID1" type="object" placeholder="<%=item.contractorWorkerID%>" value="<%=item.contractorWorkerID%>" hidden >
+        <%});%>
+    <% } %>
+</table>
+
+</div>
+<script>
+    function filter() {
+        let workDate = document.getElementById('workDate').value
+        if (!workDate) {
+            document.getElementById('error').innerHTML = 'must choose BookingDate'
+            return
+        }
+        console.log(workDate)
+        let ID = document.getElementById('ID1').value
+        console.log("33333333333333333")
+        console.log(ID)
+        // window.location.href =`/filterEmploymentsByBookingDate/${BookingDate}`
+        window.location.pathname = `contractorWorker/filterAttendanceByDate/${workDate}/${ID}`
+    }
+</script>
+</body>
+</html>
