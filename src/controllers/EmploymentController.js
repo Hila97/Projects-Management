@@ -306,9 +306,9 @@ async function findPastEmployments(req, res, next) {
         console.log(e)
     })
 }
-async function calculateRatingOfWorker(employmentID,rank)
+async function calculateRatingOfWorker(employmentID)
 {
-    console.log(employmentID,rank)
+    console.log("got here",employmentID)
     await Employment.findById(employmentID,{_id:0,workerID:1}).then(z=>
     {
         console.log(z)
@@ -332,9 +332,12 @@ async function calculateRatingOfWorker(employmentID,rank)
             ]
         ).then(avg=>
         {
-            //console.log("4444444444444444",avg)
+            console.log("the avg is",avg)
             var newRank=avg[0].AverageValue
-            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}})
+            console.log(newRank,avg[0]._id)
+            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}}).then(x=>{
+                console.log(x)
+            })
         })
     })
 }
@@ -343,14 +346,14 @@ async function rateEmployment(req,res)
     const employmentID=req.body.employmentID
     var stars=req.body.rate;
     await Employment.findByIdAndUpdate(employmentID,{$set:{rank:stars}}).then(x=>{
-        calculateRatingOfWorker(employmentID,stars);
+        calculateRatingOfWorker(employmentID);
         res.redirect('/employment/history')
     })
 }
 async function findEmploymentsForConfirmation(req,res)
 {
     var workerID=req.cookies.contractorWorkerIDCookie.id
-    console.log(workerID)
+   // console.log(workerID)
     var q={
         workerID:workerID,
         confirmation:confirmation.PENDING,
@@ -362,7 +365,6 @@ async function findEmploymentsForConfirmation(req,res)
 }
 async function confirmEmployment(req,res)
 {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
@@ -374,7 +376,16 @@ async function rejectEmployment(req,res)
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
+    var date=new Date(req.params.workDate)
+    console.log(date)
+    var q={
+        workerID:workerID,
+        departureDate:date
+    }
     await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
+    await vacation.findOneAndDelete(q).then(z=>{
+        console.log("deleted ")
+    })
     res.render('HomeContractor')
 }
 module.exports={
