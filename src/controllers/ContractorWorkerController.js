@@ -271,7 +271,7 @@ const loginOfContractorWorker= async (req, res) =>
             id: result._id
         }
         console.log(result._id)
-        res.cookie("contractorWorkerIDCookie", contractorWorkerIDCookie);
+        res.cookie("contractorWorkerIDCookie", contractorWorkerIDCookie)
         console.log(contractorWorkerIDCookie)
        // return res.json({status: 'ok', data: req.body})
         res.render('HomeContractor')

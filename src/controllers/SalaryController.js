@@ -18,28 +18,29 @@ const addSalary=(req, res)=>
     })
 }
 
-const findAllSalaries=(req,res)=>
+async function findAllSalaries(req,res)
 {
     console.log("find")
-    Salary.find()
-        .then((result)=>
-        {
-            res.send(result)
-        })
-        .catch((err)=>
+    var ID = req.params.ID
+    console.log(req.params.ID)
+    var ContractorId = await contractorWorker.findOne({ID: req.params.ID}, {_id: 1,})
+    const salaries = await Salary.find({workerID:ContractorId},{workerID:1, date:1, totalSalary:1},function(err)
+    {
+        console.log('asaa')
+        if (err)
         {
             console.log(err)
-        })
+            return res.status(500).send()
+        }
+    })
+    console.log('asaa')
+    console.log(salaries)
+    if (salaries.length == 0)
+            res.render('EmployeeViews/FailureToFindSalaries',{ID})
+    else
+       res.render('EmployeeViews/ViewSalaries',{ID})
 }
-/*const findUserById=(req,res)=>{
-    User.findById('60894503dfb11833a47c4f98')
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-}*/
+
 
 async function calculateContractorSalaryForMonth(req, res)
 {
@@ -105,7 +106,8 @@ async function calculateContractorSalaryForMonth(req, res)
         const salary=calcSalry.toFixed(2)
         console.log(calcSalry)
         console.log(salary)
-
+        if(parseInt(month)==12)
+            next= parseInt(month) -11
         const paySalary = '2021-' + next + '-10'
         var date= new Date(paySalary)
         console.log(date)
@@ -162,7 +164,13 @@ const getThisMonthSalaryByWorkerID = async (req, res) => {
     }
 }
 
-module.exports={addSalary,findAllSalaries,calculateContractorSalaryForMonth, getThisMonthSalaryByWorkerID}
+module.exports=
+    {
+        addSalary,
+        findAllSalaries,
+        calculateContractorSalaryForMonth,
+        getThisMonthSalaryByWorkerID
+    }
 
 
 

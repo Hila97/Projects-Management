@@ -5,7 +5,8 @@ const salary= require('../controllers/SalaryController')
 router.post('/calculateContractorSalaryForMonth/:ID', salary.calculateContractorSalaryForMonth)
 
 router.post('/addSalary', salary.addSalary)
-router.get('/findAllSalaries',salary.findAllSalaries)
+router.get('/findAllSalaries/:ID',salary.findAllSalaries)
+
 router.get('/getThisMonthSalaryByWorkerID/:workerID',salary.getThisMonthSalaryByWorkerID)
 
 
@@ -16,5 +17,6 @@ router.get('/EmployeeSalaryAndReportOption/:ID',(req,res)=>
     console.log("aaaa")
     res.render('EmployeeViews/EmployeeSalaryAndReportOption',{ID})
 })
+
 
 module.exports=router
