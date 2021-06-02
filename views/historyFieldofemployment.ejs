@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fieldOfEmployment</title>
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+
+<h2 >Filter by fieldOfEmployment</h2>
+<input id="fieldOfEmployment" type="text" />
+<button onclick="filter()">Filter by fieldOfEmployment</button>
+<p style="color: red;" id="error"></p>
+<table >
+    <!-- added line 38 -->
+    <% if (locals.employers) { %>
+        <% employers.forEach((item)=>{%>
+        <tr>
+
+            <th>user name</th>
+            <th>full name</th>
+            <th>company name</th>
+            <th>position</th>
+            <th>phone</th>
+            <th>fieldOfEmployment</th>
+        </tr>
+        <tr>
+
+            <td><%=item.userName%></td>
+            <td><%=item.fullName%></td>
+            <td><%=item.companyName%></td>
+            <td><%=item.position%></td>
+            <td><%=item.phone%></td>
+            <td><%=item.fieldOfEmployment%></td>
+        </tr>
+        <%});%>
+        <!-- added line 59 -->
+    <% } %>
+</table>
+
+
+
+</body>
+<script>
+    function filter(){
+        let fieldOfEmployment = document.getElementById('fieldOfEmployment').value
+        if(!fieldOfEmployment){
+            document.getElementById('error').innerHTML = 'must insert fieldOfEmployment'
+            return
+        }
+        window.location.pathname = `employer/filterHistoryByfieldOfEmployment/${fieldOfEmployment}`
+
+        // window.location.href = `employer/getEmployeesBycompanyName/${companyName}`
+        //window.history.pushState({}, document.title, "/" + `employer/filterByfieldOfEmployment/${fieldOfEmployment}`);
+        //window.location.reload()
+    }
+    <label> hiii</label>
+</script>
+</html>

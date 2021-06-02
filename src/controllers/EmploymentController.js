@@ -2,10 +2,12 @@ const Employment=require('../models/Employment')
 const moment = require('moment')
 const contractorWorker = require('../models/ContractorWorker')
 const vacation=require('../models/Vacation')
+const {reportDate} = require('../models/AttendanceReport')
 const {confirmation}=require('../models/enums')
 const {Status}=require('../models/enums')
+const {FieldOfEmployment} = require('../models/enums')
 async function BookForm(req, res) {
-   // console.log(req.cookies.employerIDCookie.id)
+    // console.log(req.cookies.employerIDCookie.id)
     var workDate=new Date(req.params.workDate)
     console.log("the date that i got from the table to the form",workDate)
     console.log(req.params.workerID)
@@ -227,6 +229,44 @@ const filterEmploymentsByBookingDate= async (req,res)=>
     }
 }
 
+const filterEmploymentsByDateContractor= async (req,res)=>
+{
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    let {workDate}= req.params
+    console.log(workDate)
+    workDate = new moment(workDate)
+    workDate.utc(workDate).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = new moment(workDate)
+    tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+    console.log(workDate, tomorrow)
+    // today1.set({hour:0,minute:0,second:0,millisecond:0})
+    try {
+        var query =
+            {
+                workerID: workerID,
+                $and: [
+                    {workDate: {$gte: workDate}},
+                    {workDate: {$lt: tomorrow}}
+                ]
+            }
+        const employments = await Employment.find(query).populate('workerID')
+        console.log(query)
+        if (employments.length === 0) {
+            // res.render('Error',{message : 'No employees working that day'})
+            res.send('no employees working that day')
+            return
+
+        }
+        res.render('historyContractor', {employments: employments})
+    }
+    catch
+        (e)
+    {
+        console.log(e)
+    }
+}
+
 
 const filterEmploymentsByBookingMonth= async (req,res)=>
 {
@@ -298,14 +338,28 @@ const getEmploymentsListForContractor = async (req,res)=>{
         .catch((err)=>{
             console.log(err)
         })
-    /*var workerID=req.cookies.contractorWorkerIDCookie.id
-    await Employment.find(workerID)
-        .then((result)=>{
-            res.render('attandenceReport',{employments: result})
+}
+
+async function findPastEmploymentsForContractor(req, res, next) {
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    var today1= moment()
+    today1.set({hour:0,minute:0,second:0,millisecond:0})
+    var query =
+        {
+            workerID:workerID,
+            workDate : {$lt: today1}
+        }
+    await Employment.find(query).sort({workDate:-1}).then((employments) => {
+        if(employments.length===0)
+        {
+            res.send("No past employment found")
+        }
+        else
+            res.render('historyContractor',{employments})
+    }).catch(e=>
+    {
+        console.log(e)
     })
-        .catch((err)=>{
-            console.log(err)
-        })*/
 }
 
 async function findPastEmployments(req, res, next) {
@@ -413,6 +467,28 @@ async function rejectEmployment(req,res)
     })
     res.render('HomeContractor')
 }
+
+async function filterHistoryByfieldOfEmployment(req, res)
+{
+    console.log("filter field of employment")
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    let {FieldOfEmployment} = req.params
+    var query = {
+        workerID : workerID,
+        field : {$eq: FieldOfEmployment}
+    }
+    await Employment.find(query).then(employments).then((employments) => {
+        if(employments.length===0)
+        {
+            res.send("No employments found")
+        }
+        else
+            res.render('historyContractor',{employments})
+    }).catch(e=>
+    {
+        console.log(e)
+    })
+}
 const getAllRatingsForWorker = async (req,res)=>{
     try {
         const {workerID} = req.params
@@ -428,22 +504,25 @@ const getAllRatingsForWorker = async (req,res)=>{
     }
 }
 module.exports={
-        addEmployment,
-        findAllEmployments,
-        findFutureEmployment,
-        findTodayEmployment,
-        filterEmployeesByStatus,
-        filterEmploymentsByBookingDate,
-        filterEmploymentsByBookingMonth,
-        BookForm,
-        getAllEmployees,
-        getEmploymentsList,
+    addEmployment,
+    findAllEmployments,
+    findFutureEmployment,
+    findTodayEmployment,
+    filterEmployeesByStatus,
+    filterEmploymentsByBookingDate,
+    filterEmploymentsByBookingMonth,
+    BookForm,
+    getAllEmployees,
+    getEmploymentsList,
     getEmploymentsListForContractor,
     findPastEmployments,
     rateEmployment,
     findEmploymentsForConfirmation,
+    findPastEmploymentsForContractor,
     confirmEmployment,
     rejectEmployment,
+    filterEmploymentsByDateContractor,
+    filterHistoryByfieldOfEmployment,
  getAllRatingsForWorker
 
 }

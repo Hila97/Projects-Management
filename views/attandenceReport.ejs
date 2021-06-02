@@ -54,30 +54,16 @@
         function func(){
             $("#panel").slideDown("slow");
         }
-        function func2() {
-            $('startBtn').click(function(){
-                // Add functionality here, then...
-                $(this).attr("disabled", true);
-            });
-
-        }
-    </script>
-    <script type="text/javascript">
-        function disableButton(){
-            //.getElementById(btn.id).disabled = true;
-            setTimeout(function(){
-                document.getElementById('startBtn').disabled = null;
-            },10000);
-            <%employments.temp=1%>
-        }
     </script>
 </head>
 <body>
-<script>
-
-</script>
 <div id="legend">
     <h1> Attandence Report </h1>
+</div>
+<div>
+    <form action="/vacationReport" method="get">
+        <button type="submit">report on vacation</button>
+    </form>
 </div>
 <table class="center">
     <tr>
@@ -89,15 +75,17 @@
     <tr >
         <td>
         <%=item.workDate%>
-            <%if (item.workDate.getDate()==d.getDate()) {%>
+            <%if (item.workDate.getDate()==d.getDate()){%>
             <button onclick="func()"  >REPORT</button>
             <%};%>
-        </td>
         <div id="panel">hello world
             <form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
                 <!-- Button -->
                 <div class="controls" id="start">
-                    <button id="startBtn" class="btn btn-success" type="submit" >start shift</button>
+                    <%if (item.workDate.getDate()==d.getDate() && item.temp==0){%>
+                    <button  class="btn btn-success" type="submit" >start shift</button>
+                    <%item.temp=1%>
+                    <%};%>
                 </div>
             </form>
             <form class="form-horizontal" action='/attendanceReport/editStartBreak' method="post">
@@ -116,6 +104,7 @@
                 </div>
             </form>
         </div>
+        </td>
     </tr>
             <%});%>
     <% } %>

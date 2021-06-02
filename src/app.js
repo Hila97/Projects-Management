@@ -53,7 +53,6 @@ app.use(function (err,req,res,next){
 })
 app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
 
-//0 3 * * *
 
 const job = schedule.scheduleJob('0 3 * * *', function(){
     console.log('The answer to life, the universe, and everything!')
@@ -117,7 +116,11 @@ app.get('/filterEmployeesByStatus',((req, res) =>
     res.render('filterEmployeesByStatus')
 
 }))
+app.get('/getRatingContractorWorker',((req, res) =>
+{
+    res.render('getRatingContractorWorker')
 
+}))
 app.get('/TotalhourWorkinMonth',((req, res) =>
 {
     res.render('TotalhourWorkinMonth')
@@ -217,4 +220,7 @@ app.get('/AttandenceList',((req, res) =>
 {
     res.render('AttandenceList')
 }))
+
 mongoose.set('useFindAndModify', false)
+
+

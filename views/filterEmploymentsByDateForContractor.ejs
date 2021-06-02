@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history by date</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+            position: relative;
+            margin: 20rem;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: auto;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .button{
+            background-color:#18c6c0;
+            font-size:24px;
+            color:white;
+            border: none;
+            position: relative;
+            left: 40%;
+            cursor: pointer;
+
+        }
+        h1{
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+<input id="workDate" type="date" />
+<button onclick="filter()">Filter Employees</button>
+<p style="color: red;" id="error"></p>
+<div>
+    <table class="center">
+        <tr>
+            <th>field</th>
+            <th>status</th>
+            <th>bookingDate</th>
+            <th>workDate</th>
+        </tr>
+        <% if (locals.employments) { %>
+            <% employments.forEach((item)=>{%>
+            <tr>
+                <td><%=item.field%></td>
+                <td><%=item.status%></td>
+                <td><%=item.bookingDate%></td>
+                <td><%=item.workDate%></td>
+            </tr>
+            <%});%>
+        <% } %>
+    </table>
+</div>
+</body>
+<script>
+    function filter(){
+        let workDate = document.getElementById('workDate').value
+        if(!workDate){
+            document.getElementById('error').innerHTML = 'must choose BookingDate'
+            return
+        }
+        console.log(workDate)
+        // window.location.href =`/filterEmploymentsByBookingDate/${BookingDate}`
+        window.location.pathname = `employment/filterEmploymentsByDateContractor/${workDate}`
+    }
+</script>
+</html>
