@@ -223,4 +223,21 @@ app.get('/AttandenceList',((req, res) =>
 
 mongoose.set('useFindAndModify', false)
 
+app.get('/historyContractor', ((req, res) =>
+{
+    res.render('historyContractor')
+}))
 
+app.get('/historyFieldofemployment', ((req, res) =>
+{
+    res.render('historyFieldofemployment')
+}))
+app.get('/vacationReport', ((req, res)=>
+{
+    res.render('vacationReport')
+}))
+
+app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
+{
+    res.render('filterEmploymentsByDateForContractor')
+}))
