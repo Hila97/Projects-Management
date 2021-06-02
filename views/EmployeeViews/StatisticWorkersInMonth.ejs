@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>pick a month</h1>
+    <form class="form-horizontal" action="/statistics/workersOfEmployments" method="post">
+        <div class="control-group">
+            <label class="control-label"  for="month"></label>
+            <div class="controls">
+                <input type="number" id="month" name="month" class="input-xlarge" min="1" max="12" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit">CALCULATE</button>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

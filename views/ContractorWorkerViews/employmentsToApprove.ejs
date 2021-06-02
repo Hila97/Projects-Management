@@ -37,6 +37,7 @@
     </tr>
     <% employments.forEach((item)=>{%>
     <%var ID=item._id;%>
+        <%var workDate=item.workDate;%>
     <%var s=item.startTime.getHours()+":"+item.startTime.getMinutes();
         var e=item.endTime.getHours()+":"+item.endTime.getMinutes()%>
 
@@ -50,7 +51,7 @@
             <td><%=item.employerID.phone%></td>
             <td>
             <a class="btn" href="/employment/confirmEmployment/<%=ID%>">APPROVE</a>
-            <a class="btn" href="/employment/rejectEmployment/<%=ID%>">REJECT</a>
+            <a class="btn" href="/employment/rejectEmployment/<%=ID%>/<%=workDate%>">REJECT</a>
             </td>
         </tr>
     <%});%>
