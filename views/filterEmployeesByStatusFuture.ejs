@@ -5,57 +5,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>position</title>
-    
+
     <style>
         table {
-          font-family: arial, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
         }
-        
+
         td, th {
-          border: 1px solid #dddddd;
-          text-align: left;
-          padding: 8px;
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
         }
-        
+
         tr:nth-child(even) {
-          background-color: #dddddd;
+            background-color: #dddddd;
         }
-        </style>
+    </style>
 </head>
 <body>
-   
-   
- <body>
- 
-  <h2 >Your constractor worker for the future</h2>
 
-   <table >
-     <!-- added line 38 -->
-     <table>
-        <% if (locals.employees) { %>
-            <% employees.forEach((item)=>{%>
-        <tr>
-            <th>first name</th>
-            <th>last name</th>
-            <th>telephone</th>
-            <th>email</th>
-            <th>mec</th>
 
-        </tr>
-        <tr>
-            <td><%=item.firstName%></td>
-            <td><%=item.lastName%></td>
-            <td><%=item.telephone%></td>
-            <td><%=item.userName%></td>
-            <td><%=item.userName%></td>
-        </tr>
-        <%});%>
-        <% } %>
-    </table>
+<h2 >Filter by future status</h2>
 
- 
+<table >
+    <!-- added line 38 -->
+    <tr>
+        <th>status</th>
+        <th>work Date</th>
+        <th>confirmation</th>
+        <th>worker</th>
+        <th>telephone</th>
+    </tr>
+    <% employees.forEach((item)=>{%>
+    <tr>
+        <td><%=item.status%></td>
+        <td><%=item.workDate.toDateString()%></td>
+        <td><%=item.confirmation%></td>
+        <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
+        <td><%=item.workerID.telephone%></td>
+    </tr>
+    <%});%>
+</table>
+
+
 
 </body>
 
