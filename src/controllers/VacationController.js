@@ -2,10 +2,11 @@ const Vacation=require('../models/Vacation')
 
 const addVacation=(req, res)=> {
     console.log("add")
-    const newVacation = new Vacation(req.body)
+    const newVacation = new Vacation({workerID: req.cookies.contractorWorkerIDCookie.id, departureDate: req.body.departureDate,returningDate:req.body.returningDate})
     newVacation.save().then(vacation=>{
+        console.log(req.cookies.contractorWorkerIDCookie.id)
         console.log(req.body)
-        res.json({newVacation})
+        res.render('HomeContractor')
     }).catch(err => {
         console.log(err)
     })

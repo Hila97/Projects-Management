@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+</head>
+<body>
+<input type="hidden" id="workers" value=<%=workers%>>
+<input type="hidden" id="allWorkers" value=<%=allWorkers%>>
+<h1>Percentage of contractor workers who worked this month out of all contractor workers</h1>
+<h2><%=workers%> workers out of <%=allWorkers%> worked in month <%=month%></h2>
+<div id="chart"></div>
+<script>
+    var a=document.getElementById("workers").value;
+    var b=document.getElementById("allWorkers").value;
+    var p=a*100/b;
+    p=p.toFixed(2);
+    var options = {
+        series: [p],
+        chart: {
+            height: 350,
+            type: 'radialBar',
+        },
+        plotOptions: {
+            radialBar: {
+                hollow: {
+                    size: '70%',
+                }
+            },
+        },
+        labels: ['contractor workers'],
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
+</body>
+</html>

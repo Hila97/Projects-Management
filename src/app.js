@@ -4,6 +4,7 @@ const app = express()
 app.use(express.static('public'))
 const axios = require('axios')
 const moment = require('moment')
+const schedule = require('node-schedule')
 ////////////////////////////////////////
 //env
 const dotenv=require('dotenv')
@@ -42,6 +43,7 @@ app.use('/employer',require('./route/EmployerAPI'))
 app.use('/employment',require('./route/EmploymentAPI'))
 app.use('/errorReport',require('./route/ErrorReportsAPI'))
 app.use('/vacation',require('./route/VacationAPI'))
+app.use('/statistics',require('./route/StatisticAPI'))
 app.use('/api',require('./route/api'))
 ///try
 app.use('/auth',require('./route/authAPI'))
@@ -52,15 +54,19 @@ app.use(function (err,req,res,next){
 app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
 
 
-
+const job = schedule.scheduleJob('0 3 * * *', function(){
+    console.log('The answer to life, the universe, and everything!')
+    updateEmploymentToday()
+})
 const Employment=require('./models/Employment')
 async function updateEmploymentToday() {
-    var date = new Date()
-    date.setDate(date.getDate()-1)
-    var date2 = new Date()
-    date2.setDate(date.getDate()+2)
+    console.log('got to update employments')
+    let today = moment()
+    today.set('hour', 0).set('minute',0)
+    let tomorrow=moment()
+    tomorrow.add(1,'days').set('hour',0).set('minute',0)
     var q = {
-        workDate: {$gt: date, $lte: date2}
+        workDate: {$gt: today, $lte: tomorrow}
     }
     await Employment.updateMany(q, {$set: {status: 'Current'}}).then((result) => {
         console.log('updated successfully')
@@ -110,7 +116,11 @@ app.get('/filterEmployeesByStatus',((req, res) =>
     res.render('filterEmployeesByStatus')
 
 }))
+app.get('/getRatingContractorWorker',((req, res) =>
+{
+    res.render('getRatingContractorWorker')
 
+}))
 app.get('/TotalhourWorkinMonth',((req, res) =>
 {
     res.render('TotalhourWorkinMonth')
@@ -222,5 +232,25 @@ app.get('/searchContractorErrorReport',((req, res) =>
 }))
 
 
+
+
+app.get('/historyContractor', ((req, res) =>
+{
+    res.render('historyContractor')
+}))
+
+app.get('/historyFieldofemployment', ((req, res) =>
+{
+    res.render('historyFieldofemployment')
+}))
+app.get('/vacationReport', ((req, res)=>
+{
+    res.render('vacationReport')
+}))
+
+app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
+{
+    res.render('filterEmploymentsByDateForContractor')
+}))
 
 mongoose.set('useFindAndModify', false)

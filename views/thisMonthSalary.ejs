@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="/styles/titleStyle.css">
     <title>Document</title>
 </head>
 <body>
-  <h2 >This month salary</h2>
+  <h2 class="title">This month salary</h2>
 
       <% if (locals.salary) { %>
-        <p>Total Hours : <%=salary.totalHours %></p>
-        <p>Total Wage : <%=salary.totalWage %></p>
+        <p style="font-weight: bold;">Total Wage : <%=salary %> $</p>
+        <% } %>
+
+        <% if (locals.message) { %>
+            <p style="color: red;"><%=message %></p>
         <% } %>
 </body>
 

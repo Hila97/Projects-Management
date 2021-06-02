@@ -18,28 +18,29 @@ const addSalary=(req, res)=>
     })
 }
 
-const findAllSalaries=(req,res)=>
+async function findAllSalaries(req,res)
 {
     console.log("find")
-    Salary.find()
-        .then((result)=>
-        {
-            res.send(result)
-        })
-        .catch((err)=>
+    var ID = req.params.ID
+    console.log(req.params.ID)
+    var ContractorId = await contractorWorker.findOne({ID: req.params.ID}, {_id: 1,})
+    const salaries = await Salary.find({workerID:ContractorId},{workerID:1, date:1, totalSalary:1},function(err)
+    {
+        console.log('asaa')
+        if (err)
         {
             console.log(err)
-        })
+            return res.status(500).send()
+        }
+    })
+    console.log('asaa')
+    console.log(salaries)
+    if (salaries.length == 0)
+            res.render('EmployeeViews/FailureToFindSalaries',{ID})
+    else
+       res.render('EmployeeViews/ViewSalaries',{salaries})
 }
-/*const findUserById=(req,res)=>{
-    User.findById('60894503dfb11833a47c4f98')
-        .then((result)=>{
-            res.send(result)
-        })
-        .catch((err)=>{
-            console.log(err)
-        })
-}*/
+
 
 async function calculateContractorSalaryForMonth(req, res)
 {
@@ -57,7 +58,7 @@ async function calculateContractorSalaryForMonth(req, res)
     let next= parseInt(month) + 1
     const thisM = '2021-' + month + '-01'
     if(parseInt(month)==12)
-         next= parseInt(month) -11
+        next= parseInt(month) -11
     const nextM = '2021-' + next + '-01'
 
     const thisMonth = moment(new Date(thisM))
@@ -74,7 +75,7 @@ async function calculateContractorSalaryForMonth(req, res)
             ]
         }
     const shifts = await attendanceReport.find(query, {startShift: 1, endShift: 1})
-   console.log(shifts)
+    console.log(shifts)
     if (shifts.length == 0)
     {
         res.render('EmployeeViews/FailureToFindAttendanceReportsToCalculate',{ID})
@@ -105,7 +106,8 @@ async function calculateContractorSalaryForMonth(req, res)
         const salary=calcSalry.toFixed(2)
         console.log(calcSalry)
         console.log(salary)
-
+        if(parseInt(month)==12)
+            next= parseInt(month) -11
         const paySalary = '2021-' + next + '-10'
         var date= new Date(paySalary)
         console.log(date)
@@ -122,15 +124,53 @@ async function calculateContractorSalaryForMonth(req, res)
                 return res.status(500).send()
             }
 
-            //return res.json({status: 'salary added ,ok', data: newSalary})
+           // return res.json({status: 'salary added ,ok', data: newSalary})
             res.render('HomeEmployee')
+
         })
     }
 
 }
 
+// -------------
+const getThisMonthSalaryByWorkerID = async (req, res) => {
+    try {
+        const {workerID} = req.params
+        // get the month of today date
+        let month = moment().format('M') 
+        let next = (parseInt(month, 10) +1).toString()
+        const thisM = '2021-' + month + '-01'
+        const nextM = '2021-' + next + '-01'
 
-module.exports={addSalary,findAllSalaries,calculateContractorSalaryForMonth}
+        const thisMonth = moment(new Date(thisM))
+        const nextMonth = moment(new Date(nextM))
+
+        var query =
+        {
+            workerID: workerID,
+            $and:
+            [
+                {date: {$gte: thisMonth}},
+                {date: {$lt: nextMonth}}
+            ]
+        }
+        const salary = await Salary.findOne(query)
+        if(!salary){
+            return res.render('Error', {message: 'No salary for this month'})
+        }
+        res.render('thisMonthSalary', {salary: salary.totalSalary})
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+module.exports=
+    {
+        addSalary,
+        findAllSalaries,
+        calculateContractorSalaryForMonth,
+        getThisMonthSalaryByWorkerID
+    }
 
 
 

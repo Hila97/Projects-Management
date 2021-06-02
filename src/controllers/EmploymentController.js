@@ -2,10 +2,12 @@ const Employment=require('../models/Employment')
 const moment = require('moment')
 const contractorWorker = require('../models/ContractorWorker')
 const vacation=require('../models/Vacation')
+const {reportDate} = require('../models/AttendanceReport')
 const {confirmation}=require('../models/enums')
 const {Status}=require('../models/enums')
+const {FieldOfEmployment} = require('../models/enums')
 async function BookForm(req, res) {
-   // console.log(req.cookies.employerIDCookie.id)
+    // console.log(req.cookies.employerIDCookie.id)
     var workDate=new Date(req.params.workDate)
     console.log("the date that i got from the table to the form",workDate)
     console.log(req.params.workerID)
@@ -227,6 +229,44 @@ const filterEmploymentsByBookingDate= async (req,res)=>
     }
 }
 
+const filterEmploymentsByDateContractor= async (req,res)=>
+{
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    console.log(workerID)
+    let {workDate}= req.params
+    console.log(workDate)
+    workDate = new moment(workDate)
+    workDate.utc(workDate).set('hour', 0).set('minute', 0).set('second', 0)
+    const tomorrow = new moment(workDate)
+    tomorrow.utc(tomorrow).add(1, 'days').set('hour', 0).set('minute', 0).set('second', 0)
+    console.log(workDate, tomorrow)
+    // today1.set({hour:0,minute:0,second:0,millisecond:0})
+    try {
+        var query =
+            {
+                workerID: workerID,
+                $and: [
+                    {workDate: {$gte: workDate}},
+                    {workDate: {$lt: tomorrow}}
+                ]
+            }
+        const employments = await Employment.find(query).populate('workerID')
+        console.log(query)
+        if (employments.length === 0) {
+            // res.render('Error',{message : 'No employees working that day'})
+            res.send('no employees working that day')
+            return
+
+        }
+        res.render('historyContractor', {employments: employments})
+    }
+    catch
+        (e)
+    {
+        console.log(e)
+    }
+}
+
 
 const filterEmploymentsByBookingMonth= async (req,res)=>
 {
@@ -298,14 +338,28 @@ const getEmploymentsListForContractor = async (req,res)=>{
         .catch((err)=>{
             console.log(err)
         })
-    /*var workerID=req.cookies.contractorWorkerIDCookie.id
-    await Employment.find(workerID)
-        .then((result)=>{
-            res.render('attandenceReport',{employments: result})
+}
+
+async function findPastEmploymentsForContractor(req, res, next) {
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    var today1= moment()
+    today1.set({hour:0,minute:0,second:0,millisecond:0})
+    var query =
+        {
+            workerID:workerID,
+            workDate : {$lt: today1}
+        }
+    await Employment.find(query).sort({workDate:-1}).then((employments) => {
+        if(employments.length===0)
+        {
+            res.send("No past employment found")
+        }
+        else
+            res.render('historyContractor',{employments})
+    }).catch(e=>
+    {
+        console.log(e)
     })
-        .catch((err)=>{
-            console.log(err)
-        })*/
 }
 
 async function findPastEmployments(req, res, next) {
@@ -330,9 +384,9 @@ async function findPastEmployments(req, res, next) {
         console.log(e)
     })
 }
-async function calculateRatingOfWorker(employmentID,rank)
+async function calculateRatingOfWorker(employmentID)
 {
-    console.log(employmentID,rank)
+    console.log("got here",employmentID)
     await Employment.findById(employmentID,{_id:0,workerID:1}).then(z=>
     {
         console.log(z)
@@ -356,9 +410,12 @@ async function calculateRatingOfWorker(employmentID,rank)
             ]
         ).then(avg=>
         {
-            //console.log("4444444444444444",avg)
+            console.log("the avg is",avg)
             var newRank=avg[0].AverageValue
-            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}})
+            console.log(newRank,avg[0]._id)
+            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}}).then(x=>{
+                console.log(x)
+            })
         })
     })
 }
@@ -367,14 +424,15 @@ async function rateEmployment(req,res)
     const employmentID=req.body.employmentID
     var stars=req.body.rate;
     await Employment.findByIdAndUpdate(employmentID,{$set:{rank:stars}}).then(x=>{
-        calculateRatingOfWorker(employmentID,stars);
+        calculateRatingOfWorker(employmentID);
         res.redirect('/employment/history')
     })
 }
 async function findEmploymentsForConfirmation(req,res)
 {
+    console.log("i got here")
     var workerID=req.cookies.contractorWorkerIDCookie.id
-    console.log(workerID)
+   // console.log(workerID)
     var q={
         workerID:workerID,
         confirmation:confirmation.PENDING,
@@ -386,7 +444,6 @@ async function findEmploymentsForConfirmation(req,res)
 }
 async function confirmEmployment(req,res)
 {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
@@ -398,28 +455,76 @@ async function rejectEmployment(req,res)
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
+    var date=new Date(req.params.workDate)
+    console.log(date)
+    var q={
+        workerID:workerID,
+        departureDate:date
+    }
     await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
+    await vacation.findOneAndDelete(q).then(z=>{
+        console.log("deleted ")
+    })
     res.render('HomeContractor')
+}
+
+async function filterHistoryByfieldOfEmployment(req, res)
+{
+    console.log("filter field of employment")
+    var workerID=req.cookies.contractorWorkerIDCookie.id
+    let {FieldOfEmployment} = req.params
+    var query = {
+        workerID : workerID,
+        field : {$eq: FieldOfEmployment}
+    }
+    await Employment.find(query).then(employments).then((employments) => {
+        if(employments.length===0)
+        {
+            res.send("No employments found")
+        }
+        else
+            res.render('historyContractor',{employments})
+    }).catch(e=>
+    {
+        console.log(e)
+    })
+}
+const getAllRatingsForWorker = async (req,res)=>{
+    try {
+        const {workerID} = req.params
+        console.log(workerID)
+        const employersRatings = await Employment.find({workerID: workerID}).populate('employerID').select('-_id employerID rank')
+        console.log(employersRatings)
+        if(employersRatings.length === 0){
+            return res.render('Error', {message: 'No employments found'})
+        }
+        return res.render('employersRatings', {ratings: employersRatings})
+    } catch (e) {
+        console.log(e)
+    }
 }
 
 
 module.exports={
-        addEmployment,
-        findAllEmployments,
-        findFutureEmployment,
-        findTodayEmployment,
-        filterEmployeesByStatus,
-        filterEmploymentsByBookingDate,
-        filterEmploymentsByBookingMonth,
-        BookForm,
-        getAllEmployees,
-        getEmploymentsList,
+    addEmployment,
+    findAllEmployments,
+    findFutureEmployment,
+    findTodayEmployment,
+    filterEmployeesByStatus,
+    filterEmploymentsByBookingDate,
+    filterEmploymentsByBookingMonth,
+    BookForm,
+    getAllEmployees,
+    getEmploymentsList,
     getEmploymentsListForContractor,
     findPastEmployments,
     rateEmployment,
     findEmploymentsForConfirmation,
+    findPastEmploymentsForContractor,
     confirmEmployment,
-    rejectEmployment
-
+    rejectEmployment,
+    filterEmploymentsByDateContractor,
+    filterHistoryByfieldOfEmployment,
+ getAllRatingsForWorker
 
 }

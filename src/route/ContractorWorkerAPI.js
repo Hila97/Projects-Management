@@ -11,6 +11,8 @@ router.get('/findContractorByFieldOfEmployment',contractorWorker.findContractorB
 router.get('/findContractorByID/:ID',contractorWorker.findContractorByID)
 router.post('/editProfile',(contractorWorker.editProfile))
 router.get('/findAllContractor',(contractorWorker.findAllContractor))
+//router.post('/findContractorWorkerById',(contractorWorker.findContractorWorkerById))
+router.get('/getRatingContractorWorkerByID/:id',(contractorWorker.getRatingContractorWorkerByID))
 router.post('/findContractorWorkerById',(contractorWorker.findContractorWorkerById))
 router.post('/findContractorWorkerByIdReturnAttendance',(contractorWorker.findContractorWorkerByIdReturnAttendance))
 router.get('/findContractorAttendance/:contractorWorkerID',(contractorWorker.findContractorAttendance))
@@ -25,6 +27,7 @@ router.get('/filterAttendanceByDate/:workDate/:contractorWorkerID',(contractorWo
 //router.post('displayProfile', (contractorWorker.displayProfile))
 router.post('/findAvailableWorkers',contractorWorker.findAvailableWorkers)
 router.post('/loginOfContractorWorker',(contractorWorker.loginOfContractorWorker))
+router.get('/getRatingContractorWorkerByID/:id',(contractorWorker.getRatingContractorWorkerByID))
 
 router.get('/contractorWorkerLogin',(req, res) =>
 {
