@@ -20,6 +20,7 @@ router.post('/rateEmployment',employment.rateEmployment)
 router.get('/pastWorkers',(req, res)=>{
     res.render('EmployerViews/PastWorkers',{names})
 })
+//I add this
 router.get('/pendingEmployments',employment.findEmploymentsForConfirmation)
 router.get('/confirmEmployment/:ID',employment.confirmEmployment)
 router.get('/rejectEmployment/:ID/:workDate',employment.rejectEmployment)

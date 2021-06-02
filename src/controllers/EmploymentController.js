@@ -352,6 +352,7 @@ async function rateEmployment(req,res)
 }
 async function findEmploymentsForConfirmation(req,res)
 {
+    console.log("i got here")
     var workerID=req.cookies.contractorWorkerIDCookie.id
    // console.log(workerID)
     var q={
