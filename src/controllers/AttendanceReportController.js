@@ -357,7 +357,7 @@ const getRangeOfSalaryByShift= async (req, res)=> {
 }
 
 
-}
+
 
 
 module.exports={
