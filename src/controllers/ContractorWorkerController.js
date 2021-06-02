@@ -533,9 +533,7 @@ module.exports =
         findContractorWorkerById,
         findContractorWorkerByIdReturnAttendance,
         findContractorAttendance,
-        filterAttendanceByDate,
-        getRatingContractorWorkerByID,
-        findContractorWorkerById
+        filterAttendanceByDate
         //TotalhourWorkinMonth,
         //TodaySalary
     }
