@@ -82,7 +82,7 @@
             <form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
                 <!-- Button -->
                 <div class="controls" id="start">
-                    <%if (item.workDate.getDate()==d.getDate() && item.temp==0){%>
+                    <%if (item.workDate.getDate()==d.getDate() ){%>
                     <button  class="btn btn-success" type="submit" >start shift</button>
                     <%item.temp=1%>
                     <%};%>
