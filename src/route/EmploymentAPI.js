@@ -13,9 +13,12 @@ router.get('/findTodayEmployment/:employerID', employment.findTodayEmployment)
 router.get('/filterEmployeesByStatus/:status',employment.filterEmployeesByStatus)
 router.get('/filterEmploymentsByBookingDate/:BookingDate', employment.filterEmploymentsByBookingDate) // the date should be inserted like this '2021-05-03'
 router.get('/filterEmploymentsByBookingMonth/:month', employment.filterEmploymentsByBookingMonth)
+router.get('/filterEmploymentsByDateContractor/:workDate', employment.filterEmploymentsByDateContractor)
+router.get('/filterHistoryByfieldOfEmployment/:fieldOfEmployment', employment.filterHistoryByfieldOfEmployment)
 router.get('/getAllEmployees', employment.getAllEmployees)
 router.get('/getEmploymentsList', employment.getEmploymentsList)
 router.get('/getEmploymentsListForContractor', employment.getEmploymentsListForContractor)
+router.get('/findPastEmploymentsForContractor', employment.findPastEmploymentsForContractor)
 router.get('/history',employment.findPastEmployments)
 router.post('/rateEmployment',employment.rateEmployment)
 router.get('/pastWorkers',(req, res)=>{
@@ -24,6 +27,7 @@ router.get('/pastWorkers',(req, res)=>{
 router.get('/pendingEmployments',employment.findEmploymentsForConfirmation)
 router.get('/confirmEmployment/:ID',employment.confirmEmployment)
 router.get('/rejectEmployment/:ID',employment.rejectEmployment)
+
 //router.put('/updateEmploymentToday/:employerID',employment.updateEmploymentToday)
 
 

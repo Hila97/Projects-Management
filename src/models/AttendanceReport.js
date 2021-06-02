@@ -17,7 +17,9 @@ const attendanceReportSchema = new schema({
  startBreak: {type:Date, default: d},
 
 
- endBreak: {type:Date, default: d}
+ endBreak: {type:Date, default: d},
+
+ temp: {type: Number, default: 0}
 
 });
 

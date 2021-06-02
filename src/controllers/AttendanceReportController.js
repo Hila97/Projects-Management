@@ -1,23 +1,26 @@
 const mongoose = require ('mongoose');
 const AttendanceReportCtrl=require('../models/AttendanceReport')
+const emoloyment=require('../controllers/EmploymentController')
 
 
-const addAttendanceReport=(req, res)=>
+async function addAttendanceReport(req, res)
 {
     console.log("add")
     console.log(req.params.contractorWorkerID)
     const newAttendanceReport = new AttendanceReportCtrl({contractorWorkerID: req.cookies.contractorWorkerIDCookie.id})
-    newAttendanceReport.save().then(report=>{
-        console.log(report)
-        //res.send("report")
-       res.render("HomeContractor", {report})
+    await newAttendanceReport.save()
+        // .then(report=>{
+        //     var d = new Date()
+        //     d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
+        //     console.log(d)
+        //     emoloyment.getEmploymentsListForContractor()
+       //res.render("HomeContractor", {report})
        //res.json({newAttendanceReport})
-    }).catch(err => {
-        console.log(err)
-    })
-    var d = new Date()
-    d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
-    console.log(d)
+   // })
+    // .catch(err => {
+    //     console.log(err)
+    // })
+
 }
 const findAllAttendanceReports=(req,res)=>
 {

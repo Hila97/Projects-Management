@@ -27,7 +27,7 @@ const mongoose = require ('mongoose')
 //connect to mongoDB
 mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result)=> {
-     console.log('connected')
+        console.log('connected')
     })
     .catch ((err)=>console.log(err))
 
@@ -82,9 +82,9 @@ async function updateEmploymentToday() {
 /*--------------------------------GET HTMLS---------------------------------*/
 //loginController(app)
 app.get('/', (req, res)=>{
-     updateEmploymentToday().then(z=>{
-         res.render('HomeNavUser')
-     })
+    updateEmploymentToday().then(z=>{
+        res.render('HomeNavUser')
+    })
 })
 
 app.get('/employeesFilters',((req, res) => {
@@ -99,7 +99,10 @@ app.get('/filterEmploymentsByBookingDate',((req, res) =>
     res.render('filterEmploymentsByBookingDate')
 
 }))
-
+app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
+{
+    res.render('filterEmploymentsByDateForContractor')
+}))
 app.get('/filterEmploymentsByBookingMonth',((req, res) =>
 {
     res.render('filterEmploymentsByBookingMonth')
@@ -160,7 +163,7 @@ app.get('/filterByfieldOfEmployment',((req, res) =>
 app.get('/filterEmploymentsByemployerID',((req, res) =>
 {
     res.render('filterEmploymentsByemployerID')
- 
+
 }))
 
 app.get('/employerSearch',((req, res) =>
@@ -171,13 +174,26 @@ app.get('/employerSearch',((req, res) =>
 app.get('/employmentsList',((req, res) =>
 {
     res.render('employmentsList')
- }))
+}))
 
 app.get('/AttandenceList',((req, res) =>
 {
     res.render('AttandenceList')
 }))
 
+app.get('/historyContractor', ((req, res) =>
+{
+    res.render('historyContractor')
+}))
+
+app.get('/historyFieldofemployment', ((req, res) =>
+{
+    res.render('historyFieldofemployment')
+}))
+app.get('/vacationReport', ((req, res)=>
+{
+    res.render('vacationReport')
+}))
 mongoose.set('useFindAndModify', false)
 
 
