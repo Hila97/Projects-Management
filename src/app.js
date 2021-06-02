@@ -4,6 +4,7 @@ const app = express()
 app.use(express.static('public'))
 const axios = require('axios')
 const moment = require('moment')
+const schedule = require('node-schedule')
 ////////////////////////////////////////
 //env
 const dotenv=require('dotenv')
@@ -27,7 +28,7 @@ const mongoose = require ('mongoose')
 //connect to mongoDB
 mongoose.connect(process.env.dbURI,{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
     .then((result)=> {
-        console.log('connected')
+     console.log('connected')
     })
     .catch ((err)=>console.log(err))
 
@@ -42,6 +43,7 @@ app.use('/employer',require('./route/EmployerAPI'))
 app.use('/employment',require('./route/EmploymentAPI'))
 app.use('/errorReport',require('./route/ErrorReportsAPI'))
 app.use('/vacation',require('./route/VacationAPI'))
+app.use('/statistics',require('./route/StatisticAPI'))
 app.use('/api',require('./route/api'))
 ///try
 app.use('/auth',require('./route/authAPI'))
@@ -52,15 +54,19 @@ app.use(function (err,req,res,next){
 app.listen(port,()=>{console.log(`server is up and running at: http://127.0.0.1:${port}`)})
 
 
-
+const job = schedule.scheduleJob('0 3 * * *', function(){
+    console.log('The answer to life, the universe, and everything!')
+    updateEmploymentToday()
+})
 const Employment=require('./models/Employment')
 async function updateEmploymentToday() {
-    var date = new Date()
-    date.setDate(date.getDate()-1)
-    var date2 = new Date()
-    date2.setDate(date.getDate()+2)
+    console.log('got to update employments')
+    let today = moment()
+    today.set('hour', 0).set('minute',0)
+    let tomorrow=moment()
+    tomorrow.add(1,'days').set('hour',0).set('minute',0)
     var q = {
-        workDate: {$gt: date, $lte: date2}
+        workDate: {$gt: today, $lte: tomorrow}
     }
     await Employment.updateMany(q, {$set: {status: 'Current'}}).then((result) => {
         console.log('updated successfully')
@@ -82,9 +88,9 @@ async function updateEmploymentToday() {
 /*--------------------------------GET HTMLS---------------------------------*/
 //loginController(app)
 app.get('/', (req, res)=>{
-    updateEmploymentToday().then(z=>{
-        res.render('HomeNavUser')
-    })
+     updateEmploymentToday().then(z=>{
+         res.render('HomeNavUser')
+     })
 })
 
 app.get('/employeesFilters',((req, res) => {
@@ -99,10 +105,7 @@ app.get('/filterEmploymentsByBookingDate',((req, res) =>
     res.render('filterEmploymentsByBookingDate')
 
 }))
-app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
-{
-    res.render('filterEmploymentsByDateForContractor')
-}))
+
 app.get('/filterEmploymentsByBookingMonth',((req, res) =>
 {
     res.render('filterEmploymentsByBookingMonth')
@@ -123,9 +126,41 @@ app.get('/TotalhourWorkinMonth',((req, res) =>
     res.render('TotalhourWorkinMonth')
 
 }))
+
+app.get('/compareTwoMonthSalaries',((req, res) =>
+{
+    res.render('compareTwoMonthSalaries')
+
+}))
+app.get('/todaySalaryContractorWorker',((req, res) =>
+{
+    res.render('todaySalaryContractorWorker')
+
+}))
+app.get('/thisYearProfit',((req, res) =>
+{
+    res.render('thisYearProfit')
+
+}))
+app.get('/rangeOfSalaryByShifts',((req, res) =>
+{
+    res.render('rangeOfSalaryByShifts')
+
+}))
 app.get('/TodaySalary',((req, res) =>
 {
     res.render('TodaySalary')
+
+}))
+
+app.get('/totalWageByMonth',((req, res) =>
+{
+    res.render('totalWageByMonth')
+
+}))
+app.get('/thisMonthSalary',((req, res) =>
+{
+    res.render('thisMonthSalary')
 
 }))
 
@@ -163,7 +198,7 @@ app.get('/filterByfieldOfEmployment',((req, res) =>
 app.get('/filterEmploymentsByemployerID',((req, res) =>
 {
     res.render('filterEmploymentsByemployerID')
-
+ 
 }))
 
 app.get('/employerSearch',((req, res) =>
@@ -174,6 +209,11 @@ app.get('/employerSearch',((req, res) =>
 app.get('/employmentsList',((req, res) =>
 {
     res.render('employmentsList')
+ }))
+
+app.get('/getWageByMonth',((req, res) =>
+{
+    res.render('getWageByMonth')
 }))
 
 app.get('/AttandenceList',((req, res) =>
@@ -181,19 +221,6 @@ app.get('/AttandenceList',((req, res) =>
     res.render('AttandenceList')
 }))
 
-app.get('/historyContractor', ((req, res) =>
-{
-    res.render('historyContractor')
-}))
-
-app.get('/historyFieldofemployment', ((req, res) =>
-{
-    res.render('historyFieldofemployment')
-}))
-app.get('/vacationReport', ((req, res)=>
-{
-    res.render('vacationReport')
-}))
 mongoose.set('useFindAndModify', false)
 
 

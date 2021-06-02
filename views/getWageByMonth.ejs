@@ -30,8 +30,8 @@
     <button onclick="filter()">Search</button>
     <p style="color: red;" id="error"></p>
     <table>
-      <% if (locals.employees) { %>
-        <% employees.forEach((item)=>{%>
+      <% if (locals.attendance) { %>
+        <% attendance.forEach((item)=>{%>
         <tr>
           <th>first name</th>
           <th>last name</th>
@@ -56,8 +56,8 @@
             return
         }
         console.log(month)
-       // window.location.href =`/filterEmploymentsByMonth/${month}`
-        window.location.pathname = `employment/filterEmploymentsByBookingMonth/${month}`
+       window.location.href =`/filterEmploymentsByMonth/${month}`
+       // window.location.pathname = `attendanceReport/getWageByMonth/${month}`
 
     }
 </script>

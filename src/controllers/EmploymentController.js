@@ -153,8 +153,8 @@ const getAllEmployees= async (req,res)=>
             if(!e.workerID) res.render('Error',{message : 'one of the worker ID doesnt exist'})
         })
 
-        //    return  res.json(employees)
-        res.render('employmentsList',{employments : employees})
+    //    return  res.json(employees)
+    res.render('employmentsList',{employments : employees})
     }
     catch(e)
     {
@@ -205,7 +205,7 @@ const filterEmploymentsByBookingDate= async (req,res)=>
             ]}
         const employees = await Employment.find(query).populate('workerID')
         if(employees.length===0){
-            // res.render('Error',{message : 'No employees working that day'})
+           // res.render('Error',{message : 'No employees working that day'})
             res.send('no employees working that day')
             return
 
@@ -289,22 +289,22 @@ const filterEmploymentsByBookingMonth= async (req,res)=>
                 {bookingDate : {$gte: thisMonth}},
                 {bookingDate : {$lt: nextMonth}}
             ]}
-        const employees = await Employment.find(query).populate('workerID')
-        if(employees.length===0){
-            res.render('Error',{message : 'No employees working that month'})
-            return
-            //res.send('no employees working that day')
-            //return
-        }
-        const employeesArr = []
-        employees.forEach(e => {
-            // if(!e.workerID) return res.send('this worker ID doesnt exist')
-            if(!e.workerID){
-                res.render('Error',{message : 'this worker ID doesnt exist'})
+            const employees = await Employment.find(query).populate('workerID')
+            if(employees.length===0){
+                res.render('Error',{message : 'No employees working that month'})
                 return
+                //res.send('no employees working that day')
+                //return
             }
-            employeesArr.push(e.workerID)
-        })
+            const employeesArr = []
+            employees.forEach(e => {
+                // if(!e.workerID) return res.send('this worker ID doesnt exist')
+                if(!e.workerID){
+                    res.render('Error',{message : 'this worker ID doesnt exist'})
+                    return
+                }
+                employeesArr.push(e.workerID)
+            })
 
         res.render('filterEmploymentsByBookingMonth',{employees : employeesArr})
         //return  res.json(employees)
@@ -384,9 +384,9 @@ async function findPastEmployments(req, res, next) {
         console.log(e)
     })
 }
-async function calculateRatingOfWorker(employmentID,rank)
+async function calculateRatingOfWorker(employmentID)
 {
-    console.log(employmentID,rank)
+    console.log("got here",employmentID)
     await Employment.findById(employmentID,{_id:0,workerID:1}).then(z=>
     {
         console.log(z)
@@ -410,9 +410,12 @@ async function calculateRatingOfWorker(employmentID,rank)
             ]
         ).then(avg=>
         {
-            //console.log("4444444444444444",avg)
+            console.log("the avg is",avg)
             var newRank=avg[0].AverageValue
-            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}})
+            console.log(newRank,avg[0]._id)
+            contractorWorker.findByIdAndUpdate(avg[0]._id,{$set:{rating:newRank}}).then(x=>{
+                console.log(x)
+            })
         })
     })
 }
@@ -421,26 +424,26 @@ async function rateEmployment(req,res)
     const employmentID=req.body.employmentID
     var stars=req.body.rate;
     await Employment.findByIdAndUpdate(employmentID,{$set:{rank:stars}}).then(x=>{
-        calculateRatingOfWorker(employmentID,stars);
+        calculateRatingOfWorker(employmentID);
         res.redirect('/employment/history')
     })
 }
 async function findEmploymentsForConfirmation(req,res)
 {
+    console.log("i got here")
     var workerID=req.cookies.contractorWorkerIDCookie.id
-    console.log(workerID)
+   // console.log(workerID)
     var q={
         workerID:workerID,
         confirmation:confirmation.PENDING,
         status:Status.FUTURE
     }
-    await Employment.find(q).populate('employerID').then(employments=>{
-        res.render('ContractorWorkerViews/employmentsToApprove',{employments})
-    })
+   await Employment.find(q).populate('employerID').then(employments=>{
+       res.render('ContractorWorkerViews/employmentsToApprove',{employments})
+   })
 }
 async function confirmEmployment(req,res)
 {
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
@@ -452,7 +455,16 @@ async function rejectEmployment(req,res)
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     console.log(req.params.ID)
+    var date=new Date(req.params.workDate)
+    console.log(date)
+    var q={
+        workerID:workerID,
+        departureDate:date
+    }
     await Employment.findByIdAndUpdate(req.params.ID,{$set:{confirmation:confirmation.CANCELED}})
+    await vacation.findOneAndDelete(q).then(z=>{
+        console.log("deleted ")
+    })
     res.render('HomeContractor')
 }
 
@@ -477,6 +489,20 @@ async function filterHistoryByfieldOfEmployment(req, res)
         console.log(e)
     })
 }
+const getAllRatingsForWorker = async (req,res)=>{
+    try {
+        const {workerID} = req.params
+        console.log(workerID)
+        const employersRatings = await Employment.find({workerID: workerID}).populate('employerID').select('-_id employerID rank')
+        console.log(employersRatings)
+        if(employersRatings.length === 0){
+            return res.render('Error', {message: 'No employments found'})
+        }
+        return res.render('employersRatings', {ratings: employersRatings})
+    } catch (e) {
+        console.log(e)
+    }
+}
 module.exports={
     addEmployment,
     findAllEmployments,
@@ -496,7 +522,7 @@ module.exports={
     confirmEmployment,
     rejectEmployment,
     filterEmploymentsByDateContractor,
-    filterHistoryByfieldOfEmployment
-
+    filterHistoryByfieldOfEmployment,
+ getAllRatingsForWorker
 
 }

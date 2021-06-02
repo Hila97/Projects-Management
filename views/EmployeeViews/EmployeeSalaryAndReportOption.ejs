@@ -8,7 +8,7 @@
     <label>INFORMATION </label>
     <div class="dot"></div>
     <ul>
-        <li><a href="/companyEmployee/ViewSalaries">VIEW SALARIES</a></li>
+        <li><a href="/salary/findAllSalaries/<%=ID%>">VIEW SALARIES</a></li>
         <li><a href="/companyEmployee/ViewAttendanceReports">VIEW ATTENDANCE REPORTS</a></li>
 
 <!--        <li><a href="/companyEmployee/employerLogin/<%=ID%>">CALCULATE SALARY FOR WORKER</a></li>-->
@@ -16,14 +16,13 @@
     </ul>
 <!--<label> <%=ID%> </label>-->
     <form class="form-horizontal" action="/salary/calculateContractorSalaryForMonth/<%=ID%>" method="POST">
-     <fieldset>
-     <div class="controls">
-            <input type="number" placeholder="month" name="month" min="1" max="12" id="month" required >
-     </div>
-     </fieldset>
-     <div>
-        <button type="submit" >CALCULATE</button>
-     </div>
+        <fieldset>
+            <label> Calculate salary for worker:</label>
+         <div class="controls">
+             <input type="number" placeholder="month" name="month" min="1" max="12" id="month" required >
+        </div>
+            <button type="submit" >CALCULATE</button>
+        </fieldset>
     </form>
 </body>
 </html>

@@ -24,11 +24,14 @@
     </style>
 </head>
 <body>
+    <h2 >Search employer</h2>
 <input id="name" type="text" />
-<button onclick="filter()">Filter by name</button>
+<button onclick="filter()">Search</button>
 <p style="color: red;" id="error"></p>
 
+
 <table>
+
     <% if (locals.employers) { %>
         <% employers.forEach((item)=>{%>
         <tr>

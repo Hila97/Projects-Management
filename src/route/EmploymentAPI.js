@@ -26,9 +26,9 @@ router.get('/pastWorkers',(req, res)=>{
 })
 router.get('/pendingEmployments',employment.findEmploymentsForConfirmation)
 router.get('/confirmEmployment/:ID',employment.confirmEmployment)
-router.get('/rejectEmployment/:ID',employment.rejectEmployment)
-
+router.get('/rejectEmployment/:ID/:workDate',employment.rejectEmployment)
 //router.put('/updateEmploymentToday/:employerID',employment.updateEmploymentToday)
+router.get('/getAllRatingsForWorker/:workerID', employment.getAllRatingsForWorker)
 
 
 module.exports =router
