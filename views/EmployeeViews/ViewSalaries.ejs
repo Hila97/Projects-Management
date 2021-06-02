@@ -26,10 +26,16 @@
 <body>
 <label> WORKER SALARIES:</label>
 <table>
-<tr>
-    <th>MONTH</th>
-    <th>TOTAL SALARY</th>
-</tr>
+    <tr>
+        <th>MONTH</th>
+        <th>TOTAL SALARY</th>
+    </tr>
+    <% salaries.forEach((item)=>{%>
+    <tr>
+        <td><%=item.date.toDateString()%></td>
+        <td><%=item.totalSalary%></td>
+    </tr>
+    <%});%>
 </table>
 
 </body>

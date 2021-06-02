@@ -10,6 +10,34 @@
     :root {
         --pink: white;
     }
+    #Hbg {
+        width: 100%;
+        height: 100%;
+
+        /*background-image: url("https://sites.google.com/site/humanresourcesbasics/_/rsrc/1429061903960/home/what-is-hr/people.jpg");*/
+        background-size: cover;
+
+        position:fixed;
+        z-index: -1;
+
+    }
+
+    .H{
+        text-decoration: none;
+        color: #2b3030;
+        left: 20px; /* Space between links in Nav*/
+        position: absolute;
+        font-family: sans-serif;
+    }
+    .P{
+        text-decoration: none;
+        color: #2b3030;
+        left: 20px; /* Space between links in Nav*/
+        position: absolute;
+        padding-top: 80px;
+        font-family: sans-serif;
+        font-size: 15px;
+    }
 
     body {
         font-family: Lato, sans-serif;
@@ -97,7 +125,6 @@
         <ul>
             <li><a href="/">HR-COMPANY</a></li>
             <li><a href="/employment/getEmploymentsListForContractor">Shifts report</a></li>
-            <li><a href="#">Schedule</a></li>
             <li><a href="/contractorWorker/displayProfile">Profile</a></li>
             <li><a href="/employment/findPastEmploymentsForContractor">history</a></li>
             <li><a href="/employment/pendingEmployments">PENDING-BOOKING</a></li>
@@ -107,10 +134,52 @@
 <!--            <a href="#"><button class="myButton">Log-In</button></a>-->
         </ul>
     </div>
+    <div id='Hbg'>
+        <div>
+
+            <h1 class="H"> Hello Contractor :)</h1>
+
+            <a class="P">
+                Welcome to your personal area,
+                Here you can perform actions and view
+                all your personal information easily
+            </a>
+        </div>
+    </div>
+
+
+
+
+
     </body>
 
-    <script>
 
+
+
+     <script>
+        function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                 let cookie = c.substring(name.length, c.length)
+                 cookie = cookie.split(':')[2].split('\"')[1]
+                 return cookie
+                }
+            }
+            return '';
+            }
+
+        function getEmployees(){
+
+           const workerID = getCookie('contractorWorkerIDCookie')
+            window.location.pathname =`/contractorWorker/getRatingContractorWorkerByID/${workerID}`
+        }
     </script>
 </div>
 </body>

@@ -503,6 +503,8 @@ const getAllRatingsForWorker = async (req,res)=>{
         console.log(e)
     }
 }
+
+
 module.exports={
     addEmployment,
     findAllEmployments,

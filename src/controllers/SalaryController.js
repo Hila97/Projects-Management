@@ -38,7 +38,7 @@ async function findAllSalaries(req,res)
     if (salaries.length == 0)
             res.render('EmployeeViews/FailureToFindSalaries',{ID})
     else
-       res.render('EmployeeViews/ViewSalaries',{ID})
+       res.render('EmployeeViews/ViewSalaries',{salaries})
 }
 
 
