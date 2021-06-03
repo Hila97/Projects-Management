@@ -157,7 +157,7 @@ const getBookedEmployeesToday= async (req, res)=>
             if(!e.workerID) return res.render('Error', {message: 'one or more of the workerIDs doesnt exist'})
         })
         const resData = employees.map(e=>e.workerID)
-        res.render('getBookedEmployeesToday',{employees : resData})
+        res.render('EmployerViews/getBookedEmployeesToday',{employees : resData})
 
       // return  res.json(employees)
     }
@@ -185,7 +185,7 @@ const getBookedEmployeesFuture= async (req,res)=>
         })
 
         const resData = employees.map(e=>e.workerID)
-        return  res.render('filterEmployeesByStatusFuture',{employees})
+        return  res.render('EmployerViews/filterEmployeesByStatusFuture',{employees})
     }
     catch(e)
     {

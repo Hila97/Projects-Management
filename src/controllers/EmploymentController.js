@@ -503,6 +503,18 @@ const getAllRatingsForWorker = async (req,res)=>{
         console.log(e)
     }
 }
+async function findEmploymentByID(req,res)
+{
+    console.log(req.params.employmentID)
+    var id=req.params.employmentID
+    var q={
+        _id:id
+    }
+    await Employment.findById(q).populate('workerID').then(e=>{
+        console.log(e)
+        res.render('EmployerViews/EmploymentDetails',{e})
+    })
+}
 module.exports={
     addEmployment,
     findAllEmployments,
@@ -523,6 +535,7 @@ module.exports={
     rejectEmployment,
     filterEmploymentsByDateContractor,
     filterHistoryByfieldOfEmployment,
- getAllRatingsForWorker
+ getAllRatingsForWorker,
+    findEmploymentByID
 
 }
