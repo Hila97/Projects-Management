@@ -17,6 +17,9 @@
     </script>
 </head>
 <body>
+<div>
+    <%- include ('../partials/EmployerNav')%>
+</div>
 <h1>COMPLETE THE EMPLOYMENT BOOKING </h1>
 <form class="form-horizontal" onsubmit="return checkHours()" action='/employment/addEmployment/<%=workDate%>' method="POST">
     <fieldset>

@@ -7,6 +7,9 @@
 </head>
 <body>
 <div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
+<div>
 <% fields.forEach((item)=>{ %>
 <input type="hidden" name="fields[]" value="<%=item%>"  >
 <%});%>
