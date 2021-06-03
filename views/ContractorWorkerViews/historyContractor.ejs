@@ -2,7 +2,6 @@
 <head>
     <meta charset="UTF-8">
     <title>History</title>
-    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -35,15 +34,16 @@
             cursor: pointer;
 
         }
-        h1{
-            position: relative;
-        }
 
     </style>
 </head>
 
 
 <body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<div class="content-area">
 <h1>History</h1>
 <div>
     <select onchange="window.location=this.options[this.selectedIndex].value">
@@ -79,6 +79,7 @@
             <%});%>
         <% } %>
     </table>
+</div>
 </div>
 <script>
     function filter(){

@@ -258,7 +258,7 @@ const filterEmploymentsByDateContractor= async (req,res)=>
             return
 
         }
-        res.render('historyContractor', {employments: employments})
+        res.render('ContractorWorkerViews/historyContractor', {employments: employments})
     }
     catch
         (e)
@@ -355,7 +355,7 @@ async function findPastEmploymentsForContractor(req, res, next) {
             res.send("No past employment found")
         }
         else
-            res.render('historyContractor',{employments})
+            res.render('ContractorWorkerViews/historyContractor',{employments})
     }).catch(e=>
     {
         console.log(e)

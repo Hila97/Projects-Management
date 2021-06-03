@@ -169,7 +169,7 @@ const getBookedEmployeesToday= async (req, res)=>
 
 const getBookedEmployeesFuture= async (req,res)=>
 {
-    const {id} = req.params
+    const id = req.cookies.employerIDCookie.id
     try
     {
         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID').sort({workDate:1})

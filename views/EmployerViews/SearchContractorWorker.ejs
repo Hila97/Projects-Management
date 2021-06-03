@@ -24,46 +24,24 @@
         }
     </script>
 </head>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-
-
+<body>
+<div>
+    <%- include ('../partials/EmployerNav')%>
+</div>
+<div class="content-area">
 <form class="form-horizontal" onsubmit="return checkHourlyWage()" action='/contractorWorker/findAvailableWorkers' method="POST">
     <fieldset>
         <div id="legend">
             <legend class="">SEARCH CONTRACTOR WORKER</legend>
         </div>
         <div class="control-group">
-            <!--date-->
                 <label class="control-label"  for="workDate">workDate:</label>
                 <div class="controls">
                     <input type="date" id="workDate" name="workDate" placeholder="" class="input-xlarge" required>
                 </div>
             </div>
-            <!--<input type="date" id="workDate" name="workDate" placeholder="" class="input-xlarge" required> -->
-<!--
-             <input type="text" id="workDate" name="workDate" value="05/06/2021" class="input-xlarge"required/>
-             <script>
-                 $(function() {
-                     $('input[name="workDate"]').daterangepicker({
-                         singleDatePicker: true,
-                         showDropdowns: true,
-                         minYear: 2021,
-                         minDate:new Date(),
-                         timePicker:true
 
-                     }, function(start, end, label) {
-                         console.log("A new date selection was made: " + start.format('YYYY-MM-DD'));
-                     });
-                 });
-             </script>
-         </div>
--->
         <div class="control-group">
-            <!--areaOfResidence-->
             <div>
                 <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
             </div>
@@ -120,7 +98,6 @@
         </div>
 
         <div class="control-group">
-            <p class="space row">                      </p>
             <!-- Experience -->
             <label class="control-label"  for="experience">Experience:</label>
             <div class="controls">
@@ -128,7 +105,6 @@
             </div>
         </div>
         <div class="control-group">
-            <p class="space row">                      </p>
             <!-- Experience -->
             <label class="control-label"  for="rating">rating:</label>
             <div class="controls">
@@ -145,5 +121,6 @@
         </div>
     </fieldset>
 </form>
-
+</div>
+</body>
 </html>
