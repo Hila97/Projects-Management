@@ -258,7 +258,7 @@ const filterEmploymentsByDateContractor= async (req,res)=>
             return
 
         }
-        res.render('historyContractor', {employments: employments})
+        res.render('ContractorWorkerViews/historyContractor', {employments: employments})
     }
     catch
         (e)
@@ -355,7 +355,7 @@ async function findPastEmploymentsForContractor(req, res, next) {
             res.send("No past employment found")
         }
         else
-            res.render('historyContractor',{employments})
+            res.render('ContractorWorkerViews/historyContractor',{employments})
     }).catch(e=>
     {
         console.log(e)
@@ -503,8 +503,18 @@ const getAllRatingsForWorker = async (req,res)=>{
         console.log(e)
     }
 }
-
-
+async function findEmploymentByID(req,res)
+{
+    console.log(req.params.employmentID)
+    var id=req.params.employmentID
+    var q={
+        _id:id
+    }
+    await Employment.findById(q).populate('workerID').then(e=>{
+        console.log(e)
+        res.render('EmployerViews/EmploymentDetails',{e})
+    })
+}
 module.exports={
     addEmployment,
     findAllEmployments,
@@ -525,6 +535,7 @@ module.exports={
     rejectEmployment,
     filterEmploymentsByDateContractor,
     filterHistoryByfieldOfEmployment,
- getAllRatingsForWorker
+ getAllRatingsForWorker,
+    findEmploymentByID
 
 }

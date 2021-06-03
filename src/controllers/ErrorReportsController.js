@@ -14,8 +14,9 @@ const addErrorReport=(req, res)=> {
 }
 const findAllErrorReports=(req,res)=>{
     console.log("find1")
-    ErrorReport.find()
+    ErrorReport.find().populate('companyEmployeeID')
         .then((result)=>{
+            console.log(result)
             res.render('fixErrorReports',{errorReports:result})
         })
         .catch((err)=>{

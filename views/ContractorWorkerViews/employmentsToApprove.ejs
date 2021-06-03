@@ -19,9 +19,29 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+        .content-area h2 {
+            font-family: poppins;
+            letter-spacing: 4px;
+            padding-top: 30px;
+            font-size: 40px;
+            margin: 0;
+            color: #18c6c0;
+        }
+        .content-area h1 {
+            font-family: poppins;
+            letter-spacing: 4px;
+            padding-right: 100px;
+            font-size: 40px;
+            margin: 0;
+            color: #18c6c0;
+        }
     </style>
 </head>
 <body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<div class="content-area">
 <h1>employments orders to confirm:</h1>
 <h2>hello</h2>
 <table>
@@ -57,5 +77,6 @@
         </tr>
     <%});%>
 </table>
+</div>
 </body>
 </html>

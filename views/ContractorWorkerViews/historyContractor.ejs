@@ -67,6 +67,10 @@
 
 
 <body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<div class="content-area">
 <h1>History</h1>
 <input id="workDate" type="date" />
 <button onclick="filter()">Filter Employees</button>
@@ -89,6 +93,7 @@
             <%});%>
         <% } %>
     </table>
+</div>
 </div>
 <script>
     function filter(){
