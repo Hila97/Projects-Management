@@ -9,61 +9,13 @@
             border-collapse: collapse;
             width: 100%;
         }
-
         td, th {
             border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
         }
-
         tr:nth-child(even) {
             background-color: #dddddd;
-        }
-        .form-popup {
-            display: none;
-            position: fixed;
-            right: 15px;
-            border: 3px solid #f1f1f1;
-            z-index: 9;
-        }
-        *{
-            margin: 0;
-            padding: 0;
-        }
-        .rate {
-            float: left;
-            height: 46px;
-            padding: 0 10px;
-        }
-        .rate:not(:checked) > input {
-            position:absolute;
-            top:-9999px;
-        }
-        .rate:not(:checked) > label {
-            float:right;
-            width:1em;
-            overflow:hidden;
-            white-space:nowrap;
-            cursor:pointer;
-            font-size:30px;
-            color:#ccc;
-        }
-        .rate:not(:checked) > label:before {
-            content: '★ ';
-        }
-        .rate > input:checked ~ label {
-            color: #ffc700;
-        }
-        .rate:not(:checked) > label:hover,
-        .rate:not(:checked) > label:hover ~ label {
-            color: #deb217;
-        }
-        .rate > input:checked + label:hover,
-        .rate > input:checked + label:hover ~ label,
-        .rate > input:checked ~ label:hover,
-        .rate > input:checked ~ label:hover ~ label,
-        .rate > label:hover ~ input:checked ~ label {
-            color: #c59b08;
         }
 
         /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
@@ -74,62 +26,21 @@
 <table>
 
     <tr>
-        <th>status</th>
-        <th>work Date</th>
+        <th>Date</th>
         <th>worker</th>
-        <th>telephone</th>
-        <th>rank</th>
-        <th>Description</th>
-        <th>rate the employer</th>
+        <th>More Details</th>
     </tr>
     <% names=[]%>
     <% employments.forEach((item)=>{%>
-    <% names.push({name:item.workerID.firstName+" "+ item.workerID.lastName})%>
-    <tr>
-        <td><%=item.status%></td>
-        <td><%=item.workDate.toDateString()%></td>
-        <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
-        <td><%=item.workerID.telephone%></td>
-        <td><%=item.rank%></td>
-        <td><%=item.jobDescription%></td>
-        <td> <button class="open-button" onclick="openForm()">rate</button></td>
-        <td><input id="ID" value="<%=item._id%>" hidden/></td>
-    </tr>
+        <% names.push({name:item.workerID.firstName+" "+ item.workerID.lastName})%>
+        <tr>
+            <td><%=item.workDate.toDateString()%></td>
+            <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
+            <td><a class="btn" href="/employment/employmentDetails/<%=item._id%>">DETAILS</a> </td>
+        </tr>
     <%});%>
 </table>
-<div class="form-popup" id="myForm">
-    <form action='/employment/rateEmployment' class="form-container" method="POST">
-        <h1>rate the worker</h1>
-        <input type="text" id="employmentID" name="employmentID" hidden class="input-xlarge"/>
 
-        <div class="rate">
-            <input type="radio" id="star5" name="rate" value="5" />
-            <label for="star5" title="text">5 stars</label>
-            <input type="radio" id="star4" name="rate" value="4" />
-            <label for="star4" title="text">4 stars</label>
-            <input type="radio" id="star3" name="rate" value="3" />
-            <label for="star3" title="text">3 stars</label>
-            <input type="radio" id="star2" name="rate" value="2" />
-            <label for="star2" title="text">2 stars</label>
-            <input type="radio" id="star1" name="rate" value="1" />
-            <label for="star1" title="text">1 star</label>
-        </div>
-
-        <button type="submit" class="btn">rate</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-    </form>
-</div>
-
-<script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-        document.getElementById("employmentID").value=document.getElementById("ID").value;
-    }
-
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
-</script>
 <a class="btn" href="/employment/pastWorkers/<%names%>">PAST WORKERS</a>
 
 </body>

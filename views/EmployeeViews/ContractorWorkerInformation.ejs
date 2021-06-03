@@ -5,7 +5,11 @@
     <title>Search contractor worker</title>
 </head>
 <body>
-
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
+<div class="banner-area"> </div>
+<div class="content-area">
 <form class="form-horizontal" action="/contractorWorker/findContractorWorkerById" method="POST">
     <fieldset>
         <div id="legend">
@@ -23,5 +27,6 @@
         <button type="submit" >SEARCH</button>
     </div>
 </form>
+</div>
 </body>
 </html>
