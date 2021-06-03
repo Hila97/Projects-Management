@@ -1,7 +1,7 @@
 const router=require('express').Router()
 const attendanceReport = require('../controllers/AttendanceReportController')
 
-router.post('/addAttendanceReport', attendanceReport.addAttendanceReport)
+router.post('/addAttendanceReport/:_id', attendanceReport.addAttendanceReport)
 router.get('/findAllAttendanceReports', attendanceReport.findAllAttendanceReports)
 router.get('/findAttendanceById', attendanceReport.findAttendanceById)
 router.post('/editExistingTime', attendanceReport.editExistingTime)

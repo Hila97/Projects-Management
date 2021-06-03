@@ -1,26 +1,24 @@
 const mongoose = require ('mongoose');
 const AttendanceReportCtrl=require('../models/AttendanceReport')
 const emoloyment=require('../controllers/EmploymentController')
+const emoloyments=require('../models/Employment')
 const moment = require('moment')
 
 
 async function addAttendanceReport(req, res)
 {
     console.log("add")
-    console.log(req.params.contractorWorkerID)
+    console.log(req.params)
     const newAttendanceReport = new AttendanceReportCtrl({contractorWorkerID: req.cookies.contractorWorkerIDCookie.id})
     await newAttendanceReport.save()
-        // .then(report=>{
-        //     var d = new Date()
-        //     d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
-        //     console.log(d)
-        //     emoloyment.getEmploymentsListForContractor()
-       //res.render("HomeContractor", {report})
-       //res.json({newAttendanceReport})
-   // })
-    // .catch(err => {
-    //     console.log(err)
-    // })
+         .then(report=>{
+             emoloyments.findOneAndUpdate({_id:req.params._id}, {temp:1}).then(result=>{
+                 res.render("HomeContractor", {report})
+             })
+         })
+    .catch(err => {
+        console.log(err)
+    })
 
 }
 const findAllAttendanceReports=(req,res)=>
@@ -49,7 +47,7 @@ var editExistingTime=(req, res)=>
     d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
-        res.send(result)
+        res.render("HomeContractor")
     })
     console.log(d)
 }
@@ -61,7 +59,7 @@ var editEnteringTime=(req, res)=>
     console.log(d)
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startShift: d}} ).then((result) => {
-        res.send(result)
+        res.render("HomeContractor")
     })
 }
 
@@ -72,7 +70,7 @@ var editStartBreak=(req, res)=>
     console.log(d)
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startBreak: d}} ).then((result) => {
-        res.send(result)
+        res.render("HomeContractor")
     })
     console.log("edit startbreak")
 }
@@ -84,7 +82,7 @@ var editEndBreak=(req, res)=>
     console.log(d)
     req.body.startBreak = d
     AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endBreak: d}} ).then((result) => {
-        res.send(result)
+        res.render("HomeContractor")
     })
 }
 const calcTotalWork = (attendanceArr, hourlyWage) => {

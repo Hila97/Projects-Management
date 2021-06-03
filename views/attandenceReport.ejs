@@ -2,29 +2,46 @@
 <html>
 <head>
     <title>Attandence Report</title>
-    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
     <style>
-        #panel, #flip {
-            padding: 5px;
-            text-align: center;
-            background-color: #e5eecc;
-            border: solid 1px #c3c3c3;
-        }
+        .btn-group button {
+            background-color: #555555; /* Green background */
+            border: 0px solid green; /* Green border */
+            color: white; /* White text */
+            padding: 10px 24px; /* Some padding */
+            cursor: pointer; /* Pointer/hand icon */
+            float: left; /* Float the buttons side by side */
 
-        #panel {
-            padding: 50px;
-            display: none;
+        }
+        h1 {
+            text-align: center;
+            font-family: "Arial Black";
         }
         table {
             font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 80%;
+            width: 50%;
+            -moz-border-radius:6px;
+            border-collapse: collapse; /* IE7 and lower */
+            border-spacing: 0;
         }
 
         td, th {
-            border: 1px solid #dddddd;
             text-align: left;
             padding: 8px;
+            vertical-align: auto;
+        }
+        th{
+            background-color: aquamarine;
+        }
+        th:first-child {
+            border-radius: 6px 0 0 0;
+        }
+
+        th:last-child {
+            border-radius: 0 6px 0 0;
+        }
+
+        th:only-child{
+            border-radius: 6px 6px 0 0;
         }
         table.center {
             margin-left: auto;
@@ -37,24 +54,9 @@
             display:none;
             /* height: 0px; */
         }
+        .button4 {border-radius: 12px;}
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#flip").click(function () {
-                $("#panel").slideDown("slow");
-            });
-            $("#panel").click(function () {
-                $("#panel").slideUp();
-            });
-        });
-
-    </script>
-    <script>
-        function func(){
-            $("#panel").slideDown("slow");
-        }
-    </script>
 </head>
 <body>
 <div id="legend">
@@ -74,35 +76,30 @@
         <% employments.forEach((item)=>{%>
     <tr >
         <td>
-        <%=item.workDate%>
-            <%if (item.workDate.getDate()==d.getDate()){%>
-            <button onclick="func()"  >REPORT</button>
-            <%};%>
-        <div id="panel">hello world
-            <form class="form-horizontal" action='/attendanceReport/addAttendanceReport' method="post">
-                <!-- Button -->
-                <div class="controls" id="start">
-                    <%if (item.workDate.getDate()==d.getDate() ){%>
-                    <button  class="btn btn-success" type="submit" >start shift</button>
-                    <%item.temp=1%>
+        <%=item.workDate.toDateString()%>
+<!--        <div id="panel">-->
+            <div class="btn-group">
+            <form class="form-horizontal" action='/attendanceReport/addAttendanceReport/<%=item._id%>' method="post">
+                    <%if (item.workDate.getDate()==d.getDate() && item.temp==0){%>
+                    <button  type="submit" class="button4">start shift</button>
                     <%};%>
-                </div>
             </form>
             <form class="form-horizontal" action='/attendanceReport/editStartBreak' method="post">
-                <div class="controls">
-                    <button class="btn btn-success" type="submit">start break</button>
-                </div>
+                <%if (item.workDate.getDate()==d.getDate()){%>
+                <button type="submit" class="button4">start break</button>
+                <%};%>
             </form>
             <form class="form-horizontal" action='/attendanceReport/editEndBreak' method="post">
-                <div class="controls">
-                    <button  class="btn btn-success" type="submit">end break</button>
-                </div>
+                <%if (item.workDate.getDate()==d.getDate()){%>
+                <button  class="button4" type="submit">end break</button>
+                <%};%>
             </form>
             <form class="form-horizontal" action='/attendanceReport/editExistingTime' method="post">
-                <div class="controls">
-                    <button  class="btn btn-success" type="submit">end shift</button>
-                </div>
+                <%if (item.workDate.getDate()==d.getDate()){%>
+                <button  class="button4" type="submit">end shift</button>
+                <%};%>
             </form>
+<!--        </div>-->
         </div>
         </td>
     </tr>

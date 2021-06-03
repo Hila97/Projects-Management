@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <title>Edit Attendance Report</title>
 </head>
-<body>
+<body onload="myFunction()">
 <h2>Edit Attendance Report</h2>
 
 <script>
-    var Sshift =new Date(<%=attandence.startShift%>)
-    const s = Sshift.toTimeString().toString()
-    document.getElementById("dd").innerHTML = s;
-
+    function myFunction() {
+        var x = document.getElementById("startShift")
+        var Sshift = new Date(x.placeholder)
+        // const s = Sshift.getTime()
+        var time = Sshift.getHours() + ":" + Sshift.getMinutes();
+        document.getElementById("startShift").value = time;
+    }
 </script>
 <form>
-    <label id="dd"> hh</label>
-    <label for="startShift">Start shift:<%=attandence.startShift%></label><br>
-    <input type="time" id="startShift" value="" name="startShift" min="06:00" max="23:00" ><br>
+<!--    <button onclick="nyFunction()" type="button">try</button>-->
+
+    <label id="qq" for="startShift">Start shift:<%=attandence.startShift%></label><br>
+    <input type="time" id="startShift" value="" name="startShift" min="06:00" max="23:00" placeholder="<%=attandence.startShift%>"><br>
 
     <label for="endShift">End shift:<%=attandence.endShift%></label><br>
     <input type="time" id="endShift" name="endShift" min="06:00" max="23:00" ><br>
