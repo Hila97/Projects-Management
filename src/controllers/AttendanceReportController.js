@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 const AttendanceReportCtrl=require('../models/AttendanceReport')
 const emoloyment=require('../controllers/EmploymentController')
+const ErrorReport=require('../models/ErrorReport')
 const moment = require('moment')
 
 
@@ -407,12 +408,14 @@ const  editAttendanceReport=(req, res)=>{
 
         AttendanceReportCtrl.findByIdAndUpdate(ID, {startShift:enterS,endShift:exitS,startBreak:enterB,endBreak:exitB})
             .then(att=>{
+                ErrorReport.findOneAndUpdate({attendanceReportID:req.params.ID},{status:1}).then(result=>{
                 res.render('HomeEmployee')
-                if(!att) {
+                if(!result) {
                     res.status(404).send({message: 'error'})
                 }else {
-                    res.send(att)
+                    res.send(result)
                 }
+                })
             })
             .catch(err=>{
                 console.log(err)

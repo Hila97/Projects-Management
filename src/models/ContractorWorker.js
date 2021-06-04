@@ -114,6 +114,7 @@ const contractorSchema = new schema (
     {
         type:Number,
         default:0
-    }
+    },
+    joinDate:{type:Date , default:Date.now() }
 })
 module.exports=mongoose.model('contractorWorker', contractorSchema)

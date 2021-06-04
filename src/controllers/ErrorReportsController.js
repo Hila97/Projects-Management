@@ -17,7 +17,7 @@ const findAllErrorReports=(req,res)=>{
     ErrorReport.find().populate('companyEmployeeID')
         .then((result)=>{
             console.log(result)
-            res.render('fixErrorReports',{errorReports:result})
+            res.render('EmployeeViews/fixErrorReports',{errorReports:result})
         })
         .catch((err)=>{
             console.log(err)
@@ -57,12 +57,13 @@ const showErrorReport = (req,res)=>{
     console.log(ID)
     attandenceReport.findById(ID)
         .then((result)=>{
-            res.render('editAttendanceReport', {attandence:result})
+            res.render('EmployeeViews/editAttendanceReport', {attandence:result})
         })
         .catch((err)=>{
             console.log(err)
         })
 }
+
 
 module.exports={
     addErrorReport,
