@@ -7,7 +7,7 @@ const moment = require('moment')
 
 const addSalary=(req, res)=>
 {
-    console.log("add")
+    console.log("add salary")
     const newSalary = new Salary(req.body)
     newSalary.save().then(Salary=>
     {
