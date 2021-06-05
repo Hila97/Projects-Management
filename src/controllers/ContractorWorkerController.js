@@ -372,7 +372,7 @@ const findContractorWorkerByIdReturnAttendance = async (req, res)=>
         var q={
             contractorWorkerID:workerID
         }
-        attandenceReport.find(q)
+        attandenceReport.find(q).populate('contractorWorkerID')
             .then((result)=>{
                 console.log(result)
                 res.render('EmployeeViews/attandenceReportByContractorID', {r:result})
@@ -421,7 +421,7 @@ const findContractorAttendance = async (req, res)=>
         var q={
             contractorWorkerID:workerID
         }
-        attandenceReport.find(q)
+        attandenceReport.find(q).populate('contractorWorkerID')
             .then((result)=>{
                 console.log(result)
                 res.render('EmployeeViews/attendanceReportOfContractor', {r:result})

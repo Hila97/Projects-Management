@@ -5,6 +5,9 @@
     <title>Edit Attendance Report</title>
 </head>
 <body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
 <h2>Add Error Report</h2>
 
 <form action="/errorReport/addErrorReport/<%=attendance.reportDate%>/<%=attendance._id%>" method="post">

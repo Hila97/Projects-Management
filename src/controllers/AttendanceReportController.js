@@ -47,8 +47,10 @@ var editExistingTime=(req, res)=>
     var d = new Date()
     d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     req.body.startBreak = d
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then((result) => {
-        res.render("HomeContractor")
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {endShift: d}} ).then(report=>{
+        emoloyments.findOneAndUpdate({_id:req.params._id}, {endS:1}).then(result=>{
+            res.render("HomeContractor", {report})
+        })
     })
     console.log(d)
 }
@@ -70,8 +72,10 @@ var editStartBreak=(req, res)=>
     d.setTime( d.getTime() - new Date().getTimezoneOffset()*60*1000 );
     console.log(d)
     req.body.startBreak = d
-    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startBreak: d}} ).then((result) => {
-        res.render("HomeContractor")
+    AttendanceReportCtrl.findOneAndUpdate({contractorWorkerID:req.cookies.contractorWorkerIDCookie.id}, {$set: {startBreak: d}} ).then(report=>{
+        emoloyments.findOneAndUpdate({_id:req.params._id}, {startB:1}).then(result=>{
+            res.render("HomeContractor", {report})
+        })
     })
     console.log("edit startbreak")
 }

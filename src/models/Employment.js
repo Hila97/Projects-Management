@@ -66,6 +66,16 @@ const employmentSchema = new schema({
         {
             type:Number,
             default:0
+        },
+    startB:
+        {
+            type:Number,
+            default:0
+        },
+    endS:
+        {
+            type:Number,
+            default:0
         }
 });
 

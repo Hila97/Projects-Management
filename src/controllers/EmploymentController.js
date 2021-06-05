@@ -334,7 +334,7 @@ const getEmploymentsListForContractor = async (req,res)=>{
     }
     Employment.find(q)
         .then((result)=>{
-            res.render('attandenceReport', {employments: result})
+            res.render('ContractorWorkerViews/attandenceReport', {employments: result})
         })
         .catch((err)=>{
             console.log(err)

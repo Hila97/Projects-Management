@@ -244,10 +244,7 @@ app.get('/historyFieldofemployment', ((req, res) =>
 {
     res.render('historyFieldofemployment')
 }))
-app.get('/vacationReport', ((req, res)=>
-{
-    res.render('vacationReport')
-}))
+
 
 app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
 {
@@ -265,7 +262,7 @@ app.get('/historyFieldofemployment', ((req, res) =>
 }))
 app.get('/vacationReport', ((req, res)=>
 {
-    res.render('vacationReport')
+    res.render('ContractorWorkerViews/vacationReport')
 }))
 
 app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
