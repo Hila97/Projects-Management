@@ -250,15 +250,15 @@ const getTwoMonthsSalaries= async (req, res)=> {
 
     // check if there is an error
     if(result1.message){
-        res.render('compareTwoMonthSalaries', {message:'You didnt work on month : ' + month1 })
+        res.render('ContractorWorkerViews/compareTwoMonthSalaries', {message:'You didnt work on month : ' + month1 })
         return
     }
     else if(result2.message){
-        res.render('compareTwoMonthSalaries', {message:'You didnt work on month : ' + month2 })
+        res.render('ContractorWorkerViews/compareTwoMonthSalaries', {message:'You didnt work on month : ' + month2 })
         return
     }
 
-    return  res.render('compareTwoMonthSalaries',{salary1: result[0], salary2: result[1]})
+    return  res.render('ContractorWorkerViews/compareTwoMonthSalaries',{salary1: result[0], salary2: result[1]})
 
 }
 
