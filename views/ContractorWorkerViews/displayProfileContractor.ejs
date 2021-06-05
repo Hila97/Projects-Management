@@ -4,6 +4,9 @@
     <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
 </head>
 <body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
 <form class="form-horizontal" action='/contractorWorker/editProfile' method="post">
 
             <div id="legend">
@@ -49,7 +52,7 @@
         <!--dateOfBirth -->
         <label class="control-label"  for="dateOfBirth">Birthday:</label>
         <div class="controls">
-            <input type="text" id="dateOfBirth" name="dateOfBirth" value="<%=contractor.dateOfBirth%>" placeholder="<%=contractor.dateOfBirth%>" class="input-xlarge" disabled>
+            <input type="text" id="dateOfBirth" name="dateOfBirth" value="<%=contractor.dateOfBirth.toDateString()%>" placeholder="<%=contractor.dateOfBirth%>" class="input-xlarge" disabled>
         </div>
     </div>
 
@@ -102,7 +105,7 @@
         <!-- Experience -->
         <label class="control-label"  for="Experience">Experience:</label>
         <div class="controls">
-            <input type="number" id="Experience" name="Experience" value="<%=contractor.Experience%>" placeholder="<%=contractor.Experience%>" class="input-xlarge" pattern="[0-9]+">
+            <input type="number" id="Experience" name="Experience" value="<%=contractor.Experience%>" placeholder="<%=contractor.Experience%>" class="input-xlarge" pattern="[0-9]+" min="0" max="80">
         </div>
     </div>
 

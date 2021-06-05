@@ -96,9 +96,21 @@
 <div>
     <%- include ('../partials/CompanyEmployeeNav')%>
 </div>
-<form class="form-horizontal" action='/contractorWorker/addContractor' method="POST">
+<script>
+    function check() {
+        var date = new Date()
+        var date2 = new Date(document.getElementById("dateOfBirth").value);
+        if (date2 > date) {
+            document.getElementById("message1").innerHTML = "invalid date";
+            return false
+        }
+    }
+</script>
+<form onsubmit="return check()" class="form-horizontal" action='/contractorWorker/addContractor' method="POST">
 
-    <h1>Add new contractor</h1>
+        <div id="legend">
+            <legend class="">Add New Contractor</legend>
+        </div>
 
 <div>
             <!-- ID-->
@@ -125,7 +137,7 @@
             <!--dateOfBirth -->
             <label class="control-label"  for="dateOfBirth">Birthday:</label>
             <br>
-                <input type="date" id="workDate" name="dateOfBirth" placeholder="" class="input-xlarge" required >
+                <input type="date" id="dateOfBirth" name="dateOfBirth" placeholder="" class="input-xlarge" required >
             <span id="message1" style="color:red"></span>
             <br>
             <!--areaOfResidence-->
