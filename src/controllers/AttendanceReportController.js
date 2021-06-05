@@ -201,7 +201,7 @@ const getWageByMonth= async (req, res)=> {
         return
     }
 
-    return  res.render('totalWageByMonth',{salary: result})
+    return  res.render('ContractorWorkerViews/totalWageByMonth',{salary: result})
 
 }
 
@@ -218,11 +218,11 @@ const getThisMonthSalary= async (req, res)=> {
 
     // check if there is an error
     if(result.message){
-        res.render('thisMonthSalary',{message: result.message})
+        res.render('ContractorWorkerViews/thisMonthSalary',{message: result.message})
         return
     }
 
-    return  res.render('thisMonthSalary',{salary: result})
+    return  res.render('ContractorWorkerViews/thisMonthSalary',{salary: result})
 
 }
 const getTwoMonthsSalaries= async (req, res)=> {
@@ -263,12 +263,12 @@ const getTodaySalary= async (req, res)=> {
 
     // check if there is an error
     if(result.message){
-        res.render('todaySalaryContractorWorker', {message:'You didnt work today' })
+        res.render('ContractorWorkerViews/todaySalaryContractorWorker', {message:'You didnt work today' })
         return
     }
 
 
-    return  res.render('todaySalaryContractorWorker',{salary: result})
+    return  res.render('ContractorWorkerViews/todaySalaryContractorWorker',{salary: result})
 
 }
 
@@ -282,12 +282,12 @@ const getThisYearSalary= async (req, res)=> {
 
     // check if there is an error
     if(result.message){
-        res.render('thisYearProfit', {message : 'You didnt work this year ' })
+        res.render('ContractorWorkerViews/thisYearProfit', {message : 'You didnt work this year ' })
         return
     }
 
 
-    return  res.render('thisYearProfit',{salary : result})
+    return  res.render('ContractorWorkerViews/thisYearProfit',{salary : result})
 
 }
 
@@ -342,7 +342,7 @@ const getRangeOfSalaryByShift= async (req, res)=> {
         const result = calcWorkRangeByShift(attendance, attendance[0].contractorWorkerID.hourlyWage)
         console.log(result)
 
-        return  res.render('rangeOfSalaryByShifts',{range : result})
+        return  res.render('ContractorWorkerViews/rangeOfSalaryByShifts',{range : result})
     } catch (e) {
         console.log(e)
     }

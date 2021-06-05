@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>companyName</title>
+    <title>fieldOfEmployment</title>
     
     <style>
         table {
@@ -24,10 +24,13 @@
         }
         </style>
 </head>
- <body>
+<body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
  
-  <h2 >Filter by company name</h2>
-  <input id="companyName" type="text" />
+  <h2 >Filter by fieldOfEmployment</h2>
+  <input id="fieldOfEmployment" type="text" />
   <button onclick="filter()">Search</button>
   <p style="color: red;" id="error"></p>
    <table >
@@ -62,13 +65,16 @@
 </body>
 <script>
   function filter(){
-      let companyName = document.getElementById('companyName').value
-      if(!companyName){
-          document.getElementById('error').innerHTML = 'must insert companyName'
+      let fieldOfEmployment = document.getElementById('fieldOfEmployment').value
+      if(!fieldOfEmployment){
+          document.getElementById('error').innerHTML = 'must insert fieldOfEmployment'
           return
       }
-      window.location.pathname = `employer/getEmployeesBycompanyName/${companyName}`
+      window.location.pathname = `employer/filterByfieldOfEmployment/${fieldOfEmployment}`
 
+      // window.location.href = `employer/getEmployeesBycompanyName/${companyName}`
+      //window.history.pushState({}, document.title, "/" + `employer/filterByfieldOfEmployment/${fieldOfEmployment}`);
+      //window.location.reload()
   }
 </script>
 </html>

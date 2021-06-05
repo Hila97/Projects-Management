@@ -18,7 +18,7 @@
         }
     </style>
     <title>Filter</title>
-    <h1>Employments filter</h1>
+
 
 </head>
     <!--</head>
@@ -30,9 +30,11 @@
     </body>
     </html>-->
 
-    <body>
-
-
+<body>
+    <div>
+        <%- include ('../partials/CompanyEmployeeNav')%>
+    </div>
+    <h1>Employments filter</h1>
     <select onchange="window.location=this.options[this.selectedIndex].value">
         <option value="">filter by:</option>
         <option value="/filterEmploymentsByBookingMonth">Filter employment by month</option>
@@ -45,6 +47,6 @@
 <!--        <option value="/filterEmploymentsByemployerID">Filter by employer ID </option>-->
     </select>
 
-    </body>
+</body>
 
 </html>

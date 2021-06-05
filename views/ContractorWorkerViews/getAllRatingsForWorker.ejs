@@ -10,7 +10,9 @@
 
 </head>
 <body>
-
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
 <h2 style="color:rgb(102, 202, 169)"><b>Rating</b></h2>
 
 <% if (locals.rating) { %>
@@ -27,7 +29,6 @@
     <option value="getAllRating">Get All Rating</option>
 </select>
 
-</body>
 <script>
     function getCookie(cname) {
         let name = cname + '=';
@@ -71,7 +72,4 @@
 
 
 </body>
-</html>
-
-
 </html>

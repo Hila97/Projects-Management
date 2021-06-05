@@ -8,11 +8,14 @@
     <title>Document</title>
 </head>
 <body>
-<h2 >Salary Range by shifts</h2>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 >Today salary</h2>
 
-<% if (locals.range) { %>
-<p>From : <%=range.from %></p>
-<p>To : <%=range.to %></p>
+<% if (locals.salary) { %>
+<p>Total Hours : <%=salary.totalHours %></p>
+<p>Total Wage : <%=salary.totalWage %></p>
 <% } %>
 
 <% if (locals.message) { %>
@@ -22,4 +25,3 @@
 </body>
 
 </html>
-

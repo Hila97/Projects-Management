@@ -293,44 +293,14 @@ const getRatingContractorWorkerByID= async (req,res)=>
             return
         }
 
-        res.render('getAllRatingsForWorker',{rating  : contractorworker.rating })
+        res.render('ContractorWorkerViews/getAllRatingsForWorker',{rating  : contractorworker.rating })
     }
     catch(e)
     {
         console.log(e)
     }
 }
-/*
-// function getBusinessDatesCount(startDate, endDate) {
-//     var count = 0;
-//     var curDate = startDate;
-//     while (curDate <= endDate) {
-//         var dayOfWeek = curDate.getDay();
-//         if(!((dayOfWeek == 6) || (dayOfWeek == 0)))
-//            count++;
-//         curDate.setDate(curDate.getDate() + 1);
-//     }
-//     return count;
-const TotalhourWorkinMonth= async (req,res)=>
-{
-    const {id} = req.params
-    try
-    {
-        const contractorworker  = await contractorWorker.findOne({  _id : id })
-        if(!contractorworker)
-        {
-            res.render('Error',{message : 'Employee not found'})
-            return
-        }
 
-    res.render('ratingPage',{rating  : contractorworker.rating })
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-*/
 
 
 const findContractorWorkerById = async (req, res)=>

@@ -24,6 +24,9 @@
     </style>
 </head>
 <body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
     <h2 >Search employer</h2>
 <input id="name" type="text" />
 <button onclick="filter()">Search</button>
@@ -47,8 +50,8 @@
             <td><%=item.companyName%></td>
             <td><%=item.position%></td>
             <td><%=item.phone%></td>
-            <td><%=item.createdAt%></td>
-            <td><%=item.updatedAt%></td>
+            <td><%=item.createdAt.toDateString()%></td>
+            <td><%=item.updatedAt.toDateString()%></td>
         </tr>
         <%});%>
     <% } %>

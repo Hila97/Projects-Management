@@ -154,7 +154,7 @@ const getAllEmployees= async (req,res)=>
         })
 
     //    return  res.json(employees)
-    res.render('employmentsList',{employments : employees})
+    res.render('EmployeeViews/employmentsList',{employments : employees})
     }
     catch(e)
     {
@@ -181,7 +181,7 @@ const filterEmployeesByStatus = async (req,res)=>
         })
 
         const resData = employees.map(e=>e.workerID)
-        res.render('filterEmployeesByStatus',{employees : resData})
+        res.render('EmployeeViews/filterEmployeesByStatus',{employees : resData})
 
     }
     catch(e)
@@ -221,7 +221,7 @@ const filterEmploymentsByBookingDate= async (req,res)=>
         })
 
         // return  res.json(employees)
-        res.render('filterEmploymentsByBookingDate',{employees : employeesArr})
+        res.render('EmployeeViews/filterEmploymentsByBookingDate',{employees : employeesArr})
     }
     catch(e)
     {
@@ -306,7 +306,7 @@ const filterEmploymentsByBookingMonth= async (req,res)=>
                 employeesArr.push(e.workerID)
             })
 
-        res.render('filterEmploymentsByBookingMonth',{employees : employeesArr})
+        res.render('EmployeeViews/filterEmploymentsByBookingMonth',{employees : employeesArr})
         //return  res.json(employees)
     }
     catch(e)
@@ -318,7 +318,7 @@ const filterEmploymentsByBookingMonth= async (req,res)=>
 const getEmploymentsList = async (req,res)=>{
     Employment.find()
         .then((result)=>{
-            res.render('employmentsList', {employments: result})
+            res.render('EmployeeViews/employmentsList', {employments: result})
         })
         .catch((err)=>{
             console.log(err)
@@ -499,7 +499,7 @@ const getAllRatingsForWorker = async (req,res)=>{
         if(employersRatings.length === 0){
             return res.render('Error', {message: 'No employments found'})
         }
-        return res.render('employersRatings', {ratings: employersRatings})
+        return res.render('ContractorWorkerViews/employersRatings', {ratings: employersRatings})
     } catch (e) {
         console.log(e)
     }
@@ -536,7 +536,7 @@ module.exports={
     rejectEmployment,
     filterEmploymentsByDateContractor,
     filterHistoryByfieldOfEmployment,
- getAllRatingsForWorker,
+    getAllRatingsForWorker,
     findEmploymentByID
 
 }

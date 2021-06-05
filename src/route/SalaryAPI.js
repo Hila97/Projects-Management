@@ -20,7 +20,7 @@ router.get('/EmployeeSalaryAndReportOption/:ID',(req,res)=>
 
 router.get('/contractorSalaryFilters',((req, res) =>
 {
-    res.render('contractorSalaryFilters')
+    res.render('ContractorWorkerViews/contractorSalaryFilters')
 
 }))
 
