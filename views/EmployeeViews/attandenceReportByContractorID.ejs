@@ -55,14 +55,22 @@
 
 <table class="center">
     <tr>
-        <th>Company</th>
+        <th>Work Date:</th>
+        <th>Start shift:</th>
+        <th>End shift:</th>
+        <th>Start break:</th>
+        <th>End break:</th>
     </tr>
     <% if (locals.r) {%>
         <%r.forEach((item)=>{%>
     <tr>
         <form action="/attendanceReport/displayEditAttendance/<%=item._id%>">
-        <td><%=item.reportDate%></td>
-        <td><%=item.contractorWorkerID%></td>
+        <td><%=item.reportDate.toDateString()%></td>
+<!--        <td><%=item.contractorWorkerID%></td>-->
+            <td><%=item.startShift.toLocaleTimeString()%></td>
+            <td><%=item.endShift.toLocaleTimeString()%></td>
+            <td><%=item.startBreak.toLocaleTimeString()%></td>
+            <td><%=item.endBreak.toLocaleTimeString()%></td>
             <td> <button type="submit">report on error</button></td>
         </form>
     </tr>

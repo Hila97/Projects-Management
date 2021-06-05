@@ -91,7 +91,7 @@ const displayEditProfile= async (req,res)=>
     await contractorWorker.findById({_id:req.cookies.contractorWorkerIDCookie.id})
         .then(contractor=> {
             console.log(contractor)
-            res.render("displayProfileContractor",{contractor})
+            res.render("ContractorWorkerViews/displayProfileContractor",{contractor})
         }).catch(err=>
         {
             return res.status(400).send('That contractor not found')
@@ -405,7 +405,7 @@ const findContractorWorkerByIdReturnAttendance = async (req, res)=>
         attandenceReport.find(q)
             .then((result)=>{
                 console.log(result)
-                res.render('attandenceReportByContractorID', {r:result})
+                res.render('EmployeeViews/attandenceReportByContractorID', {r:result})
 
             })
             .catch((err)=>{
@@ -454,7 +454,7 @@ const findContractorAttendance = async (req, res)=>
         attandenceReport.find(q)
             .then((result)=>{
                 console.log(result)
-                res.render('attendanceReportOfContractor', {r:result})
+                res.render('EmployeeViews/attendanceReportOfContractor', {r:result})
 
             })
             .catch((err)=>{
@@ -489,7 +489,7 @@ const filterAttendanceByDate= async (req,res)=>
             }
         attandenceReport.find(query).then((result)=>{
             console.log(result)
-            res.render('attandenceReportByContractorID', {r:result})
+            res.render('EmployeeViews/attandenceReportByContractorID', {r:result})
 
         })
             .catch((err)=>{

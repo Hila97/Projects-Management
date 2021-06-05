@@ -8,8 +8,13 @@ router.get('/showErrorReport/:attendanceReportID', errorReport.showErrorReport)
 
 
 router.get('/NavErrorReport',((req, res) => {
-    res.render('NavErrorReport')
+    res.render('EmployeeViews/NavErrorReport')
 }))
 
+
+router.get('/searchContractorErrorReport',((req, res) =>
+{
+    res.render('EmployeeViews/searchContractorErrorReport')
+}))
 
 module.exports=router

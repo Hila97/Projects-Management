@@ -59,10 +59,10 @@
         <%r.forEach((item)=>{%>
         <tr>
             <td><%=item.reportDate.toDateString()%></td>
-            <td><%=item.startShift.toTimeString()%></td>
-            <td><%=item.endShift.toTimeString()%></td>
-            <td><%=item.startBreak.toTimeString()%></td>
-            <td><%=item.endBreak.toTimeString()%></td>
+            <td><%=item.startShift.toLocaleTimeString()%></td>
+            <td><%=item.endShift.toLocaleTimeString()%></td>
+            <td><%=item.startBreak.toLocaleTimeString()%></td>
+            <td><%=item.endBreak.toLocaleTimeString()%></td>
 
         </tr>
         <%});%>
