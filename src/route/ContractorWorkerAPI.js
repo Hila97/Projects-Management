@@ -24,7 +24,7 @@ router.get('/filterAttendanceByDate/:workDate/:contractorWorkerID',(contractorWo
 //router.post('displayProfile', (contractorWorker.displayProfile))
 router.post('/findAvailableWorkers',contractorWorker.findAvailableWorkers)
 router.post('/loginOfContractorWorker',(contractorWorker.loginOfContractorWorker))
-//router.get('/getRatingContractorWorkerByID/:id',(contractorWorker.getRatingContractorWorkerByID))
+router.get('/getRatingContractorWorkerByID/:id',(contractorWorker.getRatingContractorWorkerByID))
 
 router.get('/contractorWorkerLogin',(req, res) =>
 {
@@ -37,6 +37,10 @@ router.get('/editContractorWorker',(req,res)=>{
     res.render('editProfileContractor')
 })
 
+router.get('/getRatingContractorWorker',((req, res) =>
+{
+    res.render('ContractorWorkerViews/getRatingContractorWorker')
 
+}))
 
 module.exports=router

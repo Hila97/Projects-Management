@@ -5,6 +5,9 @@
     <title>vacations</title>
 </head>
 <body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
 <form action="/vacation/addVacation" method="post">
     <label for="departureDate">Start vacation:</label><br>
     <input type="date" id="departureDate" name="departureDate" value=""><br>

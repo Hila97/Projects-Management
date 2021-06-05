@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/inputAndSelectStyle.css">
+    <link rel="stylesheet" href="/styles/buttonStyle.css">
+
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 style="color:rgb(102, 202, 169)">Filter salary by month</h2>
+
+<input id="month" value=1 type="number" min="1" max="12" />
+<button class="button" onclick="filter()">Get salary</button>
+<p style="color: red;" id="error"></p>
+<% if (locals.salary) { %>
+<p style="font-weight: bold;">Total Hours : <%=salary.totalHours %></p>
+<p style="font-weight: bold;">Total Wage : <%=salary.totalWage %> $</p>
+<% } %>
+
+
+
+</body>
+<script>
+    function getCookie(cname) {
+        let name = cname + '=';
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                let cookie = c.substring(name.length, c.length)
+                cookie = cookie.split(':')[2].split('\"')[1]
+                return cookie
+            }
+        }
+        return '';
+    }
+
+    function filter(){
+        let month = document.getElementById('month').value
+        if(!month){
+            document.getElementById('error').innerHTML = 'must choose month'
+            return
+        }
+        console.log(month)
+        if(month > 12 || month < 1) {
+            document.getElementById('error').innerHTML = 'must choose valid month'
+            return
+        }
+        const workerID = getCookie('contractorWorkerIDCookie')
+
+        // window.location.href =`/filterEmploymentsByMonth/${month}`
+        window.location.pathname = `attendanceReport/getWageByMonth/${workerID}/${month}`
+
+    }
+</script>
+</html>
+

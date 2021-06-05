@@ -40,7 +40,9 @@
 </head>
 
 <body>
-
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
 <h2 >Error Report List</h2>
 
 
@@ -53,20 +55,22 @@
         <th>Error Description:</th>
     </tr>
     <% if (locals.errorReports) {%>
-    <%var i=1;%>
+        <%var i=1;%>
         <% errorReports.forEach((item)=>{%>
 
         <form action="/errorReport/showErrorReport/<%=item.attendanceReportID%>" method="get">
-        <tr>
-            <td><%=i%></td>
-            <td><%=item.attendanceReportID%></td>
-            <td><%=item.companyEmployeeID.userName%></td>
-            <td><%=item.reportDate.toDateString()%></td>
-            <td><%=item.errorDescription%></td>
-            <td><button type="submit">Fix</button></td>
-    </form>
+            <% if (item.status==0){%>
+            <tr>
+                <td><%=i++;%></td>
+                <td><%=item.attendanceReportID%></td>
+                <td><%=item.companyEmployeeID.userName%></td>
+                <td><%=item.reportDate.toDateString()%></td>
+                <td><%=item.errorDescription%></td>
+                <td><button type="submit">Fix</button></td>
+        </form>
         </tr>
-        <%i++;%>
+        <% }; %>
+
         <%});%>
     <% } %>
 </table>

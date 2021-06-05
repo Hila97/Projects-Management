@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 class="title">This month salary</h2>
+
+<% if (locals.salary) { %>
+<p style="font-weight: bold;">Total Wage : <%=salary %> $</p>
+<% } %>
+
+<% if (locals.message) { %>
+<p style="color: red;"><%=message %></p>
+<% } %>
+</body>
+
+</html>
+

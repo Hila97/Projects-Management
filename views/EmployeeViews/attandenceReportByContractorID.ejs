@@ -43,7 +43,10 @@
 <body>
 
 <div id="legend">
-    <h1> Attandence Report </h1>
+    <div>
+        <%- include ('../partials/CompanyEmployeeNav')%>
+    </div>
+    <h1> Attandence Reports</h1>
 
 
 
@@ -53,16 +56,28 @@
         <button class="btn btn-success" onclick="filter()">Search</button>
     </div>
 
-<table class="center">
+<table >
     <tr>
-        <th>Company</th>
+        <th>Contractor's name:</th>
+        <th>ID:</th>
+        <th>Work Date:</th>
+        <th>Start shift:</th>
+        <th>End shift:</th>
+        <th>Start break:</th>
+        <th>End break:</th>
     </tr>
     <% if (locals.r) {%>
         <%r.forEach((item)=>{%>
     <tr>
         <form action="/attendanceReport/displayEditAttendance/<%=item._id%>">
-        <td><%=item.reportDate%></td>
-        <td><%=item.contractorWorkerID%></td>
+            <td><%=item.contractorWorkerID.firstName%> <%=item.contractorWorkerID.lastName%></td>
+            <td><%=item.contractorWorkerID.ID%></td>
+        <td><%=item.reportDate.toDateString()%></td>
+<!--        <td><%=item.contractorWorkerID%></td>-->
+            <td><%=item.startShift.toLocaleTimeString()%></td>
+            <td><%=item.endShift.toLocaleTimeString()%></td>
+            <td><%=item.startBreak.toLocaleTimeString()%></td>
+            <td><%=item.endBreak.toLocaleTimeString()%></td>
             <td> <button type="submit">report on error</button></td>
         </form>
     </tr>

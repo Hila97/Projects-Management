@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Attendance Report</title>
+</head>
+<body onload="myFunction()">
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
+<h2>Edit Attendance Report</h2>
+
+<script>
+    function myFunction() {
+        var x1 = document.getElementById("startShift")
+        var StartShift = new Date(x1.placeholder)
+        var time1 = StartShift.getHours() + ":" + StartShift.getMinutes();
+        document.getElementById("startShift").value = time1;
+
+        var x2 = document.getElementById("endShift")
+        var EndShift = new Date(x2.placeholder)
+        var time2 = EndShift.getHours() + ":" + EndShift.getMinutes();
+        document.getElementById("endShift").value = time2;
+
+        var x3 = document.getElementById("startBreak")
+        var StartBreak = new Date(x3.placeholder)
+        var time3 = StartBreak.getHours() + ":" + StartBreak.getMinutes();
+        document.getElementById("startBreak").value = time3;
+
+        var x4 = document.getElementById("endBreak")
+        var EndBreak = new Date(x4.placeholder)
+        var time4 = EndBreak.getHours() + ":" + EndBreak.getMinutes();
+        document.getElementById("endBreak").value = time4;
+    }
+
+</script>
+
+
+
+
+<form action="/attendanceReport/editAttendanceReport/<%=attandence._id%> " method="post" >
+    <!--    <button onclick="nyFunction()" type="button">try</button>-->
+    <label  for="reportDate">Report  date  of  error : <%=attandence.reportDate.toDateString()%> </label><br>
+    <label  for="startShift">Start shift:</label><br>
+    <input type="time" id="startShift" value="" name="startShift" min="06:00" max="00:00" placeholder="<%=attandence.startShift%>"><br>
+
+    <label for="endShift">End shift:</label><br>
+    <input type="time" id="endShift" name="endShift" min="06:00" max="00:00" placeholder="<%=attandence.endShift%>"><br>
+
+    <label for="startBreak">Start break:</label><br>
+    <input type="time" id="startBreak" name="startBreak" min="06:00" max="00:00" placeholder="<%=attandence.startBreak%>"><br>
+
+    <label for="endBreak">End break:</label><br>
+    <input type="time" id="endBreak" name="endBreak" min="06:00" max="00:00" placeholder="<%=attandence.endBreak%>"><br>
+
+    <div class="controls">
+        <button class="btn btn-success"  type="submit">Save Changes</button>
+    </div>
+</form>
+</body>
+</html>

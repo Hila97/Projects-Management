@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/styles/tableStyle.css">
+</head>
+<body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 style="color:rgb(102, 202, 169)"><b>Rating</b></h2>
+
+<table style="width: 30rem;">
+    <tr>
+        <th >employer name</th>
+        <th>rank</th>
+
+    </tr>
+    <% if (locals.ratings) { %>
+        <% ratings.forEach((item)=>{%>
+
+        <tr>
+            <td><%=item.employerID.fullName%></td>
+            <td><%=item.rank%></td>
+        </tr>
+        <%});%>
+    <% } %>
+</table>
+<h2>Send e-mail to your employment:</h2>
+
+<form action="mailto:someone@example.com" method="post" enctype="text/plain">
+    Name:<br>
+    <input type="text" name="name"><br>
+    E-mail:<br>
+    <input type="text" name="mail"><br>
+    Comment:<br>
+    <input type="text" name="comment" size="50"><br><br>
+    <input type="submit" value="Send">
+    <input type="reset" value="Reset">
+</form>
+
+</body>
+</html>
+</body>
+</html>

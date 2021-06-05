@@ -5,6 +5,9 @@
     <title>Edit Attendance Report</title>
 </head>
 <body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
 <h2>Add Error Report</h2>
 
 <form action="/errorReport/addErrorReport/<%=attendance.reportDate%>/<%=attendance._id%>" method="post">
@@ -12,7 +15,7 @@
 <!--    <input type="object" id="attendanceReportID" name="attendanceReportID" placeholder="<%=attendance._id%>"     ><br>-->
 
     <label for="reportDate">Report Date of error:</label><br>
-    <input type="text"  placeholder="<%=attendance.reportDate%>"><br>
+    <input type="text"  placeholder="<%=attendance.reportDate.toDateString()%>"><br>
 
     <label for="errorDescription"> Error Description:</label><br>
     <input type="text" id="errorDescription" name="errorDescription" ><br>

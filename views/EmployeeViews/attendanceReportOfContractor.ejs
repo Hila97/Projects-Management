@@ -43,12 +43,17 @@
 <body>
 
 <div id="legend">
-    <h1>My Attendance Report </h1>
+    <div>
+        <%- include ('../partials/CompanyEmployeeNav')%>
+    </div>
+    <h1>Attendance Report </h1>
 </div>
 
 <div>
-    <table class="center">
+    <table>
         <tr>
+            <th>Contractor's name:</th>
+            <th>ID:</th>
             <th>Work date:</th>
             <th>Start shift:</th>
             <th>End shift:</th>
@@ -58,11 +63,13 @@
         <% if (locals.r) {%>
         <%r.forEach((item)=>{%>
         <tr>
+            <td><%=item.contractorWorkerID.firstName%> <%=item.contractorWorkerID.lastName%></td>
+            <td><%=item.contractorWorkerID.ID%></td>
             <td><%=item.reportDate.toDateString()%></td>
-            <td><%=item.startShift.toTimeString()%></td>
-            <td><%=item.endShift.toTimeString()%></td>
-            <td><%=item.startBreak.toTimeString()%></td>
-            <td><%=item.endBreak.toTimeString()%></td>
+            <td><%=item.startShift.toLocaleTimeString()%></td>
+            <td><%=item.endShift.toLocaleTimeString()%></td>
+            <td><%=item.startBreak.toLocaleTimeString()%></td>
+            <td><%=item.endBreak.toLocaleTimeString()%></td>
 
         </tr>
         <%});%>

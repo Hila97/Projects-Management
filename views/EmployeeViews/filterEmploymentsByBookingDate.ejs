@@ -24,9 +24,11 @@
     <title>Document</title>
 </head>
 <body>
-  <h2 >Filter by month</h2>
-
-    <input id="month" type="text" />
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
+  <h2 >Filter by BookingDate</h2>
+    <input id="BookingDate" type="date" />
     <button onclick="filter()">Search</button>
     <p style="color: red;" id="error"></p>
     <table>
@@ -50,16 +52,14 @@
 </body>
 <script>
     function filter(){
-        let month = document.getElementById('month').value
-        if(!month){
-            document.getElementById('error').innerHTML = 'must choose month'
+        let BookingDate = document.getElementById('BookingDate').value
+        if(!BookingDate){
+            document.getElementById('error').innerHTML = 'must choose BookingDate'
             return
         }
-        console.log(month)
-       // window.location.href =`/filterEmploymentsByMonth/${month}`
-        window.location.pathname = `employment/filterEmploymentsByBookingMonth/${month}`
-
+        console.log(BookingDate)
+        // window.location.href =`/filterEmploymentsByBookingDate/${BookingDate}`
+        window.location.pathname = `employment/filterEmploymentsByBookingDate/${BookingDate}`
     }
 </script>
 </html>
-

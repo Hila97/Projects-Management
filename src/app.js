@@ -94,26 +94,31 @@ app.get('/', (req, res)=>{
 })
 
 app.get('/employeesFilters',((req, res) => {
-    res.render('employeesFilters')
+    res.render('EmployeeViews/employeesFilters')
 }))
+
+//add from merav:
+
+
+
 app.get('/getBookedEmployeesToday',((req, res) => {
     res.render('getBookedEmployeesToday')
 }))
 
 app.get('/filterEmploymentsByBookingDate',((req, res) =>
 {
-    res.render('filterEmploymentsByBookingDate')
+    res.render('EmployeeViews/filterEmploymentsByBookingDate')
 
 }))
 
 app.get('/filterEmploymentsByBookingMonth',((req, res) =>
 {
-    res.render('filterEmploymentsByBookingMonth')
+    res.render('EmployeeViews/filterEmploymentsByBookingMonth')
 
 }))
 app.get('/filterEmployeesByStatus',((req, res) =>
 {
-    res.render('filterEmployeesByStatus')
+    res.render('EmployeeViews/filterEmployeesByStatus')
 
 }))
 app.get('/getRatingContractorWorker',((req, res) =>
@@ -171,7 +176,7 @@ app.get('/filterEmployeesByStatusFuture',((req, res) =>
 
 app.get('/employerSearch',((req, res) =>
 {
-    res.render('employerSearch')
+    res.render('EmployeeViews/employerSearch')
 }))
 
 app.get('/employerRegister',((req, res) =>
@@ -181,17 +186,17 @@ app.get('/employerRegister',((req, res) =>
 
 app.get('/filterbycompanyName',((req, res) =>
 {
-    res.render('filterbycompanyName')
+    res.render('EmployeeViews/filterbycompanyName')
 
 }))
 app.get('/filterEmployeesByposition',((req, res) =>
 {
-    res.render('filterEmployeesByposition')
+    res.render('EmployeeViews/filterEmployeesByposition')
 }))
 
 app.get('/filterByfieldOfEmployment',((req, res) =>
 {
-    res.render('filterByfieldOfEmployment')
+    res.render('EmployeeViews/filterByfieldOfEmployment')
 }))
 
 
@@ -208,7 +213,7 @@ app.get('/employerSearch',((req, res) =>
 
 app.get('/employmentsList',((req, res) =>
 {
-    res.render('employmentsList')
+    res.render('EmployeeViews/employmentsList')
  }))
 
 app.get('/getWageByMonth',((req, res) =>
@@ -221,15 +226,11 @@ app.get('/AttandenceList',((req, res) =>
     res.render('AttandenceList')
 }))
 
-app.get('/editAttendanceReport',((req, res) =>
-{
-    res.render('editAttendanceReport')
-}))
+// app.get('/editAttendanceReport',((req, res) =>
+// {
+//     res.render('editAttendanceReport')
+// }))
 
-app.get('/searchContractorErrorReport',((req, res) =>
-{
-    res.render('searchContractorErrorReport')
-}))
 
 
 
@@ -243,15 +244,32 @@ app.get('/historyFieldofemployment', ((req, res) =>
 {
     res.render('historyFieldofemployment')
 }))
+
+
+app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
+{
+    res.render('filterEmploymentsByDateForContractor')
+}))
+
+app.get('/historyContractor', ((req, res) =>
+{
+    res.render('historyContractor')
+}))
+
+app.get('/historyFieldofemployment', ((req, res) =>
+{
+    res.render('historyFieldofemployment')
+}))
 app.get('/vacationReport', ((req, res)=>
 {
-    res.render('vacationReport')
+    res.render('ContractorWorkerViews/vacationReport')
 }))
 
 app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
 {
     res.render('filterEmploymentsByDateForContractor')
 }))
+
 
 mongoose.set('useFindAndModify', false)
 

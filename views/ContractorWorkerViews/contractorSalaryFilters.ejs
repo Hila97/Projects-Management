@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 style="color:rgb(102, 202, 169)">Salary Filters</h2>
+
+
+<select onchange="activateFunc(this.options[this.selectedIndex].value)">
+    <option value="">filter by:</option>
+    <option value="getThisMonthSalary">Get This Month Salary</option>
+    <option value="getTodaySalary">Get Today Salary</option>
+    <option value="getThisYearSalary">Get this year Salary</option>
+    <option value="getRangeOfSalaryShifts">Get Salary range by shifts</option>
+    <option value="compareTwoMonthSalaries">Compare two Months Salaries</option>
+    <option value="totalWageByMonth">Total Wage By Month</option>
+</select>
+
+</body>
+<script>
+    function getCookie(cname) {
+        let name = cname + '=';
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                let cookie = c.substring(name.length, c.length)
+                cookie = cookie.split(':')[2].split('\"')[1]
+                return cookie
+            }
+        }
+        return '';
+    }
+
+
+
+    function getThisMonthSalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `salary/getThisMonthSalaryByWorkerID/${workerID}`
+
+    }
+
+    function getTodaySalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getTodaySalary/${workerID}`
+
+    }
+    function getThisYearSalary(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getThisYearSalary/${workerID}`
+
+    }
+    function getRangeOfSalaryShifts(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `attendanceReport/getRangeOfSalaryByShift/${workerID}`
+
+    }
+    function compareTwoMonthSalaries(){
+        window.location.pathname = '/attendanceReport/compareTwoMonthSalaries'
+
+    }
+    function totalWageByMonth(){
+        window.location.pathname = 'attendanceReport/totalWageByMonth'
+
+    }
+
+    function activateFunc(value){
+        switch(value){
+            case 'getThisMonthSalary':
+                getThisMonthSalary()
+                break
+            case 'getTodaySalary':
+                getTodaySalary()
+                break
+            case 'getThisYearSalary':
+                getThisYearSalary()
+                break
+            case 'getRangeOfSalaryShifts':
+                getRangeOfSalaryShifts()
+                break
+            case 'compareTwoMonthSalaries':
+                compareTwoMonthSalaries()
+                break
+            case 'totalWageByMonth':
+                totalWageByMonth()
+                break
+
+            default:
+                return
+                break
+        }
+    }
+</script>
+</html>
+

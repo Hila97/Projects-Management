@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/inputAndSelectStyle.css">
+
+</head>
+<body>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 style="color:rgb(102, 202, 169)"><b>Rating</b></h2>
+
+<% if (locals.rating) { %>
+    <h6 style="display: inline;font-size: large;"><b>Your current general rating : </b></h6>
+    <% for(var i=0; i < parseInt(rating, 10); i++) { %>
+        <span style="color: orange" class="fa fa-star"></span>
+    <% } %>
+<% } %>
+<br/>
+<br/>
+<!-- <button onclick="getAllRating()">getAllRating</button> -->
+<select onchange="activateFunc(this.options[this.selectedIndex].value)">
+    <option value="">filter by:</option>
+    <option value="getAllRating">Get All Rating</option>
+</select>
+
+<script>
+    function getCookie(cname) {
+        let name = cname + '=';
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                let cookie = c.substring(name.length, c.length)
+                cookie = cookie.split(':')[2].split('\"')[1]
+                return cookie
+            }
+        }
+        return '';
+    }
+
+    function getAllRating(){
+        const workerID = getCookie('contractorWorkerIDCookie')
+        window.location.pathname = `employment/getAllRatingsForWorker/${workerID}`
+
+
+    }
+
+    function activateFunc(value){
+        switch(value){
+            case 'getAllRating':
+                getAllRating()
+
+
+                break
+
+            default:
+                return
+                break
+        }
+    }
+</script>
+
+
+</body>
+</html>

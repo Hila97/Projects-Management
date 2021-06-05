@@ -112,7 +112,7 @@
 <!--    }-->
 <!--</style>-->
 
-<body>
+
 <div>
     <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700">
@@ -120,8 +120,6 @@
         <!-- Code by Angela Delise  https://codepen.io/angeladelise/pen/OJVePqz
        -->
     </head>
-
-    <body>
     <div id='navbar'>
         <ul>
             <li><a href="/">HR-COMPANY</a></li>
@@ -129,43 +127,37 @@
             <li><a href="/contractorWorker/displayProfile">Profile</a></li>
             <li><a href="/employment/findPastEmploymentsForContractor">history</a></li>
             <li><a href="/employment/pendingEmployments">PENDING-BOOKING</a></li>
+            <li><a onclick="getEmployees()">Rating</a></li>
+            <li><a href="/salary/contractorSalaryFilters">Salary filters</a></li>
+            <li><a href="/vacationReport">vacation</a> </li>
         </ul>
     </div>
+    <script>
+        function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    let cookie = c.substring(name.length, c.length)
+                    cookie = cookie.split(':')[2].split('\"')[1]
+                    return cookie
+                }
+            }
+            return '';
+        }
 
-    </body>
+        function getEmployees(){
+
+            const workerID = getCookie('contractorWorkerIDCookie')
+            window.location.pathname =`/contractorWorker/getRatingContractorWorkerByID/${workerID}`
+        }
+    </script>
 
 </div>
-</body>
 </html>
 
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title></title>-->
-<!--    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">-->
-<!--    <link href="/styles/nav.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="box-area">-->
-<!--    <header>-->
-<!--        <div class="wrapper">-->
-<!--            <div class="logo">-->
-<!--                <a href="/">HR-COMPANY</a>-->
-<!--            </div>-->
-<!--            <nav>-->
-<!--                <a href="/employment/getEmploymentsListForContractor">Shifts report |</a>-->
-<!--                <a href="/contractorWorker/displayProfile">Profile |</a>-->
-<!--                <a href="/employment/findPastEmploymentsForContractor">history |</a>-->
-<!--                <a href="/employment/pendingEmployments">PENDING-BOOKING</a>-->
-<!--            </nav>-->
-<!--        </div>-->
-
-<!--    </header>-->
-
-
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->

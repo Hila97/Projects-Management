@@ -19,7 +19,8 @@ const errorReportSchema = new schema({
     errorDescription:
         {
             type:String
-        }
+        },
+        status:{ type:Number, default:0}
 });
 
 module.exports = mongoose.model('ErrorReport',errorReportSchema);

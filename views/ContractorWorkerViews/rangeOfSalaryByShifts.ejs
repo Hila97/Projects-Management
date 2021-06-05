@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <title>Document</title>
 </head>
 <body>
-  <h2 >Salary Range by shifts</h2>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 >Salary Range by shifts</h2>
 
-      <% if (locals.range) { %>
-        <p>From : <%=range.from %></p>
-        <p>To : <%=range.to %></p>
-        <% } %>
+<% if (locals.range) { %>
+<p>From : <%=range.from %></p>
+<p>To : <%=range.to %></p>
+<% } %>
 
-        <% if (locals.message) { %>
-            <p><%=message %></p>
-        <% } %>
+<% if (locals.message) { %>
+<p><%=message %></p>
+<% } %>
 
 </body>
 

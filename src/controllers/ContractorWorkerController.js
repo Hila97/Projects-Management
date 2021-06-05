@@ -91,7 +91,7 @@ const displayEditProfile= async (req,res)=>
     await contractorWorker.findById({_id:req.cookies.contractorWorkerIDCookie.id})
         .then(contractor=> {
             console.log(contractor)
-            res.render("displayProfileContractor",{contractor})
+            res.render("ContractorWorkerViews/displayProfileContractor",{contractor})
         }).catch(err=>
         {
             return res.status(400).send('That contractor not found')
@@ -281,59 +281,27 @@ const loginOfContractorWorker= async (req, res) =>
 
 }
 
-
-const getRatingContractorWorker= async (req,res)=>
-{
-    const {fieldOfEmployment} = req.params
-    try
-    {
-        const contractorWorkers  = await contractorWorker.find({  fieldOfEmployment : fieldOfEmployment })
-        if(contractorWorkers .length===0)
-        {
-            // res.send("No employers found")
-            res.render('Error',{message : 'No employers found'})
-            return
-        }
-
-        //    return  res.json(employers)
-        res.render('getRatingContractorWorker',{contractorworkers  : contractorWorkers })
-    }
-    catch(e)
-    {
-        console.log(e)
-    }
-}
-/*
-// function getBusinessDatesCount(startDate, endDate) {
-//     var count = 0;
-//     var curDate = startDate;
-//     while (curDate <= endDate) {
-//         var dayOfWeek = curDate.getDay();
-//         if(!((dayOfWeek == 6) || (dayOfWeek == 0)))
-//            count++;
-//         curDate.setDate(curDate.getDate() + 1);
-//     }
-//     return count;
-const TotalhourWorkinMonth= async (req,res)=>
+const getRatingContractorWorkerByID= async (req,res)=>
 {
     const {id} = req.params
     try
-    {  
+    {
         const contractorworker  = await contractorWorker.findOne({  _id : id })
         if(!contractorworker)
         {
             res.render('Error',{message : 'Employee not found'})
             return
         }
-        
-    res.render('ratingPage',{rating  : contractorworker.rating })
+
+        res.render('ContractorWorkerViews/getAllRatingsForWorker',{rating  : contractorworker.rating })
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
-*/
+
+
 
 const findContractorWorkerById = async (req, res)=>
 {
@@ -404,10 +372,10 @@ const findContractorWorkerByIdReturnAttendance = async (req, res)=>
         var q={
             contractorWorkerID:workerID
         }
-        attandenceReport.find(q)
+        attandenceReport.find(q).populate('contractorWorkerID')
             .then((result)=>{
                 console.log(result)
-                res.render('attandenceReportByContractorID', {r:result})
+                res.render('EmployeeViews/attandenceReportByContractorID', {r:result})
 
             })
             .catch((err)=>{
@@ -453,10 +421,10 @@ const findContractorAttendance = async (req, res)=>
         var q={
             contractorWorkerID:workerID
         }
-        attandenceReport.find(q)
+        attandenceReport.find(q).populate('contractorWorkerID')
             .then((result)=>{
                 console.log(result)
-                res.render('attendanceReportOfContractor', {r:result})
+                res.render('EmployeeViews/attendanceReportOfContractor', {r:result})
 
             })
             .catch((err)=>{
@@ -491,7 +459,7 @@ const filterAttendanceByDate= async (req,res)=>
             }
         attandenceReport.find(query).then((result)=>{
             console.log(result)
-            res.render('attandenceReportByContractorID', {r:result})
+            res.render('EmployeeViews/attandenceReportByContractorID', {r:result})
 
         })
             .catch((err)=>{
@@ -529,7 +497,7 @@ module.exports =
         loginOfContractorWorker,
         displayEditProfile,
         findAvailableWorkers,
-        getRatingContractorWorker,
+        getRatingContractorWorkerByID,
         findContractorWorkerById,
         findContractorWorkerByIdReturnAttendance,
         findContractorAttendance,

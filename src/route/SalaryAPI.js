@@ -18,5 +18,11 @@ router.get('/EmployeeSalaryAndReportOption/:ID',(req,res)=>
     res.render('EmployeeViews/EmployeeSalaryAndReportOption',{ID})
 })
 
+router.get('/contractorSalaryFilters',((req, res) =>
+{
+    res.render('ContractorWorkerViews/contractorSalaryFilters')
+
+}))
+
 
 module.exports=router
