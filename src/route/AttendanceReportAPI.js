@@ -21,4 +21,37 @@ router.get('/displayEditAttendance/:_id', attendanceReport.displayEditAttendance
 router.get('/addContractorForm', (req, res)=>{
     res.render('addContractorForm')
 })
+router.get('/compareTwoMonthSalaries',((req, res) =>
+{
+    res.render('compareTwoMonthSalaries')
+
+}))
+
+router.get('/thisYearProfit',((req, res) =>
+{
+    res.render('thisYearProfit')
+
+}))
+router.get('/rangeOfSalaryByShifts',((req, res) =>
+{
+    res.render('rangeOfSalaryByShifts')
+
+}))
+router.get('/TodaySalary',((req, res) =>
+{
+    res.render('TodaySalary')
+
+}))
+
+router.get('/totalWageByMonth',((req, res) =>
+{
+    res.render('totalWageByMonth')
+
+}))
+router.get('/thisMonthSalary',((req, res) =>
+{
+    res.render('thisMonthSalary')
+
+}))
+
 module.exports=router

@@ -89,34 +89,34 @@ const calcTotalWork = (attendanceArr, hourlyWage) => {
     let totalWork = 0
 
     attendanceArr.forEach(a => {
-       const start = a.startShift.getTime()
-       const end = a.endShift.getTime()
-       let total = end - start
+        const start = a.startShift.getTime()
+        const end = a.endShift.getTime()
+        let total = end - start
 
 
-       const startBreak = a.startBreak.getTime()
-       const endBreak = a.endBreak.getTime()
-       let totalBreak = endBreak - startBreak
+        const startBreak = a.startBreak.getTime()
+        const endBreak = a.endBreak.getTime()
+        let totalBreak = endBreak - startBreak
 
-       // sub break hours from work hours
-       total -= totalBreak
+        // sub break hours from work hours
+        total -= totalBreak
 
-       totalWork += total
+        totalWork += total
     })
 
-       let hours = Math.floor(totalWork / 1000 / 60 / 60)
-       totalWork -= hours * 1000 * 60 * 60
-       let minutes = Math.floor(totalWork / 1000 / 60)
-       totalWork -= minutes * 1000 * 60
-       let seconds = Math.floor(totalWork / 1000)
+    let hours = Math.floor(totalWork / 1000 / 60 / 60)
+    totalWork -= hours * 1000 * 60 * 60
+    let minutes = Math.floor(totalWork / 1000 / 60)
+    totalWork -= minutes * 1000 * 60
+    let seconds = Math.floor(totalWork / 1000)
 
-       const result =  (hours < 9 ? '0' : '') + hours + ':' + (minutes < 9 ? '0' : '') + minutes + ':' + (seconds < 9 ? '0' : '') + seconds
+    const result =  (hours < 9 ? '0' : '') + hours + ':' + (minutes < 9 ? '0' : '') + minutes + ':' + (seconds < 9 ? '0' : '') + seconds
 
-       let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
+    let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
 
 
 
-       return  {totalHours: result, totalWage: totalWage.toFixed(2)}
+    return  {totalHours: result, totalWage: totalWage.toFixed(2)}
 
 }
 
@@ -125,18 +125,16 @@ const getWageByYearMonthDayFunc = async (val, workerID, action) => {
     let date, topDateTmp, topDateString, tmp
     switch (action) {
         case 'year':
-             date = val + '-01' + '-01'
-             tmp = parseInt(val, 10) + 1
-             topDateTmp =  tmp < 10 ? '0' + (tmp).toString() : (tmp).toString()
-             topDateString = topDateTmp + '-01' + '-01'
-             console.log(topDateString)
+            date = val + '-01' + '-01'
+            tmp = parseInt(val, 10) + 1
+            topDateTmp =  tmp < 10 ? '0' + (tmp).toString() : (tmp).toString()
+            topDateString = topDateTmp + '-01' + '-01'
+            console.log(topDateString)
             break
 
         case 'month':
             date = '2021-' + val + '-01'
             tmp = parseInt(val, 10) + 1
-            tmp = tmp === 0 ? 1 : tmp
-
             topDateTmp =  tmp < 10 ? '0' + (tmp).toString() : (tmp).toString()
             topDateString = '2021-' + topDateTmp + '-01'
             console.log(topDateString)
@@ -145,7 +143,8 @@ const getWageByYearMonthDayFunc = async (val, workerID, action) => {
         case 'day':
             const thisMonth = parseInt(moment().format('M'), 10).toString()
             date = '2021-' + thisMonth + '-' + val
-            tmp = (parseInt(val, 10) + 1) % 31
+            tmp = ((parseInt(val, 10) + 1) % 31)
+            tmp = tmp === 0 ? 1 : tmp
             topDateTmp =  tmp < 10 ? '0' + (tmp).toString() : (tmp).toString()
             topDateString = '2021-' + thisMonth + '-' + topDateTmp
             console.log(topDateString)
@@ -158,16 +157,11 @@ const getWageByYearMonthDayFunc = async (val, workerID, action) => {
     startDate = moment(new Date(date))
     topDate = moment(new Date(topDateString))
 
-    thisMonth = moment(new Date(date))
-    nextMonth = moment(new Date(nextMonthString))
 
     startDate.utc(startDate).set('hour', 0).set('minute', 0).set('second', 0)
     topDate.utc(topDate).set('hour', 0).set('minute', 0).set('second', 0)
     console.log(startDate, topDate)
 
-    thisMonth.utc(thisMonth).set('hour', 0).set('minute', 0).set('second', 0)
-    nextMonth.utc(nextMonth).set('hour', 0).set('minute', 0).set('second', 0)
-    console.log(thisMonth, nextMonth)
 
     try{
         const query = {
@@ -175,7 +169,7 @@ const getWageByYearMonthDayFunc = async (val, workerID, action) => {
                 {startShift : {$gte: startDate}},
                 {startShift : {$lt: topDate}},
             ],
-             contractorWorkerID: workerID
+            contractorWorkerID: workerID
         }
 
         const attendance = await AttendanceReportCtrl.find(query).populate('contractorWorkerID')
@@ -183,30 +177,28 @@ const getWageByYearMonthDayFunc = async (val, workerID, action) => {
             return {message:'You didnt work that date'}
 
         }
-         // for each attendance calc work hours
+        // for each attendance calc work hours
         const hourlyWage = attendance[0].contractorWorkerID.hourlyWage
         const result = calcTotalWork(attendance, hourlyWage)
         //return  res.json(result)
-        return  res.render('TotalWageByMonth',{result: result})
+        return result
     }
     catch(e)
     {
         console.log(e)
     }
 }
-
-
 const getWageByMonth= async (req, res)=> {
 
     // get all attendance by month and contractorID
     let {month, contractorWorkerID} = req.params
-        const result = await getWageByYearMonthDayFunc(month, contractorWorkerID, 'month')
-        if(result.message){
-            res.render('Error',{message: result.message})
-            return
-        }
+    const result = await getWageByYearMonthDayFunc(month, contractorWorkerID, 'month')
+    if(result.message){
+        res.render('Error',{message: result.message})
+        return
+    }
 
-        return  res.render('totalWageByMonth',{salary: result})
+    return  res.render('totalWageByMonth',{salary: result})
 
 }
 
@@ -227,10 +219,9 @@ const getThisMonthSalary= async (req, res)=> {
         return
     }
 
-        return  res.render('thisMonthSalary',{salary: result})
+    return  res.render('thisMonthSalary',{salary: result})
 
 }
-
 const getTwoMonthsSalaries= async (req, res)=> {
 
     let {contractorWorkerID, month1, month2} = req.params
@@ -297,35 +288,34 @@ const getThisYearSalary= async (req, res)=> {
 
 }
 
-
 const calcWorkRangeByShift = (attendanceArr, hourlyWage) => {
     let  totalSalaryArr = []
     console.log(attendanceArr, hourlyWage)
     attendanceArr.forEach(a => {
-       const start = a.startShift.getTime()
-       const end = a.endShift.getTime()
-       let total = end - start
+        const start = a.startShift.getTime()
+        const end = a.endShift.getTime()
+        let total = end - start
 
 
-       const startBreak = a.startBreak.getTime()
-       const endBreak = a.endBreak.getTime()
-       let totalBreak = endBreak - startBreak
+        const startBreak = a.startBreak.getTime()
+        const endBreak = a.endBreak.getTime()
+        let totalBreak = endBreak - startBreak
 
-       // sub break hours from work hours
-       total -= totalBreak
+        // sub break hours from work hours
+        total -= totalBreak
 
-       let hours = Math.floor(total / 1000 / 60 / 60)
-       total -= hours * 1000 * 60 * 60
-       let minutes = Math.floor(total / 1000 / 60)
-       total -= minutes * 1000 * 60
-       let seconds = Math.floor(total / 1000)
+        let hours = Math.floor(total / 1000 / 60 / 60)
+        total -= hours * 1000 * 60 * 60
+        let minutes = Math.floor(total / 1000 / 60)
+        total -= minutes * 1000 * 60
+        let seconds = Math.floor(total / 1000)
 
 
-       let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
+        let totalWage = (hours * hourlyWage) + (minutes * 0.16 * hourlyWage) + (seconds * 0.16 * 0.16 * hourlyWage)
         totalWage = totalWage.toFixed(2)
 
 
-       totalSalaryArr.push(totalWage)
+        totalSalaryArr.push(totalWage)
     })
 
     let from = Math.min(...totalSalaryArr)
@@ -333,30 +323,29 @@ const calcWorkRangeByShift = (attendanceArr, hourlyWage) => {
 
     console.log(totalSalaryArr)
 
-   return  {from: from, to: to}
+    return  {from: from, to: to}
 }
 
 const getRangeOfSalaryByShift= async (req, res)=> {
 
     let {contractorWorkerID} = req.params
 
-   try {
-       const attendance = await AttendanceReportCtrl.find({contractorWorkerID : contractorWorkerID}).populate('contractorWorkerID')
-       if(attendance.length === 0){
-           return res.render('Error', {message: 'You didnt worked yet'})
+    try {
+        const attendance = await AttendanceReportCtrl.find({contractorWorkerID : contractorWorkerID}).populate('contractorWorkerID')
+        if(attendance.length === 0){
+            return res.render('Error', {message: 'You didnt worked yet'})
         }
         const result = calcWorkRangeByShift(attendance, attendance[0].contractorWorkerID.hourlyWage)
         console.log(result)
 
         return  res.render('rangeOfSalaryByShifts',{range : result})
-   } catch (e) {
-       console.log(e)
-   }
-    
-         
-   
-}
+    } catch (e) {
+        console.log(e)
+    }
 
+
+
+}
 
 const displayEditAttendance= async (req,res)=>
 {

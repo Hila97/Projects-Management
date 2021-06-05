@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!--    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
     <title>Attandence Report</title>
     <style>
         .btn-group button {
@@ -13,15 +14,26 @@
 
         }
         h1 {
-            text-align: center;
+            /*margin-top: 30px;*/
+            /*margin-bottom: 30px;*/
+            text-align: left;
             font-family: "Arial Black";
+            color: teal;
+            margin-left: 30px;
+
+        }
+        h2{
+
         }
         table {
             font-family: arial, sans-serif;
-            width: 50%;
+            width: 80%;
             -moz-border-radius:6px;
             border-collapse: collapse; /* IE7 and lower */
             border-spacing: 0;
+            margin-top: 30px;
+            margin-left: 30px;
+            box-shadow: 10px 10px 5px #aaaaaa;
         }
 
         td, th {
@@ -30,7 +42,11 @@
             vertical-align: auto;
         }
         th{
-            background-color: aquamarine;
+            background-color: teal;
+            color: white;
+        }
+        td{
+            padding-right: 4px;
         }
         th:first-child {
             border-radius: 6px 0 0 0;
@@ -39,7 +55,6 @@
         th:last-child {
             border-radius: 0 6px 0 0;
         }
-
         th:only-child{
             border-radius: 6px 6px 0 0;
         }
@@ -59,25 +74,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<div id="legend">
-    <h1> Attandence Report </h1>
-</div>
 <div>
-    <form action="/vacationReport" method="get">
-        <button type="submit">report on vacation</button>
-    </form>
+    <%- include ('./partials/ContractorWorkerNav')%>
 </div>
-<table class="center">
-    <tr>
-        <th>Company</th>
+<div id="legend">
+    <header class="w3-container w3-teal">
+    <h1> Attandence Report </h1>
+    </header>
+</div>
+<table>
+    <tr class="w3-teal">
+        <th>Date</th>
+        <th></th>
     </tr>
     <% if (locals.employments) {
         d = new Date()%>
         <% employments.forEach((item)=>{%>
     <tr >
         <td>
-        <%=item.workDate.toDateString()%>
+            <%=item.workDate.toDateString()%></td>
 <!--        <div id="panel">-->
+            <td>
             <div class="btn-group">
             <form class="form-horizontal" action='/attendanceReport/addAttendanceReport/<%=item._id%>' method="post">
                     <%if (item.workDate.getDate()==d.getDate() && item.temp==0){%>

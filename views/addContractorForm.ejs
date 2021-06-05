@@ -1,74 +1,137 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>
+        h1 {
+            /*margin-top: 30px;*/
+            /*margin-bottom: 30px;*/
+            text-align: left;
+            font-family: "Arial Black";
+            color: teal;
+            margin-left: 30px;
 
-<link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+        }
+        input[type=text], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 70px;
+        }
+        input[type=Number], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 70px;
+        }
+        input[type=password], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 70px;
+        }
+        input[type=email], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 70px;
+        }
+        input[type=date], select {
+            width: 20%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 70px;
+        }
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 4px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+        label{
+            margin-left: 70px;
+        }
+        button{
+            margin-left: 700px;
+            border-radius: 12px;
+            color: teal;
+            background-color: teal;
+            padding: 20px;
+        }
+        /*div {*/
+        /*    border-radius: 5px;*/
+        /*    background-color: #f2f2f2;*/
+        /*    padding: 20px;*/
+        /*}*/
+    </style>
 </head>
 <body>
 <div>
     <%- include ('./partials/CompanyEmployeeNav')%>
 </div>
 <form class="form-horizontal" action='/contractorWorker/addContractor' method="POST">
-    <fieldset>
-        <div id="legend">
-            <legend class="">Add New Contractor</legend>
-        </div>
 
-        <div class="control-group">
+    <h1>Add new contractor</h1>
+
+
             <!-- ID-->
             <label class="control-label" for="ID">ID:</label>
-            <div class="controls">
+            <br>
+    <i class="fas fa-band-aid"></i>
                 <input type="number" placeholder="Enter contractor ID" name="ID" min="100000000" max="999999999" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid" >
-            </div>
-        </div>
-
-<!--        <div class="control-group">-->
-<!--            &lt;!&ndash; ID &ndash;&gt;-->
-<!--            <label class="control-label" for="ID">ID:</label>-->
-<!--            <div class="controls">-->
-<!--                <input type="number" id="ID" name="ID" placeholder="Enter Contractor ID"  pattern="/^\d{9}$/" title="Enter valid ID" required>-->
-<!--            </div>-->
-<!--        </div>-->
-
-        <div class="control-group">
+            <br>
             <!-- firstName -->
             <label class="control-label"  for="firstName">First Name:</label>
-            <div class="controls">
+            <br>
                 <input type="text" id="firstName" name="firstName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required  >
-            </div>
-        </div>
-
-        <div class="control-group">
+            <br>
             <!-- lastName -->
             <label class="control-label"  for="lastName">Last Name:</label>
-            <div class="controls">
+            <br>
                 <input type="text" id="lasttName" name="lastName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required >
-            </div>
-        </div>
-
-        <div class="control-group">
+            <br>
             <!-- telephone -->
             <label class="control-label"  for="telephone">Phone Number:</label>
-            <div class="controls">
+            <br>
                 <input type="text" id="telephone" name="telephone" placeholder="" class="input-xlarge"   pattern="[0-9]+" required >
-            </div>
-        </div>
-
-
-        <div class="control-group">
+            <br>
             <!--dateOfBirth -->
             <label class="control-label"  for="dateOfBirth">Birthday:</label>
-            <div class="controls">
+            <br>
                 <input type="date" id="workDate" name="dateOfBirth" placeholder="" class="input-xlarge" required >
-            </div>
             <span id="message1" style="color:red"></span>
-        </div>
-
-        <div class="control-group">
+            <br>
             <!--areaOfResidence-->
-            <div>
+
                 <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
-            </div>
+                <br>
                 <select class="form-group" name="areaOfResidence" id="areaOfResidence">
                 <option value="NORTH">North</option>
                 <option value="SOUTH">South</option>
@@ -79,45 +142,35 @@
                 <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
                 <option value="JERUSALEM" >Jerusalem</option>
                 </select>
-        </div>
 
-        <div class="control-group">
+            <br>
+
             <!-- hourlyWage -->
             <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
-            <div class="controls">
+            <br>
                 <input type="number" id="hourlyWage" name="hourlyWage" placeholder="" class="input-xlarge"  pattern="[0-9]+" required min="0" >
-            </div>
-        </div>
+            <br>
 
-        <div class="control-group">
             <!--bankAccount.bankName-->
             <label class="control-label"  for="bankAccount.bankName"> Bank Name:</label>
-            <div class="controls">
+            <br>
                 <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" placeholder="" class="input-xlarge"  pattern="[a-zA-z]+" required >
-            </div>
-        </div>
-
-        <div class="control-group">
+            <br>
             <!--bankAccount.branch-->
             <label class="control-label"  for="bankAccount.branch"> branch:</label>
-            <div class="controls">
+            <br>
                 <input type="number" id="bankAccount.branch" name="bankAccount.branch" placeholder="" class="input-xlarge"  pattern="[0-9]+" required >
-            </div>
-        </div>
+            <br>
 
-        <div class="control-group">
             <!--bankAccount.accountNumber-->
             <label class="control-label"  for="bankAccount.accountNumber">Account Number:</label>
-            <div class="controls">
+            <br>
                 <input type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" placeholder="" class="input-xlarge"  pattern="[0-9]+" required >
-            </div>
-        </div>
+            <br>
 
-
-        <div class="control-group">
             <!--fieldOfEmployment-->
-            <div>
             <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+         <br>
         </div>
             <select class="form-group" name="fieldOfEmployment" id="fieldOfEmployment">
             <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
@@ -156,35 +209,30 @@
 <!--        </div>-->
 
 
-        <div class="control-group">
-            <p class="space row">                      </p>
+
+            <p class="space row"></p>
             <!-- Experience -->
             <label class="control-label"  for="Experience">Experience:</label>
-            <div class="controls">
+            <br>
                 <input type="number" id="Experience" name="Experience" placeholder="Enter the contractor's years of experience if there is no,Enter 0" class="input-xlarge" required pattern="[0-9]+" min="0" >
-            </div>
-        </div>
+            <br>
 
-        <div class="control-group">
             <!-- E-mail -->
             <label class="control-label" for="userName">E-mail:</label>
-            <div class="controls">
+            <br>
                 <input type="email" id="userName" name="userName" placeholder="Enter contractor's email" class="input-xlarge" required>
-            </div>
-        </div>
+                <br>
 
-        <div class="control-group">
+
             <!-- Password-->
             <label class="control-label" for="password">Password:</label>
-            <div class="controls">
+            <br>
                 <input type="password" placeholder="Enter contractor password " name="password" id="password"  required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
-                <p class="space row">          </p>
-            </div>
-        </div>
+                <p class="space row"></p>
 
-        <div class="control-group">
+
+
             <!-- Button -->
-            <div class="controls">
                 <button class="btn btn-success" type="submit" onclick="checkHourlyWage()">Add New Contractor</button>
                 <script>
                     function checkHourlyWage() {
@@ -199,7 +247,6 @@
                 </script>
             </div>
         </div>
-    </fieldset>
 </form>
 </body>
 </html>

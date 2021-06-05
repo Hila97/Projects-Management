@@ -4,20 +4,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating</title>
 
-    <title>Document</title>
 </head>
 <body>
-<h2 >Today salary</h2>
 
-<% if (locals.salary) { %>
-<p>Total Hours : <%=salary.totalHours %></p>
-<p>Total Wage : <%=salary.totalWage %></p>
-<% } %>
+<h2><b>Rating</b></h2>
+<p style="color: red;" id="error"></p>
 
-<% if (locals.message) { %>
-<p><%=message %></p>
-<% } %>
+<% if (locals.rating) { %>
+<h3>Your rating from current employer is : <%=rating%></h3>
+    <% } %>
+
+
 
 </body>
 
