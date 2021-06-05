@@ -13,7 +13,7 @@ router.get('/CompanyEmployeeLogin',(req, res) =>
 })
 
 router.get('/addContractorForm', (req, res)=>{
-res.render('contractorWorkerViews/addContractorForm')
+res.render('EmployeeViews/addContractorForm')
 })
 
 router.get('/searchContractorWorker', (req, res)=>{
