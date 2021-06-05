@@ -112,7 +112,7 @@
 <!--    }-->
 <!--</style>-->
 
-<body>
+
 <div>
     <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700">
@@ -129,13 +129,40 @@
             <li><a href="/contractorWorker/displayProfile">Profile</a></li>
             <li><a href="/employment/findPastEmploymentsForContractor">history</a></li>
             <li><a href="/employment/pendingEmployments">PENDING-BOOKING</a></li>
+            <li><a onclick="getEmployees()">Rating</a></li>
+            <li><a href="/salary/contractorSalaryFilters">Salary filters</a></li>
+            <li><a href="/vacationReport">vacation</a> </li>
         </ul>
     </div>
+    <script>
+        function getCookie(cname) {
+            let name = cname + '=';
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for(let i = 0; i <ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    let cookie = c.substring(name.length, c.length)
+                    cookie = cookie.split(':')[2].split('\"')[1]
+                    return cookie
+                }
+            }
+            return '';
+        }
+
+        function getEmployees(){
+
+            const workerID = getCookie('contractorWorkerIDCookie')
+            window.location.pathname =`/contractorWorker/getRatingContractorWorkerByID/${workerID}`
+        }
+    </script>
 
     </body>
 
 </div>
-</body>
 </html>
 
 
