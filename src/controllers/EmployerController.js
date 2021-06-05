@@ -157,7 +157,7 @@ const getBookedEmployeesToday= async (req, res)=>
             if(!e.workerID) return res.render('Error', {message: 'one or more of the workerIDs doesnt exist'})
         })
         const resData = employees.map(e=>e.workerID)
-        res.render('getBookedEmployeesToday',{employees : resData})
+        res.render('EmployerViews/getBookedEmployeesToday',{employees : resData})
 
       // return  res.json(employees)
     }
@@ -169,7 +169,7 @@ const getBookedEmployeesToday= async (req, res)=>
 
 const getBookedEmployeesFuture= async (req,res)=>
 {
-    const {id} = req.params
+    const id = req.cookies.employerIDCookie.id
     try
     {
         const employees = await Employment.find({ employerID : id,status : 'Future'}).populate('workerID').sort({workDate:1})
@@ -185,7 +185,7 @@ const getBookedEmployeesFuture= async (req,res)=>
         })
 
         const resData = employees.map(e=>e.workerID)
-        return  res.render('filterEmployeesByStatusFuture',{employees})
+        return  res.render('EmployerViews/filterEmployeesByStatusFuture',{employees})
     }
     catch(e)
     {

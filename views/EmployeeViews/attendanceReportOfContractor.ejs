@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Attandence Report</title>
+    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+    <style>
+        #panel, #flip {
+            padding: 5px;
+            text-align: center;
+            background-color: #e5eecc;
+            border: solid 1px #c3c3c3;
+        }
+
+        #panel {
+            padding: 50px;
+            display: none;
+        }
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        table.center {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        .hidden_row td{
+            display:none;
+            /* height: 0px; */
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="legend">
+    <h1>My Attendance Report </h1>
+</div>
+
+<div>
+    <table class="center">
+        <tr>
+            <th>Work date:</th>
+            <th>Start shift:</th>
+            <th>End shift:</th>
+            <th>Start break:</th>
+            <th>End break:</th>
+        </tr>
+        <% if (locals.r) {%>
+        <%r.forEach((item)=>{%>
+        <tr>
+            <td><%=item.reportDate.toDateString()%></td>
+            <td><%=item.startShift.toLocaleTimeString()%></td>
+            <td><%=item.endShift.toLocaleTimeString()%></td>
+            <td><%=item.startBreak.toLocaleTimeString()%></td>
+            <td><%=item.endBreak.toLocaleTimeString()%></td>
+
+        </tr>
+        <%});%>
+        <% } %>
+    </table>
+</div>
+
+</body>
+</html>

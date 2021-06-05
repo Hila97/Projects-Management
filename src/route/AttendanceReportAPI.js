@@ -14,6 +14,9 @@ router.get('/thisMonthSalary/:contractorWorkerID', attendanceReport.getThisMonth
 router.get('/getTodaySalary/:contractorWorkerID', attendanceReport.getTodaySalary)
 router.get('/getThisYearSalary/:contractorWorkerID', attendanceReport.getThisYearSalary)
 router.get('/getRangeOfSalaryByShift/:contractorWorkerID', attendanceReport.getRangeOfSalaryByShift)
+router.get('/displayEditAttendance/:_id', attendanceReport.displayEditAttendance)
+router.post('/editAttendanceReport/:ID', attendanceReport.editAttendanceReport)
+
 
 
 router.get('/addContractorForm', (req, res)=>{

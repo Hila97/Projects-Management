@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Attendance Report</title>
+</head>
+<body>
+<h2>Add Error Report</h2>
+
+<form action="/errorReport/addErrorReport/<%=attendance.reportDate%>/<%=attendance._id%>" method="post">
+    <label for="attendanceReportID">attendanceReportID: <%=attendance._id%> </label><br>
+<!--    <input type="object" id="attendanceReportID" name="attendanceReportID" placeholder="<%=attendance._id%>"     ><br>-->
+
+    <label for="reportDate">Report Date of error:</label><br>
+    <input type="text"  placeholder="<%=attendance.reportDate.toDateString()%>"><br>
+
+    <label for="errorDescription"> Error Description:</label><br>
+    <input type="text" id="errorDescription" name="errorDescription" ><br>
+
+    <div class="controls">
+        <button class="btn btn-success" type="submit">SAVE</button>
+    </div>
+</form>
+</body>
+</html>

@@ -6,6 +6,9 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 </head>
 <body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
 <% salaryAvg.forEach((item)=>{ %>
 <input type="hidden" name="salaryAvg" value=<%=item%> >
 <%});%>

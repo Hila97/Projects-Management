@@ -221,7 +221,14 @@ app.get('/AttandenceList',((req, res) =>
     res.render('AttandenceList')
 }))
 
-mongoose.set('useFindAndModify', false)
+// app.get('/editAttendanceReport',((req, res) =>
+// {
+//     res.render('editAttendanceReport')
+// }))
+
+
+
+
 
 app.get('/historyContractor', ((req, res) =>
 {
@@ -241,3 +248,7 @@ app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
 {
     res.render('filterEmploymentsByDateForContractor')
 }))
+
+mongoose.set('useFindAndModify', false)
+
+

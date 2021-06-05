@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DETAILS</title>
+    <style>
+        .form-popup {
+            display: none;
+            position: fixed;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .rate {
+            float: left;
+            height: 46px;
+            padding: 0 10px;
+        }
+        .rate:not(:checked) > input {
+            position:absolute;
+            top:-9999px;
+        }
+        .rate:not(:checked) > label {
+            float:right;
+            width:1em;
+            overflow:hidden;
+            white-space:nowrap;
+            cursor:pointer;
+            font-size:30px;
+            color:#ccc;
+        }
+        .rate:not(:checked) > label:before {
+            content: '★ ';
+        }
+        .rate > input:checked ~ label {
+            color: #ffc700;
+        }
+        .rate:not(:checked) > label:hover,
+        .rate:not(:checked) > label:hover ~ label {
+            color: #deb217;
+        }
+        .rate > input:checked + label:hover,
+        .rate > input:checked + label:hover ~ label,
+        .rate > input:checked ~ label:hover,
+        .rate > input:checked ~ label:hover ~ label,
+        .rate > label:hover ~ input:checked ~ label {
+            color: #c59b08;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <%- include ('../partials/EmployerNav')%>
+</div>
+<h1>DETAILS:</h1>
+<div>
+    <ul>
+        <li><label>STATUS: </label> <%=e.status%></li>
+        <li><label>WORK DATE: </label> <%=e.workDate.toDateString()%></li>
+        <li><label>NAME: </label> <%=e.workerID.firstName%> <%=e.workerID.lastName%></li>
+        <li><label>TELEPHONE: </label> <%=e.workerID.telephone%></li>
+        <li><label>MAIL: </label> <%=e.workerID.userName%></li>
+        <li><label>EMPLOYMENT RANKING: </label> <%=e.rank%></li>
+        <li><label>DESCRIPTION: </label> <%=e.jobDescription%></li>
+        <li><label>START TIME: </label><%=e.startTime.toLocaleTimeString()%></li>
+        <li><label>END TIME: </label><%=e.endTime.toLocaleTimeString()%></li>
+    </ul>
+    <button class="open-button" onclick="openForm()">rate this employments</button>
+</div>
+
+<div class="form-popup" id="myForm">
+    <form onsubmit="return checkRate()" action='/employment/rateEmployment' class="form-container" method="POST">
+        <h1>rate the worker</h1>
+        <input type="hidden" id="employmentID" name="employmentID" value="<%=e._id%>" class="input-xlarge"/>
+        <div class="rate">
+            <input type="radio" id="star5" name="rate" value="5" />
+            <label for="star5" title="text">5 stars</label>
+            <input type="radio" id="star4" name="rate" value="4" />
+            <label for="star4" title="text">4 stars</label>
+            <input type="radio" id="star3" name="rate" value="3" />
+            <label for="star3" title="text">3 stars</label>
+            <input type="radio" id="star2" name="rate" value="2" />
+            <label for="star2" title="text">2 stars</label>
+            <input type="radio" id="star1" name="rate" value="1" />
+            <label for="star1" title="text">1 star</label>
+        </div>
+        <div id="disp" style="color:red; font-size:18px; font-weight:bold;"></div>
+        <button type="submit" class="btn">rate</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+        document.getElementById("employmentID").value=document.getElementById("ID").value;
+    }
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+    function checkRate()
+    {
+        var checkRadio = document.querySelector("input[name=rate]:checked");
+        if(checkRadio == null) {
+            document.getElementById("disp").innerHTML = "please rate between 1 to 5";
+            return false;
+        }
+    }
+</script>
+</body>
+</html>

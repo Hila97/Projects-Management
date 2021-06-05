@@ -24,17 +24,19 @@
     </style>
 </head>
 <body>
-
+<div>
+    <%- include ('../partials/EmployerNav')%>
+</div>
 <table>
     <% if (locals.employees) { %>
 
-        <% employees.forEach((item)=>{%>
         <tr>
             <th>first name</th>
             <th>last name</th>
             <th>telephone</th>
             <th>email</th>
         </tr>
+        <% employees.forEach((item)=>{%>
         <tr>
             <td><%=item.firstName%></td>
             <td><%=item.lastName%></td>

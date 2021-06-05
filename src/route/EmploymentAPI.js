@@ -30,5 +30,5 @@ router.get('/rejectEmployment/:ID/:workDate',employment.rejectEmployment)
 //router.put('/updateEmploymentToday/:employerID',employment.updateEmploymentToday)
 router.get('/getAllRatingsForWorker/:workerID', employment.getAllRatingsForWorker)
 
-
+router.get('/employmentDetails/:employmentID',employment.findEmploymentByID)
 module.exports =router

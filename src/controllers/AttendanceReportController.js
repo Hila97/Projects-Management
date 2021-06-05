@@ -1,6 +1,7 @@
 const mongoose = require ('mongoose');
 const AttendanceReportCtrl=require('../models/AttendanceReport')
 const emoloyment=require('../controllers/EmploymentController')
+const ErrorReport=require('../models/ErrorReport')
 const moment = require('moment')
 
 
@@ -354,11 +355,82 @@ const getRangeOfSalaryByShift= async (req, res)=> {
    } catch (e) {
        console.log(e)
    }
+    
+         
+   
 }
 
 
+const displayEditAttendance= async (req,res)=>
+{
+    console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+    var ID= req.params._id
+    console.log(ID)
+    await AttendanceReportCtrl.findById({_id:ID})
+        .then(attendance=> {
+            console.log(attendance)
+            res.render("EmployeeViews/addErrorReport",{attendance})
+        }).catch(err=>
+        {
+            return res.status(400).send('That attendance not found')
+        })
+}
 
 
+const  editAttendanceReport=(req, res)=>{
+    var ID=req.params.ID
+    AttendanceReportCtrl.findById(ID).then(result=>{
+        console.log(result)
+        var startS=result.startShift
+        var endS=result.endShift
+        var startB=result.startBreak
+        var endB=result.endBreak
+
+        const S1 = startS.toISOString().split('T').shift();
+        const enterS= moment(S1 + ' ' + req.body.startShift).toDate();
+        enterS.setHours(enterS.getHours()+3)
+        console.log(enterS)
+
+        const S2 = endS.toISOString().split('T').shift();
+        const exitS = moment(S2 + ' ' + req.body.endShift).toDate();
+        exitS.setHours(exitS.getHours()+3)
+        console.log(exitS)
+
+        const B1 = startB.toISOString().split('T').shift();
+        const enterB = moment(B1+ ' ' + req.body.startBreak).toDate();
+        enterB.setHours(enterB.getHours()+3)
+        console.log(enterB)
+
+        const B2 = endB.toISOString().split('T').shift();
+        const exitB = moment(B2 + ' ' + req.body.endBreak).toDate();
+        exitB.setHours(exitB.getHours()+3)
+        console.log(exitB)
+
+        AttendanceReportCtrl.findByIdAndUpdate(ID, {startShift:enterS,endShift:exitS,startBreak:enterB,endBreak:exitB})
+            .then(att=>{
+                ErrorReport.findOneAndUpdate({attendanceReportID:req.params.ID},{status:1}).then(result=>{
+                res.render('HomeEmployee')
+                if(!result) {
+                    res.status(404).send({message: 'error'})
+                }else {
+                    res.send(result)
+                }
+                })
+            })
+            .catch(err=>{
+                console.log(err)
+            })
+    })
+
+    // A.startShift.setTime(req.body.startShift)
+
+    if(!req.body)
+        return res
+            .status(400)
+            .send({message:"error"})
+    // const id = req.params.ID
+
+}
 
 module.exports={
     addAttendanceReport,
@@ -375,6 +447,8 @@ module.exports={
     getTodaySalary,
     getThisYearSalary,
     getRangeOfSalaryByShift,
-    calcWorkRangeByShift
+    displayEditAttendance,
+    calcWorkRangeByShift,
+    editAttendanceReport
 }
 
