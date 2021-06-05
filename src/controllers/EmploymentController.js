@@ -329,7 +329,8 @@ const getEmploymentsListForContractor = async (req,res)=>{
     var workerID=req.cookies.contractorWorkerIDCookie.id
     console.log(workerID)
     var q={
-        workerID:workerID
+        workerID:workerID,
+        confirmation: "approved"
     }
     Employment.find(q)
         .then((result)=>{

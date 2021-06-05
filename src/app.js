@@ -96,6 +96,11 @@ app.get('/', (req, res)=>{
 app.get('/employeesFilters',((req, res) => {
     res.render('employeesFilters')
 }))
+
+//add from merav:
+
+
+
 app.get('/getBookedEmployeesToday',((req, res) => {
     res.render('getBookedEmployeesToday')
 }))
@@ -248,6 +253,26 @@ app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
 {
     res.render('filterEmploymentsByDateForContractor')
 }))
+
+app.get('/historyContractor', ((req, res) =>
+{
+    res.render('historyContractor')
+}))
+
+app.get('/historyFieldofemployment', ((req, res) =>
+{
+    res.render('historyFieldofemployment')
+}))
+app.get('/vacationReport', ((req, res)=>
+{
+    res.render('vacationReport')
+}))
+
+app.get('/filterEmploymentsByDateForContractor', ((req, res) =>
+{
+    res.render('filterEmploymentsByDateForContractor')
+}))
+
 
 mongoose.set('useFindAndModify', false)
 

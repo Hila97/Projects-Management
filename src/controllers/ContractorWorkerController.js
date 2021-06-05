@@ -281,22 +281,19 @@ const loginOfContractorWorker= async (req, res) =>
 
 }
 
-
-const getRatingContractorWorker= async (req,res)=>
+const getRatingContractorWorkerByID= async (req,res)=>
 {
-    const {fieldOfEmployment} = req.params
+    const {id} = req.params
     try
     {
-        const contractorWorkers  = await contractorWorker.find({  fieldOfEmployment : fieldOfEmployment })
-        if(contractorWorkers .length===0)
+        const contractorworker  = await contractorWorker.findOne({  _id : id })
+        if(!contractorworker)
         {
-            // res.send("No employers found")
-            res.render('Error',{message : 'No employers found'})
+            res.render('Error',{message : 'Employee not found'})
             return
         }
 
-        //    return  res.json(employers)
-        res.render('getRatingContractorWorker',{contractorworkers  : contractorWorkers })
+        res.render('getAllRatingsForWorker',{rating  : contractorworker.rating })
     }
     catch(e)
     {
@@ -318,22 +315,23 @@ const TotalhourWorkinMonth= async (req,res)=>
 {
     const {id} = req.params
     try
-    {  
+    {
         const contractorworker  = await contractorWorker.findOne({  _id : id })
         if(!contractorworker)
         {
             res.render('Error',{message : 'Employee not found'})
             return
         }
-        
+
     res.render('ratingPage',{rating  : contractorworker.rating })
     }
     catch(e)
     {
         console.log(e)
-    }  
+    }
 }
 */
+
 
 const findContractorWorkerById = async (req, res)=>
 {
@@ -529,7 +527,7 @@ module.exports =
         loginOfContractorWorker,
         displayEditProfile,
         findAvailableWorkers,
-        getRatingContractorWorker,
+        getRatingContractorWorkerByID,
         findContractorWorkerById,
         findContractorWorkerByIdReturnAttendance,
         findContractorAttendance,
