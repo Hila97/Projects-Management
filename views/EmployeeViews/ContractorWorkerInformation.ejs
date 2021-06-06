@@ -9,23 +9,18 @@
     <%- include ('../partials/CompanyEmployeeNav')%>
 </div>
 <div class="banner-area"> </div>
-<div class="content-area">
+
 <form class="form-horizontal" action="/contractorWorker/findContractorWorkerById" method="POST">
-    <fieldset>
+
         <div id="legend">
-            <legend class="">Search contractor worker</legend>
+            <h1> Search contractor worker</h1>
         </div>
-        <div class="control-group">
+
             <!-- ID-->
-            <label> Enter Contractor ID: </label>
-            <div class="controls">
-                <input type="text" placeholder=" ID" name="ID" min="100000000" max="999999999" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid, ID must contain 9 digits" >
-            </div>
-        </div>
-    </fieldset>
-    <div>
+        <label> Enter Contractor ID: </label>
+        <input type="text" placeholder=" ID" name="ID" min="100000000" max="999999999" id="ID" required  pattern="(\d\d\d\d\d\d\d\d\d)$" title="ID not valid, ID must contain 9 digits" >
         <button type="submit" >SEARCH</button>
-    </div>
+
 </form>
 </div>
 </body>
