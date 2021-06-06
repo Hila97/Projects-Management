@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Search contractor worker</title>
+    <style>
+        label{
+            font-size: 18px;
+            font-weight: bold;
+            color: teal;
+        }
+    </style>
     <script>
         function checkHourlyWage()
         {
@@ -28,17 +35,60 @@
 <div>
     <%- include ('../partials/EmployerNav')%>
 </div>
-<form class="form-horizontal" onsubmit="return checkHourlyWage()" action='/contractorWorker/findAvailableWorkers' method="POST">
-
-        <div id="legend">
-            <legend class="">SEARCH CONTRACTOR WORKER</legend>
-        </div>
-        <div class="control-group">
+<div class="content-area">
+    <form class="form-horizontal" onsubmit="return checkHourlyWage()" action='/contractorWorker/findAvailableWorkers' method="POST">
+      <br>
+            <div class="control-group">
                 <label class="control-label"  for="workDate">workDate:</label>
                 <div class="controls">
                     <input type="date" id="workDate" name="workDate" placeholder="" class="input-xlarge" required>
                 </div>
             </div>
+
+            <div class="control-group">
+                <!-- hourlyWage -->
+                <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
+                <div class="controls">
+                   <label>minimum:</label> <input type="number" id="min" name="min" placeholder="" class="input-xlarge" min="1">
+                    <label>maximum:</label><input type="number" id="max" name="max" placeholder="" class="input-xlarge" min="1" >
+
+                </div>
+            </div>
+        <div class="control-group">
+            <!-- Experience -->
+            <label class="control-label"  for="experience">Experience:</label>
+            <div class="controls">
+                <input type="number" id="experience" name="experience" placeholder="" class="input-xlarge" min="0" max="20">
+            </div>
+        </div>
+            <div class="control-group">
+                <!--fieldOfEmployment-->
+                <div>
+                    <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+                </div>
+                <select class="form-group" name="fieldOfEmployment" id="fieldOfEmployment">
+                    <option value="ALL">All</option>
+                    <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
+                    <option value="Fashion And Textiles" >Fashion And Textiles</option>
+                    <option value="SecurityAndSafety" >Security And Safety</option>
+                    <option value="ConstructionInfrastructureAndRealEstate">Construction Infrastructure And Real Estate</option>
+                    <option value="GraphicsDesignAndArt">Graphics Design And Art</option>
+                    <option value="EducationAndTraining" >Education And Training</option>
+                    <option value="AccountingAndFinance"  >Accounting And Finance</option>
+                    <option value="LogisticsProcurementAndShipping">Logistics Procurement And Shipping</option>
+                    <option value="RestaurantsFoodAndEvents" >Restaurants Food And Events</option>
+                    <option value="Retail" >Retail</option>
+                    <option value="Medicine And Health" >Medicine And Health</option>
+                    <option value="marketingAndAdvertising" >marketing And Advertising</option>
+                    <option value="CustomerService" >Customer Service</option>
+                    <option value="TransportAndVehicle" >Transport And Vehicle</option>
+                    <option value="TourismAndHotels" >Tourism And Hotels</option>
+                    <option value="IndustryAndManagement" >Industry And Management</option>
+                    <option value="Sales" >Sales</option>
+                    <option value="other" >other</option>
+                </select>
+            </div>
+
 
         <div class="control-group">
             <div>
@@ -57,68 +107,22 @@
                 <option value="other" >other</option>
             </select>
         </div>
-
-        <div class="control-group">
-            <!-- hourlyWage -->
-            <label class="control-label"  for="hourlyWage">Hourly Wage:</label>
-            <div class="controls">
-                <input type="number" id="min" name="min" placeholder="" class="input-xlarge" min="1">
-                <input type="number" id="max" name="max" placeholder="" class="input-xlarge" min="1" >
-
+            <div class="control-group">
+                <!-- Experience -->
+                <label class="control-label"  for="rating">rating:</label>
+                <div class="controls">
+                    <input type="number" id="rating" name="rating" placeholder="" class="input-xlarge" min="0" max="5">
+                </div>
             </div>
-        </div>
 
-        <div class="control-group">
-            <!--fieldOfEmployment-->
-            <div>
-                <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+            <div class="control-group">
+                <!-- Button -->
+                <div class="controls">
+                    <span id="message1" style="color:red"></span><br><br>
+                    <button type="submit">SEARCH</button>
+                </div>
             </div>
-            <select class="form-group" name="fieldOfEmployment" id="fieldOfEmployment">
-                <option value="ALL">All</option>
-                <option value="ElectronicsAndElectricity">Electronics And Electricity</option>
-                <option value="Fashion And Textiles" >Fashion And Textiles</option>
-                <option value="SecurityAndSafety" >Security And Safety</option>
-                <option value="ConstructionInfrastructureAndRealEstate">Construction Infrastructure And Real Estate</option>
-                <option value="GraphicsDesignAndArt">Graphics Design And Art</option>
-                <option value="EducationAndTraining" >Education And Training</option>
-                <option value="AccountingAndFinance"  >Accounting And Finance</option>
-                <option value="LogisticsProcurementAndShipping">Logistics Procurement And Shipping</option>
-                <option value="RestaurantsFoodAndEvents" >Restaurants Food And Events</option>
-                <option value="Retail" >Retail</option>
-                <option value="Medicine And Health" >Medicine And Health</option>
-                <option value="marketingAndAdvertising" >marketing And Advertising</option>
-                <option value="CustomerService" >Customer Service</option>
-                <option value="TransportAndVehicle" >Transport And Vehicle</option>
-                <option value="TourismAndHotels" >Tourism And Hotels</option>
-                <option value="IndustryAndManagement" >Industry And Management</option>
-                <option value="Sales" >Sales</option>
-                <option value="other" >other</option>
-            </select>
-        </div>
-
-        <div class="control-group">
-            <!-- Experience -->
-            <label class="control-label"  for="experience">Experience:</label>
-            <div class="controls">
-                <input type="number" id="experience" name="experience" placeholder="" class="input-xlarge" min="0" max="20">
-            </div>
-        </div>
-        <div class="control-group">
-            <!-- Experience -->
-            <label class="control-label"  for="rating">rating:</label>
-            <div class="controls">
-                <input type="number" id="rating" name="rating" placeholder="" class="input-xlarge" min="0" max="5">
-            </div>
-        </div>
-
-        <div class="control-group">
-            <!-- Button -->
-            <div class="controls">
-                <span id="message1" style="color:red"></span><br><br>
-                <button type="submit">SEARCH</button>
-            </div>
-        </div>
-
-</form>
+    </form>
+</div>
 </body>
 </html>

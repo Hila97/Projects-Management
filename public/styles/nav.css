@@ -91,7 +91,7 @@ input[type=text], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-left: 30px;
+    margin-left: 70px;
 }
 input[type=Number], select {
     width: 20%;
@@ -101,7 +101,7 @@ input[type=Number], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-left: 30px;
+    margin-left: 70px;
 }
 input[type=password], select {
     width: 20%;
@@ -111,7 +111,7 @@ input[type=password], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-left: 30px;
+    margin-left: 70px;
 }
 input[type=email], select {
     width: 20%;
@@ -131,7 +131,7 @@ input[type=date], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    margin-left: 30px;
+    margin-left: 70px;
 }
 input[type=submit] {
     width: 100%;
@@ -151,11 +151,12 @@ label{
     margin-left: 70px;
 }
 button{
-    margin-left: 700px;
     border-radius: 12px;
-    color: teal;
+    color: aliceblue;
     background-color: teal;
     padding: 20px;
+    margin-left: 70px;
+
 }
 /*div {*/
 /*    border-radius: 5px;*/
@@ -284,4 +285,42 @@ button{
 /*}*/
 .btn{
     background-color:#599bb3;
+}
+table {
+    font-family: arial, sans-serif;
+    width: 80%;
+    -moz-border-radius:6px;
+    border-collapse: collapse; /* IE7 and lower */
+    border-spacing: 10px;
+    margin-top: 30px;
+    margin-left: 30px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+td, th {
+    text-align: left;
+    padding: 8px;
+    vertical-align: auto;
+    margin-right: 3px;
+}
+th{
+    background-color: teal;
+    color: white;
+}
+td{
+    padding-right: 1px;
+    width: 100px
+}
+.td1{
+    width: 200px;
+}
+th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 6px 0 0;
+}
+th:only-child{
+    border-radius: 6px 6px 0 0;
 }
