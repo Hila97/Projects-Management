@@ -24,18 +24,18 @@ router.get('/addContractorForm', (req, res)=>{
 })
 router.get('/compareTwoMonthSalaries',((req, res) =>
 {
-    res.render('compareTwoMonthSalaries')
+    res.render('ContractorWorkerViews/compareTwoMonthSalaries')
 
 }))
 
 router.get('/thisYearProfit',((req, res) =>
 {
-    res.render('thisYearProfit')
+    res.render('ContractorWorkerViews/thisYearProfit')
 
 }))
 router.get('/rangeOfSalaryByShifts',((req, res) =>
 {
-    res.render('rangeOfSalaryByShifts')
+    res.render('ContractorWorkerViews/rangeOfSalaryByShifts')
 
 }))
 router.get('/TodaySalary',((req, res) =>
@@ -46,12 +46,12 @@ router.get('/TodaySalary',((req, res) =>
 
 router.get('/totalWageByMonth',((req, res) =>
 {
-    res.render('totalWageByMonth')
+    res.render('ContractorWorkerViews/totalWageByMonth')
 
 }))
 router.get('/thisMonthSalary',((req, res) =>
 {
-    res.render('thisMonthSalary')
+    res.render('ContractorWorkerViews/thisMonthSalary')
 
 }))
 

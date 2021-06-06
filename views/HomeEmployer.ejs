@@ -85,51 +85,10 @@
 
 <body>
 <div>
-    <head>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,400i,700">
-        <!-- Code by Angela Delise  https://codepen.io/angeladelise/pen/OJVePqz
-       -->
-
-   <meta http-equiv="">
-    </head>
-    <div id='navbar'>
-        <ul>
-            <li><a href="/">HR-COMPANY</a></li>
-            <li><a href="/employer/search">SEARCH WORKER</a></li>
-            <li><a href="/employment/history">HISTORY OF EMPLOYMENTS</a></li>
-            <li><a href="/employer/getBookedEmployeesToday"> TODAY EMPLOYMENTS</a></li>
-            <li><a href="/employer/getBookedEmployeesFuture"> FUTURE EMPLOYMENTS</a></li>
-        </ul>
-    </div>
+    <%- include ('./partials/EmployerNav')%>
+</div>
+<div>
+    <h1>HELLO</h1>
 </div>
 </body>
-
-    <!-- added this script -->
-    <script>
-        function getCookie(cname) {
-            let name = cname + '=';
-            let decodedCookie = decodeURIComponent(document.cookie);
-            let ca = decodedCookie.split(';');
-            for(let i = 0; i <ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-                }
-                if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-                }
-            }
-            return '';
-            }
-
-        function getEmployees(){
-           
-           const employerID = getCookie('employerIDCookie')
-           let tmp = employerID.split(':')[2].split('\"')[1]
-            console.log(employerID.split(':')[2].split('\"')[1])
-            // const employerID = '60897c4e3b16b63e2437bbad'
-            window.location.pathname =`/employer/getBookedEmployeesFuture/${tmp}`
-        }
-    </script>
-
 </html>

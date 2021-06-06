@@ -24,14 +24,17 @@
     <title>Document</title>
 </head>
 <body>
+<div>
+    <%- include ('../partials/CompanyEmployeeNav')%>
+</div>
   <h2 >Filter by month</h2>
 
     <input id="month" type="text" />
     <button onclick="filter()">Search</button>
     <p style="color: red;" id="error"></p>
     <table>
-      <% if (locals.attendance) { %>
-        <% attendance.forEach((item)=>{%>
+      <% if (locals.employees) { %>
+        <% employees.forEach((item)=>{%>
         <tr>
           <th>first name</th>
           <th>last name</th>
@@ -42,7 +45,7 @@
           <td><%=item.firstName%></td>
           <td><%=item.lastName%></td>
           <td><%=item.telephone%></td>
-          <td><%=item.email%></td>
+          <td><%=item.userName%></td>
         </tr>
         <%});%>
         <% } %>
@@ -56,8 +59,8 @@
             return
         }
         console.log(month)
-       window.location.href =`/filterEmploymentsByMonth/${month}`
-       // window.location.pathname = `attendanceReport/getWageByMonth/${month}`
+       // window.location.href =`/filterEmploymentsByMonth/${month}`
+        window.location.pathname = `employment/filterEmploymentsByBookingMonth/${month}`
 
     }
 </script>

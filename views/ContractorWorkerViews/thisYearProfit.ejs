@@ -8,7 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-<h2 >Today salary</h2>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 >This year salary</h2>
 
 <% if (locals.salary) { %>
 <p>Total Hours : <%=salary.totalHours %></p>
@@ -22,3 +25,4 @@
 </body>
 
 </html>
+

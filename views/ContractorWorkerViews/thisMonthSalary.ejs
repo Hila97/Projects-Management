@@ -8,11 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-<h2 >This month salary</h2>
+<div>
+    <%- include ('../partials/ContractorWorkerNav')%>
+</div>
+<h2 class="title">This month salary</h2>
 
 <% if (locals.salary) { %>
-<p>Total Hours : <%=salary.totalHours %></p>
-<p>Total Wage : <%=salary.totalWage %></p>
+<p style="font-weight: bold;">Total Wage : <%=salary %> $</p>
+<% } %>
+
+<% if (locals.message) { %>
+<p style="color: red;"><%=message %></p>
 <% } %>
 </body>
 

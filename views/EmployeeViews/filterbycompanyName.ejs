@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>position</title>
+    <title>companyName</title>
     
     <style>
         table {
@@ -24,13 +24,12 @@
         }
         </style>
 </head>
-<body>
-   
-   
  <body>
- 
-  <h2 >Filter by position</h2>
-  <input id="position" type="text" />
+ <div>
+     <%- include ('../partials/CompanyEmployeeNav')%>
+ </div>
+  <h2 >Filter by company name</h2>
+  <input id="companyName" type="text" />
   <button onclick="filter()">Search</button>
   <p style="color: red;" id="error"></p>
    <table >
@@ -65,15 +64,13 @@
 </body>
 <script>
   function filter(){
-      let position = document.getElementById('position').value
-      if(!position){
-          document.getElementById('error').innerHTML = 'must insert position'
+      let companyName = document.getElementById('companyName').value
+      if(!companyName){
+          document.getElementById('error').innerHTML = 'must insert companyName'
           return
       }
-   
-      // window.location.href = `employer/getEmployeesBycompanyName/${companyName}`
-    //  window.history.pushState({}, document.title, "/" + `employer/filterEmployeesByposition/${fieldOfEmpositionployment}`);
-      window.location.pathname = `employer/getEmployeesByposition/${position}`
+      window.location.pathname = `employer/getEmployeesBycompanyName/${companyName}`
+
   }
 </script>
 </html>

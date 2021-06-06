@@ -207,7 +207,7 @@ const getEmployeesBycompanyName= async (req,res)=>
         }
 
     //    return  res.json(employers)
-        res.render('filterbycompanyName',{employers : employers})
+        res.render('EmployeeViews/filterbycompanyName',{employers : employers})
     }
     catch(e)
     {
@@ -229,7 +229,7 @@ const getEmployeesByposition= async (req,res)=>
         }
 
     //    return  res.json(employers)
-    res.render('filterEmployeesByposition',{employers : employers})
+    res.render('EmployeeViews/filterEmployeesByposition',{employers : employers})
     }
     catch(e)
     {
@@ -247,7 +247,7 @@ const filterByfieldOfEmployment= async (req, res)=>
             res.send("No workers found")
             return
         }
-        res.render('filterByfieldOfEmployment',{employers : employers})
+        res.render('EmployeeViews/filterByfieldOfEmployment',{employers : employers})
 
         return  res.json(employees)
     }
@@ -270,7 +270,7 @@ const getEmployersByEmployerName= async (req,res)=>
         }
 
     //    return  res.json(employers)
-        res.render('employerSearch',{employers : employers})
+        res.render('EmployeeViews/employerSearch',{employers : employers})
     }
     catch(e)
     {

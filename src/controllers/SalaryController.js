@@ -158,7 +158,7 @@ const getThisMonthSalaryByWorkerID = async (req, res) => {
         if(!salary){
             return res.render('Error', {message: 'No salary for this month'})
         }
-        res.render('thisMonthSalary', {salary: salary.totalSalary})
+        res.render('ContractorWorkerViews/thisMonthSalary', {salary: salary.totalSalary})
     } catch (e) {
         console.log(e)
     }

@@ -39,7 +39,7 @@ router.get('/editContractorWorker',(req,res)=>{
 
 router.get('/getRatingContractorWorker',((req, res) =>
 {
-    res.render('getRatingContractorWorker')
+    res.render('ContractorWorkerViews/getRatingContractorWorker')
 
 }))
 
