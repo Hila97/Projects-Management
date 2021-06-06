@@ -151,11 +151,11 @@ label{
     margin-left: 70px;
 }
 button{
-    margin-left: 70px;
+    margin-left: 700px;
     border-radius: 12px;
     color: aliceblue;
     background-color: teal;
-    padding: 10px;
+    padding: 20px;
 }
 /*div {*/
 /*    border-radius: 5px;*/
@@ -352,3 +352,4 @@ input {
     margin: 8px 0;
     box-sizing: border-box;
 }
+

@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <title>History</title>
     <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-        tr:nth-child(even) {
-            background-color: #dddddd;
+        .a1:link, a:visited {
+            background-color:teal;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        /* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+        .a1:hover, a:active {
+            background-color: cadetblue;
+        }
+        a{
+            margin-left: 50px;
+        }
+
     </style>
 </head>
 <body>
 <div>
     <%- include ('../partials/EmployerNav')%>
 </div>
-<label>THIS IS YOUR EMPLOYMENTS HISTORY</label>
+<br>
 <table>
 
     <tr>
@@ -39,12 +40,14 @@
         <tr>
             <td><%=item.workDate.toDateString()%></td>
             <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
-            <td><a class="btn" href="/employment/employmentDetails/<%=item._id%>">DETAILS</a> </td>
+            <td><a class="a1" href="/employment/employmentDetails/<%=item._id%>">DETAILS</a> </td>
         </tr>
     <%});%>
 </table>
-
-<a class="btn" href="/employment/pastWorkers/<%names%>">PAST WORKERS</a>
+<br>
+<br>
+<br>
+<a class="a1" href="/employment/pastWorkers/<%names%>">PAST WORKERS</a>
 
 </body>
 </html>
