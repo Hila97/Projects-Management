@@ -6,8 +6,9 @@
 * [Authors](#Authors)
 
 ## description:
-this sprint is part of academic course, 
-this project contain 2 first pages of web: home page and login / signup pages
+this system is website of contractors-employer management system.
+in this system contractor can register to site and to receive Job applications from optional employers.
+employers can search contractor that he needs and invite him to work.
 
 ## Technologies:
 * webstorm version 2020.3
@@ -19,8 +20,9 @@ this project contain 2 first pages of web: home page and login / signup pages
 * mongoose
 * nodemon 2.0.7
 * mocha
-* body parcer
+* body parser
 * bcrypt
+* mongodb database servers
 languages: javaScript, html, css
 
 ## setup:
@@ -50,6 +52,8 @@ npm install express-validator
 npm mongoose --save
 #### install body parser:
 npm body-parser
+#### install node schedule:
+npm install node-schedule
 #### more installations:
 npm install bcryptjs jsonwebtoken
 

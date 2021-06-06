@@ -1,152 +1,123 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
-    <link rel="stylesheet" type="text/css" href="/styles/login.css"/>
+
+<style>
+    .inline
+    {
+        display: inline;
+
+    }
+</style>
+
 </head>
 <body>
 <div>
     <%- include ('../partials/ContractorWorkerNav')%>
 </div>
+<h1>My Profile</h1>
+<div class="div1">
 <form class="form-horizontal" action='/contractorWorker/editProfile' method="post">
 
-            <div id="legend">
-                <legend class="">My Profile</legend>
-            </div>
 
+<span class="inline">
+        <!-- ID -->
+        <label class="control-label" for="ID">ID:</label>
+        <br>
+        <input style="width: 90%" type="number" id="ID" name="ID" value="<%=contractor.ID%>" placeholder="<%=contractor.ID%>" class="input-xlarge" disabled>
+        <br>
 
-            <div class="control-group">
-                <!-- ID -->
-                <label class="control-label" for="ID">ID:</label>
-                <div class="controls">
-                    <input type="number" id="ID" name="ID" value="<%=contractor.ID%>" placeholder="<%=contractor.ID%>" class="input-xlarge" disabled>
-                </div>
-            </div>
+        <!-- firstName -->
+        <label class="control-label" for="firstName">FirstName:</label>
+        <br>
+        <input style="width: 90%" type="text" id="firstName" name="firstName" value="<%=contractor.firstName%>" placeholder="<%=contractor.firstName%>" class="input-xlarge" >
+        <br>
+</span>
 
-            <div class="control-group">
-                <!-- firstName -->
-                <label class="control-label" for="firstName">FirstName:</label>
-                <div class="controls">
-                    <input type="text" id="firstName" name="firstName" value="<%=contractor.firstName%>" placeholder="<%=contractor.firstName%>" class="input-xlarge" >
-                </div>
-            </div>
+        <!-- lastName -->
+        <label class="control-label" for="lastName">Last Name:</label>
+        <br>
+        <input style="width: 90%" type="text" id="lastName" name="lastName" value="<%=contractor.lastName%>" placeholder="<%=contractor.lastName%>" class="input-xlarge" >
+        <br>
 
-
-            <div class="control-group">
-                <!-- lastName -->
-                <label class="control-label" for="lastName">Last Name:</label>
-                <div class="controls">
-                    <input type="text" id="lastName" name="lastName" value="<%=contractor.lastName%>" placeholder="<%=contractor.lastName%>" class="input-xlarge" >
-                </div>
-            </div>
-
-    <div class="control-group">
         <!-- telephone -->
         <label class="control-label"  for="telephone">Phone Number:</label>
-        <div class="controls">
-            <input type="text" id="telephone" name="telephone" value="<%=contractor.telephone%>" placeholder="<%=contractor.telephone%>" class="input-xlarge">
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="text" id="telephone" name="telephone" value="<%=contractor.telephone%>" placeholder="<%=contractor.telephone%>" class="input-xlarge">
+        <br>
 
-
-    <div class="control-group">
         <!--dateOfBirth -->
         <label class="control-label"  for="dateOfBirth">Birthday:</label>
-        <div class="controls">
-            <input type="text" id="dateOfBirth" name="dateOfBirth" value="<%=contractor.dateOfBirth.toDateString()%>" placeholder="<%=contractor.dateOfBirth%>" class="input-xlarge" disabled>
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="text" id="dateOfBirth" name="dateOfBirth" value="<%=contractor.dateOfBirth.toDateString()%>" placeholder="<%=contractor.dateOfBirth%>" class="input-xlarge" disabled>
+        <br>
 
-
-    <div class="control-group">
         <!--areaOfResidence-->
         <div>
             <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
         </div>
-        <select class="form-group" name="areaOfResidence" id="areaOfResidence">
-            <option ><%=contractor.areaOfResidence%></option>
-            <option value="NORTH">North</option>
-            <option value="SOUTH">South</option>
-            <option value="GALIL" >Galil</option>
-            <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
-            <option value="NEGEV" >Negev</option>
-            <option value="SHFELA" >Shfela</option>
-            <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
-            <option value="JERUSALEM" >Jerusalem</option>
-        </select>
-    </div>
+            <select style="width: 90%"  class="form-group" name="areaOfResidence" id="areaOfResidence">
+                <option ><%=contractor.areaOfResidence%></option>
+                <option value="NORTH">North</option>
+                <option value="SOUTH">South</option>
+                <option value="GALIL" >Galil</option>
+                <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
+                <option value="NEGEV" >Negev</option>
+                <option value="SHFELA" >Shfela</option>
+                <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
+                <option value="JERUSALEM" >Jerusalem</option>
+            </select>
+        <br>
 
-    <div class="control-group">
+
         <!--bankAccount.bankName-->
         <label class="control-label"  for="bankAccount.bankName"> Bank Name:</label>
-        <div class="controls">
-            <input type="text" id="bankAccount.bankName" name="bankAccount.bankName" value="<%=contractor.bankAccount.bankName%>" placeholder="<%=contractor.bankAccount.bankName%>" class="input-xlarge" >
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="text" id="bankAccount.bankName" name="bankAccount.bankName" value="<%=contractor.bankAccount.bankName%>" placeholder="<%=contractor.bankAccount.bankName%>" class="input-xlarge" >
+        <br>
 
-    <div class="control-group">
         <!--bankAccount.branch-->
         <label class="control-label"  for="bankAccount.branch"> branch:</label>
-        <div class="controls">
-            <input type="number" id="bankAccount.branch" name="bankAccount.branch" value="<%=contractor.bankAccount.branch%>" placeholder="<%=contractor.bankAccount.branch%>" class="input-xlarge" >
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="number" id="bankAccount.branch" name="bankAccount.branch" value="<%=contractor.bankAccount.branch%>" placeholder="<%=contractor.bankAccount.branch%>" class="input-xlarge" >
+        <br>
 
-
-    <div class="control-group">
         <!--bankAccount.accountNumber-->
         <label class="control-label"  for="bankAccount.accountNumber">Account Number:</label>
-        <div class="controls">
-            <input type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" value="<%=contractor.bankAccount.accountNumber%>" placeholder="<%=contractor.bankAccount.accountNumber%>" class="input-xlarge" >
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="number" id="bankAccount.accountNumber" name="bankAccount.accountNumber" value="<%=contractor.bankAccount.accountNumber%>" placeholder="<%=contractor.bankAccount.accountNumber%>" class="input-xlarge" >
+        <br>
 
-
-    <div class="control-group">
         <!-- Experience -->
         <label class="control-label"  for="Experience">Experience:</label>
-        <div class="controls">
-            <input type="number" id="Experience" name="Experience" value="<%=contractor.Experience%>" placeholder="<%=contractor.Experience%>" class="input-xlarge" pattern="[0-9]+" min="0" max="80">
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="number" id="Experience" name="Experience" value="<%=contractor.Experience%>" placeholder="<%=contractor.Experience%>" class="input-xlarge" pattern="[0-9]+" min="0" max="80">
+        <br>
 
 
-    <div class="control-group">
-    <!-- fieldOfEmployment -->
-    <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
-    <div class="controls">
-        <input type="text" id="fieldOfEmployment" name="fieldOfEmployment" value="<%=contractor.fieldOfEmployment%>" placeholder="<%=contractor.fieldOfEmployment%>" class="input-xlarge" disabled>
-    </div>
-    </div>
+        <!-- fieldOfEmployment -->
+        <label class="control-label"  for="fieldOfEmployment">Field Of Employment:</label>
+        <br>
+        <input style="width: 90%" type="text" id="fieldOfEmployment" name="fieldOfEmployment" value="<%=contractor.fieldOfEmployment%>" placeholder="<%=contractor.fieldOfEmployment%>" class="input-xlarge" disabled>
+        <br>
 
 
-
-
-
-    <div class="control-group">
-        <!-- E-mail -->
+            <!-- E-mail -->
         <label class="control-label" for="userName">E-mail:</label>
-        <div class="controls">
-            <input type="email" id="userName" name="userName" value="<%=contractor.userName%>" placeholder="<%=contractor.userName%>" class="input-xlarge" disabled>
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="email" id="userName" name="userName" value="<%=contractor.userName%>" placeholder="<%=contractor.userName%>" class="input-xlarge" disabled>
+        <br>
 
-    <div class="control-group">
-        <!-- Password-->
+            <!-- Password-->
         <label class="control-label" for="password">Password:</label>
-        <div class="controls">
-            <input type="text" value="<%=contractor.password%>" placeholder="<%=contractor.password%>" name="password" id="password" class="input-xlarge" disabled pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
-        </div>
-    </div>
+        <br>
+        <input style="width: 90%" type="text" value="<%=contractor.password%>" placeholder="<%=contractor.password%>" name="password" id="password" class="input-xlarge" disabled pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
+        <br>
+        <p class="space row">                      </p>
 
-    <p class="space row">                      </p>
-    <div class="control-group">
-        <!-- Button -->
-        <div class="controls">
-            <button class="btn btn-success" type="submit">EDIT</button>
-        </div>
-    </div>
+        <button class="button4" type="submit">EDIT</button>
 
-<!--      <a class="btn" href="/contractorWorker/editContractorWorker">EDIT</a>-->
 </form>
+</div>
 </body>
 </html>

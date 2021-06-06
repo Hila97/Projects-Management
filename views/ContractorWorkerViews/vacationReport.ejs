@@ -1,6 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <style>
+        input[type=date], select {
+            width: 60%;
+            padding: 12px 20px;
+            margin: 2px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-left: 40px;
+        }
+        label{
+            margin-top: 40px;
+            margin-left: 20px;
+        }
+        .div1 {
+            background-color: ghostwhite;
+            width: 300px;
+            border: 2px solid teal;
+            padding: 150px;
+            padding-bottom: 70px;
+            padding-top: 70px;
+            margin: 80px;
+            margin-left: 350px;
+        }
+        .button4 {
+            border-radius: 8px;
+            background-color: teal;
+            margin: auto;
+            margin-left: 110px;
+            border: 0px solid green; /* Green border */
+            color: white; /* White text */
+            padding: 10px 24px; /* Some padding */
+            cursor: pointer; /* Pointer/hand icon */
+            float: left;
+        }
+        .inline
+        {
+            display: inline;
+
+        }
+
+    </style>
     <meta charset="UTF-8">
     <title>vacations</title>
 </head>
@@ -9,12 +52,23 @@
     <%- include ('../partials/ContractorWorkerNav')%>
 </div>
 <form action="/vacation/addVacation" method="post">
-    <label for="departureDate">Start vacation:</label><br>
-    <input type="date" id="departureDate" name="departureDate" value=""><br>
-
-    <label for="returningDate">end vacation:</label><br>
-    <input type="date" id="returningDate" name="returningDate" value=""><br>
-    <button type="submit">report</button>
+    <br>
+    <br>
+    <div>
+        <span class="inline">
+            <div class="inline">
+                <label for="departureDate">Start vacation:</label>
+                <input type="date" id="departureDate" name="departureDate" value="">
+            </div>
+            <div class="inline">
+                <label for="returningDate" style="margin-left: 70px;">end vacation:</label>
+                <input type="date" id="returningDate" name="returningDate" value="">
+            </div>
+        </span>
+    </div>
+    <br>
+    <br>
+    <button style="margin-left: 70px" class="button4" type="submit">report</button>
 </form>
 </body>
 </html>
