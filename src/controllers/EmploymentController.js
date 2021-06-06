@@ -316,7 +316,7 @@ const filterEmploymentsByBookingMonth= async (req,res)=>
 }
 
 const getEmploymentsList = async (req,res)=>{
-    Employment.find()
+    Employment.find().populate('workerID')
         .then((result)=>{
             res.render('EmployeeViews/employmentsList', {employments: result})
         })

@@ -46,16 +46,20 @@
 
   
     <table>
-      <% if (locals.employments) { %>
-        <% employments.forEach((item)=>{%>
         <tr>
-          <th>field</th>
-          <th>status</th>
-          <th>bookingDate</th>
-          <th>workDate</th>
+            <th>Field:</th>
+            <th>Contractor's Name:</th>
+            <th>Status:</th>
+            <th>Booking Date:</th>
+            <th>Work Date:</th>
         </tr>
+      <% if (locals.employments) { %>
+
+        <% employments.forEach((item)=>{%>
+
         <tr>
           <td><%=item.field%></td>
+            <td><%=item.workerID.firstName%> <%=item.workerID.lastName%></td>
           <td><%=item.status%></td>
           <td><%=item.bookingDate.toDateString()%></td>
           <td><%=item.workDate.toDateString()%></td>
