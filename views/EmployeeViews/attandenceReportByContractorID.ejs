@@ -38,7 +38,6 @@
             /* height: 0px; */
         }
     </style>
-
 </head>
 <body>
 
@@ -58,20 +57,17 @@
 
 <table >
     <tr>
-        <th>Contractor's name:</th>
-        <th>ID:</th>
         <th>Work Date:</th>
         <th>Start shift:</th>
         <th>End shift:</th>
         <th>Start break:</th>
         <th>End break:</th>
+        <th></th>
     </tr>
     <% if (locals.r) {%>
         <%r.forEach((item)=>{%>
     <tr>
         <form action="/attendanceReport/displayEditAttendance/<%=item._id%>">
-            <td><%=item.contractorWorkerID.firstName%> <%=item.contractorWorkerID.lastName%></td>
-            <td><%=item.contractorWorkerID.ID%></td>
         <td><%=item.reportDate.toDateString()%></td>
 <!--        <td><%=item.contractorWorkerID%></td>-->
             <td><%=item.startShift.toLocaleTimeString()%></td>
@@ -91,7 +87,7 @@
     function filter() {
         let workDate = document.getElementById('workDate').value
         if (!workDate) {
-            document.getElementById('error').innerHTML = 'must choose BookingDate'
+            document.getElementById('error').innerHTML = 'choose'
             return
         }
         console.log(workDate)
