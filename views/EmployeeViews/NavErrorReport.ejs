@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Error report</title>
+    <style>
+        .a1:link, a:visited {
+            background-color: #f44336;
+            color: white;
+            padding: 14px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .a1:hover, a:active {
+            background-color: cadetblue;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -11,6 +25,10 @@
 <!--<button onclick="location.href='searchContractorErrorReport'">Error Reporting</button>-->
 <a href="/errorReport/searchContractorErrorReport">Reporting On Error</a>
 <a href="/errorReport/findAllErrorReports">Fix Error Report</a>
+<br>
+<br>
+<a style="margin-left: 70px" class="a1" href="/errorReport/searchContractorErrorReport">Error Report</a>
+<a style="margin-left: 30px"    class="a1" href="/errorReport/findAllErrorReports">Fix Error Report</a>
 
 
 </body>

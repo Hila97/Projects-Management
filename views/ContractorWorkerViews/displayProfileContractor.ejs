@@ -2,7 +2,13 @@
 <html xmlns="http://www.w3.org/1999/html">
 <head>
 
+<style>
+    .inline
+    {
+        display: inline;
 
+    }
+</style>
 
 </head>
 <body>
@@ -11,10 +17,10 @@
 </div>
 <h1>My Profile</h1>
 <div class="div1">
-    <form class="form-horizontal" action='/contractorWorker/editProfile' method="post">
+<form class="form-horizontal" action='/contractorWorker/editProfile' method="post">
 
 
-
+<span class="inline">
         <!-- ID -->
         <label class="control-label" for="ID">ID:</label>
         <br>
@@ -26,7 +32,7 @@
         <br>
         <input style="width: 90%" type="text" id="firstName" name="firstName" value="<%=contractor.firstName%>" placeholder="<%=contractor.firstName%>" class="input-xlarge" >
         <br>
-
+</span>
 
         <!-- lastName -->
         <label class="control-label" for="lastName">Last Name:</label>
@@ -50,17 +56,17 @@
         <div>
             <label class="control-label"  for="areaOfResidence">Area Of Residence:</label>
         </div>
-        <select style="width: 90%"  class="form-group" name="areaOfResidence" id="areaOfResidence">
-            <option ><%=contractor.areaOfResidence%></option>
-            <option value="NORTH">North</option>
-            <option value="SOUTH">South</option>
-            <option value="GALIL" >Galil</option>
-            <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
-            <option value="NEGEV" >Negev</option>
-            <option value="SHFELA" >Shfela</option>
-            <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
-            <option value="JERUSALEM" >Jerusalem</option>
-        </select>
+            <select style="width: 90%"  class="form-group" name="areaOfResidence" id="areaOfResidence">
+                <option ><%=contractor.areaOfResidence%></option>
+                <option value="NORTH">North</option>
+                <option value="SOUTH">South</option>
+                <option value="GALIL" >Galil</option>
+                <option value="TEL_AVIV_METROPOLITAN_AREA" >Tel Aviv metropolitan area</option>
+                <option value="NEGEV" >Negev</option>
+                <option value="SHFELA" >Shfela</option>
+                <option value="HAIFA_AND_THE_KRAYOT" >Haifa and the Krayot</option>
+                <option value="JERUSALEM" >Jerusalem</option>
+            </select>
         <br>
 
 
@@ -96,22 +102,22 @@
         <br>
 
 
-        <!-- E-mail -->
+            <!-- E-mail -->
         <label class="control-label" for="userName">E-mail:</label>
         <br>
         <input style="width: 90%" type="email" id="userName" name="userName" value="<%=contractor.userName%>" placeholder="<%=contractor.userName%>" class="input-xlarge" disabled>
         <br>
 
-        <!-- Password-->
+            <!-- Password-->
         <label class="control-label" for="password">Password:</label>
         <br>
-        <input style="width: 90%" type="text" value="<%=contractor.password%>" placeholder="<%=contractor.password%>" name="password" id="password" class="input-xlarge" disabled pattern="(?=.\d)(?=.[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
+        <input style="width: 90%" type="text" value="<%=contractor.password%>" placeholder="<%=contractor.password%>" name="password" id="password" class="input-xlarge" disabled pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$"  title="Password must be at least 6 characters, contain a capital letter, a small letter, a char and a number" >
         <br>
         <p class="space row">                      </p>
 
         <button class="button4" type="submit">EDIT</button>
 
-    </form>
+</form>
 </div>
 </body>
 </html>
